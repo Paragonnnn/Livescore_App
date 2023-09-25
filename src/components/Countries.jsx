@@ -7,12 +7,15 @@ import { arrowDown, arrowUp } from '../index.js';
 const Countries = ({loading, countries, error, leagues}) => {
     const [search, setSearch] = useState('')
     const [show, setShow] = useState(false)
-    const [index, setIndex] = useState([])
 
-    const toggle = false
     const handleClick = (e) => {
-        setShow(prev => setShow(!prev))
-        console.log(show);
+        if (e.target) {
+            
+        }
+        setShow((prev) => {
+            setShow(!prev)
+        } )
+        console.log(e.target);
         // if (show) {
         //     e.target.src = arrowUp
         // }
@@ -52,18 +55,18 @@ const Countries = ({loading, countries, error, leagues}) => {
                             </div>
                             <img src={country.country_logo} alt="" className='country_logo'/>
                             <img 
-                                src={arrowDown} 
+                                src={show ? arrowDown : arrowUp} 
                                 alt="" 
                                 className='up_down_arrow'
                                 onClick={handleClick}
                             />
                         </div>
-                        <div>
+                        <div className={show ? 'show' : 'hidden'}>
                             {
                                 leagues.map((league) => (
-                                    
+                                    (league.country_name == country.country_name) &&
                                     <div key={league.league_key}>
-                                        {(league.country_name == country.country_name) ? league.league_name : null}
+                                        {league.league_name}
                                     </div>
                                 ))
                             }

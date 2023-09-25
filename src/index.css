@@ -121,3 +121,9 @@ body{
   width: 30px;
   cursor: pointer;
 }
+.hidden{
+  display: none;
+}
+.show{
+  display: block;
+}
