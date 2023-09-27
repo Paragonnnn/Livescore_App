@@ -115,6 +115,7 @@ body{
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
+  color: red;
 }
 .up_down_arrow{
   height: 30px;
@@ -126,4 +127,9 @@ body{
 }
 .show{
   display: block;
+}
+.caution{
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
 }

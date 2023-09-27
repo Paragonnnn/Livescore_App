@@ -6,6 +6,7 @@ import Home from './components/Home'
 import { Routes, Route } from 'react-router-dom'
 import Teams from './components/Teams'
 import Table from './components/Table'
+import Fixtures from './components/Fixtures'
 
 const App = () => {
   const [countries, setCountries] = useState([])
@@ -23,7 +24,7 @@ const App = () => {
           setError(false)
             setCountries(json.result)
             setLoading(false)
-            console.log(json.result);
+            // console.log(json.result);
         })
         .catch(err => {
           setLoading(false)
@@ -45,7 +46,7 @@ const App = () => {
               setError(false)
               setLoading(false)
               setLeagues(json.result)
-              console.log(json.result);
+              // console.log(json.result);
           })
           .catch(err => {
               console.log(err)
@@ -64,7 +65,8 @@ const App = () => {
         <Route path='/' element={<Home />}/>
         <Route path='/countries' element={<Countries countries={countries} loading={loading} error={error} leagues={leagues}/>} />
         <Route path='/leagues/:id' element={<Leagues />}/>
-        <Route path='/table/:id' element={<Table/>} />
+        <Route path='/:id/table/:id' element={<Table/>} />
+        <Route path='/fixtures' element={<Fixtures leagues={leagues}/>}/>
       </Routes>
       
     </div>

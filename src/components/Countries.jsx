@@ -3,34 +3,34 @@ import { Link, useParams } from 'react-router-dom'
 import Loading from './Loading';
 import Error from './Error';
 import { arrowDown, arrowUp } from '../index.js';
+import Header from './Header';
 
 const Countries = ({loading, countries, error, leagues}) => {
     const [search, setSearch] = useState('')
-    const [show, setShow] = useState(false)
-
-    const handleClick = (e) => {
-        if (e.target) {
-            
-        }
-        setShow((prev) => {
-            setShow(!prev)
-        } )
-        console.log(e.target);
-        // if (show) {
-        //     e.target.src = arrowUp
-        // }
-        // else {
-        //     e.target.src = arrowDown
-        // }
+    const [show, setShow] = useState()
+    const [check, setCheck] = useState()
+    const [activeIndex, setActiveIndex] = useState([])
+    
+    
+    const handleClick = (index) => {
+        console.log(activeIndex);
+        // setShow((prev) => {
+        //     setShow(!prev)
+        // } )
+        if (activeIndex.includes(index)) {
+            // setActiveIndex(activeIndex.filter((i) => i !== index));
+            setActiveIndex(activeIndex.filter((i) => (
+                i !== index
+            )))
+          } else {
+            setActiveIndex([index]);
+          }
     }
     
   return (
     <div>
-        <input 
-            type="text" 
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-        />
+        <Header setSearch={setSearch} search={search}/>
+        
         {
             error && (
                 <Error />
@@ -46,27 +46,29 @@ const Countries = ({loading, countries, error, leagues}) => {
         <div className='country_div'>
             {
                 countries.filter((country) => (
-                    search.toLowerCase() === '' ? country : country.country_name.toLowerCase().includes(search)
+                    search.trim().toLowerCase() === '' ? country : country.country_name.toLowerCase().includes(search)
                 )).map((country,index) => (
-                    <div key={country.country_key}>
-                        <div   to={`/leagues/${country.country_key}`} className='country'>
+                    <div key={country.country_key} >
+                        <div    className='country' onClick={() => handleClick(index)}>
                             <div className='country_name_div'>
                                 <h2 className='country_name'>{country.country_name}</h2>
                             </div>
                             <img src={country.country_logo} alt="" className='country_logo'/>
                             <img 
-                                src={show ? arrowDown : arrowUp} 
+                                src={activeIndex.includes(index) ? arrowUp : arrowDown} 
                                 alt="" 
                                 className='up_down_arrow'
-                                onClick={handleClick}
+                                
                             />
                         </div>
-                        <div className={show ? 'show' : 'hidden'}>
+                        <div className={activeIndex.includes(index) ? 'show' : 'hidden'}>
                             {
                                 leagues.map((league) => (
-                                    (league.country_name == country.country_name) &&
+                                    (league.country_key == country.country_key) &&
                                     <div key={league.league_key}>
-                                        {league.league_name}
+                                        <Link to={`/table/${league.league_key}`}>
+                                            {league.league_name}
+                                        </Link>
                                     </div>
                                 ))
                             }
