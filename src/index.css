@@ -6,6 +6,8 @@
 }
 body{
   padding: 20px;
+  max-width: 1440px;
+  margin: auto;
 }
 .loading-container {
   display: flex;
@@ -132,4 +134,66 @@ body{
   height: 30px;
   width: 30px;
   margin-right: 10px;
+}
+.players_div{
+  /* outline: solid 5px blue; */
+  width: 80%;
+  margin: auto;
+  
+}
+.player_div_1{
+  background-color: rgba(0, 0, 0, 0.192);
+  padding: 10px;
+  border-radius: 5px;
+}
+.player_div{
+  padding: 20px 30px;
+  /* outline: solid 5px green; */
+  margin-bottom: 30px;
+  border-radius: 10px;
+  /* background-color: rgba(0, 128, 128, 0.295); */
+  background-color: rgba(0, 0, 0, 0.192);
+
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  /* flex-direction: column; */
+}
+.player_team{
+  margin-bottom: 20px;
+  /* background-color: rgba(0, 128, 128, 0.082); */
+  background-color: rgba(0, 0, 0, 0.192);
+  padding: 5px;
+  border-radius: 5px;
+  /* color: blue; */
+}
+.player_image{
+  height: 80px;
+  border-radius: 80px;
+}
+.player_image_div{
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.player_details_div{
+  margin-top: 30px;
+  display: flex;
+  gap: 30px;
+  width: fit-content;
+  text-align: center;
+  flex-wrap: wrap;
+}
+.player_details{
+  /* outline: solid 1px red; */
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.096);
+  background-color: rgba(0, 0, 0, 0.096);
+  /* background-color: rgba(0, 128, 128, 0.082); */
+
+  
+}
+.player_details_1{
+  color: gray;
 }

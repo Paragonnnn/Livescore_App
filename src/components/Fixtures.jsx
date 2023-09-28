@@ -7,12 +7,15 @@ const Fixtures = ({leagues}) => {
     const [fixtures, setFixtures] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
+    const [check, setCheck] = useState([])
 
     let api_key = import.meta.env.VITE_api_key
     let date = new Date
     let month = date.getMonth() + 1
     let currentYear = date.getFullYear()
     let day = date.getDate()
+    
+    
     
     // useEffect(() => {
     //     setLoading(true)
@@ -33,7 +36,7 @@ const Fixtures = ({leagues}) => {
     //     }
     //     getData()  
     // }, [])
-
+    
     useEffect(() => {
         async function getData() {
             setLoading(true)
@@ -44,6 +47,14 @@ const Fixtures = ({leagues}) => {
             .then(json => {
                 setFixtures(json.result)
                 setLoading(false)
+                setCheck(
+                    json.result.map(fixture => (
+                        (
+                            !check.includes(fixture.league_key) && fixture.league_key 
+                        )
+                        
+                    ))
+                )
                 console.log(json.result);
             })
             .catch(err => {
@@ -53,6 +64,17 @@ const Fixtures = ({leagues}) => {
         }
         getData()
     },[])
+    // useEffect(() => {
+    //     setCheck(
+    //             fixtures.map(fixture => (
+    //                 (
+    //                     !check.includes(fixture.league_key) && fixture.league_key 
+    //                 )
+                    
+    //             ))
+    //         )
+    //         console.log(check);
+    // },[fixtures]) 
   return (
     <div>
         {
@@ -68,19 +90,24 @@ const Fixtures = ({leagues}) => {
 
         }
         {
+            !(loading && error) &&
             leagues.map(league => (
+                (check.includes(league.league_key)) &&
                 <div key={league.league_key}>
-                    <h1>{league.league_name}</h1>
+                        {check.includes(league.league_key)
+                        &&
+                        <h1>{league.league_name}</h1>
+                        }
                     {
                         fixtures.map(fixture => (
                             // leagues.map(league => (
                                 
                             // )) 
-                            league.league_key == fixture.league_key &&
+                            (league.league_key == fixture.league_key ) &&
 
                             <div key={fixture.event_key}>
                                 {/* <div>{fixture.country_name}</div> */}
-                                {/* <div>{fixture.league_name}</div> */}
+                                {/* <h1>{fixture.league_name}</h1> */}
                                 <div>{fixture.event_home_team} vs {fixture.event_away_team}</div>
                             </div>
                         ))

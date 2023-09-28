@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom'
 import Teams from './components/Teams'
 import Table from './components/Table'
 import Fixtures from './components/Fixtures'
+import Players from './components/Players'
 
 const App = () => {
   const [countries, setCountries] = useState([])
@@ -65,8 +66,10 @@ const App = () => {
         <Route path='/' element={<Home />}/>
         <Route path='/countries' element={<Countries countries={countries} loading={loading} error={error} leagues={leagues}/>} />
         <Route path='/leagues/:id' element={<Leagues />}/>
-        <Route path='/:id/table/:id' element={<Table/>} />
+        <Route path='/table/:id' element={<Table/>} />
         <Route path='/fixtures' element={<Fixtures leagues={leagues}/>}/>
+        <Route path='/teams/:id' element={<Teams leagues={leagues}/>}/>
+        <Route path='/players/:id' element={<Players countries={countries} leagues={leagues}/>}/>
       </Routes>
       
     </div>

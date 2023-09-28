@@ -1,0 +1,132 @@
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import Error from './Error'
+import Loading from './Loading'
+
+const Players = ({countries, leagues}) => {
+    const [players,setPlayers] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
+    const [check, setCheck] = useState([])
+
+    
+
+    const api_key = import.meta.env.VITE_api_key
+    const {id} = useParams()
+    useEffect(() => {
+        setLoading(true)
+        async function getData() {
+            await fetch(`https://apiv2.allsportsapi.com/football/?&met=Players&playerId=${id}&APIkey=${api_key}`)
+            .then(res => res.json())
+            .then(json => {
+                setError(false)
+                setLoading(false)
+                setPlayers(json.result)
+                console.log(json.result);
+            })
+            .catch(err => {
+                setError(true)
+                setLoading(false)
+                console.log(err);
+            })
+        }
+        getData()
+    },[id])
+  return (
+    <div>
+        {
+            error && (
+                <Error />
+            )
+        }
+        {
+            loading && (
+                <Loading />
+
+            )
+
+        }
+        <div className='players_div'>
+            {
+                
+                players.map((player,index) => (
+                    <div key={player.team_key} className='player_div'>
+
+                        <h1 className='player_team'>{player.team_name}</h1>
+                        <div className='player_div_1'>
+                            <h3 >Player's Details</h3>
+                            <div className='player_image_div'>
+                                <img src={player.player_image} alt={player.player_name} className='player_image'/>
+                                <h1>{player.player_name}</h1>
+                            </div>
+                            <div className='player_details_div'>
+                                {player.player_number 
+                                    &&
+                                    <div className='player_details'>
+                                        <div>
+                                            <div className='player_details_1'>shirt number </div> 
+                                            <div>
+                                                {player.player_number}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    } 
+                                {player.player_age 
+                                    &&
+                                    <div className='player_details'>
+                                        <div>
+                                            <div className='player_details_1'>Age </div> 
+                                            <div>
+                                                {player.player_age}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    } 
+                                {player.player_country 
+                                    &&
+                                    <div className='player_details'>
+                                        <div>
+                                            <div className='player_details_1'> Nationality </div> 
+                                            <div>
+                                                {player.player_country}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    } 
+                                {player.player_type 
+                                    &&
+                                    <div className='player_details'>
+                                        <div>
+                                            <div className='player_details_1'>Positon </div> 
+                                            <div>{player.player_type == 'Goalkeepers' ? 'GK' 
+                                            : player.player_type == 'Forwards' ? 'FW' : `${player.player_type.slice(0,3).toUpperCase()}` } 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    } 
+                                {player.player_rating 
+                                    &&
+                                    <div className='player_details'>
+                                        <div>
+                                            <div className='player_details_1'>Avg. rating</div> 
+                                            <div>{player.player_rating}</div>
+                                        </div>
+                                    </div>
+                                    } 
+
+                            </div>
+                        </div>
+                        <div>
+                            Statistics
+                        </div>
+                    </div>
+                ))
+            }
+
+        </div>
+        
+    </div>
+  )
+}
+
+export default Players
