@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Loading from './Loading'
 import Error from './Error'
 import Countries from './Countries'
+import { Link } from 'react-router-dom'
 
 const Fixtures = ({leagues}) => {
     const [fixtures, setFixtures] = useState([])
@@ -60,6 +61,7 @@ const Fixtures = ({leagues}) => {
             .catch(err => {
                 setLoading(false)
                 setError(true)
+                console.log(err);
             })
         }
         getData()
@@ -75,31 +77,32 @@ const Fixtures = ({leagues}) => {
     //         )
     //         console.log(check);
     // },[fixtures]) 
+    
+        
+        loading && (
+            <Loading />
+
+        )
+    
+        error && (
+            <Error />
+        )
+    
+        
   return (
     <div>
         {
-            error && (
-                <Error />
-            )
-        }
-        {
-            loading && (
-                <Loading />
-
-            )
-
-        }
-        {
-            !(loading && error) &&
-            leagues.map(league => (
+            // !(loading && error) &&
+            
+            leagues?.map(league => (
                 (check.includes(league.league_key)) &&
                 <div key={league.league_key}>
                         {check.includes(league.league_key)
                         &&
-                        <h1>{league.league_name}</h1>
+                        <h1><Link to={`/leagues/${league.league_key}`}>{league.league_name}</Link></h1>
                         }
                     {
-                        fixtures.map(fixture => (
+                        fixtures?.map(fixture => (
                             // leagues.map(league => (
                                 
                             // )) 

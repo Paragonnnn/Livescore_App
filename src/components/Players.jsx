@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Error from './Error'
 import Loading from './Loading'
+import { pic } from '..'
 
 const Players = ({countries, leagues}) => {
     const [players,setPlayers] = useState([])
@@ -51,12 +52,14 @@ const Players = ({countries, leagues}) => {
                 
                 players.map((player,index) => (
                     <div key={player.team_key} className='player_div'>
+                        <Link to={`/teams/${player.team_key}`}>
+                            <h1 className='player_team'>{player.team_name}</h1>
 
-                        <h1 className='player_team'>{player.team_name}</h1>
+                        </Link>
                         <div className='player_div_1'>
-                            <h3 >Player's Details</h3>
+                            <h3 className='player_det_header'>Player's Details</h3>
                             <div className='player_image_div'>
-                                <img src={player.player_image} alt={player.player_name} className='player_image'/>
+                                <img src={player.player_image ? player.player_image : pic} alt={player.player_name} className='player_image'/>
                                 <h1>{player.player_name}</h1>
                             </div>
                             <div className='player_details_div'>
@@ -116,8 +119,8 @@ const Players = ({countries, leagues}) => {
 
                             </div>
                         </div>
-                        <div>
-                            Statistics
+                        <div className='player_div_2'>
+                            <h3>Statistics</h3>
                         </div>
                     </div>
                 ))

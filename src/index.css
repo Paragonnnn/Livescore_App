@@ -2,13 +2,18 @@
   font-family: sans-serif;
   margin: 0;
   padding: 0;
+  text-decoration: none;
   /* outline: solid 1px red; */
+}
+:root {
+  --primary-color: #1E1E1E;
 }
 body{
   padding: 20px;
   max-width: 1440px;
   margin: auto;
 }
+
 .loading-container {
   display: flex;
   justify-content: center;
@@ -137,14 +142,19 @@ body{
 }
 .players_div{
   /* outline: solid 5px blue; */
-  width: 80%;
+  width: 95%;
   margin: auto;
-  
 }
 .player_div_1{
-  background-color: rgba(0, 0, 0, 0.192);
-  padding: 10px;
+  /* background-color: rgba(0, 0, 0, 0.192); */
+  background-color: #1E1E1E;
+  color: white;
+  padding: 20px;
   border-radius: 5px;
+}
+.player_det_header{
+  padding-bottom: 20px;
+  color: #f39d12c0;
 }
 .player_div{
   padding: 20px 30px;
@@ -152,7 +162,7 @@ body{
   margin-bottom: 30px;
   border-radius: 10px;
   /* background-color: rgba(0, 128, 128, 0.295); */
-  background-color: rgba(0, 0, 0, 0.192);
+  /* background-color: rgba(0, 0, 0, 0.192); */
 
   /* display: flex; */
   /* justify-content: space-between; */
@@ -162,7 +172,11 @@ body{
 .player_team{
   margin-bottom: 20px;
   /* background-color: rgba(0, 128, 128, 0.082); */
-  background-color: rgba(0, 0, 0, 0.192);
+  /* background-color: rgba(0, 0, 0, 0.192); */
+  /* background-color: #1E1E1E; */
+  background-color: var(--primary-color);
+  /* background-color: #f39c12; */
+  color: #f39c12;
   padding: 5px;
   border-radius: 5px;
   /* color: blue; */
@@ -188,12 +202,25 @@ body{
   /* outline: solid 1px red; */
   padding: 5px 10px;
   border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.096);
-  background-color: rgba(0, 0, 0, 0.096);
+  /* background-color: rgba(0, 0, 0, 0.096); */
+  /* background-color: rgba(0, 0, 0, 0.096); */
+  box-shadow: 0 0 3px 1px #f39d1241;
   /* background-color: rgba(0, 128, 128, 0.082); */
 
   
 }
+
 .player_details_1{
-  color: gray;
+  color: grey;
+}
+.table{
+  margin-bottom: 50px;
+}
+.player_div_2{
+  /* background-color: rgba(0, 0, 0, 0.192); */
+  background-color: #1E1E1E;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
 }

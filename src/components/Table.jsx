@@ -8,7 +8,6 @@ const Table = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
 
-
     const {id} = useParams()
     
     const api_key = import.meta.env.VITE_api_key
@@ -31,11 +30,7 @@ const Table = () => {
         getData()
     },[id])
 
-    const styling = {
-        if (condition) {
-            
-        }
-    }
+    
   return (
     <div>
         {
@@ -50,6 +45,13 @@ const Table = () => {
             )
 
         }
+        {
+            table.length == 0 && (
+                <h3>No data found</h3>
+            )
+        }
+        {table.length != 0  &&   (
+            
         <table border='1'>
             <thead>
                 <tr>
@@ -67,7 +69,7 @@ const Table = () => {
             </thead>
             {
                 table.map((table) => (
-                    <tbody key={table.team_key}>
+                    <tbody key={table.team_key} className='table'>
                         <tr style={(table.standing_place_type == 'Promotion - Champions League (Group Stage: )') ? {background : 'lightgreen'} : {background: 'white'} }>
                             <th>{table.standing_place}</th>
                             <th><Link to={`/teams/${table.team_key}`}>{table.standing_team}</Link> <img className='country_logo' src={table.team_logo} alt="" /></th>
@@ -87,6 +89,7 @@ const Table = () => {
             }
 
         </table>
+        )}
     </div>
   )
 }

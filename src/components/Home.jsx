@@ -9,6 +9,9 @@ const Home = () => {
         <button>show</button>
 
       </Link>
+      <Link to={`/fixtures`}>
+        <button>fixtures</button>
+      </Link>
     </div>
   )
 }
