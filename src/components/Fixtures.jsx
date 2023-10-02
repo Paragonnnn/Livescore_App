@@ -4,7 +4,21 @@ import Error from './Error'
 import Countries from './Countries'
 import { Link } from 'react-router-dom'
 
-const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures}) => {
+const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, currentFixture, setCurrentFixture}) => {
+
+    const handleClick = (id) => {
+        if (!currentFixture.includes(id)) {
+            setCurrentFixture(
+                fixtures.filter((fixture) => (
+                    fixture === id
+                ))
+            )
+        } else {
+            setCurrentFixture([id])
+        }
+        console.log(currentFixture);
+        console.log('hi');
+    }
     // const [fixtures, setFixtures] = useState([])
     // const [loading, setLoading] = useState(false)
     // const [error, setError] = useState(false)
@@ -82,7 +96,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures}) =
     
     
     return (
-        <div>
+        <div className='p-4 bg-black rounded-md'>
         {loadingFixtures && (
             <Loading />
     
@@ -108,31 +122,50 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures}) =
                         </div>
                         }
                     {
-                        fixtures?.map(fixture => (
+                        fixtures?.map((fixture, index) => (
                             // leagues.map(league => (
                                 
                             // )) 
                             (league.league_key == fixture.league_key ) &&
 
-                            <div key={fixture.event_key} className='text-gray-200 text-xs p-2 flex gap-2 '>
+                            <div key={fixture.event_key} className='text-gray-200 text-xs p-2 flex gap-2 ' onClick={() => handleClick(fixture)}>
                                 {/* <div>{fixture.country_name}</div> */}
                                 {/* <h1>{fixture.league_name}</h1> */}
                                 <div className='text-xxs text-gray-300 '>
                                     <div>
                                         {fixture.event_time}
                                     </div>
-                                    <div className='text-center'>
-                                        -
+                                    <div className={`${!isNaN(+fixture.event_status) && fixture.event_status !== '' ? ' text-lightOrange animate-pulse': '' } ' text-[.35rem] text-center '`}>
+                                        {fixture.event_status === 'Finished' ? 'FT' : fixture.event_status === 'Half Time' ? 'HT' : fixture.event_status === '' ? '-' : !isNaN(+fixture.event_status) ? `${fixture.event_status}'` : `${fixture.event_status.slice(0,4)}..` }
                                     </div>
                                 </div>
                                 <div className='cursor-pointer w-full '>
                                     <div className='flex gap-1 items-center'>
                                         <img src={fixture.home_team_logo} alt="" className='w-2 h-2'/>
-                                        {fixture.event_home_team}
+                                        <div className='flex justify-between  w-full'>
+                                            <div className='text-xs'>
+                                                {fixture.event_home_team}
+                                            </div>
+                                            <div className='text-xxs'>
+                                                {fixture.event_ft_result.slice(0,fixture.event_ft_result.indexOf('-'))}
+                                            </div>
+                                            
+                                        </div>
+                                        
                                     </div>
                                     <div className='flex gap-1 items-center'>
                                         <img src={fixture.away_team_logo} alt="" className='h-2 w-2'/>
-                                        {fixture.event_away_team}
+                                        <div className='flex justify-between w-full'>
+                                            <div className='text-xs'>
+                                                {fixture.event_away_team}
+                                            </div>
+                                            <div className='text-xxs'>
+                                                {fixture.event_ft_result.slice(fixture.event_ft_result.indexOf('-') + 1, fixture.event_ft_result.length + 1)}
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                        
                                     </div>
                                      {/* {fixture.event_ft_result.slice(0,fixture.event_ft_result.indexOf('-'))} vs  {fixture.event_ft_result.slice(fixture.event_ft_result.indexOf('-') + 1, fixture.event_ft_result.length + 1)} */}
                                 </div>

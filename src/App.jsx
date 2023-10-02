@@ -19,6 +19,7 @@ const App = () => {
     const [leagues, setLeagues] = useState([])
     const [fixtures, setFixtures] = useState([])
     const [check, setCheck] = useState([])
+    const [currentFixture, setCurrentFixture] = useState([])
 
 
     const api_key = import.meta.env.VITE_api_key
@@ -74,7 +75,7 @@ const App = () => {
   useEffect(() => {
     async function getData() {
         setLoadingFixtures(true)
-        await fetch(`https://apiv2.allsportsapi.com/football/?met=Fixtures&leagueId=${leagues.map(league => (
+        await fetch(`https://apiv2.allsportsapi.com/football/?met=Fixtures&timezone=Africa/Lagos&leagueId=${leagues.map(league => (
             league.league_key
         ))}&APIkey=${api_key}&from=${currentYear}-${month}-${day}&to=${currentYear}-${month}-${day}`)
         .then(res => res.json())
@@ -101,10 +102,14 @@ const App = () => {
   },[])
 
   return (
-    <div className='m-auto w-1440 bg-customBg p-4'>
+    <div className='max-w-[1440px] m-auto  bg-customBg p-4'>
       
+      <div>
+        <h1>Paragon</h1>
+      </div>
       <Routes>
-        <Route path='/' element={<Home countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues} check={check} fixtures={fixtures}  loadingFixtures={loadingFixtures} fixturesError={fixturesError}/>}/>
+        
+        <Route path='/' element={<Home countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues} check={check} fixtures={fixtures}  loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture}/>}/>
         <Route path='/countries' element={<Countries countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues}/>} />
         <Route path='/leagues/:id' element={<Leagues />}/>
         <Route path='/table/:id' element={<Table/>} />

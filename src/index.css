@@ -9,8 +9,7 @@
   --primary-color: #1E1E1E;
 }
 body{
-  max-width: 1440px;
-  margin: auto;
+  background-color: #1E1E1E;
 }
 
 .loading-container {
