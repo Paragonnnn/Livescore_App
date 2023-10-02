@@ -11,24 +11,35 @@ import Players from './components/Players'
 
 const App = () => {
   const [countries, setCountries] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [loadingCountries, setLoadingCountries] = useState(false)
+    const [loadingLeagues, setLoadingLeagues] = useState(false)
+    const [loadingFixtures, setLoadingFixtures] = useState(false)
     const [error, setError] = useState(false)
+    const [fixturesError, setFixturesError] = useState()
     const [leagues, setLeagues] = useState([])
+    const [fixtures, setFixtures] = useState([])
+    const [check, setCheck] = useState([])
+
 
     const api_key = import.meta.env.VITE_api_key
+    let date = new Date
+    let month = date.getMonth() + 1
+    let currentYear = date.getFullYear()
+    let day = date.getDate()
+
     useEffect(() => {
-        setLoading(true)
+        setLoadingCountries(true)
         async function getData() {
           await fetch(`https://apiv2.allsportsapi.com/football/?met=Countries&APIkey=${api_key}`)
         .then((res) => res.json())
         .then(json => {
           setError(false)
             setCountries(json.result)
-            setLoading(false)
+            setLoadingCountries(false)
             // console.log(json.result);
         })
         .catch(err => {
-          setLoading(false)
+          setLoadingCountries(false)
           setError(true)
           console.log(err)
         })
@@ -37,7 +48,7 @@ const App = () => {
     }, [])
 
     useEffect(() => {
-      setLoading(true)
+      setLoadingLeagues(true)
       async function getData() {
           await fetch(`https://apiv2.allsportsapi.com/football/?met=Leagues&countryId=${countries.map((country) => (
             country.country_key
@@ -45,7 +56,7 @@ const App = () => {
           .then(res => res.json())
           .then(json => {
               setError(false)
-              setLoading(false)
+              setLoadingLeagues(false)
               setLeagues(json.result)
               // console.log(json.result);
           })
@@ -53,21 +64,51 @@ const App = () => {
               console.log(err)
               console.log('errors');
               setError(true)
-              setLoading(false)
+              setLoadingLeagues(false)
           })
       }
       getData()
   },[])
 
+
+  useEffect(() => {
+    async function getData() {
+        setLoadingFixtures(true)
+        await fetch(`https://apiv2.allsportsapi.com/football/?met=Fixtures&leagueId=${leagues.map(league => (
+            league.league_key
+        ))}&APIkey=${api_key}&from=${currentYear}-${month}-${day}&to=${currentYear}-${month}-${day}`)
+        .then(res => res.json())
+        .then(json => {
+            setFixtures(json.result)
+            setLoadingFixtures(false)
+            setCheck(
+                json.result.map(fixture => (
+                    (
+                        !check.includes(fixture.league_key) && fixture.league_key 
+                    )
+                    
+                ))
+            )
+            console.log(json.result);
+        })
+        .catch(err => {
+            setLoadingFixtures(false)
+            setFixturesError(true)
+            console.log(err);
+        })
+    }
+    getData()
+  },[])
+
   return (
-    <div>
+    <div className='m-auto w-1440 bg-customBg p-4'>
       
       <Routes>
-        <Route path='/' element={<Home />}/>
-        <Route path='/countries' element={<Countries countries={countries} loading={loading} error={error} leagues={leagues}/>} />
+        <Route path='/' element={<Home countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues} check={check} fixtures={fixtures}  loadingFixtures={loadingFixtures} fixturesError={fixturesError}/>}/>
+        <Route path='/countries' element={<Countries countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues}/>} />
         <Route path='/leagues/:id' element={<Leagues />}/>
         <Route path='/table/:id' element={<Table/>} />
-        <Route path='/fixtures' element={<Fixtures leagues={leagues}/>}/>
+        {/* <Route path='/fixtures' element={<Fixtures check={check} fixtures={fixtures} leagues={leagues} loadingFixtures={loadingFixtures} fixturesError={fixturesError}/>}/> */}
         <Route path='/teams/:id' element={<Teams leagues={leagues}/>}/>
         <Route path='/players/:id' element={<Players countries={countries} leagues={leagues}/>}/>
       </Routes>

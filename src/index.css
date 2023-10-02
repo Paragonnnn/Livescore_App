@@ -9,7 +9,6 @@
   --primary-color: #1E1E1E;
 }
 body{
-  padding: 20px;
   max-width: 1440px;
   margin: auto;
 }
@@ -177,7 +176,7 @@ body{
   background-color: var(--primary-color);
   /* background-color: #f39c12; */
   color: #f39c12;
-  padding: 5px;
+  padding: 5px 15px;
   border-radius: 5px;
   /* color: blue; */
 }
@@ -218,7 +217,7 @@ body{
 }
 .player_div_2{
   /* background-color: rgba(0, 0, 0, 0.192); */
-  background-color: #1E1E1E;
+  background-color: #1e1e1ead;
   color: white;
   padding: 10px;
   border-radius: 5px;

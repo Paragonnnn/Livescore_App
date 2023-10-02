@@ -5,7 +5,7 @@ import Error from './Error';
 import { arrowDown, arrowUp } from '../index.js';
 import Header from './Header';
 
-const Countries = ({loading, countries, error, leagues}) => {
+const Countries = ({loadingCountries, countries, error, leagues}) => {
     const [search, setSearch] = useState('')
     const [show, setShow] = useState()
     const [check, setCheck] = useState()
@@ -37,7 +37,7 @@ const Countries = ({loading, countries, error, leagues}) => {
             )
         }
         {
-            loading && (
+            loadingCountries && (
                 <Loading />
 
             )
