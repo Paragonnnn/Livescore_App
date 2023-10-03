@@ -19,6 +19,7 @@ const App = () => {
     const [leagues, setLeagues] = useState([])
     const [fixtures, setFixtures] = useState([])
     const [check, setCheck] = useState([])
+    const [liveCheck, setLiveCheck] = useState([])
     const [currentFixture, setCurrentFixture] = useState([])
 
 
@@ -90,7 +91,17 @@ const App = () => {
                     
                 ))
             )
+            setLiveCheck(
+                json.result.map(fixture => (
+                    (
+                        !check.includes(fixture.league_key)  && fixture.event_live === '1' && (fixture.league_key)
+                    )
+                    
+                ))
+            )
             console.log(json.result);
+            console.log(liveCheck);
+            console.log(check);
         })
         .catch(err => {
             setLoadingFixtures(false)
@@ -109,7 +120,7 @@ const App = () => {
       </div>
       <Routes>
         
-        <Route path='/' element={<Home countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues} check={check} fixtures={fixtures}  loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture}/>}/>
+        <Route path='/' element={<Home countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues} check={check} fixtures={fixtures}  loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture} liveCheck={liveCheck}/>}/>
         <Route path='/countries' element={<Countries countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues}/>} />
         <Route path='/leagues/:id' element={<Leagues />}/>
         <Route path='/table/:id' element={<Table/>} />

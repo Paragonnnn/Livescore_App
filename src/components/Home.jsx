@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import Countries from './Countries'
 import Fixtures from './Fixtures'
 
-const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, loadingFixtures, fixturesError, currentFixture, setCurrentFixture}) => {
+const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, loadingFixtures, fixturesError, currentFixture, setCurrentFixture, liveCheck}) => {
   return (
-    <div className='grid grid-cols-1 md:grid-cols-11 h-[100%]'>
+    <div className='grid grid-cols-1 lg:grid-cols-11 h-[100%] gap-4'>
         {/* <h1>Livescore</h1>
       <Link to={`/countries`}>
         <button>show</button>
@@ -14,13 +14,13 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
       <Link to={`/fixtures`}>
         <button>fixtures</button>
       </Link> */}
-      <div className='hidden md:block col-span-3'>
+      <div className='hidden lg:block col-span-3'>
         <Countries countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues}/>
       </div>
       <div className='col-span-5'>
-        <Fixtures check={check} fixtures={fixtures} leagues={leagues} loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture}/>
+        <Fixtures check={check} fixtures={fixtures} leagues={leagues} loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture} liveCheck={liveCheck}/>
       </div>
-      <div className='hidden md:block col-span-3  text-white'>
+      <div className='hidden lg:block col-span-3  text-white'>
         {
 
           currentFixture.map(fixture => (

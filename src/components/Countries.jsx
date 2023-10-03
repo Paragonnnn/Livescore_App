@@ -28,7 +28,7 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
     }
     
   return (
-    <div>
+    <div className='border border-solid border-lighterOrange text-white p-4'>
         <Header setSearch={setSearch} search={search}/>
         
         {
@@ -43,17 +43,17 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
             )
 
         }
-        <div className='country_div'>
+        <div className='divide-y divide-lighterOrange'>
             {
                 countries.filter((country) => (
                     search.trim().toLowerCase() === '' ? country : country.country_name.toLowerCase().includes(search)
                 )).map((country,index) => (
-                    <div key={country.country_key} >
-                        <div    className='country' onClick={() => handleClick(index)}>
+                    <div key={country.country_key} className=''>
+                        <div    className='text-white flex items-center justify-between w-full p-1' onClick={() => handleClick(index)}>
                             <div className='country_name_div'>
-                                <h2 className='country_name'>{country.country_name}</h2>
+                                <h2 className='text-white'>{country.country_name}</h2>
                             </div>
-                            <img src={country.country_logo} alt="" className='country_logo'/>
+                            <img src={country.country_logo} alt="" className='w-4 h-4 rounded-full'/>
                             <img 
                                 src={activeIndex.includes(index) ? arrowUp : arrowDown} 
                                 alt="" 
@@ -61,11 +61,11 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
                                 
                             />
                         </div>
-                        <div className={activeIndex.includes(index) ? 'show' : 'hidden'}>
+                        <div className={`${activeIndex.includes(index) ? 'block' : 'hidden'} p-2 divide-y divide-lighterOrange transition`}>
                             {
                                 leagues.map((league) => (
                                     (league.country_key == country.country_key) &&
-                                    <div key={league.league_key}>
+                                    <div key={league.league_key} className='p-1'>
                                         <Link to={`/table/${league.league_key}`}>
                                             {league.league_name}
                                         </Link>
