@@ -4,7 +4,7 @@ import Error from './Error'
 import Countries from './Countries'
 import { Link } from 'react-router-dom'
 
-const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, currentFixture, setCurrentFixture, liveCheck}) => {
+const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, currentFixture, setCurrentFixture, liveCheck, windowWidth}) => {
 
     const [isLive, setIsLive] = useState(true)
 
@@ -16,6 +16,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
     }
 
     const handleClick = (id) => {
+        
         if (!currentFixture.includes(id)) {
             setCurrentFixture(
                 fixtures.filter((fixture) => (
@@ -105,8 +106,8 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
     
     
     return (
-        <div className='p-4 bg-black rounded-md'>
-            <div className=' text-white border border-solid border-lighterOrange p-2 flex gap-2 mb-2'>
+        <div className='p-4 bg-customBg2 rounded-md'>
+            <div className=' text-white border border-solid border-black p-2 flex gap-2 mb-2'>
                 <button onClick={all} className={`${isLive ? 'text-orange': 'text-white'}`}>All</button>
                 <button onClick={live} className={`${!isLive ? 'text-orange': 'text-white'} flex items-center gap-1`}>Live <div className='text-xs'>
                         {
@@ -117,7 +118,6 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
             </div>
         {loadingFixtures && (
             <Loading />
-    
         )}
     
         {fixturesError && (
@@ -128,7 +128,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
             fixtures &&
             leagues.map((league,index) => (
                 (!isLive ? (check.includes(league.league_key) && liveCheck.includes(league.league_key)) : check.includes(league.league_key)) &&
-                <div key={league.league_key} className={`border border-lighterOrange border-solid mb-4 rounded divide-y divide-lighterOrange`}>
+                <div key={league.league_key} className={`border border-black border-solid mb-4 rounded divide-y divide-black`}>
                         {(check.includes(league.league_key) )
                         &&
                         <div className=' text-orange p-2 text-xs  flex items-center '>
@@ -157,19 +157,22 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                                 
                             // )) 
                             (league.league_key == fixture.league_key ) &&
-
                             <div key={fixture.event_key} className='text-gray-200 text-xs p-2 flex gap-2 ' onClick={() => handleClick(fixture)}>
+
+                             
+                                <Link to={`/fixture/${fixture.event_key}`} >
+                
                                 {/* <div>{fixture.country_name}</div> */}
                                 {/* <h1>{fixture.league_name}</h1> */}
                                 <div className='text-xxs text-gray-300 '>
                                     <div>
                                         {fixture.event_time}
                                     </div>
-                                    <div className={`${fixture.event_status !== 'Half Time' && fixture.event_status !== 'Finished' && fixture.event_live ===  '1' ? ' text-lightOrange animate-pulse': '' } ' text-[.35rem] text-center '`}>
+                                    <div className={`${fixture.event_status !== 'Half Time' && fixture.event_status !== 'Finished' && fixture.event_live ===  '1' ? ' text-orange animate-pulse text-[.55rem]': '' } ' text-[.35rem] text-center '`}>
                                         {fixture.event_status === 'Finished' ? 'FT' : fixture.event_status === 'Half Time' ? 'HT' : fixture.event_status === '' ? '-' : !isNaN(+fixture.event_status || fixture.event_status.includes('+')) ? `${fixture.event_status}'` : `${fixture.event_status.slice(0,4)}.` }
                                     </div>
                                 </div>
-                                <div className='cursor-pointer w-full '>
+                                <div  className='cursor-pointer w-full '>
                                     <div className='flex gap-1 items-center'>
                                         <img src={fixture.home_team_logo} alt="" className='w-2 h-2'/>
                                         <div className='flex justify-between  w-full'>
@@ -199,6 +202,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                                     </div>
                                      {/* {fixture.event_ft_result.slice(0,fixture.event_ft_result.indexOf('-'))} vs  {fixture.event_ft_result.slice(fixture.event_ft_result.indexOf('-') + 1, fixture.event_ft_result.length + 1)} */}
                                 </div>
+                            </Link>
                             </div>
                         ))
                     }

@@ -5,9 +5,12 @@ import Loading from './Loading'
 const Teams = () => {
     const [teams, setTeams] = useState([])
     const [loading, setLoading] = useState(false)
+    const [isCap, setIsCap] = useState([])
     const {id} = useParams()
     const api_key = import.meta.env.VITE_api_key
 
+
+    
     useEffect(() => {
         async function getData() {
             setLoading(true)
@@ -17,12 +20,17 @@ const Teams = () => {
                 setTeams(json.result)
                 setLoading(false)
                 console.log(json.result);
+                json.result.map((team) => (
+                    team.players.map(cap => (
+                        setIsCap(cap.player_is_captain)
+                    ))
+                    ))
+                    console.log(isCap);
             })
             .catch(err => console.log(err))
         }
         getData()
     },[id])
-    console.log(id);
   return (
     <div>
         {
@@ -38,6 +46,7 @@ const Teams = () => {
         {
             teams.map((team) => (
                 <div key={team.team_key}>
+                    
                     {team.team_name} <img src={team.team_logo} alt="" />
                     
                     <div>
@@ -59,6 +68,7 @@ const Teams = () => {
                                 // player.player_type == 'Goalkeepers' &&
                                 <div key={player.player_key}>
                                     <Link to={`/players/${player.player_key}`}>{player.player_name} {(player.player_is_captain == '9') && <span>(c)</span> }</Link>
+                                    {player.player_is_captain}
                                 </div>
                                 
                             ))

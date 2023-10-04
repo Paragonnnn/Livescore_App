@@ -8,6 +8,7 @@ import Teams from './components/Teams'
 import Table from './components/Table'
 import Fixtures from './components/Fixtures'
 import Players from './components/Players'
+import CurrentFixtures from './components/CurrentFixtures'
 
 const App = () => {
   const [countries, setCountries] = useState([])
@@ -21,6 +22,20 @@ const App = () => {
     const [check, setCheck] = useState([])
     const [liveCheck, setLiveCheck] = useState([])
     const [currentFixture, setCurrentFixture] = useState([])
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+    console.log(windowWidth);
 
 
     const api_key = import.meta.env.VITE_api_key
@@ -113,21 +128,27 @@ const App = () => {
   },[])
 
   return (
-    <div className='max-w-[1440px] m-auto  bg-customBg p-4'>
+    <div className='bg-customBg '>
       
-      <div>
-        <h1>Paragon</h1>
+      <div className='bg-customBg2 w-full text-white sticky top-0 rounded-b-xl z-10'>
+        <div className='w-[1536px] m-auto '>
+          <Link to={'/'}><h3 className='text-[40px] px-4 py-2 mb-2 '>Paragon</h3></Link>
+        </div>
       </div>
-      <Routes>
-        
-        <Route path='/' element={<Home countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues} check={check} fixtures={fixtures}  loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture} liveCheck={liveCheck}/>}/>
-        <Route path='/countries' element={<Countries countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues}/>} />
-        <Route path='/leagues/:id' element={<Leagues />}/>
-        <Route path='/table/:id' element={<Table/>} />
-        {/* <Route path='/fixtures' element={<Fixtures check={check} fixtures={fixtures} leagues={leagues} loadingFixtures={loadingFixtures} fixturesError={fixturesError}/>}/> */}
-        <Route path='/teams/:id' element={<Teams leagues={leagues}/>}/>
-        <Route path='/players/:id' element={<Players countries={countries} leagues={leagues}/>}/>
-      </Routes>
+      <div className=' max-w-[1536px] m-auto  p-4'>
+
+        <Routes>
+          
+          <Route path='/' element={<Home countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues} check={check} fixtures={fixtures}  loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture} liveCheck={liveCheck} month={month} currentYear={currentYear} day={day} windowWidth={windowWidth}/>}/>
+          <Route path='/countries' element={<Countries countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues}/>} />
+          <Route path='/leagues/:id' element={<Leagues />}/>
+          <Route path='/table/:id' element={<Table/>} />
+          <Route path='/fixture/:id' element={<CurrentFixtures />}/>
+          {/* <Route path='/fixtures' element={<Fixtures check={check} fixtures={fixtures} leagues={leagues} loadingFixtures={loadingFixtures} fixturesError={fixturesError}/>}/> */}
+          <Route path='/teams/:id' element={<Teams leagues={leagues}/>}/>
+          <Route path='/players/:id' element={<Players countries={countries} leagues={leagues}/>}/>
+        </Routes>
+      </div>
       
     </div>
   )

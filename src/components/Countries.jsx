@@ -28,7 +28,7 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
     }
     
   return (
-    <div className='border border-solid border-lighterOrange text-white p-4'>
+    <div className='border border-solid border-border text-white p-4 bg-customBg2'>
         <Header setSearch={setSearch} search={search}/>
         
         {
@@ -43,7 +43,7 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
             )
 
         }
-        <div className='divide-y divide-lighterOrange'>
+        <div className='divide-y divide-black'>
             {
                 countries.filter((country) => (
                     search.trim().toLowerCase() === '' ? country : country.country_name.toLowerCase().includes(search)
@@ -61,7 +61,7 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
                                 
                             />
                         </div>
-                        <div className={`${activeIndex.includes(index) ? 'block' : 'hidden'} p-2 divide-y divide-lighterOrange transition`}>
+                        <div className={`${activeIndex.includes(index) ? 'block' : 'hidden'} p-2 divide-y divide-black transition`}>
                             {
                                 leagues.map((league) => (
                                     (league.country_key == country.country_key) &&
