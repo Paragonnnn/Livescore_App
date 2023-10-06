@@ -23,7 +23,8 @@ const App = () => {
     const [liveCheck, setLiveCheck] = useState([])
     const [currentFixture, setCurrentFixture] = useState([])
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
+    
+    
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -43,6 +44,8 @@ const App = () => {
     let month = date.getMonth() + 1
     let currentYear = date.getFullYear()
     let day = date.getDate()
+    
+    const [calenderDate, setCalenderDate] = useState(`${currentYear}-${month}-${day}`)
 
     useEffect(() => {
         setLoadingCountries(true)
@@ -93,11 +96,13 @@ const App = () => {
         setLoadingFixtures(true)
         await fetch(`https://apiv2.allsportsapi.com/football/?met=Fixtures&timezone=Africa/Lagos&leagueId=${leagues.map(league => (
             league.league_key
-        ))}&APIkey=${api_key}&from=${currentYear}-${month}-${day}&to=${currentYear}-${month}-${day}`)
+        ))}&APIkey=${api_key}&from=${calenderDate}&to=${calenderDate}`)
         .then(res => res.json())
         .then(json => {
             setFixtures(json.result)
+            console.log(fixtures);
             setLoadingFixtures(false)
+            setCurrentFixture(json.result.slice(0,1))
             setCheck(
                 json.result.map(fixture => (
                     (
@@ -125,21 +130,21 @@ const App = () => {
         })
     }
     getData()
-  },[])
+  },[calenderDate])
 
   return (
     <div className='bg-customBg '>
       
-      <div className='bg-customBg2 w-full text-white sticky top-0 rounded-b-xl z-10'>
+      <div className='bg-customBg2 w-full text-white sticky top-[-2px] rounded-b-xl z-10'>
         <div className='w-[1536px] m-auto '>
-          <Link to={'/'}><h3 className='text-[40px] px-4 py-2 mb-2 '>Paragon</h3></Link>
+          <Link to={'/'}><h3 className='text-[30px] md:text-[40px] px-2 md:px-4 py-2 mb-2 '>Paragon</h3></Link>
         </div>
       </div>
-      <div className=' max-w-[1536px] m-auto  p-4'>
+      <div className=' max-w-[1536px] m-auto  md:p-4 p-1'>
 
         <Routes>
           
-          <Route path='/' element={<Home countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues} check={check} fixtures={fixtures}  loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture} liveCheck={liveCheck} month={month} currentYear={currentYear} day={day} windowWidth={windowWidth}/>}/>
+          <Route path='/' element={<Home countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues} check={check} fixtures={fixtures}  loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture} liveCheck={liveCheck} month={month} currentYear={currentYear} day={day} windowWidth={windowWidth} calenderDate={calenderDate} setCalenderDate={setCalenderDate}/>}/>
           <Route path='/countries' element={<Countries countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues}/>} />
           <Route path='/leagues/:id' element={<Leagues />}/>
           <Route path='/table/:id' element={<Table/>} />

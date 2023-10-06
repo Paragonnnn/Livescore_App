@@ -111,7 +111,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                 <button onClick={all} className={`${isLive ? 'text-orange': 'text-white'}`}>All</button>
                 <button onClick={live} className={`${!isLive ? 'text-orange': 'text-white'} flex items-center gap-1`}>Live <div className='text-xs'>
                         {
-                        fixtures.filter(fixture => fixture.event_live === '1').length
+                        fixtures?.filter(fixture => fixture.event_live === '1').length
                     }
                     </div>
                     </button>
@@ -157,18 +157,22 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                                 
                             // )) 
                             (league.league_key == fixture.league_key ) &&
-                            <div key={fixture.event_key} className='text-gray-200 text-xs p-2 flex gap-2 ' onClick={() => handleClick(fixture)}>
 
                              
-                                <Link to={`/fixture/${fixture.event_key}`} >
+                                <div to={`/fixture/${fixture.event_key}`} key={fixture.event_key} className='text-gray-200 text-xs p-2 flex gap-2 relative' onClick={() => handleClick(fixture)}>
                 
                                 {/* <div>{fixture.country_name}</div> */}
                                 {/* <h1>{fixture.league_name}</h1> */}
+                                {
+                                    windowWidth < 1024 &&
+                                    <Link className='absolute h-full w-full z-[1] bg-transparent top-[-2px] left-[-2px]' to={`/fixture/${fixture.event_key}`}></Link>
+
+                                }
                                 <div className='text-xxs text-gray-300 '>
                                     <div>
                                         {fixture.event_time}
                                     </div>
-                                    <div className={`${fixture.event_status !== 'Half Time' && fixture.event_status !== 'Finished' && fixture.event_live ===  '1' ? ' text-orange animate-pulse text-[.55rem]': '' } ' text-[.35rem] text-center '`}>
+                                    <div className={`${ fixture.event_status !== 'Finished' && fixture.event_live ===  '1' ? ' text-orange animate-pulse text-[.55rem]': '' } ' text-[.35rem] text-center '`}>
                                         {fixture.event_status === 'Finished' ? 'FT' : fixture.event_status === 'Half Time' ? 'HT' : fixture.event_status === '' ? '-' : !isNaN(+fixture.event_status || fixture.event_status.includes('+')) ? `${fixture.event_status}'` : `${fixture.event_status.slice(0,4)}.` }
                                     </div>
                                 </div>
@@ -202,7 +206,6 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                                     </div>
                                      {/* {fixture.event_ft_result.slice(0,fixture.event_ft_result.indexOf('-'))} vs  {fixture.event_ft_result.slice(fixture.event_ft_result.indexOf('-') + 1, fixture.event_ft_result.length + 1)} */}
                                 </div>
-                            </Link>
                             </div>
                         ))
                     }
