@@ -100,7 +100,7 @@ const App = () => {
         .then(res => res.json())
         .then(json => {
             setFixtures(json.result)
-            console.log(fixtures);
+            console.log(json.result);
             setLoadingFixtures(false)
             setCurrentFixture(json.result.slice(0,1))
             setCheck(

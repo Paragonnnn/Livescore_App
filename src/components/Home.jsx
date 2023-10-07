@@ -34,7 +34,7 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
               currentFixture.map(fixture => (
                 <div key={fixture.event_key} className=''>
                   <div className=' w-full bg-customBg p-2 grid grid-cols-5 items-center rounded'>
-                    <div className='text-center col-span-2 justify-self-start'>
+                    <div className='text-center col-span-2 justify-self-start flex flex-col gap-1 justify-center items-center'>
                       <img src={fixture.home_team_logo} alt="" className='w-[50px]'/>
                       <div className='text-xxs'>
                         {fixture.event_home_team}
@@ -44,16 +44,19 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
                       <div className=' lg:text-base xl:text-2xl'>{fixture.event_final_result}</div>
                       <div className='text-base'>{fixture.event_status === 'Finished' ? 'FT' : fixture.event_status === 'Half Time' ? 'HT' : fixture.event_status}</div>
                     </div>
-                    <div className='text-center col-span-2 justify-self-end'>
+                    <div className='text-center col-span-2 justify-self-end flex flex-col gap-1 justify-center items-center'>
                       <img src={fixture.away_team_logo} alt="" className='w-[50px]'/>
                       <div className='text-xxs'>
                         {fixture.event_away_team}
                       </div>
                     </div> 
                   </div>
-                  <div>
-                    <Link to={`/fixture/${fixture.event_key}`} className='px-4 bg-customBg py-2 text-2xl   '>show more</Link>
+                  <div className='flex justify-center'>
+                    <Link to={`/fixture/${fixture.event_key}`} className='px-4 bg-customBg py-1 text-lg  rounded hover:opacity-80 mt-3'>show more</Link>
 
+                  </div>
+                  <div>
+                    
                   </div>
                 </div>
               ))

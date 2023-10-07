@@ -159,7 +159,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                             (league.league_key == fixture.league_key ) &&
 
                              
-                                <div to={`/fixture/${fixture.event_key}`} key={fixture.event_key} className='text-gray-200 text-xs p-2 flex gap-2 relative' onClick={() => handleClick(fixture)}>
+                                <div to={`/fixture/${fixture.event_key}`} key={fixture.event_key} className={`${windowWidth < 1024 ? 'hover:opacity-70 transition ' : ''}text-gray-200 text-xs p-2 flex gap-2 relative`} onClick={() => handleClick(fixture)}>
                 
                                 {/* <div>{fixture.country_name}</div> */}
                                 {/* <h1>{fixture.league_name}</h1> */}
