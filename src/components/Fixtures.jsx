@@ -141,7 +141,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                         }
                     {
                         
-                        fixtures.filter(fixture => {
+                        fixtures?.filter(fixture => {
 
                             // fixture.event_live === isLive
                             if (isLive) {
