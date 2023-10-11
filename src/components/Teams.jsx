@@ -56,7 +56,7 @@ const Teams = () => {
                                 // player.player_type == 'Goalkeepers' &&
 
                                 <div key={player.player_key}>
-                                    <Link to={`/players/${player.player_key}`}>{player.player_name} {(player.player_is_captain == '9') && <span>(c)</span> }</Link>
+                                    <Link to={`/player/${player.player_name.replace(' ', '-')}/${player.player_key}`}>{player.player_name} {(player.player_is_captain == '9') && <span>(c)</span> }</Link>
                                 </div>
                                 
                             ))
@@ -67,7 +67,7 @@ const Teams = () => {
                             team.players.filter(player => player.player_type == 'Defenders').map((player) => (
                                 // player.player_type == 'Goalkeepers' &&
                                 <div key={player.player_key}>
-                                    <Link to={`/players/${player.player_key}`}>{player.player_name} {(player.player_is_captain == '9') && <span>(c)</span> }</Link>
+                                    <Link to={`/player/${player.player_name.replace(' ', '-')}/${player.player_key}`}>{player.player_name} {(player.player_is_captain == '9') && <span>(c)</span> }</Link>
                                     {player.player_is_captain}
                                 </div>
                                 
@@ -79,7 +79,7 @@ const Teams = () => {
                             team.players.filter(player => player.player_type == 'Midfielders').map((player) => (
                                 // player.player_type == 'Goalkeepers' &&
                                 <div key={player.player_key}>
-                                    <Link to={`/players/${player.player_key}`}>{player.player_name} {(player.player_is_captain == '9') && <span>(c)</span> }</Link>
+                                    <Link to={`/player/${player.player_name.replace(' ', '-')}/${player.player_key}`}>{player.player_name} {(player.player_is_captain == '9') && <span>(c)</span> }</Link>
                                 </div>
                                 
                             ))
@@ -90,7 +90,7 @@ const Teams = () => {
                             team.players.filter(player => player.player_type == 'Forwards').map((player) => (
                                 // player.player_type == 'Goalkeepers' &&
                                 <div key={player.player_key}>
-                                    <Link to={`/players/${player.player_key}`}>{player.player_name} {(player.player_is_captain == '9') && <span>(c)</span> }</Link>
+                                    <Link to={`/player/${player.player_name.replace(' ', '-')}/${player.player_key}`}>{player.player_name} {(player.player_is_captain == '9') && <span>(c)</span> }</Link>
                                 </div>
                                 
                             ))

@@ -52,11 +52,11 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
                     </div> 
                   </div>
                   <div className='flex justify-center'>
-                    <Link to={`/fixture/${fixture.event_key}`} className='px-4 bg-customBg py-1 text-lg  rounded hover:opacity-80 mt-3'>show more</Link>
+                    <Link to={`/fixture/${fixture.event_home_team.replace(' ','-')}-${fixture.event_away_team.replace(' ','-')}/${fixture.event_key}`} className='px-4 bg-customBg py-1 text-lg  rounded hover:opacity-80 mt-3'>show more</Link>
 
                   </div>
                   <div>
-                    
+
                   </div>
                 </div>
               ))
