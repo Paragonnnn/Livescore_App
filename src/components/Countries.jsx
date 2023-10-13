@@ -66,7 +66,7 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
                                 leagues.map((league) => (
                                     (league.country_key == country.country_key) &&
                                     <div key={league.league_key} className='p-1'>
-                                        <Link to={`/table/${league.league_key}`}>
+                                        <Link to={`/table/${league.league_name.replace(' ','-')}/${league.league_key}`}>
                                             {league.league_name}
                                         </Link>
                                     </div>

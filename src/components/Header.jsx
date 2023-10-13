@@ -8,7 +8,7 @@ const Header = ({setSearch, search}) => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder='Search Country...'
-            className='bg-transparent outline-none border border-solid border-lighterOrange p-2 w-full'
+            className='bg-transparent outline-none border border-solid border-black p-2 w-full'
         />
     </div>
   )

@@ -9,6 +9,7 @@ import Table from './components/Table'
 import Fixtures from './components/Fixtures'
 import Players from './components/Players'
 import CurrentFixtures from './components/CurrentFixtures'
+import SearchClub from './components/SearchClub'
 
 const App = () => {
   const [countries, setCountries] = useState([])
@@ -23,6 +24,8 @@ const App = () => {
     const [liveCheck, setLiveCheck] = useState([])
     const [currentFixture, setCurrentFixture] = useState([])
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [searchClub, setSearchClub] = useState('')
+    const [clubs, setClubs] = useState([])
     
     
   useEffect(() => {
@@ -132,12 +135,30 @@ const App = () => {
     getData()
   },[calenderDate])
 
+  useEffect(() => {
+    async function getData() {
+      await fetch(`https://apiv2.allsportsapi.com/football/?&met=Standings&leagueId=${leagues.map(league => (
+        league.league_key
+    ))}&APIkey=${api_key}`)
+    .then(res => res.json())
+    .then(json => {
+      setClubs(json.result)
+      console.log(json.result);
+    })
+    }
+    getData()
+  }, [])
+
   return (
     <div className='bg-customBg '>
       
-      <div className='bg-customBg2 w-full text-white sticky top-[-2px] rounded-b-xl z-10'>
-        <div className='w-[1440px] m-auto '>
-          <Link to={'/'}><h3 className='text-[30px] md:text-[40px] px-2 md:px-4 py-2 mb-2 '>Paragon</h3></Link>
+      <div className='bg-customBg2  w-full  sticky top-[-2px] rounded-b-xl z-10'>
+        <div className='m-auto  max-w-[1440px] flex items-center justify-between'>
+          <Link to={'/'}><h3 className='text-[30px] md:text-[40px] px-2 md:px-4 py-2 mb-2 text-white'>Paragon</h3></Link>
+          <div className='px-2'>
+            <input className='bg-transparent outline-none border border-solid border-black p-2 ' onChange={e => setSearchClub(e.target.value)} value={searchClub} id="" />
+            <SearchClub searchClub={searchClub}/>
+          </div>
         </div>
       </div>
       <div className=' max-w-[1440px] m-auto  md:p-4 p-1'>
@@ -148,7 +169,7 @@ const App = () => {
           <Route path='/countries' element={<Countries countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues}/>} />
           <Route path='/leagues/:id' element={<Leagues />}/>
           <Route path='/table/:leaguename/:id' element={<Table/>} />
-          <Route path='/fixture/:teamsname/:id' element={<CurrentFixtures />}/>
+          <Route path='/fixture/:league/:teamsname/:id' element={<CurrentFixtures />}/>
           {/* <Route path='/fixtures' element={<Fixtures check={check} fixtures={fixtures} leagues={leagues} loadingFixtures={loadingFixtures} fixturesError={fixturesError}/>}/> */}
           <Route path='/team/:teamname/:id' element={<Teams leagues={leagues}/>}/>
           <Route path='/player/:playername/:id' element={<Players countries={countries} leagues={leagues}/>}/>

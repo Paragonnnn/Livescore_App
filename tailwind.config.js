@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        customBg: '#4682B4',
-        customBg2: '#123456',
+        customBg: 'wheat',
+        customBg2: 'darkslategray',
         border : '#151B54',
         orange: '#f39c12',
         lightOrange: '#f39d12c0',
@@ -18,7 +18,7 @@ export default {
         sm: '0 0 2px 2px #f39d1241'
       },
       fontSize: {
-        'xxs': '.5rem'
+        'xxs': '.6rem'
       }
     },
   },

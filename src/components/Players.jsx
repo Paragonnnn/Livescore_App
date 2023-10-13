@@ -51,16 +51,16 @@ const Players = ({countries, leagues}) => {
             {
                 
                 players.map((player,index) => (
-                    <div key={player.team_key} className='player_div'>
-                        <Link to={`/team/${player.team_name.replace(' ','-')}/${player.team_key}`}>
-                            <h1 className='player_team'>{player.team_name}</h1>
+                    <div key={player.team_key} className=' mb-4'>
+                        <Link to={`/team/${player.team_name.replace(/ /g,'-')}/${player.team_key}`}>
+                            <h1 className=' bg-customBg2 text-customBg p-2 rounded mb-2'>{player.team_name}</h1>
 
                         </Link>
-                        <div className='player_div_1'>
-                            <h3 className='player_det_header'>Player's Details</h3>
-                            <div className='player_image_div'>
+                        <div className=' bg-customBg2 p-4 rounded'>
+                            <h3 className=' text-customBg mb-2'>Player's Details</h3>
+                            <div className=' flex items-center gap-4'>
                                 <img src={player.player_image ? player.player_image : pic} alt={player.player_name} className='player_image'/>
-                                <h1>{player.player_name}</h1>
+                                <h1 className=' text-customBg text-lg'>{player.player_name}</h1>
                             </div>
                             <div className='player_details_div'>
                                 {player.player_number 

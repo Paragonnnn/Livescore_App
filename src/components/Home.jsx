@@ -17,6 +17,7 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
       <Link to={`/fixtures`}>
         <button>fixtures</button>
       </Link> */}
+      
       <div className='hidden lg:block col-span-3'>
       <input type="date" name="" id="" onChange={e=> {
         setCalenderDate(e.target.value)
@@ -28,7 +29,7 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
         <Fixtures check={check} fixtures={fixtures} leagues={leagues} loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture} liveCheck={liveCheck} windowWidth={windowWidth}/>
       </div>
       
-      <div className='hidden lg:block col-span-3 sticky top-[80px] text-white bg-customBg2 p-4 h-[50vh]'>
+      <div className='hidden lg:block col-span-3 sticky top-[80px] text-black bg-customBg2 p-4 h-[50vh]'>
       
             {
               currentFixture.map(fixture => (
@@ -40,7 +41,7 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
                         {fixture.event_home_team}
                       </div>
                     </div> 
-                    <div className={`${fixture.event_live === '1' ? 'text-lightOrange   ' : 'text-white '} text-center col-span-1 `}>
+                    <div className={`${fixture.event_live === '1' ? 'text-lightOrange   ' : 'text-black '} text-center col-span-1 `}>
                       <div className=' lg:text-base xl:text-2xl'>{fixture.event_final_result}</div>
                       <div className='text-base'>{fixture.event_status === 'Finished' ? 'FT' : fixture.event_status === 'Half Time' ? 'HT' : fixture.event_status}</div>
                     </div>
@@ -52,7 +53,7 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
                     </div> 
                   </div>
                   <div className='flex justify-center'>
-                    <Link to={`/fixture/${fixture.event_home_team.replace(' ','-')}-${fixture.event_away_team.replace(' ','-')}/${fixture.event_key}`} className='px-4 bg-customBg py-1 text-lg  rounded hover:opacity-80 mt-3'>show more</Link>
+                    <Link to={`/fixture/${fixture.event_home_team.replace(/ /g,'-')}-${fixture.event_away_team.replace(/ /g,'-')}/${fixture.event_key}`} className='px-4 bg-customBg py-1 text-lg rounded hover:opacity-80 mt-3'>show more</Link>
 
                   </div>
                   <div>

@@ -1,10 +1,10 @@
 import React from 'react'
-import { ball } from '..'
+import { ball,ogball } from '..'
 
 const Event = ({events}) => {
   return (
     <div>
-        <div className=' p-2 divide-y divide-black'>
+        <div className=' p-2 divide-y divide-black bg-customBg2 rounded text-customBg'>
                     {
                       events &&
                       events.filter(eve => eve.info_time === '1st Half').sort((a,b) => (
@@ -34,18 +34,21 @@ const Event = ({events}) => {
                                   }
                                   {
                                     (eve.home_scorer) && (
-                                      <div className='flex gap-1 justify-end text-xs'>
+                                      <div className='flex gap-1 justify-end items-center text-xs'>
                                         <div className='flex flex-col items-end'>
-                                          <div className=' text-white'>{eve.home_scorer}</div>
+                                          <div className=' '>{eve.home_scorer}</div>
                                               {eve.home_assist && (
-                                          <div className={`${eve.home_assist ? 'text-xxs ' : ''} text-white opacity-70 w-fit border border-solid border-red-600`}>
+                                          <div className={`  font-semibold opacity-70 w-fit `}>
                                                 {eve.home_assist}(a)
                                                 
                                           </div>
                                               )}
 
                                         </div>
-                                        <img src={ball} alt="" className='w-[20px] h-[20px]'/>
+                                        <div className='relative'>
+                                        <img src={eve.home_scorer.includes('(o.g.)') ? ogball : ball} alt="" className='w-[20px] h-[20px]'/>
+                                        <div className=' opacity-70 absolute top-[-5px] right-0'>{eve.info === 'Penalty' ? 'p' : ''}</div>
+                                        </div>
                                       </div>
                                     ) 
                                   }
@@ -63,14 +66,17 @@ const Event = ({events}) => {
                                   {
                                     (eve.away_scorer) && (
                                       <div className='flex gap-1 items-center text-xs'>
-                                        <img src={ball} alt="" className='w-[20px] h-[20px] text-white'/>
+                                        <div className='relative'>
+                                        <img src={eve.away_scorer.includes('(o.g.)') ? ogball : ball} alt="" className='w-[20px] h-[20px] '/>
+                                        <div className=' opacity-70 absolute top-[-5px] right-0'>{eve.info === 'Penalty' ? 'p' : ''}</div>
+                                        </div>
                                         <div className='flex flex-col '>
-                                          <div className='text-white '>{eve.away_scorer}</div>
-                                          <div className=' text-white opacity-70'>
+                                          <div className=' '>{eve.away_scorer}</div>
+                                          <div className='  font-semibold opacity-70'>
                                             {eve.away_assist && (
                                               eve.away_assist 
                                             )} 
-                                            {eve.away_assist && <span>(assist)</span>}
+                                            {eve.away_assist && <span>(a)</span>}
                                           </div>
                                           
                                         </div>
@@ -126,11 +132,11 @@ const Event = ({events}) => {
                                     (eve.home_scorer) && (
                                       <div className='flex gap-1 justify-end text-xs'>
                                         <div className='flex flex-col items-end'>
-                                          <div className=' text-white'>{eve.home_scorer}</div>
+                                          <div className=' '>{eve.home_scorer}</div>
                                           {
                                             eve.home_assist && (
 
-                                              <div className={`${eve.home_assist ? 'text-xxs ' : ''} text-white opacity-70 w-fit border border-solid border-red-600`}>
+                                              <div className={`${eve.home_assist ? 'text-xxs ' : ''}  font-semibold opacity-70 w-fit `}>
                                                     {eve.home_assist}(a)
                                                     
                                               </div>
@@ -138,7 +144,10 @@ const Event = ({events}) => {
                                           }
 
                                         </div>
-                                        <img src={ball} alt="" className='w-[20px] h-[20px]'/>
+                                        <div className='relative'>
+                                            <img src={eve.home_scorer.includes('(o.g.)') ? ogball : ball} alt="" className='w-[20px] h-[20px]'/>
+                                            <div className=' opacity-70 absolute top-[-5px] right-0'>{eve.info === 'Penalty' ? 'p' : ''}</div>
+                                        </div>
                                       </div>
                                     ) 
                                   }
@@ -156,10 +165,13 @@ const Event = ({events}) => {
                                   {
                                     (eve.away_scorer) && (
                                       <div className='flex gap-1 items-center text-xs'>
-                                        <img src={ball} alt="" className='w-[20px] h-[20px]'/>
+                                        <div className='relative'>
+                                        <img src={eve.away_scorer.includes('(o.g.)') ? ogball : ball} alt="" className='w-[20px] h-[20px]'/>
+                                        <div className=' opacity-70 absolute top-[-5px] right-0'>{eve.info === 'Penalty' ? 'p' : ''}</div>
+                                        </div>
                                         <div className='flex flex-col'>
-                                          <div className=' text-white'>{eve.away_scorer}</div>
-                                          <div className=' text-white opacity-70'>
+                                          <div className=' '>{eve.away_scorer}</div>
+                                          <div className='  font-semibold opacity-70'>
                                               {eve.away_assist && (
                                                 eve.away_assist 
                                               )} 

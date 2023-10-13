@@ -18,7 +18,7 @@ const LineUp = ({statToggle, lineUp}) => {
                                     <Link to={`/player/${startingLineUp.player.replace(' ', '-')}/${startingLineUp.player_key}`} className=''>
                                         {startingLineUp.player}
                                     </Link>
-                                    <div className=' text-white opacity-60'>({startingLineUp.player_number})</div>
+                                    <div className=' text-black opacity-60'>({startingLineUp.player_number})</div>
                                     
 
                                 </div>
@@ -38,7 +38,7 @@ const LineUp = ({statToggle, lineUp}) => {
                         parseInt(a.player_position) - parseInt(b.player_position)
                     )).map((startingLineUp,index) => (
                                 <div key={index} className=' py-1 flex gap-2 justify-end'>
-                                    <div className=' text-white opacity-60'>({startingLineUp.player_number})</div>
+                                    <div className=' text-black opacity-60'>({startingLineUp.player_number})</div>
                                     <Link to={`/player/${startingLineUp.player.replace(' ', '-')}/${startingLineUp.player_key}`}>
                                         {startingLineUp.player}
                                     </Link>
