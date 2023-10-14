@@ -117,7 +117,7 @@ const CurrentFixtures = ({}) => {
           match.map(match => (
             <div key={match.event_key}>
               {/* {match.event_home_team} vs {match.event_away_team} */}
-                  <div className=' w-full bg-customBg2 text-customBg p-2 grid grid-cols-5 items-center rounded'>
+                  <div className=' w-full bg-customBg2 text-customBg p-2 grid grid-cols-5 items-center rounded mb-4'>
                     <div className='text-center col-span-2 justify-self-start flex flex-col gap-1 justify-center items-center'>
                       <Link to={`/team/${match.event_home_team.replace(/ +/g,'-')}/${match.home_team_key}`}><img src={match.home_team_logo} alt="" className='w-[50px]'/></Link>
                       <div className='text-xxs md:text-xs'>
