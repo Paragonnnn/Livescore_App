@@ -49,7 +49,7 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
                     search.trim().toLowerCase() === '' ? country : country.country_name.toLowerCase().includes(search)
                 )).map((country,index) => (
                     <div key={country.country_key} className=''>
-                        <div    className='text-white flex items-center justify-between w-full p-1' onClick={() => handleClick(index)}>
+                        <div    className='text-white flex items-center justify-between w-full p-1 cursor-pointer' onClick={() => handleClick(index)}>
                             <div className='country_name_div'>
                                 <h2 className='text-white'>{country.country_name}</h2>
                             </div>
@@ -57,16 +57,15 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
                             <img 
                                 src={activeIndex.includes(index) ? arrowUp : arrowDown} 
                                 alt="" 
-                                className='up_down_arrow'
-                                
+                                className=' w-7 h-7 cursor-pointer'
                             />
                         </div>
-                        <div className={`${activeIndex.includes(index) ? 'block' : 'hidden'} p-2 divide-y divide-black transition`}>
+                        <div className={`${activeIndex.includes(index) ? 'block' : 'hidden'} p-2 divide-y divide-black  `}>
                             {
                                 leagues.map((league) => (
                                     (league.country_key == country.country_key) &&
                                     <div key={league.league_key} className='p-1'>
-                                        <Link to={`/table/${league.league_name.replace(' ','-')}/${league.league_key}`}>
+                                        <Link to={`/table/${league.league_name.replace(/ +/g,'-')}/${league.league_key}`}>
                                             {league.league_name}
                                         </Link>
                                     </div>

@@ -11,7 +11,7 @@ const HeadToHead = ({statToggle, hToH}) => {
               hToH &&
               hToH.map(h => (
                 <div key={h.event_key} className=' py-4  divide-y divide-black '>
-                    <div className=' mb-2 text-lg font-bold'>
+                    <div className=' mb-2 text-lg font-semibold rounded bg-customBg2 text-customBg p-2'>
                         <div>{h.league_name}</div>
                     </div>
                     <div className=''>
@@ -20,7 +20,7 @@ const HeadToHead = ({statToggle, hToH}) => {
                                 <div>{h.event_date.slice(0,h.event_date.indexOf('-')) === year.toString() ? h.event_date.slice(h.event_date.indexOf('-') + 1 ,h.event_date.lenght) : h.event_date.slice(0,h.event_date.indexOf('-'))}</div>
                                 <div>{h.event_status === 'Finished' && 'FT'}</div>
                             </div>
-                            <Link to={`/fixture/${h.league_name.replace(/ /g,'-')}/${h.event_home_team.replace(/ /g,'-')}-${h.event_away_team.replace(/ /g,'-')}/${h.event_key}`} className='w-full mt-2'>
+                            <Link to={`/fixture/${h.league_name.replace(/ +/g,'-')}/${h.event_home_team.replace(/ +/g,'-')}-${h.event_away_team.replace(/ +/g,'-')}/${h.event_key}`} className='w-full mt-2'>
                                 <div className='flex justify-between '>
                                     <div>{h.event_home_team}</div>
                                     <div>{h.event_final_result.slice(0,h.event_final_result.indexOf('-'))}</div>

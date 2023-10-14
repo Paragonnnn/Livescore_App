@@ -29,7 +29,7 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
         <Fixtures check={check} fixtures={fixtures} leagues={leagues} loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture} liveCheck={liveCheck} windowWidth={windowWidth}/>
       </div>
       
-      <div className='hidden lg:block col-span-3 sticky top-[80px] text-black bg-customBg2 p-4 h-[50vh]'>
+      <div className='hidden lg:block col-span-3 sticky top-[90px] text-black bg-customBg2 p-4 h-[50vh]'>
       
             {
               currentFixture.map(fixture => (
@@ -53,7 +53,7 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
                     </div> 
                   </div>
                   <div className='flex justify-center'>
-                    <Link to={`/fixture/${fixture.event_home_team.replace(/ /g,'-')}-${fixture.event_away_team.replace(/ /g,'-')}/${fixture.event_key}`} className='px-4 bg-customBg py-1 text-lg rounded hover:opacity-80 mt-3'>show more</Link>
+                    <Link to={`/fixture/${fixture.league_name.replace(/ +/g,'-')}/${fixture.event_home_team.replace(/ +/g,'-')}-${fixture.event_away_team.replace(/ +/g,'-')}/${fixture.event_key}`} className='px-4 bg-customBg py-1 text-lg rounded hover:opacity-80 mt-3'>show more</Link>
 
                   </div>
                   <div>

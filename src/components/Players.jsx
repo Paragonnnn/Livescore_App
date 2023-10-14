@@ -52,7 +52,7 @@ const Players = ({countries, leagues}) => {
                 
                 players.map((player,index) => (
                     <div key={player.team_key} className=' mb-4'>
-                        <Link to={`/team/${player.team_name.replace(/ /g,'-')}/${player.team_key}`}>
+                        <Link to={`/team/${player.team_name.replace(/ +/g,'-')}/${player.team_key}`}>
                             <h1 className=' bg-customBg2 text-customBg p-2 rounded mb-2'>{player.team_name}</h1>
 
                         </Link>

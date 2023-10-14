@@ -39,7 +39,7 @@ const LineUp = ({statToggle, lineUp}) => {
                     )).map((startingLineUp,index) => (
                                 <div key={index} className=' py-1 flex gap-2 justify-end'>
                                     <div className=' text-black opacity-60'>({startingLineUp.player_number})</div>
-                                    <Link to={`/player/${startingLineUp.player.replace(' ', '-')}/${startingLineUp.player_key}`}>
+                                    <Link to={`/player/${startingLineUp.player.replace(/ +/g, '-')}/${startingLineUp.player_key}`}>
                                         {startingLineUp.player}
                                     </Link>
                                     

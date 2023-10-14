@@ -154,20 +154,20 @@ const App = () => {
       
       <div className='bg-customBg2  w-full  sticky top-[-2px] rounded-b-xl z-10'>
         <div className='m-auto  max-w-[1440px] flex items-center justify-between'>
-          <Link to={'/'}><h3 className='text-[30px] md:text-[40px] px-2 md:px-4 py-2 mb-2 text-white'>Paragon</h3></Link>
+          <Link to={'/'}><h3 className='text-[25px] md:text-[40px] px-2 md:px-4 py-2 mb-2 text-customBg font-bold'>Paragon</h3></Link>
           <div className='px-2'>
             <input className='bg-transparent outline-none border border-solid border-black p-2 ' onChange={e => setSearchClub(e.target.value)} value={searchClub} id="" />
             <SearchClub searchClub={searchClub}/>
           </div>
         </div>
       </div>
-      <div className=' max-w-[1440px] m-auto  md:p-4 p-1'>
+      <div className=' max-w-[1440px] m-auto  lg:p-4 p-1'>
 
         <Routes>
           
           <Route path='/' element={<Home countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues} check={check} fixtures={fixtures}  loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture} liveCheck={liveCheck} month={month} currentYear={currentYear} day={day} windowWidth={windowWidth} calenderDate={calenderDate} setCalenderDate={setCalenderDate}/>}/>
           <Route path='/countries' element={<Countries countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues}/>} />
-          <Route path='/leagues/:id' element={<Leagues />}/>
+          <Route path='/leagues/:countryname/:id' element={<Leagues />}/>
           <Route path='/table/:leaguename/:id' element={<Table/>} />
           <Route path='/fixture/:league/:teamsname/:id' element={<CurrentFixtures />}/>
           {/* <Route path='/fixtures' element={<Fixtures check={check} fixtures={fixtures} leagues={leagues} loadingFixtures={loadingFixtures} fixturesError={fixturesError}/>}/> */}

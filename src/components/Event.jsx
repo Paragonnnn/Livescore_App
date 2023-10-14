@@ -5,11 +5,14 @@ const Event = ({events}) => {
   return (
     <div>
         <div className=' p-2 divide-y divide-black bg-customBg2 rounded text-customBg'>
+          <div className=' bg-customBg text-customBg2 w-fit px-4 rounded-full mb-2'>Events</div>
                     {
                       events &&
                       events.filter(eve => eve.info_time === '1st Half').sort((a,b) => (
                         parseInt(a.time) - parseInt(b.time)
                       )).map((eve, index) => (
+                        (eve.home_scorer || eve.away_scorer || eve.home_fault || eve.away_fault) && 
+
                         <div key={index} className='py-2 divide-y divide-black '>
                           {
                             index === 0 && (
@@ -106,6 +109,8 @@ const Event = ({events}) => {
                       events.filter(eve => eve.info_time === '2nd Half').sort((a,b) => (
                         parseInt(a.time) - parseInt(b.time)
                       )).map((eve, index) => (
+                        (eve.home_scorer || eve.away_scorer || eve.home_fault || eve.away_fault) && 
+                        
                         <div key={index} className='py-2 divide-y divide-black'>
                           {
                             index === 0 && (

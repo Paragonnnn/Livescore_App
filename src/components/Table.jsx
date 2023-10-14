@@ -126,7 +126,7 @@ const Table = () => {
                             <div className='md:p-2 p-1 flex items-center gap-2' >
                             <div className='md:p-2 p-1 '>{table.standing_place}.</div>
                                 <img className='w-6 rounded-full h-6' src={table.team_logo} alt="" />
-                                <Link className='text-xs sm:text-sm  md:text-lg' to={`/team/${table.standing_team.replace(/ /g, '-')}/${table.team_key}`}>{table.standing_team}</Link> 
+                                <Link className='text-xs sm:text-sm  md:text-lg' to={`/team/${table.standing_team.replace(/ +/g, '-')}/${table.team_key}`}>{table.standing_team}</Link> 
                             </div>
                             <section className='flex justify-between md:w-[350px] w-[200px] '>
                                 <div className='md:p-2 p-1'>{table.standing_P}</div>

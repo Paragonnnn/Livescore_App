@@ -59,7 +59,7 @@ const Leagues = () => {
             
             {
                 leagues.map((league) => (
-                    <Link to={`/table/${league.league_name.replace(/ /g, '-')}/${league.league_key}`} key={league.league_key} className='country'>
+                    <Link to={`/table/${league.league_name.replace(/ +/g, '-')}/${league.league_key}`} key={league.league_key} className='country'>
                         <div className='country_name_div'>
                             <h1 className='country_name'>
                                 {league.league_name}
