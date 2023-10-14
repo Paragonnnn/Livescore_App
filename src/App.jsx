@@ -26,6 +26,7 @@ const App = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [searchClub, setSearchClub] = useState('')
     const [clubs, setClubs] = useState([])
+    const [calenderDate, setCalenderDate] = useState(new Date().toISOString().split('T')[0])
     
     
   useEffect(() => {
@@ -41,14 +42,15 @@ const App = () => {
   }, []);
     console.log(windowWidth);
 
+    const handleDateChange = (e) => {
+        setCalenderDate(e.target.value)
+        console.log(calenderDate);
+    }
+
 
     const api_key = import.meta.env.VITE_api_key
-    let date = new Date
-    let month = date.getMonth() + 1
-    let currentYear = date.getFullYear()
-    let day = date.getDate()
     
-    const [calenderDate, setCalenderDate] = useState(`${currentYear}-${month}-${day}`)
+    
 
     useEffect(() => {
         setLoadingCountries(true)
@@ -73,9 +75,7 @@ const App = () => {
     useEffect(() => {
       setLoadingLeagues(true)
       async function getData() {
-          await fetch(`https://apiv2.allsportsapi.com/football/?met=Leagues&countryId=${countries.map((country) => (
-            country.country_key
-          ))}&APIkey=${api_key}`)
+          await fetch(`https://apiv2.allsportsapi.com/football/?met=Leagues&APIkey=${api_key}`)
           .then(res => res.json())
           .then(json => {
               setError(false)
@@ -97,9 +97,7 @@ const App = () => {
   useEffect(() => {
     async function getData() {
         setLoadingFixtures(true)
-        await fetch(`https://apiv2.allsportsapi.com/football/?met=Fixtures&timezone=Africa/Lagos&leagueId=${leagues.map(league => (
-            league.league_key
-        ))}&APIkey=${api_key}&from=${calenderDate}&to=${calenderDate}`)
+        await fetch(`https://apiv2.allsportsapi.com/football/?met=Fixtures&timezone=Africa/Lagos&APIkey=${api_key}&from=${calenderDate}&to=${calenderDate}`)
         .then(res => res.json())
         .then(json => {
             setFixtures(json.result)
@@ -165,7 +163,7 @@ const App = () => {
 
         <Routes>
           
-          <Route path='/' element={<Home countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues} check={check} fixtures={fixtures}  loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture} liveCheck={liveCheck} month={month} currentYear={currentYear} day={day} windowWidth={windowWidth} calenderDate={calenderDate} setCalenderDate={setCalenderDate}/>}/>
+          <Route path='/' element={<Home countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues} check={check} fixtures={fixtures}  loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture} liveCheck={liveCheck} windowWidth={windowWidth} calenderDate={calenderDate} setCalenderDate={setCalenderDate} handleDateChange={handleDateChange}/>}/>
           <Route path='/countries' element={<Countries countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues}/>} />
           <Route path='/leagues/:countryname/:id' element={<Leagues />}/>
           <Route path='/table/:leaguename/:id' element={<Table/>} />

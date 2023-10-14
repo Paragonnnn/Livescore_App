@@ -121,7 +121,7 @@ const Table = () => {
             <section className='divide-y divide-black'>
             {
                 mappedTable.map((table,index) => (
-                        <section key={index} className='flex justify-between  md:px-4 p-1  text-white ' >
+                        <section key={index} className='flex justify-between items-center gap-4 md:px-4 p-1  text-white ' >
                             
                             <div className='md:p-2 p-1 flex items-center gap-2' >
                             <div className='md:p-2 p-1 '>{table.standing_place}.</div>
@@ -158,7 +158,7 @@ const Table = () => {
                 <div className='text-white divide-y divide-black'>
                     {
                         topScorers.map((top,index) => (
-                            <div className='flex justify-between p-2'>
+                            <div className='flex justify-between p-2' key={index}>
                                 <div>
                                     {index+1}. {top.player_name}
                                 

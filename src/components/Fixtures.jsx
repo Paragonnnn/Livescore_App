@@ -168,12 +168,12 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                                     <Link className='absolute h-full w-full z-[1] bg-transparent top-[-2px] left-[-2px]' to={`/fixture/${fixture.league_name.replace(/ +/g,'-')}/${fixture.event_home_team.replace(/ +/g,'-')}-${fixture.event_away_team.replace(/ +/g,'-')}/${fixture.event_key}`}></Link>
 
                                 }
-                                <div className='text-xxs text-gray-300 flex flex-col justify-center'>
+                                <div className='text-xxs text-gray-300 flex flex-col justify-center items-center'>
                                     <div>
                                         {fixture.event_time}
                                     </div>
                                     <div className={`${ fixture.event_status !== 'Finished' && fixture.event_live ===  '1' ? ' text-orange animate-pulse text-[.55rem]': '' } ' text-[.5rem] text-center font-semibold '`}>
-                                        {fixture.event_status === 'Finished' ? 'FT' : fixture.event_status === 'Half Time' ? 'HT' : fixture.event_status === 'Postponed' ? `${fixture.event_status.slice(0,4)}..` : fixture.event_status === '' ? '-' : !isNaN(+fixture.event_status || fixture.event_status.includes('+')) ? `${fixture.event_status}'` : `${fixture.event_status.slice(0,4)}.` }
+                                        {fixture.event_status === 'Finished' ? 'FT' : fixture.event_status === 'Half Time' ? 'HT' : fixture.event_status === 'After Pen.' ? 'AP' : fixture.event_status === 'Postponed' ? `${fixture.event_status.slice(0,4)}..` : fixture.event_status === '' ? '-' : !isNaN(+fixture.event_status || fixture.event_status.includes('+')) ? `${fixture.event_status}'` : `${fixture.event_status.slice(0,4)}.` }
                                     </div>
                                 </div>
                                 <div  className=' cursor-pointer w-full '>

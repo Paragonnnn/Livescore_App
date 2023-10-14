@@ -4,7 +4,7 @@ import Countries from './Countries'
 import Fixtures from './Fixtures'
 import CurrentFixtures from './CurrentFixtures'
 
-const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, loadingFixtures, fixturesError, currentFixture, setCurrentFixture, liveCheck, month, day, currentYear, windowWidth, calenderDate, setCalenderDate}) => {
+const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, loadingFixtures, fixturesError, currentFixture, setCurrentFixture, liveCheck, windowWidth, calenderDate, setCalenderDate, handleDateChange}) => {
 
 
   return (
@@ -19,10 +19,7 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
       </Link> */}
       
       <div className='hidden lg:block col-span-3'>
-      <input type="date" name="" id="" onChange={e=> {
-        setCalenderDate(e.target.value)
-        console.log(calenderDate);
-      }}/>
+      <input type="date" name="" id="" onChange={handleDateChange} value={calenderDate}/>
         <Countries countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues}/>
       </div>
       <div className='col-span-5'>
