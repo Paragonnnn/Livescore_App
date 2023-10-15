@@ -257,7 +257,7 @@ const Event = ({events}) => {
 
                                         </div>
                                         <div className='relative'>
-                                            <img src={eve.home_scorer.includes('(o.g.)') ? ogball : ball} alt="" className='w-[20px] h-[20px]'/>
+                                            <img src={eve.home_scorer.includes('(o.g.)') || eve.home_scorer.includes('(OG)') ? ogball : ball} alt="" className='w-[20px] h-[20px]'/>
                                             <div className=' opacity-70 absolute top-[-5px] right-0'>{eve.info === 'Penalty' ? 'p' : ''}</div>
                                         </div>
                                       </div>
