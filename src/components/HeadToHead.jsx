@@ -23,11 +23,11 @@ const HeadToHead = ({statToggle, hToH}) => {
                             <Link to={`/fixture/${h.league_name.replace(/ +/g,'-')}/${h.event_home_team.replace(/ +/g,'-')}-${h.event_away_team.replace(/ +/g,'-')}/${h.event_key}`} className='w-full mt-2'>
                                 <div className='flex justify-between '>
                                     <div>{h.event_home_team}</div>
-                                    <div>{h.event_final_result.slice(0,h.event_final_result.indexOf('-'))}</div>
+                                    <div className=' pr-1'>{h.event_final_result.slice(0,h.event_final_result.indexOf('-'))}</div>
                                 </div>
                                 <div className='flex justify-between'>
                                     <div>{h.event_away_team}</div>
-                                    <div className=''>{h.event_final_result.slice(h.event_final_result.indexOf('-') + 1,h.event_final_result.lenght)}</div>
+                                    <div className=' pr-1'>{h.event_final_result.slice(h.event_final_result.indexOf('-') + 1,h.event_final_result.lenght)}</div>
                                 </div>
 
                             </Link>

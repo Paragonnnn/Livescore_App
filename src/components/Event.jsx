@@ -1,5 +1,5 @@
 import React from 'react'
-import { ball,ogball } from '..'
+import { ball,ogball,assist } from '..'
 
 const Event = ({events}) => {
   return (
@@ -41,8 +41,10 @@ const Event = ({events}) => {
                                         <div className='flex flex-col items-end'>
                                           <div className=' '>{eve.home_scorer}</div>
                                               {eve.home_assist && (
-                                          <div className={`  font-semibold opacity-70 w-fit `}>
-                                                {eve.home_assist}(a)
+                                          <div className={` flex gap-1 items-center font-semibold opacity-70 w-fit `}>
+                                                <img src={assist} className=' w-[15px] h-[15px]'  />
+                                                {eve.home_assist} 
+
                                                 
                                           </div>
                                               )}
@@ -75,11 +77,12 @@ const Event = ({events}) => {
                                         </div>
                                         <div className='flex flex-col '>
                                           <div className=' '>{eve.away_scorer}</div>
-                                          <div className='  font-semibold opacity-70'>
+                                          <div className=' flex gap-1 items-center font-semibold opacity-70'>
                                             {eve.away_assist && (
                                               eve.away_assist 
-                                            )} 
-                                            {eve.away_assist && <span>(a)</span>}
+                                            )}
+                                            {eve.away_assist && <img src={assist} className=' w-[15px] h-[15px]'  /> }
+                                            
                                           </div>
                                           
                                         </div>
@@ -120,7 +123,7 @@ const Event = ({events}) => {
                           {
                             <div className='flex justify-between py-2 items-center'>
                               <div className='w-16 text-center text-xs '>{eve.time}</div>
-                              <div className='w-[calc(100%-64px)] flex justify-between '>
+                              <div className='w-[calc(100%-64px)] flex justify-between'>
                                 <div className='w-[calc(50%-35px)] '>
                                   {
                                     (eve.card && eve.home_fault) && (
@@ -135,14 +138,15 @@ const Event = ({events}) => {
                                   }
                                   {
                                     (eve.home_scorer) && (
-                                      <div className='flex gap-1 justify-end text-xs'>
+                                      <div className='flex gap-1 justify-end  items-center text-xs'>
                                         <div className='flex flex-col items-end'>
                                           <div className=' '>{eve.home_scorer}</div>
                                           {
                                             eve.home_assist && (
 
-                                              <div className={`${eve.home_assist ? 'text-xxs ' : ''}  font-semibold opacity-70 w-fit `}>
-                                                    {eve.home_assist}(a)
+                                              <div className={`flex gap-1 items-center font-semibold opacity-70 w-fit `}>
+                                                    <img src={assist} className=' w-[15px] h-[15px]'  />
+                                                    {eve.home_assist} 
                                                     
                                               </div>
                                             )
@@ -176,11 +180,11 @@ const Event = ({events}) => {
                                         </div>
                                         <div className='flex flex-col'>
                                           <div className=' '>{eve.away_scorer}</div>
-                                          <div className='  font-semibold opacity-70'>
+                                          <div className=' flex gap-1 items-center font-semibold opacity-70'>
                                               {eve.away_assist && (
                                                 eve.away_assist 
                                               )} 
-                                              {eve.away_assist && <span>(a)</span>}
+                                              {eve.away_assist && <img src={assist} className=' w-[15px] h-[15px]'  /> }
                                             </div>
 
                                         </div>
@@ -237,14 +241,15 @@ const Event = ({events}) => {
                                   }
                                   {
                                     (eve.home_scorer) && (
-                                      <div className='flex gap-1 justify-end text-xs'>
+                                      <div className='flex gap-1 justify-end text-xs items-center'>
                                         <div className='flex flex-col items-end'>
                                           <div className=' '>{eve.home_scorer}</div>
                                           {
                                             eve.home_assist && (
 
-                                              <div className={`${eve.home_assist ? 'text-xxs ' : ''}  font-semibold opacity-70 w-fit `}>
-                                                    {eve.home_assist}(a)
+                                              <div className={`flex gap-1 items-center font-semibold opacity-70 w-fit `}>
+                                                    <img src={assist} className=' w-[15px] h-[15px]'  />
+                                                    {eve.home_assist} 
                                                     
                                               </div>
                                             )
@@ -278,11 +283,11 @@ const Event = ({events}) => {
                                         </div>
                                         <div className='flex flex-col'>
                                           <div className=' '>{eve.away_scorer}</div>
-                                          <div className='  font-semibold opacity-70'>
+                                          <div className=' flex gap-1 items-center font-semibold opacity-70'>
                                               {eve.away_assist && (
                                                 eve.away_assist 
                                               )} 
-                                              {eve.away_assist && <span>(a)</span>}
+                                              {eve.away_assist && <img src={assist} className=' w-[15px] h-[15px]'  /> }
                                             </div>
 
                                         </div>
@@ -345,8 +350,8 @@ const Event = ({events}) => {
                                           {
                                             eve.home_assist && (
 
-                                              <div className={`${eve.home_assist ? 'text-xxs ' : ''}  font-semibold opacity-70 w-fit `}>
-                                                    {eve.home_assist}(a)
+                                              <div className={` flex gap-1 items-center  font-semibold opacity-70 w-fit `}>
+                                                    {eve.home_assist} <img src={assist} className=' w-[15px] h-[15px]'  />
                                                     
                                               </div>
                                             )
@@ -380,11 +385,11 @@ const Event = ({events}) => {
                                         </div>
                                         <div className='flex flex-col'>
                                           <div className=' '>{eve.away_scorer}</div>
-                                          <div className='  font-semibold opacity-70'>
+                                          <div className=' flex gap-1 items-center font-semibold opacity-70'>
                                               {eve.away_assist && (
                                                 eve.away_assist 
                                               )} 
-                                              {eve.away_assist && <span>(a)</span>}
+                                              {eve.away_assist && <img src={assist} className=' w-[15px] h-[15px]'  /> }
                                             </div>
 
                                         </div>

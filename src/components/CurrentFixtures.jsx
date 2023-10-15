@@ -112,7 +112,7 @@ const CurrentFixtures = ({}) => {
     
   return (
     <div className='grid lg:grid-cols-2 gap-4'>
-      <div className='col-span-1 w-full  max-w-[700px] mx-auto mb-4'>
+      <div className='col-span-1 w-full  mx-auto mb-4'>
         {
           match.map(match => (
             <div key={match.event_key}>
