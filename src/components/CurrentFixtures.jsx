@@ -21,6 +21,7 @@ const CurrentFixtures = ({}) => {
     const [half,setHalf] = useState([])
     const [statToggle, setStatToggle] = useState('Stats')
     const [lineUp,setLineUp] = useState([])
+    const [sub, setSub] = useState([])
     const {id} = useParams()
     
 

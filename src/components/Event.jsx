@@ -51,7 +51,7 @@ const Event = ({events}) => {
 
                                         </div>
                                         <div className='relative'>
-                                        <img src={eve.home_scorer.includes('(o.g.)') ? ogball : ball} alt="" className='w-[20px] h-[20px]'/>
+                                        <img src={(eve.home_scorer.includes('(o.g.)') || eve.home_scorer.includes('(OG)')) ? ogball : ball} alt="" className='w-[20px] h-[20px]'/>
                                         <div className=' opacity-70 absolute top-[-5px] right-0'>{eve.info === 'Penalty' ? 'p' : ''}</div>
                                         </div>
                                       </div>
@@ -72,7 +72,7 @@ const Event = ({events}) => {
                                     (eve.away_scorer) && (
                                       <div className='flex gap-1 items-center text-xs'>
                                         <div className='relative'>
-                                        <img src={eve.away_scorer.includes('(o.g.)') ? ogball : ball} alt="" className='w-[20px] h-[20px] '/>
+                                        <img src={(eve.home_scorer.includes('(o.g.)') || eve.home_scorer.includes('(OG)')) ? ogball : ball} alt="" className='w-[20px] h-[20px] '/>
                                         <div className=' opacity-70 absolute top-[-5px] right-0'>{eve.info === 'Penalty' ? 'p' : ''}</div>
                                         </div>
                                         <div className='flex flex-col '>
@@ -154,7 +154,7 @@ const Event = ({events}) => {
 
                                         </div>
                                         <div className='relative'>
-                                            <img src={eve.home_scorer.includes('(o.g.)') ? ogball : ball} alt="" className='w-[20px] h-[20px]'/>
+                                            <img src={(eve.home_scorer.includes('(o.g.)') || eve.home_scorer.includes('(OG)')) ? ogball : ball} alt="" className='w-[20px] h-[20px]'/>
                                             <div className=' opacity-70 absolute top-[-5px] right-0'>{eve.info === 'Penalty' ? 'p' : ''}</div>
                                         </div>
                                       </div>
@@ -175,7 +175,7 @@ const Event = ({events}) => {
                                     (eve.away_scorer) && (
                                       <div className='flex gap-1 items-center text-xs'>
                                         <div className='relative'>
-                                        <img src={eve.away_scorer.includes('(o.g.)') ? ogball : ball} alt="" className='w-[20px] h-[20px]'/>
+                                        <img src={(eve.home_scorer.includes('(o.g.)') || eve.home_scorer.includes('(OG)')) ? ogball : ball} alt="" className='w-[20px] h-[20px]'/>
                                         <div className=' opacity-70 absolute top-[-5px] right-0'>{eve.info === 'Penalty' ? 'p' : ''}</div>
                                         </div>
                                         <div className='flex flex-col'>
@@ -278,7 +278,7 @@ const Event = ({events}) => {
                                     (eve.away_scorer) && (
                                       <div className='flex gap-1 items-center text-xs'>
                                         <div className='relative'>
-                                        <img src={eve.away_scorer.includes('(o.g.)') ? ogball : ball} alt="" className='w-[20px] h-[20px]'/>
+                                        <img src={(eve.home_scorer.includes('(o.g.)') || eve.home_scorer.includes('(OG)')) ? ogball : ball} alt="" className='w-[20px] h-[20px]'/>
                                         <div className=' opacity-70 absolute top-[-5px] right-0'>{eve.info === 'Penalty' ? 'p' : ''}</div>
                                         </div>
                                         <div className='flex flex-col'>
