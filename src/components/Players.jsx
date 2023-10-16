@@ -59,7 +59,7 @@ const Players = ({countries, leagues}) => {
                         <div className=' bg-customBg2 p-4 rounded'>
                             <h3 className=' text-customBg mb-2'>Player's Details</h3>
                             <div className=' flex items-center gap-4'>
-                                <img src={player.player_image ? player.player_image : pic} alt={player.player_name} className='player_image'/>
+                                <img src={player.player_image} alt={player.player_name} className=' h-20 rounded-[80px]'/>
                                 <h1 className=' text-customBg text-lg'>{player.player_name}</h1>
                             </div>
                             <div className='player_details_div'>

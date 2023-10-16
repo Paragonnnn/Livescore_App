@@ -5,6 +5,7 @@ import pic from './assets/pic.jpeg'
 import ball from './assets/ball.svg'
 import ogball from './assets/ogball.svg'
 import assist from './assets/assist.svg'
+import sub from './assets/sub.svg'
 
 export {
     arrowDown,
@@ -13,5 +14,6 @@ export {
     pic,
     ball,
     ogball,
-    assist
+    assist,
+    sub
 }

@@ -88,11 +88,11 @@ const Table = () => {
                 <h3>No data found</h3>
             )
         }
-        <div className='lg:grid grid-cols-2 gap-4 w-full'>
+        <div className=' gap-4 w-full'>
 
         {table.length != 0  &&   (
             
-        <div className='bg-customBg2 col-span-1 divide-y divide-black border border-solid border-lighterOrange rounded-md px-1'>
+        <div className='bg-customBg2  divide-y divide-black border border-solid border-lighterOrange rounded-md px-1'>
             <div className='px-4 py-2'>
                 <button className={`${changeTable === 'all' ? 'border-orange text-orange' : 'text-white '} text-[20px] py-1 px-6 rounded-full border border-solid border-white mr-4 hover:opacity-80`} onClick={all}>All</button>
                 <button className={`${changeTable === 'home' ? 'border-orange text-orange' : 'text-white '} text-[20px] py-1 px-6 rounded-full border border-solid border-white mr-4 hover:opacity-80`} onClick={home}>Home</button>
@@ -120,6 +120,7 @@ const Table = () => {
             </section>
             <section className='divide-y divide-black'>
             {
+                mappedTable &&
                 mappedTable.map((table,index) => (
                         <section key={index} className='flex justify-between items-center gap-4 md:px-4 p-1  text-white ' >
                             
@@ -148,31 +149,40 @@ const Table = () => {
 
         </div>
         )}
-        {table.length != 0  && (
-            <div className='hidden lg:block col-span-1 h-fit w-full bg-customBg2 divide-y divide-black px-4 sticky top-[80px] '>
-                <div className='text-white text-[40px] text-center'>League Top Scorers</div>
-                <div className='text-[24px] text-white flex justify-between p-2'>
-                    <div>Player</div>
-                    <div>Goals</div>
-                </div>
-                <div className='text-white divide-y divide-black'>
+                
+        {
+            topScorers && (
+            table.length != 0 &&  (
+                <div className='  h-fit w-full bg-customBg2 divide-y divide-black px-4 sticky top-[80px] '>
+                    <div className='text-white text-2xl md:text-[40px] text-center'>League Top Scorers</div>
+                    <div className='text-[24px] text-white flex justify-between p-2'>
+                        <div>Player</div>
+                        <div>Goals</div>
+                    </div>
                     {
-                        topScorers.map((top,index) => (
-                            <div className='flex justify-between p-2' key={index}>
-                                <div>
-                                    {index+1}. {top.player_name}
-                                
-                                </div>
-                                <div>
-                                    {top.goals}
-                                </div>
-                                
-                            </div>
-                        ))
-                    }
+                        <div className='text-white divide-y divide-black'>
+                            {
+                                topScorers &&
+                                topScorers.map((top,index) => (
+                                    <div className='flex justify-between p-2' key={index}>
+                                        <div>
+                                            {index+1}. {top.player_name}
+                                        
+                                        </div>
+                                        <div>
+                                            {top.goals}
+                                        </div>
+                                        
+                                    </div>
+                                ))
+                            }
 
+                        </div>
+
+                    }
                 </div>
-            </div>
+
+            )
         )
         }
         </div>
