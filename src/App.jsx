@@ -30,7 +30,6 @@ const App = () => {
     const [currentFixture, setCurrentFixture] = useState([])
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [searchClub, setSearchClub] = useState('')
-    const [calenderDate, setCalenderDate] = useState(new Date().toISOString().split('T')[0])
     const [clubs, setClubs] = useState([])
     const [showCalendar, setShowCalendar] = useState(false)
     
@@ -38,7 +37,7 @@ const App = () => {
     // const newDate = format(date, 'MM-dd-yyyy')
     // console.log(date);
     // const newDate2 = newDate
-    console.log(date);
+    const [calenderDate, setCalenderDate] = useState(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
