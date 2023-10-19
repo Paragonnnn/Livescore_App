@@ -13,9 +13,18 @@
   --primary-color: #1E1E1E;
 }
 body{
-  background-color: wheat;
+  background-color: #203535;
+}
+.scroll_bar::-webkit-scrollbar {
+  width: 6px;
+  background-color: #00000031;
+  color: #ffffff67;
 }
 
+.scroll_bar::-webkit-scrollbar-thumb {
+  background-color: grey; 
+  border-radius: 6px;
+}
 .loading-container {
   display: flex;
   justify-content: center;

@@ -6,6 +6,8 @@ import ball from './assets/ball.svg'
 import ogball from './assets/ogball.svg'
 import assist from './assets/assist.svg'
 import sub from './assets/sub.svg'
+import teamLogo from './assets/teamLogo.svg'
+import searchLogo from './assets/searchLogo.svg'
 
 export {
     arrowDown,
@@ -15,5 +17,7 @@ export {
     ball,
     ogball,
     assist,
-    sub
+    sub,
+    teamLogo,
+    searchLogo
 }

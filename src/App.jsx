@@ -10,6 +10,8 @@ import Fixtures from './components/Fixtures'
 import Players from './components/Players'
 import CurrentFixtures from './components/CurrentFixtures'
 import SearchClub from './components/SearchClub'
+import parseISO from 'date-fns/parseISO'
+import { addDays, format, addMonths } from 'date-fns'
 
 const App = () => {
   const [countries, setCountries] = useState([])
@@ -25,10 +27,18 @@ const App = () => {
     const [currentFixture, setCurrentFixture] = useState([])
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [searchClub, setSearchClub] = useState('')
-    const [clubs, setClubs] = useState([])
     const [calenderDate, setCalenderDate] = useState(new Date().toISOString().split('T')[0])
+    const [clubs, setClubs] = useState([])
     
-    
+    const date = new Date()
+    const month = addMonths(date, 1)
+    console.log(month.toISOString().split('T')[0]);
+    // const newDate = format(date, 'MM-dd-yyyy')
+    // console.log(date);
+    // const newDate2 = newDate
+    // console.log(newDate2);
+    const [maxDate,setMaxDate] = useState(month)
+    console.log(maxDate);
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -42,9 +52,21 @@ const App = () => {
   }, []);
     console.log(windowWidth);
 
-    const handleDateChange = (e) => {
-        setCalenderDate(e.target.value)
+    const handleDateChange = (date) => {
+      setCalenderDate(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
+      console.log(date.toISOString().split('T')[0]);
+      console.log(`${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`);
         console.log(calenderDate);
+    }
+    const handleDateFocus = (e) => {
+        // e.key && e.code === "Backspace" && e.preventDefault();
+        !isNaN(e.key) && e.preventDefault()
+    }
+
+    const handleSearchChange = (e) => {
+      setSearchClub(e.target.value)
+      
+     
     }
 
 
@@ -60,8 +82,9 @@ const App = () => {
         .then(json => {
           setError(false)
             setCountries(json.result)
+            setClubs(json.result)
             setLoadingCountries(false)
-            // console.log(json.result);
+            console.log(json.result);
         })
         .catch(err => {
           setLoadingCountries(false)
@@ -81,7 +104,7 @@ const App = () => {
               setError(false)
               setLoadingLeagues(false)
               setLeagues(json.result)
-              // console.log(json.result);
+              console.log(json.result);
           })
           .catch(err => {
               console.log(err)
@@ -130,40 +153,41 @@ const App = () => {
             console.log(err);
         })
     }
+    // const timeoutId = setTimeout(getData(), 2000);
+
+    // Clean up the timer when the component unmounts
+    // return () => {
+    //   clearTimeout(timeoutId);
+    // };
     getData()
+    
   },[calenderDate])
 
-  useEffect(() => {
-    async function getData() {
-      await fetch(`https://apiv2.allsportsapi.com/football/?&met=Standings&leagueId=${leagues.map(league => (
-        league.league_key
-    ))}&APIkey=${api_key}`)
-    .then(res => res.json())
-    .then(json => {
-      setClubs(json.result)
-      console.log(json.result);
-    })
-    }
-    getData()
-  }, [])
+  // useEffect(() => {
+  //   async function getData() {
+  //     await fetch(`https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=&APIkey=${api_key}`)
+  //   }
+  // })
+
+  
 
   return (
-    <div className='bg-customBg '>
+    <div className='bg-[#042a2b] '>
       
-      <div className='bg-customBg2  w-full  sticky top-[-2px] rounded-b-xl z-10'>
-        <div className='m-auto  max-w-[1440px] flex items-center justify-between'>
+      <div className='bg-[#042a2b] shadow-sm  w-full  sticky top-[-2px] rounded-b-xl z-10'>
+        <div className='m-auto  max-w-[1440px] flex items-center justify-between relative'>
           <Link to={'/'}><h3 className='text-[25px] md:text-[40px] px-2 md:px-4 py-2 mb-2 text-customBg font-bold'>Paragon</h3></Link>
-          <div className='px-2'>
-            <input className='bg-transparent outline-none border border-solid border-black p-2 ' onChange={e => setSearchClub(e.target.value)} value={searchClub} id="" />
-            <SearchClub searchClub={searchClub}/>
+          <div className='px-2 '>
+              <SearchClub searchClub={searchClub} handleSearchChange={handleSearchChange} setSearchClub={setSearchClub} clubs={leagues.concat(countries)}  windowWidth={windowWidth}/>
           </div>
+          <div className=' hidden lg:block'></div>
         </div>
       </div>
       <div className=' max-w-[1440px] m-auto  lg:p-4 p-1'>
 
         <Routes>
           
-          <Route path='/' element={<Home countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues} check={check} fixtures={fixtures}  loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture} liveCheck={liveCheck} windowWidth={windowWidth} calenderDate={calenderDate} setCalenderDate={setCalenderDate} handleDateChange={handleDateChange}/>}/>
+          <Route path='/' element={<Home countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues} check={check} fixtures={fixtures}  loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture} liveCheck={liveCheck} windowWidth={windowWidth} calenderDate={calenderDate} setCalenderDate={setCalenderDate} handleDateChange={handleDateChange} handleDateFocus={handleDateFocus} maxDate={maxDate}/>}/>
           <Route path='/countries' element={<Countries countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues}/>} />
           <Route path='/leagues/:countryname/:id' element={<Leagues />}/>
           <Route path='/table/:leaguename/:id' element={<Table/>} />

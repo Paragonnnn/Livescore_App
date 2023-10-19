@@ -106,7 +106,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
     
     
     return (
-        <div className=' sm:p-4 p-2 bg-customBg2 rounded-md '>
+        <div className=' sm:p-4 p-2 bg-customBg2 shadow-sm rounded-md '>
             <div className=' text-white border border-solid border-black p-2 flex gap-2 mb-2'>
                 <button onClick={all} className={`${isLive ? 'text-orange': 'text-white'}`}>All</button>
                 <button onClick={live} className={`${!isLive ? 'text-orange': 'text-white'} flex items-center gap-1`}>Live <div className='text-xs'>
@@ -125,16 +125,16 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
         )}
         {
             // !(loading && error) &&
-            fixtures &&
+            (fixtures && leagues) &&
             leagues.map((league,index) => (
                 (!isLive ? (check.includes(league.league_key) && liveCheck.includes(league.league_key)) : check.includes(league.league_key)) &&
                 <div key={league.league_key} className={`border border-black border-solid mb-4 rounded divide-y divide-black`}>
                         {(check.includes(league.league_key) )
                         &&
-                        <div className=' text-orange p-2 text-xs  flex items-center '>
+                        <div className=' text-customBg p-2 text-xs  flex items-center '>
                             <img src={league.country_logo} alt="" className='w-4 h-4 rounded-[100%] mr-2'/>
                             <div className='flex flex-col'>
-                                <Link className='text-lightOrange' to={`/leagues/${league.country_name.replace(/ +/g,'-')}/${league.country_key}`}>{league.country_name}</Link> 
+                                <Link className='text-lightcustomBg' to={`/leagues/${league.country_name.replace(/ +/g,'-')}/${league.country_key}`}>{league.country_name}</Link> 
                                 <Link to={`/table/${league.league_name.replace(/ +/g,'-')}/${league.league_key}`}>{league.league_name}</Link> 
                             </div>
                         </div>
@@ -159,7 +159,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                             (league.league_key == fixture.league_key ) &&
 
                              
-                                <div to={`/fixture/${fixture.event_key}`} key={fixture.event_key} className={`${windowWidth < 1024 ? 'hover:opacity-70 transition ' : ''}text-gray-200 text-xs p-2 flex gap-2 relative `} onClick={() => handleClick(fixture)}>
+                                <div to={`/fixture/${fixture.event_key}`} key={fixture.event_key} className={`${windowWidth < 1024 ? 'hover:opacity-70 transition ' : ''}text-gray-400 text-xs p-2 flex gap-2 relative `} onClick={() => handleClick(fixture)}>
                 
                                 {/* <div>{fixture.country_name}</div> */}
                                 {/* <h1>{fixture.league_name}</h1> */}
@@ -168,17 +168,17 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                                     <Link className='absolute h-full w-full z-[1] bg-transparent top-[-2px] left-[-2px]' to={`/fixture/${fixture.league_name.replace(/ +/g,'-')}/${fixture.event_home_team.replace(/ +/g,'-')}-${fixture.event_away_team.replace(/ +/g,'-')}/${fixture.event_key}`}></Link>
 
                                 }
-                                <div className='text-xxs text-gray-300 flex flex-col justify-center items-center'>
+                                <div className='text-xxs  text-gray-300 flex flex-col justify-center items-center'>
                                     <div>
                                         {fixture.event_time}
                                     </div>
-                                    <div className={`${ fixture.event_status !== 'Finished' && fixture.event_live ===  '1' ? ' text-orange animate-pulse text-[.55rem]': '' } ' text-[.5rem] text-center font-semibold '`}>
-                                        {fixture.event_status === 'Finished' ? 'FT' : fixture.event_status === 'Half Time' ? 'HT' : fixture.event_status === 'After Pen.' ? 'AP' : fixture.event_status === 'Postponed' ? `${fixture.event_status.slice(0,4)}..` : fixture.event_status === '' ? '-' : !isNaN(+fixture.event_status || fixture.event_status.includes('+')) ? `${fixture.event_status}'` : `${fixture.event_status.slice(0,4)}.` }
+                                    <div className={`${ fixture.event_status !== 'Finished' && fixture.event_live ===  '1' ? ' text-orange animate-pulse text-[.55rem]': '' } ' text-[.5rem] text-center font-semibold'`}>
+                                        {fixture.event_status === 'Finished' ? 'FT' : fixture.event_status === 'Half Time' ? 'HT' : fixture.event_status === 'After Pen.' ? 'AP' : fixture.event_status === 'Postponed' || fixture.event_status === 'Cancelled' ? `${fixture.event_status.slice(0,4)}..` : fixture.event_status === '' ? '-' : !isNaN(+fixture.event_status || fixture.event_status.includes('+')) ? `${fixture.event_status}'` : `${fixture.event_status.slice(0,4)}.` }
                                     </div>
                                 </div>
                                 <div  className=' cursor-pointer w-full '>
                                     <div className='flex gap-1 items-center'>
-                                        <img src={fixture.home_team_logo} alt="" className='w-2 h-2'/>
+                                        <img src={fixture.home_team_logo} alt="" className='w-3 h-3'/>
                                         <div className='flex justify-between items-center  w-full'>
                                             <div className='text-base'>
                                                 {fixture.event_home_team}
@@ -191,7 +191,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                                         
                                     </div>
                                     <div className='flex gap-1 items-center'>
-                                        <img src={fixture.away_team_logo} alt="" className='h-2 w-2'/>
+                                        <img src={fixture.away_team_logo} alt="" className='h-3 w-3 '/>
                                         <div className='flex justify-between items-center w-full'>
                                             <div className='text-base'>
                                                 {fixture.event_away_team}

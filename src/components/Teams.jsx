@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Loading from './Loading'
+import GoalKeepers from './GoalKeepers'
+import Defenders from './Defenders'
+import Midfielders from './Midfielders'
+import Forwards from './Forwards'
+import TeamFixtures from './TeamFixtures'
 
 const Teams = () => {
     const [teams, setTeams] = useState([])
     const [loading, setLoading] = useState(false)
     const [isCap, setIsCap] = useState([])
+    const [teamFixtures, setTeamFixtures] = useState([])
     const {id} = useParams()
     const api_key = import.meta.env.VITE_api_key
-
-
     
+    
+    const date = new Date()
+    const fromDate = (`${date.getFullYear() - 3}-${date.getMonth() + 1}-${date.getDate()}`)
+    const toDate = (`${date.getFullYear() + 1}-${date.getMonth() + 1}-${date.getDate()}`)
+    console.log(fromDate,toDate,date);
+    const [from, setFrom] = useState(fromDate)
+    const [to,setTo] = useState(toDate)
     useEffect(() => {
         async function getData() {
             setLoading(true)
@@ -31,8 +42,19 @@ const Teams = () => {
         }
         getData()
     },[id])
+    useEffect(() => {
+        async function getData() {
+            await fetch(`https://apiv2.allsportsapi.com/football/?met=Fixtures&teamId=${id}&APIkey=${api_key}&from=${from}&to=${to}`)
+            .then(res => res.json())
+            .then(json => {
+                setTeamFixtures(json.result)
+                console.log(json.result);
+            })
+        }
+        getData()
+    },[id])
   return (
-    <div>
+    <div className='  p-4 lg:grid grid-cols-5 gap-4'>
         {
             loading && (
                 <Loading />
@@ -43,63 +65,34 @@ const Teams = () => {
         {
 
         }
-        {
-            teams.map((team) => (
-                <div key={team.team_key}>
+        <div className=' bg-customBg2 p-4 h-fit col-span-3 '>
+            {
+                teams.map((team) => (
+                    <div key={team.team_key} className=' '>
+                        <div className=' bg-black gap-12 p-4 rounded-xl bg-opacity-40 w-full flex items-center'>
+                            <img src={team.team_logo} alt="" className=' h-24'/>
+                            <div>
+                                <div className='text-2xl font-semibold text-customBg'>{team.team_name} </div>
+                            </div>
+                        </div>
+                        
                     
-                    {team.team_name} <img src={team.team_logo} alt="" />
-                    
-                    <div>
-                        <h1>Goalkeepers</h1>
-                        {
-                            team.players.filter(player => player.player_type == 'Goalkeepers').map((player) => (
-                                // player.player_type == 'Goalkeepers' &&
+                        <div>
+                            <GoalKeepers team={team}/>
+                            <Defenders team={team}/>
+                            <Midfielders team={team}/>
+                            <Forwards team={team}/>
 
-                                <div key={player.player_key}>
-                                    <Link to={`/player/${player.player_name.replace(/ +/g, '-')}/${player.player_key}`}>{player.player_name} {(player.player_is_captain == '9') && <span>(c)</span> }</Link>
-                                </div>
-                                
-                            ))
-                        }
-                        <h1>Defenders</h1>
-
-                        {
-                            team.players.filter(player => player.player_type == 'Defenders').map((player) => (
-                                // player.player_type == 'Goalkeepers' &&
-                                <div key={player.player_key}>
-                                    <Link to={`/player/${player.player_name.replace(/ +/g, '-')}/${player.player_key}`}>{player.player_name} {(player.player_is_captain == '9') && <span>(c)</span> }</Link>
-                                    {player.player_is_captain}
-                                </div>
-                                
-                            ))
-                        }
-                        <h1>Midfielders</h1>
-
-                        {
-                            team.players.filter(player => player.player_type == 'Midfielders').map((player) => (
-                                // player.player_type == 'Goalkeepers' &&
-                                <div key={player.player_key}>
-                                    <Link to={`/player/${player.player_name.replace(/ +/g, '-')}/${player.player_key}`}>{player.player_name} {(player.player_is_captain == '9') && <span>(c)</span> }</Link>
-                                </div>
-                                
-                            ))
-                        }
-                        <h1>Forwards</h1>
-
-                        {
-                            team.players.filter(player => player.player_type == 'Forwards').map((player) => (
-                                // player.player_type == 'Goalkeepers' &&
-                                <div key={player.player_key}>
-                                    <Link to={`/player/${player.player_name.replace(/ +/g, '-')}/${player.player_key}`}>{player.player_name} {(player.player_is_captain == '9') && <span>(c)</span> }</Link>
-                                </div>
-                                
-                            ))
-                        }
-
+                        </div>
                     </div>
-                </div>
-            ))
-        }
+                ))
+            }
+
+        </div>
+        <div className=' col-span-2'>
+            <TeamFixtures  teamFixtures={teamFixtures}/>     
+
+        </div>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ball, ogball, assist } from '..'
+import { ball, ogball, assist,sub } from '..'
 
 const FirstHalfEvent = ({events}) => {
   return (
@@ -19,7 +19,7 @@ const FirstHalfEvent = ({events}) => {
               }
               {
                 <div className='flex justify-between items-center py-2'>
-                  <div className='w-16 text-center text-xs'>{eve.time}</div>
+                  <div className='w-12 sm:w-16 text-center text-xxs sm:text-xs'>{eve.time}'</div>
                   <div className='w-[calc(100%-64px)] flex justify-between '>
                     <div className='w-[calc(50%-35px)] '>
                       {
@@ -50,7 +50,7 @@ const FirstHalfEvent = ({events}) => {
                             </div>
                             <div className='relative'>
                             <img src={(eve.home_scorer.includes('(o.g.)') || eve.home_scorer.includes('(OG)')) ? ogball : ball} alt="" className='w-[20px] h-[20px]'/>
-                            <div className=' opacity-70 absolute top-[-5px] right-0'>{eve.info === 'Penalty' ? 'p' : ''}</div>
+                            <div className=' opacity-70 absolute top-[-5px] right-0'>{eve.info === 'Penalty' || eve.home_scorer.includes('PG') ? 'p' : ''}</div>
                             </div>
                           </div>
                         ) 
@@ -82,8 +82,8 @@ const FirstHalfEvent = ({events}) => {
                         (eve.away_scorer && !isNaN(eve.score.slice(0,1))) && (
                           <div className='flex gap-1 items-center text-xs'>
                             <div className='relative'>
-                            <img src={(eve.home_scorer.includes('(o.g.)') || eve.home_scorer.includes('(OG)')) ? ogball : ball} alt="" className='w-[20px] h-[20px] '/>
-                            <div className=' opacity-70 absolute top-[-5px] right-0'>{eve.info === 'Penalty' ? 'p' : ''}</div>
+                            <img src={(eve.away_scorer.includes('(o.g.)') || eve.away_scorer.includes('(OG)')) ? ogball : ball} alt="" className='w-[20px] h-[20px] '/>
+                            <div className=' opacity-70 absolute top-[-5px] right-0'>{eve.info === 'Penalty' || eve.away_scorer.includes('PG') ? 'p' : ''}</div>
                             </div>
                             <div className='flex flex-col '>
                               <div className=' '>{eve.away_scorer}</div>

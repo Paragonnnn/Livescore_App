@@ -121,7 +121,7 @@ const CurrentFixtures = ({}) => {
         <Event events={events}/>
       </div>
       <div className='col-span-1  '>
-        <div className='flex justify-between mb-3 p-3 rounded text-customBg text-lg border-b-2 border-solid border-black bg-customBg2'>
+        <div className='flex justify-between mb-3 p-3 rounded text-customBg  text-base sm:text-lg border-b-2 border-solid border-black bg-customBg2'>
           {hToH && (hToH.length !== 0) && <div onClick={handleStatToggle} className={`${statToggle.includes('H2H') ? ' text-customBg2 bg-customBg border border-solid border-customBg ' : ''}  border border-solid border-customBg  px-3 rounded-full cursor-pointer`} > H2H</div>}
           {stats && (stats.length !== 0) && <div onClick={handleStatToggle} className={`${statToggle.includes('Stats') ? ' text-customBg2 bg-customBg border border-solid border-customBg ' : ''} border border-solid border-customBg px-3 rounded-full cursor-pointer`} >Stats</div>}
           <div onClick={handleStatToggle} className={`${statToggle.includes('Line-Up') ? ' text-customBg2 bg-customBg border border-solid border-customBg ' : ''} border border-solid border-customBg px-3 rounded-full cursor-pointer`} >Line-Up</div>

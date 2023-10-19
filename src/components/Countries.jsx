@@ -10,6 +10,7 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
     const [show, setShow] = useState()
     const [check, setCheck] = useState()
     const [activeIndex, setActiveIndex] = useState([])
+    const [seeAll, setSeeAll] = useState(20)
     
     
     const handleClick = (index) => {
@@ -25,6 +26,10 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
           } else {
             setActiveIndex([index]);
           }
+    }
+
+    const handleSeeAll = () => {
+        setSeeAll(countries.lenght)
     }
     
   return (
@@ -47,11 +52,11 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
             {
                 countries.filter((country) => (
                     search.trim().toLowerCase() === '' ? country : country.country_name.toLowerCase().includes(search)
-                )).map((country,index) => (
+                )).slice(0,seeAll).map((country,index) => (
                     <div key={country.country_key} className=''>
-                        <div    className='text-white flex items-center justify-between w-full p-1 cursor-pointer' onClick={() => handleClick(index)}>
+                        <div    className='text-gray-400 flex items-center justify-between w-full p-1 cursor-pointer' onClick={() => handleClick(index)}>
                             <div className='country_name_div'>
-                                <h2 className='text-white'>{country.country_name}</h2>
+                                <h2 className='text-gray-400'>{country.country_name}</h2>
                             </div>
                             <img src={country.country_logo} alt="" className='w-4 h-4 rounded-full'/>
                             <img 
@@ -76,6 +81,8 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
                 ))
                 
             }
+
+            <div onClick={handleSeeAll} className=' cursor-pointer text-center'>See All</div>
             
 
         </div>

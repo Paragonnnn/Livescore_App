@@ -7,15 +7,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        customBg: 'wheat',
-        customBg2: 'darkslategray',
+        customBg: '#aaa95a',
+        customBg2: '#00000031',
         border : '#151B54',
         orange: '#f39c12',
         lightOrange: '#f39d12c0',
         lighterOrange: '#f39d1241'
       },
       boxShadow: {
-        sm: '0 0 2px 2px #f39d1241'
+        sm: '0 0 5px 2px #0000007c'
       },
       fontSize: {
         'xxs': '.6rem'
