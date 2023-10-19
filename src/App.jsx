@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import Countries from './components/Countries'
 import Leagues from './components/Leagues'
 import { Link } from 'react-router-dom'
@@ -12,9 +12,12 @@ import CurrentFixtures from './components/CurrentFixtures'
 import SearchClub from './components/SearchClub'
 import parseISO from 'date-fns/parseISO'
 import { addDays, format, addMonths } from 'date-fns'
+import Calendar from 'react-calendar'
+import { calendar } from '.'
+
 
 const App = () => {
-  const [countries, setCountries] = useState([])
+    const [countries, setCountries] = useState([])
     const [loadingCountries, setLoadingCountries] = useState(false)
     const [loadingLeagues, setLoadingLeagues] = useState(false)
     const [loadingFixtures, setLoadingFixtures] = useState(false)
@@ -29,6 +32,8 @@ const App = () => {
     const [searchClub, setSearchClub] = useState('')
     const [calenderDate, setCalenderDate] = useState(new Date().toISOString().split('T')[0])
     const [clubs, setClubs] = useState([])
+    const [showCalendar, setShowCalendar] = useState(false)
+    const elementToFocusRef = useRef(null);
     
     const date = new Date()
     const month = addMonths(date, 1)
@@ -56,7 +61,7 @@ const App = () => {
       setCalenderDate(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
       console.log(date.toISOString().split('T')[0]);
       console.log(`${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`);
-        console.log(calenderDate);
+      setShowCalendar(false)
     }
     const handleDateFocus = (e) => {
         // e.key && e.code === "Backspace" && e.preventDefault();
@@ -67,6 +72,12 @@ const App = () => {
       setSearchClub(e.target.value)
       
      
+    }
+    const handleCalendarClick = () => {
+      setShowCalendar((prev) => !prev)
+      if (elementToFocusRef.current) {
+        elementToFocusRef.current.click();
+      }
     }
 
 
@@ -181,6 +192,16 @@ const App = () => {
               <SearchClub searchClub={searchClub} handleSearchChange={handleSearchChange} setSearchClub={setSearchClub} clubs={leagues.concat(countries)}  windowWidth={windowWidth}/>
           </div>
           <div className=' hidden lg:block'></div>
+        </div>
+      </div>
+      <div className=' fixed block lg:hidden shadow-sm bottom-0 w-full  bg-[#042a2b] z-10 p-3'>
+        <div tabIndex={0} ref={elementToFocusRef} onBlur={() => setShowCalendar(false)} className={`${showCalendar ? 'block' : 'hidden'} bg-customBg2 shadow-sm rounded-t`}>
+          <Calendar value={calenderDate}  onChange={handleDateChange} className={` text-[#aaa95a] mb-2 bg-transparent border-none w-full bg-opacity-50 `} minDetail='year' maxDetail='month'/>
+          <div onClick={() => setCalenderDate(new Date().toISOString().split('T')[0])} className='  px-3 py-2 rounded-full text-customBg  w-fit mb-4 cursor-pointer hover:opacity-80 active:opacity-60'>Today</div>
+
+        </div>
+        <div>
+          <img src={calendar} onClick={handleCalendarClick} className=' h-7' alt="" />
         </div>
       </div>
       <div className=' max-w-[1440px] m-auto  lg:p-4 p-1'>

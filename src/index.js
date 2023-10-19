@@ -8,6 +8,8 @@ import assist from './assets/assist.svg'
 import sub from './assets/sub.svg'
 import teamLogo from './assets/teamLogo.svg'
 import searchLogo from './assets/searchLogo.svg'
+import calendar from './assets/calendar.svg'
+
 
 export {
     arrowDown,
@@ -19,5 +21,6 @@ export {
     assist,
     sub,
     teamLogo,
-    searchLogo
+    searchLogo,
+    calendar
 }

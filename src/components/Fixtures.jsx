@@ -131,7 +131,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                 <div key={league.league_key} className={`border border-black border-solid mb-4 rounded divide-y divide-black`}>
                         {(check.includes(league.league_key) )
                         &&
-                        <div className=' text-customBg p-2 text-xs  flex items-center '>
+                        <div className=' text-customBg py-2 px-3 text-xs  flex gap-1 items-center '>
                             <img src={league.country_logo} alt="" className='w-4 h-4 rounded-[100%] mr-2'/>
                             <div className='flex flex-col'>
                                 <Link className='text-lightcustomBg' to={`/leagues/${league.country_name.replace(/ +/g,'-')}/${league.country_key}`}>{league.country_name}</Link> 
@@ -180,7 +180,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                                     <div className='flex gap-1 items-center'>
                                         <img src={fixture.home_team_logo} alt="" className='w-3 h-3'/>
                                         <div className='flex justify-between items-center  w-full'>
-                                            <div className='text-base'>
+                                            <div className=' text-xs sm:text-base'>
                                                 {fixture.event_home_team}
                                             </div>
                                             <div className='text-xs'>
@@ -193,7 +193,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                                     <div className='flex gap-1 items-center'>
                                         <img src={fixture.away_team_logo} alt="" className='h-3 w-3 '/>
                                         <div className='flex justify-between items-center w-full'>
-                                            <div className='text-base'>
+                                            <div className=' text-xs sm:text-base'>
                                                 {fixture.event_away_team}
                                             </div>
                                             <div className='text-xs'>
