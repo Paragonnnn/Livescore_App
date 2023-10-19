@@ -33,7 +33,7 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
     }
     
   return (
-    <div className='border border-solid border-border text-white p-4 bg-customBg2'>
+    <div className=' shadow-sm text-white p-4 bg-customBg2'>
         <Header setSearch={setSearch} search={search}/>
         
         {

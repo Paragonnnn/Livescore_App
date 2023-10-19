@@ -32,18 +32,18 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
         </div>
         {/* <DatePicker selected={calenderDate} onChange={date => setCalenderDate(date)} onKeyDown={handleDateFocus} /> */}
       {/* <input type="date" name="" pattern='' onKeyDown={handleDateFocus} onChange={handleDateChange} max={maxDate} value={calenderDate} className=' w-full outline-none bg-customBg2 mb-4 text-customBg p-2'/> */}
-      <div className=' bg-customBg2 p-2 '>
-        <div>Top Leagues</div>
-        <div className=''>
+      <div className=' bg-customBg2 px-2 shadow-sm mb-4 divide-y divide-black '>
+        <div className=' text-xl text-customBg py-2'>Top Leagues</div>
+        <div className=' divide-y divide-black '>
             {
               leagues && (
                 leagues.slice(6,16).map(top => (
-                  <Link to={`/table/${top.league_name.replace(/ +/g,'-')}/${top.league_key}`} key={top.league_key} className=' p-2 text-gray-400'>
-                    <div>
+                    <div  key={top.league_key} className=' px-1 py-2'>
+                  <Link to={`/table/${top.league_name.replace(/ +/g,'-')}/${top.league_key}`} className=' flex justify-between text-gray-400'>
                       {top.league_name}
-                    </div>
-
+                    <img src={top.league_logo} className=' h-5' alt="" />
                   </Link>
+                    </div>
                 ))
               )
             }
