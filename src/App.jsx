@@ -183,7 +183,7 @@ const App = () => {
           <div className=' hidden lg:block'></div>
         </div>
       </div>
-      <div className=' fixed block lg:hidden shadow-sm bottom-0 w-full  bg-customBg3 z-10 p-3'>
+      <div className=' fixed block lg:hidden shadow-sm bottom-[-2px] w-full  bg-customBg3 z-10 p-3'>
         <div className={`${showCalendar ? 'block' : 'hidden'} bg-customBg3 shadow-sm rounded-t absolute bottom-[52px] animate-dis left-0`}>
           <Calendar value={calenderDate}  onChange={handleDateChange} className={` text-customBg mb-2 bg-transparent border-none w-full bg-opacity-50 `} minDetail='year' maxDetail='month'/>
           <div  onClick={() => {setCalenderDate(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`); setShowCalendar(false)}} className='  px-3 py-2 rounded-full text-customBg  w-fit mb-4 cursor-pointer hover:opacity-80 active:opacity-60'>Today</div>
