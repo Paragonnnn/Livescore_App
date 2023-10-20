@@ -14,6 +14,7 @@ export default {
         orange: '#f39c12',
         lightOrange: '#f39d12c0',
         lighterOrange: '#f39d1241',
+        live: '#F3A712'
       },
       textColor : {
         'gray-400': '#d9dcd6'

@@ -64,20 +64,20 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
               currentFixture.map(fixture => (
                 <div key={fixture.event_key} className=''>
                   <div>{fixture.event_date}</div>
-                  <div className=' w-full bg-customBg p-2 grid grid-cols-5 items-center rounded'>
+                  <div className=' w-full border border-solid border-customBg p-2 grid grid-cols-5 items-center rounded'>
                     <div className='text-center col-span-2 justify-self-start flex flex-col gap-1 justify-center items-center'>
                       <img src={fixture.home_team_logo} alt="" className='w-[50px]'/>
-                      <div className='text-xxs'>
+                      <div className='text-xxs xl:text-xs text-gray-400 '>
                         {fixture.event_home_team}
                       </div>
                     </div> 
-                    <div className={`${fixture.event_live === '1' ? 'text-lightOrange   ' : 'text-black '} text-center col-span-1 `}>
+                    <div className={`${fixture.event_live === '1' ? 'text-live   ' : 'text-black '} text-center col-span-1 `}>
                       <div className=' lg:text-base xl:text-2xl'>{fixture.event_final_result}</div>
                       <div className='text-base'>{fixture.event_status === 'Finished' ? 'FT' : fixture.event_status === 'Half Time' ? 'HT' : fixture.event_status}</div>
                     </div>
                     <div className='text-center col-span-2 justify-self-end flex flex-col gap-1 justify-center items-center'>
                       <img src={fixture.away_team_logo} alt="" className='w-[50px]'/>
-                      <div className='text-xxs'>
+                      <div className='text-xxs xl:text-xs text-gray-400'>
                         {fixture.event_away_team}
                       </div>
                     </div> 

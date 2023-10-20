@@ -107,10 +107,10 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
     
     return (
         <div className=' sm:p-4 p-2 bg-customBg2 shadow-sm rounded-md '>
-            <div className=' text-white border border-solid border-black p-2 mb-2 text-lg'>
+            <div className=' text-gray-400 border border-solid border-black p-2 mb-2 text-lg'>
                 <div className=' flex border border-solid border-customBg w-fit  rounded-full p-1'>
-                <button onClick={all} className={`${isLive ? 'text-customBg3 bg-customBg': 'text-white '}  px-3 rounded-full transition duration-200 ease-in-out`}>All</button>
-                <button onClick={live} className={`${!isLive ? 'text-customBg3 bg-customBg': 'text-white'}  transition duration-200 ease-in px-3 rounded-full flex  items-center gap-1`}>Live <div className='text-xs'>
+                <button onClick={all} className={`${isLive ? ' border border-solid border-customBg': 'text-gray-400 '}  px-3 rounded-full transition duration-200 ease-in-out`}>All</button>
+                <button onClick={live} className={`${!isLive ? ' border border-solid border-customBg': 'text-gray-400'}  transition duration-200 ease-in px-3 rounded-full flex  items-center gap-1`}>Live <div className='text-xs text-live font-bold'>
                         ({
                         fixtures?.filter(fixture => fixture.event_live === '1').length
                     })
@@ -175,7 +175,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                                     <div>
                                         {fixture.event_time}
                                     </div>
-                                    <div className={`${ fixture.event_status !== 'Finished' && fixture.event_live ===  '1' ? ' text-orange animate-pulse text-[.55rem]': '' } ' text-[.5rem] text-center font-semibold'`}>
+                                    <div className={`${ fixture.event_status !== 'Finished' && fixture.event_live ===  '1' ? ' text-live font-semi-bold  text-[.65rem]': '' } ' text-[.5rem] text-center font-semibold'`}>
                                         {fixture.event_status === 'Finished' ? 'FT' : fixture.event_status === 'Half Time' ? 'HT' : fixture.event_status === 'After Pen.' ? 'AP' : fixture.event_status === 'Postponed' || fixture.event_status === 'Cancelled' ? `${fixture.event_status.slice(0,4)}..` : fixture.event_status === '' ? '-' : !isNaN(+fixture.event_status || fixture.event_status.includes('+')) ? `${fixture.event_status}'` : `${fixture.event_status.slice(0,4)}.` }
                                     </div>
                                 </div>
