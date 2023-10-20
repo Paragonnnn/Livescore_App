@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 const Defenders = ({team}) => {
   return (
     <div>
-        <div>
-            <h1 className=' text-3xl text-white font-semibold mb-4'>Defenders</h1>
+        <div className=' mb-5'>
+            <h1 className=' text-3xl text-customBg font-semibold mb-4'>Defenders</h1>
             <div  className='flex flex-wrap gap-5 px-2'>
                 {
                     team.players.filter(player => player.player_type == 'Defenders').map((player) => (

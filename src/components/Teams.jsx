@@ -69,10 +69,10 @@ const Teams = () => {
             {
                 teams.map((team) => (
                     <div key={team.team_key} className=' '>
-                        <div className=' bg-black gap-12 p-4 rounded-xl bg-opacity-40 w-full flex items-center'>
+                        <div className=' bg-black gap-12 p-4 rounded-xl mb-5 bg-opacity-40 w-full flex items-center'>
                             <img src={team.team_logo} alt="" className=' h-24'/>
                             <div>
-                                <div className='text-2xl font-semibold text-customBg'>{team.team_name} </div>
+                                <div className='text-3xl font-bold text-gray-300'>{team.team_name} </div>
                             </div>
                         </div>
                         

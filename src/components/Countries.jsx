@@ -48,7 +48,7 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
             )
 
         }
-        <div className='divide-y divide-black'>
+        <div className='divide-y divide-black '>
             {
                 countries.filter((country) => (
                     search.trim().toLowerCase() === '' ? country : country.country_name.toLowerCase().includes(search)
@@ -65,7 +65,7 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
                                 className=' w-7 h-7 cursor-pointer'
                             />
                         </div>
-                        <div className={`${activeIndex.includes(index) ? 'block' : 'hidden'} p-2 divide-y divide-black  `}>
+                        <div className={`${activeIndex.includes(index) ? 'block' : 'hidden'} p-2 divide-y divide-black  transition-all duration-300`}>
                             {
                                 leagues.map((league) => (
                                     (league.country_key == country.country_key) &&

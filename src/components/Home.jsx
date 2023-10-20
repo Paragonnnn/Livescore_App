@@ -12,6 +12,7 @@ import { teamLogo } from '..'
 const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, loadingFixtures, fixturesError, currentFixture, setCurrentFixture, liveCheck, windowWidth, calenderDate, setCalenderDate, handleDateChange,handleDateFocus,maxDate}) => {
 
   const [picker, setPicker] = useState(null)
+  const date = new Date
 
   return (
     <div className='grid grid-cols-1 lg:grid-cols-11 h-[100%] gap-4'>
@@ -26,8 +27,8 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
       
       <div className='hidden lg:block col-span-3'>
         <div className=' bg-customBg2 shadow-sm rounded-t'>
-          <Calendar value={calenderDate} onChange={handleDateChange} className={` text-[#aaa95a] mb-2 bg-transparent border-none  bg-opacity-50 w-full`} minDetail='year' maxDetail='month'/>
-          <div onClick={() => setCalenderDate(new Date().toISOString().split('T')[0])} className='  px-3 py-2 rounded-full text-customBg  w-fit mb-4 cursor-pointer hover:opacity-80 active:opacity-60'>Today</div>
+          <Calendar value={calenderDate} onChange={handleDateChange} className={` text-customBg mb-2 bg-transparent border-none  bg-opacity-50 w-full`} minDetail='year' maxDetail='month'/>
+          <div onClick={() => setCalenderDate(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)} className='  px-3 py-2 rounded-full text-customBg  w-fit mb-4 cursor-pointer hover:opacity-80 active:opacity-60'>Today</div>
 
         </div>
         {/* <DatePicker selected={calenderDate} onChange={date => setCalenderDate(date)} onKeyDown={handleDateFocus} /> */}
@@ -57,7 +58,7 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
         <Fixtures check={check} fixtures={fixtures} leagues={leagues} loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture} liveCheck={liveCheck} windowWidth={windowWidth}/>
       </div>
       
-      <div className='hidden lg:block col-span-3 sticky top-[90px] text-black bg-customBg2 p-4 h-fit'>
+      <div className='hidden shadow-sm lg:block col-span-3 sticky top-[90px] text-black bg-customBg2 p-4 h-fit'>
       
             {
               currentFixture.map(fixture => (
@@ -81,7 +82,7 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
                       </div>
                     </div> 
                   </div>
-                  <div className='flex justify-between text-gray-300 lg:text-xxs xl:text-xs opacity-80 mt-2'>
+                  <div className='flex justify-between text-gray-400 lg:text-xxs xl:text-xs opacity-80 mt-2'>
 
                     <div>
                       {fixture && 

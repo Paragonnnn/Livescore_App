@@ -107,14 +107,17 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
     
     return (
         <div className=' sm:p-4 p-2 bg-customBg2 shadow-sm rounded-md '>
-            <div className=' text-white border border-solid border-black p-2 flex gap-2 mb-2'>
-                <button onClick={all} className={`${isLive ? 'text-orange': 'text-white'}`}>All</button>
-                <button onClick={live} className={`${!isLive ? 'text-orange': 'text-white'} flex items-center gap-1`}>Live <div className='text-xs'>
-                        {
+            <div className=' text-white border border-solid border-black p-2 mb-2 text-lg'>
+                <div className=' flex border border-solid border-customBg w-fit  rounded-full p-1'>
+                <button onClick={all} className={`${isLive ? 'text-customBg3 bg-customBg': 'text-white '}  px-3 rounded-full transition duration-200 ease-in-out`}>All</button>
+                <button onClick={live} className={`${!isLive ? 'text-customBg3 bg-customBg': 'text-white'}  transition duration-200 ease-in px-3 rounded-full flex  items-center gap-1`}>Live <div className='text-xs'>
+                        ({
                         fixtures?.filter(fixture => fixture.event_live === '1').length
-                    }
+                    })
                     </div>
                     </button>
+
+                </div>
             </div>
         {loadingFixtures && (
             <Loading />

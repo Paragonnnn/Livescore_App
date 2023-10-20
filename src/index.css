@@ -13,7 +13,7 @@
   --primary-color: #1E1E1E;
 }
 body{
-  background-color: #203535;
+  background-color: #173753;
 }
 .scroll_bar::-webkit-scrollbar {
   width: 6px;
@@ -25,6 +25,21 @@ body{
   background-color: grey; 
   border-radius: 6px;
 }
+/* .dis{
+  animation: show 1s;
+}
+
+  @keyframes show {
+    0% {
+      
+      transform: translateY(0%);
+    }
+    100%{
+      transform: translateY(100%);
+    }
+  
+  } */
+
 .loading-container {
   display: flex;
   justify-content: center;

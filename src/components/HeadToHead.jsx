@@ -14,7 +14,7 @@ const HeadToHead = ({statToggle, hToH}) => {
                     <div className=' mb-2 text-lg font-semibold rounded bg-customBg2 text-customBg p-2'>
                         <div>{h.league_name}</div>
                     </div>
-                    <div className=''>
+                    <div className=' text-gray-400'>
                         <div className='flex gap-8 items-center'>
                             <div className='flex flex-col items-center w-14 mt-2'>
                                 <div>{h.event_date.slice(0,h.event_date.indexOf('-')) === year.toString() ? h.event_date.slice(h.event_date.indexOf('-') + 1 ,h.event_date.lenght) : h.event_date.slice(0,h.event_date.indexOf('-'))}</div>

@@ -18,9 +18,9 @@ const ExtraTimeEvent = ({events}) => {
                 )
                 }
                 {
-                <div className='flex justify-between py-2 items-center'>
-                    <div className='w-12 sm:w-16 text-center text-xxs sm:text-xs '>{eve.time}'</div>
-                    <div className='w-[calc(100%-64px)] flex justify-between '>
+                <div className='flex gap-4 sm:justify-between items-center py-2'>
+                    <div className='w-fit sm:w-16 text-left sm:text-center text-xxs sm:text-xs '>{eve.time}'</div>
+                    <div className='sm:w-[calc(100%-64px)] flex w-full justify-between'>
                     <div className='w-[calc(50%-35px)] '>
                         {
                         (eve.card && eve.home_fault) && (
@@ -28,7 +28,7 @@ const ExtraTimeEvent = ({events}) => {
                             {
                                 eve.home_fault
                             }
-                            <div className={`${eve.card === 'yellow card' ? 'bg-yellow-500' : 'bg-red-700'} w-4 h-5 rounded-[2px]`}></div>
+                            <div className={`${eve.card === 'yellow card' ? 'bg-yellow-500' : 'bg-red-700'} w-3 h-4 sm:w-4 sm:h-5 rounded-[2px]`}></div>
                             </div>
                         ) 
                         
@@ -104,7 +104,7 @@ const ExtraTimeEvent = ({events}) => {
                         }
                         {(eve.card && eve.away_fault) && (
                         <div className='flex gap-1 items-center text-xs'>
-                            <div className={`${eve.card === 'yellow card' ? 'bg-yellow-500' : 'bg-red-700'} w-4 h-5 rounded-[2px]`}></div>
+                            <div className={`${eve.card === 'yellow card' ? 'bg-yellow-500' : 'bg-red-700'} w-3 h-4 sm:w-4 sm:h-5 rounded-[2px]`}></div>
                             {
                             eve.away_fault
                             }

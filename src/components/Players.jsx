@@ -47,7 +47,7 @@ const Players = ({countries, leagues}) => {
             )
 
         }
-        <div className='players_div'>
+        <div className=''>
             {
                 
                 players.map((player,index) => (

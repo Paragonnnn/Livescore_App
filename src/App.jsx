@@ -172,9 +172,9 @@ const App = () => {
   
 
   return (
-    <div className='bg-[#042a2b] '>
+    <div className='bg-[#173753] '>
       
-      <div className='bg-[#042a2b] shadow-sm  w-full  sticky top-[-2px] rounded-b-xl z-10'>
+      <div className='bg-[#173753] shadow-sm  w-full  sticky top-[-2px] rounded-b-xl z-10'>
         <div className='m-auto  max-w-[1440px] flex items-center justify-between relative'>
           <Link to={'/'}><h3 className='text-[25px] md:text-[40px] px-2 md:px-4 py-2 mb-2 text-customBg font-bold'>Paragon</h3></Link>
           <div className='px-2 '>
@@ -183,10 +183,10 @@ const App = () => {
           <div className=' hidden lg:block'></div>
         </div>
       </div>
-      <div className=' fixed block lg:hidden shadow-sm bottom-0 w-full  bg-[#042a2b] z-10 p-3'>
-        <div className={`${showCalendar ? 'block' : 'hidden'} bg-customBg2 shadow-sm rounded-t`}>
-          <Calendar value={calenderDate}  onChange={handleDateChange} className={` text-[#aaa95a] mb-2 bg-transparent border-none w-full bg-opacity-50 `} minDetail='year' maxDetail='month'/>
-          <div  onClick={() => {setCalenderDate(new Date().toISOString().split('T')[0]); setShowCalendar(false)}} className='  px-3 py-2 rounded-full text-customBg  w-fit mb-4 cursor-pointer hover:opacity-80 active:opacity-60'>Today</div>
+      <div className=' fixed block lg:hidden shadow-sm bottom-0 w-full  bg-customBg3 z-10 p-3'>
+        <div className={`${showCalendar ? 'block' : 'hidden'} bg-customBg3 shadow-sm rounded-t absolute bottom-[52px] animate-dis left-0`}>
+          <Calendar value={calenderDate}  onChange={handleDateChange} className={` text-customBg mb-2 bg-transparent border-none w-full bg-opacity-50 `} minDetail='year' maxDetail='month'/>
+          <div  onClick={() => {setCalenderDate(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`); setShowCalendar(false)}} className='  px-3 py-2 rounded-full text-customBg  w-fit mb-4 cursor-pointer hover:opacity-80 active:opacity-60'>Today</div>
 
         </div>
         <div>

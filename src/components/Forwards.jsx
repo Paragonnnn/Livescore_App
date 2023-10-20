@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 const Forwards = ({team}) => {
   return (
     <div>
-        <div>
-            <h1 className=' text-3xl text-white font-semibold mb-4'>Forwards</h1>
+        <div className=' mb-5'>
+            <h1 className=' text-3xl text-customBg font-semibold mb-4'>Forwards</h1>
 
             <div className='flex flex-wrap gap-5 px-2'>
                 {
