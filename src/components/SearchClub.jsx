@@ -1,29 +1,23 @@
 import React, { useState,useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { searchLogo } from '..'
+import { searchLogo,back } from '..'
 
-const SearchClub = ({setSearchClub, windowWidth, showSearch, handleSearchChange, searchClub, clubs, setShowSearch}) => {
-  const [toggleSearch, setToggleSearch] = useState(false)
+const SearchClub = ({setSearchClub, windowWidth, showSearch, handleSearchChange, searchClub, clubs, setShowSearch, handleSearchToggleClick, toggleSearch, setToggleSearch, }) => {
   const [focus,setFocus] = useState(false)
 
-  const handleSearchToggleClick = () => {
-    setToggleSearch(prev => !prev)
-    if (!toggleSearch) {
-      setSearchClub('')
-    }
-  }
+  
  
   return (
-    <div className=' '>
-        <img src={searchLogo} alt="" className=' h-6 w-6 block lg:hidden' onClick={handleSearchToggleClick}/>
+    <div className=' w-full relative'>
         <input onFocus={() => setFocus(true)}  className={` bg-transparent outline-none hidden lg:block border border-solid border-black p-2 `} onChange={handleSearchChange} value={searchClub} id="" />
 
-        <div className='absolute'>
-          <div className={`${toggleSearch ? 'block' : 'hidden'}`}>
-            <input onFocus={() => setFocus(true)} className={` bg-transparent outline-none block lg:hidden border border-solid border-black p-2 `} onChange={handleSearchChange} value={searchClub} id="" />
+        <div className=''>
+          <div className={`flex gap-4 items-center px-2 pt-2`}>
+            <img src={back} alt="" className=' h-6 lg:hidden block' onClick={() => setToggleSearch(false)}/>
+            <input onFocus={() => setFocus(true)} className={` w-full bg-transparent outline-none block lg:hidden border border-solid border-customBg rounded text-gray-400 p-2 `} onChange={handleSearchChange} value={searchClub} id="" />
 
           </div>
-          <div className={`${focus ? 'block' : 'hidden'} ${!toggleSearch && windowWidth < 1024 ? 'hidden' : ''}  overflow-y-scroll scroll_bar h-[100vh] lg:h-[80vh] absolute bg-customBg3 shadow-sm   left-[0] mt-4  lg:min-w-[350px] p-2 divide-y divide-black`}>
+          <div className={`${focus || windowWidth < 1024 ? 'block' : 'hidden'} ${!toggleSearch && windowWidth < 1024 ? 'hidden' : ''}  overflow-y-scroll scroll_bar h-[100vh] lg:h-[80vh]  bg-customBg3 shadow-sm   left-[0] mt-4  lg:min-w-[350px] px-2 py-1 divide-y divide-black lg:absolute`}>
             {
               clubs && 
               clubs.filter(club => (

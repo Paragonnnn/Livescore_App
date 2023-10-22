@@ -59,8 +59,28 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
       </div>
       
       <div className='hidden shadow-sm lg:block col-span-3 sticky top-[90px] text-black bg-customBg2 p-4 h-fit'>
-      
             {
+              loadingFixtures && (
+                <div>
+                  <div className='p-2 flex justify-between'>
+                    <div className=' flex flex-col justify-center gap-2 items-center'>
+                      <div className=' h-12 w-12  bg-[#ffffff10] animate-pulse rounded-xl'></div>
+                      <div className='bg-[#ffffff10] w-16 h-4'></div>
+                    </div>
+                    <div className=' flex flex-col justify-center gap-2 items-center'>
+                      <div className=' h-12 w-12  bg-[#ffffff10] animate-pulse rounded-xl'></div>
+                      <div className=' w-16 bg-[#ffffff10] h-4'></div>
+                    </div>
+                  </div>
+                  <div className='flex justify-center '>
+                    <div className=' h-10 w-36 bg-[#ffffff10] mt-6 rounded'></div>
+                  </div>
+                  
+                </div>
+              )
+            }
+            {
+              !loadingFixtures &&
               currentFixture.map(fixture => (
                 <div key={fixture.event_key} className=''>
                   <div>{fixture.event_date}</div>

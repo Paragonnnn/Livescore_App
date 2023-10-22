@@ -9,6 +9,8 @@ import sub from './assets/sub.svg'
 import teamLogo from './assets/teamLogo.svg'
 import searchLogo from './assets/searchLogo.svg'
 import calendar from './assets/calendar.svg'
+import back from './assets/back.svg'
+
 
 
 export {
@@ -22,5 +24,6 @@ export {
     sub,
     teamLogo,
     searchLogo,
-    calendar
+    calendar,
+    back
 }

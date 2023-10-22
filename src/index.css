@@ -22,9 +22,9 @@ body{
 }
 
 .scroll_bar::-webkit-scrollbar-thumb {
-  background-color: grey; 
   border-radius: 6px;
 }
+
 /* .dis{
   animation: show 1s;
 }
@@ -77,6 +77,7 @@ body{
   gap: 50px;
 }
 .country{
+  color: #ffffff10;
   width: 300px;
   height: 50px;
   display: flex;

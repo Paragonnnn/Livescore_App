@@ -103,7 +103,7 @@ const FirstHalfEvent = ({events}) => {
                       }
                       {(eve.card && eve.away_fault) && (
                         <div className='flex gap-1 items-center text-xs'>
-                          <div className={`${eve.card === 'yellow card' ? 'bg-yellow-500' : 'bg-red-700'} w-3 h-4 sm:w-4 sm:h-5 rounded-[2px]`}></div>
+                          <div className={`${eve.card === 'yellow card' ? 'bg-yellow-500' : eve.card === 'red card' ?'bg-red-700' : ''} w-3 h-4 sm:w-4 sm:h-5 rounded-[2px]`}></div>
                           <div>{eve.away_fault}</div>
                         </div>
                       ) }

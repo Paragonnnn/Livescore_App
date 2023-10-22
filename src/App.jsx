@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import Countries from './components/Countries'
 import Leagues from './components/Leagues'
 import { Link } from 'react-router-dom'
@@ -13,7 +13,7 @@ import SearchClub from './components/SearchClub'
 import parseISO from 'date-fns/parseISO'
 import { addDays, format, addMonths } from 'date-fns'
 import Calendar from 'react-calendar'
-import { calendar } from '.'
+import { calendar, searchLogo } from '.'
 
 
 const App = () => {
@@ -32,6 +32,7 @@ const App = () => {
     const [searchClub, setSearchClub] = useState('')
     const [clubs, setClubs] = useState([])
     const [showCalendar, setShowCalendar] = useState(false)
+    const [toggleSearch, setToggleSearch] = useState(false)
     
     const date = new Date()
     // const newDate = format(date, 'MM-dd-yyyy')
@@ -69,7 +70,14 @@ const App = () => {
      
     }
 
-
+  
+    const handleSearchToggleClick = () => {
+      setToggleSearch(prev => !prev)
+      if (!toggleSearch) {
+        setSearchClub('')
+      }
+      
+    }
     const api_key = import.meta.env.VITE_api_key
     
     
@@ -169,28 +177,54 @@ const App = () => {
   //   }
   // })
 
-  
-
+  let a = window.scrollY
+  window.onscroll = () => {
+    if (a<window.scrollY) {
+      console.log('up');
+    } else {
+      console.log('down');
+    }
+    console.log(a,window.scrollY);
+    a = window.scrollY
+  }
   return (
-    <div className='bg-[#173753] '>
+    <div className='bg-customBg3 '>
       
-      <div className='bg-[#173753] shadow-sm  w-full  sticky top-[-2px] rounded-b-xl z-10'>
+      <div className='bg-customBg3 shadow-sm  w-full  sticky top-[-2px] rounded-b-xl z-10'>
         <div className='m-auto  max-w-[1440px] flex items-center justify-between relative'>
           <Link to={'/'}><h3 className='text-[25px] md:text-[40px] px-2 md:px-4 py-2 mb-2 text-customBg font-bold'>Paragon</h3></Link>
           <div className='px-2 '>
-              <SearchClub searchClub={searchClub} handleSearchChange={handleSearchChange} setSearchClub={setSearchClub} clubs={leagues.concat(countries)}  windowWidth={windowWidth}/>
+            <img src={searchLogo} alt="" className=' h-6 w-6 block lg:hidden' onClick={handleSearchToggleClick}/>
+            {
+              windowWidth > 1024 &&
+                <div className=''>
+
+                  <SearchClub  handleSearchToggleClick={handleSearchToggleClick} toggleSearch={toggleSearch} setToggleSearch={setToggleSearch} searchClub={searchClub} handleSearchChange={handleSearchChange} setSearchClub={setSearchClub} clubs={leagues.concat(countries)}  windowWidth={windowWidth}/>
+                </div>
+            }
           </div>
           <div className=' hidden lg:block'></div>
         </div>
       </div>
-      <div className=' fixed block lg:hidden shadow-sm bottom-[-2px] w-full  bg-customBg3 z-10 p-3'>
-        <div className={`${showCalendar ? 'block' : 'hidden'} bg-customBg3 shadow-sm rounded-t absolute bottom-[52px] animate-dis left-0`}>
+        <div className={`${toggleSearch ? 'block animate-dis' : 'hidden animate-dat'} h-full static  w-full   `}> 
+            {
+              windowWidth < 1024 &&
+                <div className=' '>
+
+                  <SearchClub  handleSearchToggleClick={handleSearchToggleClick} toggleSearch={toggleSearch} setToggleSearch={setToggleSearch} searchClub={searchClub} handleSearchChange={handleSearchChange} setSearchClub={setSearchClub} clubs={leagues.concat(countries)}  windowWidth={windowWidth}/>
+                </div>
+            }
+
+        </div>
+      <div className={`${window.scrollY <= a ? 'block fixed' : 'hidden'}  lg:hidden shadow-sm bottom-[-5px] w-full  bg-customBg3 z-10 p-3 `}>
+        <div className={`${showCalendar ? 'block' : 'hidden'}  bg-customBg3 shadow-sm rounded-t absolute bottom-[52px] animate-dis left-0`}>
           <Calendar value={calenderDate}  onChange={handleDateChange} className={` text-customBg mb-2 bg-transparent border-none w-full bg-opacity-50 `} minDetail='year' maxDetail='month'/>
           <div  onClick={() => {setCalenderDate(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`); setShowCalendar(false)}} className='  px-3 py-2 rounded-full text-customBg  w-fit mb-4 cursor-pointer hover:opacity-80 active:opacity-60'>Today</div>
 
         </div>
-        <div>
+        <div className={` flex justify-between`}>
           <img src={calendar} onClick={() => setShowCalendar((prev) => !prev)} className=' h-7' alt="" />
+          <img src={searchLogo} className=' h-7' onClick={handleSearchToggleClick} alt="" />
         </div>
       </div>
       <div className=' max-w-[1440px] m-auto  lg:p-4 p-1'>

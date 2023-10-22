@@ -7,14 +7,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        customBg: '#8EB19D',
+        customBg: '#94B0DA',
         customBg2: '#00000031',
         customBg3: '#173753',
         border : '#151B54',
         orange: '#f39c12',
         lightOrange: '#f39d12c0',
         lighterOrange: '#f39d1241',
-        live: '#F3A712'
+        live: '#F3A712',
+        loading: '#ffffff10'
       },
       textColor : {
         'gray-400': '#d9dcd6'
@@ -31,6 +32,10 @@ export default {
           '0%': { transform : 'translateY(100%)'},
           '100%' : { transform : 'translateY(0%)'}
         },
+        dat : {
+          '0%' : { transform : 'translateY(0%)'},
+          '100%': { transform : 'translateY(100%)'},
+        },
         show: {
           '0%': { height : '0'},
           '100%': { height : '100%'},
@@ -40,7 +45,8 @@ export default {
       }, 
       animation: {
         dis: 'dis .3s',
-        show: 'show linear .3s'
+        show: 'show linear .3s',
+        dat: 'dat .3s'
       },
 
     },
