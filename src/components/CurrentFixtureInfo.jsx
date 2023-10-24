@@ -17,7 +17,7 @@ const CurrentFixtureInfo = ({match, odds, handleClick, handleSeeMore, bookie, se
                         {match.event_home_team}
                       </div>
                     </div> 
-                    <div className={`${match.event_live === '1' ? 'text-lightOrange   ' : 'text-customBg '} text-center col-span-1 `}>
+                    <div className={`${match.event_live === '1' ? 'text-live   ' : 'text-customBg '} text-center col-span-1 `}>
                       <div className=' lg:text-base xl:text-2xl'>{match.event_final_result}</div>
                       <div className='text-base'>{match.event_status === 'Finished' ? 'FT' : match.event_status === 'Half Time' ? 'HT' : match.event_status}</div>
                     </div>

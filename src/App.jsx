@@ -33,6 +33,8 @@ const App = () => {
     const [clubs, setClubs] = useState([])
     const [showCalendar, setShowCalendar] = useState(false)
     const [toggleSearch, setToggleSearch] = useState(false)
+
+    const focus = useRef()
     
     const date = new Date()
     // const newDate = format(date, 'MM-dd-yyyy')
@@ -217,13 +219,12 @@ const App = () => {
 
         </div>
       <div className={`${window.scrollY <= a ? 'block fixed' : 'hidden'}  lg:hidden shadow-sm bottom-[-5px] w-full  bg-customBg3 z-10 p-3 `}>
-        <div className={`${showCalendar ? 'block' : 'hidden'}  bg-customBg3 shadow-sm rounded-t absolute bottom-[52px] animate-dis left-0`}>
+        <div className={`${showCalendar ? 'block' : 'hidden'}  bg-customBg3 shadow-sm rounded-t absolute bottom-[52px] animate-dis left-0`} onBlur={() => {setShowCalendar(false) ;console.log('yoo')} } tabIndex={-1}  ref={focus} onFocus={console.log('yii')}>
           <Calendar value={calenderDate}  onChange={handleDateChange} className={` text-customBg mb-2 bg-transparent border-none w-full bg-opacity-50 `} minDetail='year' maxDetail='month'/>
           <div  onClick={() => {setCalenderDate(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`); setShowCalendar(false)}} className='  px-3 py-2 rounded-full text-customBg  w-fit mb-4 cursor-pointer hover:opacity-80 active:opacity-60'>Today</div>
-
-        </div>
+         </div>
         <div className={` flex justify-between`}>
-          <img src={calendar} onClick={() => setShowCalendar((prev) => !prev)} className=' h-7' alt="" />
+          <img src={calendar} onClick={() => {setShowCalendar((prev) => !prev);  }} className=' h-7' alt="" />
           <img src={searchLogo} className=' h-7' onClick={handleSearchToggleClick} alt="" />
         </div>
       </div>

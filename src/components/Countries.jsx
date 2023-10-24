@@ -51,7 +51,7 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
         <div className='divide-y divide-black '>
             {
                 countries.filter((country) => (
-                    search.trim().toLowerCase() === '' ? country : country.country_name.toLowerCase().includes(search)
+                    search.trim().toLowerCase() === '' ? country : country.country_name.toLowerCase().includes(search.toLowerCase())
                 )).slice(0,seeAll).map((country,index) => (
                     <div key={country.country_key} className=''>
                         <div    className='text-gray-400 flex items-center justify-between w-full p-1 cursor-pointer' onClick={() => handleClick(index)}>

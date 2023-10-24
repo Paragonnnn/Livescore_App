@@ -108,7 +108,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
     return (
         <div className=' sm:p-4 p-2 bg-customBg2 shadow-sm rounded-md '>
             <div className=' text-gray-400 border border-solid border-black p-2 mb-2 text-lg' >
-                <div className=' flex border border-solid border-customBg w-fit  rounded-full p-1'>
+                <div className=' flex  w-fit  rounded-full p-1'>
                 <button onClick={all} className={`${isLive ? ' border border-solid border-customBg': 'text-gray-400 '}  px-3 rounded-full transition duration-200 ease-in-out`}>All</button>
                 <button onClick={live} className={`${!isLive ? ' border border-solid border-customBg': 'text-gray-400'}  transition duration-200 ease-in px-3 rounded-full flex  items-center gap-1`}>Live <div className='text-xs text-live font-bold'>
                         ({
