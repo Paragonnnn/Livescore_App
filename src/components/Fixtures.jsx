@@ -106,8 +106,8 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
     
     
     return (
-        <div className=' sm:p-4 p-2 bg-customBg2 shadow-sm rounded-md '>
-            <div className=' text-gray-400 border border-solid border-black p-2 mb-2 text-lg' >
+        <div className='  bg-customBg2 rounded-md sm:p-4 p-2 shadow-sm '>
+            <div className=' text-gray-400 p-2 mb-2 text-lg' >
                 <div className=' flex  w-fit  rounded-full p-1'>
                 <button onClick={all} className={`${isLive ? ' border border-solid border-customBg': 'text-gray-400 '}  px-3 rounded-full transition duration-200 ease-in-out`}>All</button>
                 <button onClick={live} className={`${!isLive ? ' border border-solid border-customBg': 'text-gray-400'}  transition duration-200 ease-in px-3 rounded-full flex  items-center gap-1`}>Live <div className='text-xs text-live font-bold'>
@@ -120,7 +120,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                 </div>
             </div>
         {loadingFixtures && (
-            <div className='   '>
+            <div className=' h-[100vh]'>
                 <div className=' mb-4 divide-y rounded divide-black border border-solid border-black'>
                     <div className=' flex gap-2 items-center p-2'>
                         <div className=' w-6 h-6 rounded-full bg-loading animate-pulse'></div>
@@ -257,12 +257,14 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
         {fixturesError && (
             <Error />
         )}
+        <div className='  '>
+
         {
             // !(loading && error) &&
-            (fixtures && leagues) &&
+            (fixtures && leagues && !loadingFixtures) &&
             leagues.map((league,index) => (
                 (!isLive ? (check.includes(league.league_key) && liveCheck.includes(league.league_key)) : check.includes(league.league_key)) &&
-                <div key={league.league_key} className={`border border-black border-solid mb-4 rounded divide-y divide-black`}>
+                <div key={league.league_key} className={`border border-black border-solid mb-4 first:rounded-t-lg last:rounded-b-lg divide-y divide-black `}>
                         {(check.includes(league.league_key) )
                         &&
                         <div className=' text-customBg py-2 px-3 text-xs  flex gap-1 items-center '>
@@ -346,6 +348,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                 </div>
             ))
         }
+        </div>
         
     </div>
   )

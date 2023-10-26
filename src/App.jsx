@@ -179,16 +179,7 @@ const App = () => {
   //   }
   // })
 
-  let a = window.scrollY
-  window.onscroll = () => {
-    if (a<window.scrollY) {
-      console.log('up');
-    } else {
-      console.log('down');
-    }
-    console.log(a,window.scrollY);
-    a = window.scrollY
-  }
+ 
   return (
     <div className='bg-customBg3 '>
       
@@ -218,21 +209,12 @@ const App = () => {
             }
 
         </div>
-      <div className={`${window.scrollY <= a ? 'block fixed' : 'hidden'}  lg:hidden shadow-sm bottom-[-5px] w-full  bg-customBg3 z-10 p-3 `}>
-        <div className={`${showCalendar ? 'block' : 'hidden'}  bg-customBg3 shadow-sm rounded-t absolute bottom-[52px] animate-dis left-0`} onBlur={() => {setShowCalendar(false) ;console.log('yoo')} } tabIndex={-1}  ref={focus} onFocus={console.log('yii')}>
-          <Calendar value={calenderDate}  onChange={handleDateChange} className={` text-customBg mb-2 bg-transparent border-none w-full bg-opacity-50 `} minDetail='year' maxDetail='month'/>
-          <div  onClick={() => {setCalenderDate(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`); setShowCalendar(false)}} className='  px-3 py-2 rounded-full text-customBg  w-fit mb-4 cursor-pointer hover:opacity-80 active:opacity-60'>Today</div>
-         </div>
-        <div className={` flex justify-between`}>
-          <img src={calendar} onClick={() => {setShowCalendar((prev) => !prev);  }} className=' h-7' alt="" />
-          <img src={searchLogo} className=' h-7' onClick={handleSearchToggleClick} alt="" />
-        </div>
-      </div>
+      
       <div className=' max-w-[1440px] m-auto  lg:p-4 p-1'>
 
         <Routes>
           
-          <Route path='/' element={<Home countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues} check={check} fixtures={fixtures}  loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture} liveCheck={liveCheck} windowWidth={windowWidth} calenderDate={calenderDate} setCalenderDate={setCalenderDate} handleDateChange={handleDateChange} handleDateFocus={handleDateFocus} />}/>
+          <Route path='/' element={<Home countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues} check={check} fixtures={fixtures}  loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture} liveCheck={liveCheck} windowWidth={windowWidth} calenderDate={calenderDate} setCalenderDate={setCalenderDate} handleDateChange={handleDateChange} handleDateFocus={handleDateFocus} showCalendar={showCalendar} setShowCalendar={setShowCalendar} handleSearchToggleClick={handleSearchToggleClick}/>}/>
           <Route path='/countries' element={<Countries countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues}/>} />
           <Route path='/leagues/:countryname/:id' element={<Leagues />}/>
           <Route path='/table/:leaguename/:id' element={<Table/>} />

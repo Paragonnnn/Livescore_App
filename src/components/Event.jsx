@@ -4,11 +4,11 @@ import SecondHalfEvent from './SecondHalfEvent'
 import ExtraTimeEvent from './ExtraTimeEvent'
 import PenaltyShootOutEvent from './PenaltyShootOutEvent'
 
-const Event = ({events}) => {
+const Event = ({events,statToggle}) => {
   return (
-    <div>
-        <div className=' p-2  bg-customBg2 rounded text-gray-400'>
-          <div className=' bg-customBg  w-fit px-4 rounded-full mb-2'>Events</div>
+    <div className={``}>
+        <div className={`${statToggle.includes('Events') ? 'block' : 'hidden'} p-2  bg-customBg2 rounded text-gray-400`}>
+          {/* <div className=' bg-customBg  w-fit px-4 rounded-full mb-2'>Events</div> */}
             <FirstHalfEvent events={events}/>
             <SecondHalfEvent events={events}/>
             <ExtraTimeEvent events={events}/>

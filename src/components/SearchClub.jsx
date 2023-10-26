@@ -21,19 +21,6 @@ const SearchClub = ({setSearchClub, windowWidth, showSearch, handleSearchChange,
             {
               clubs && 
               clubs.filter(club => (
-                club.country_iso2 && club
-              )).filter(club => (
-                searchClub?.trim().toLowerCase() === '' ? club : club.country_name.toLowerCase().includes(searchClub.toLowerCase())
-              )).map(club => (
-                <div key={club.country_key} className='flex gap-4 items-center p-2' onClick={() => setFocus(false)}>
-                  <img src={club.country_logo} alt="" className=' w-8 h-8 rounded-full'/>
-                  <Link className=' text-base text-white' to={`/leagues/${club.country_name}/${club.country_key}`}>{club.country_name}</Link>
-                </div>
-              ))
-            }
-            {
-              clubs && 
-              clubs.filter(club => (
                 club.league_name && club
               )).filter(club => (
                 searchClub?.trim().toLowerCase() === '' ? club : club.league_name.toLowerCase().includes(searchClub) || club.country_name.toLowerCase().includes(searchClub.toLowerCase())
@@ -47,6 +34,19 @@ const SearchClub = ({setSearchClub, windowWidth, showSearch, handleSearchChange,
                     </div>
                   </Link>
                   
+                </div>
+              ))
+            }
+            {
+              clubs && 
+              clubs.filter(club => (
+                club.country_iso2 && club
+              )).filter(club => (
+                searchClub?.trim().toLowerCase() === '' ? club : club.country_name.toLowerCase().includes(searchClub.toLowerCase())
+              )).map(club => (
+                <div key={club.country_key} className='flex gap-4 items-center p-2' onClick={() => setFocus(false)}>
+                  <img src={club.country_logo} alt="" className=' w-8 h-8 rounded-full'/>
+                  <Link className=' text-base text-white' to={`/leagues/${club.country_name}/${club.country_key}`}>{club.country_name}</Link>
                 </div>
               ))
             }

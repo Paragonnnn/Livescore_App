@@ -7,6 +7,7 @@ import HeadToHead from './HeadToHead'
 import Odds from './Odds'
 import LineUp from './LineUp'
 import CurrentFixtureInfo from './CurrentFixtureInfo'
+import MatchInfo from './MatchInfo'
 
 const CurrentFixtures = ({}) => {
     const [loading, setLoading] = useState(false)
@@ -20,7 +21,7 @@ const CurrentFixtures = ({}) => {
     const [goalscorers, setGoalscorers] = useState([])
     const [events, setEvents] = useState([])
     const [half,setHalf] = useState([])
-    const [statToggle, setStatToggle] = useState('Stats')
+    const [statToggle, setStatToggle] = useState('Events')
     const [lineUp,setLineUp] = useState([])
     const [sub, setSub] = useState([])
     const {id} = useParams()
@@ -118,14 +119,20 @@ const CurrentFixtures = ({}) => {
     <div className='grid lg:grid-cols-2 gap-4'>
       <div className='col-span-1 w-full  mx-auto mb-4'>
         <CurrentFixtureInfo match={match} odds={odds} handleClick={handleClick} handleSeeMore={handleSeeMore} bookie={bookie} seeMore={seeMore}/>
-        <Event events={events}/>
       </div>
-      <div className='col-span-1  '>
-        <div className='flex justify-between mb-3 p-3 rounded text-customBg  text-base sm:text-lg border-b-2 border-solid border-black bg-customBg2'>
-          {hToH && (hToH.length !== 0) && <div onClick={handleStatToggle} className={`${statToggle.includes('H2H') ? ' text-customBg3 bg-customBg border border-solid border-customBg ' : ''}  border border-solid border-customBg  px-3 rounded-full cursor-pointer`} > H2H</div>}
-          {stats && (stats.length !== 0) && <div onClick={handleStatToggle} className={`${statToggle.includes('Stats') ? ' text-customBg3 bg-customBg border border-solid border-customBg ' : ''} border border-solid border-customBg px-3 rounded-full cursor-pointer`} >Stats</div>}
-          <div onClick={handleStatToggle} className={`${statToggle.includes('Line-Up') ? ' text-customBg3 bg-customBg border border-solid border-customBg ' : ''} border border-solid border-customBg px-3 rounded-full cursor-pointer`} >Line-Up</div>
-          {odds && <div onClick={handleStatToggle} className={`${statToggle.includes('Odds') ? ' text-customBg3 bg-customBg border border-solid border-customBg ' : ''} border border-solid border-customBg px-3 rounded-full cursor-pointer`} > Odds</div>}
+      <div className='col-span-1'>
+        <div className='flex gap-4 overflow-x-scroll m-auto w-[95vw] justify-between mb-3 p-3 rounded text-customBg  text-xs sm:text-lg border-b-2 border-solid border-black bg-customBg2 '>
+          {events && <div onClick={handleStatToggle} className={`${statToggle.includes('Events') ? ' text-customBg3 bg-customBg border border-solid border-customBg ' : ''} border border-solid border-customBg px-2 sm:px-3 rounded-full cursor-pointer flex-shrink-0`} > Events</div>}
+          {hToH && (hToH.length !== 0) && <div onClick={handleStatToggle} className={`${statToggle.includes('H2H') ? ' text-customBg3 bg-customBg border border-solid border-customBg ' : ''}  border border-solid border-customBg px-2 sm:px-3 rounded-full cursor-pointer flex-shrink-0`} > H2H</div>}
+          {stats && (stats.length !== 0) && <div onClick={handleStatToggle} className={`${statToggle.includes('Stats') ? ' text-customBg3 bg-customBg border border-solid border-customBg ' : ''} border border-solid border-customBg px-2 sm:px-3 rounded-full cursor-pointer flex-shrink-0`} >Stats</div>}
+          <div onClick={handleStatToggle} className={`${statToggle.includes('Line-Up') ? ' text-customBg3 bg-customBg border border-solid border-customBg ' : ''} border border-solid border-customBg px-2 sm:px-3 rounded-full cursor-pointer flex-shrink-0`} >Line-Up</div>
+          {odds && <div onClick={handleStatToggle} className={`${statToggle.includes('Odds') ? ' text-customBg3 bg-customBg border border-solid border-customBg ' : ''} border border-solid border-customBg px-2 sm:px-3 rounded-full cursor-pointer flex-shrink-0`} > Odds</div>}
+          {match && <div onClick={handleStatToggle} className={`${statToggle.includes('Match Info') ? ' text-customBg3 bg-customBg border border-solid border-customBg ' : ''} border border-solid border-customBg px-2 sm:px-3 rounded-full cursor-pointer flex-shrink-0`} > Match Info</div>}
+          
+          
+        </div>
+        <div>
+          <Event events={events} statToggle={statToggle}/> 
         </div>
         <div>
           <HeadToHead statToggle={statToggle} hToH={hToH}/>
@@ -140,7 +147,9 @@ const CurrentFixtures = ({}) => {
         <div>
           <LineUp statToggle={statToggle} lineUp={lineUp}/>
         </div>
-
+        <div>
+          <MatchInfo match={match} statToggle={statToggle} />
+        </div>
       </div>
     </div>
   )

@@ -19,12 +19,12 @@ const ExtraTimeEvent = ({events}) => {
                 }
                 {
                 <div className='flex gap-4 sm:justify-between items-center py-2'>
-                    <div className='w-fit sm:w-16 text-left sm:text-center text-xxs sm:text-xs '>{eve.time}'</div>
+                    <div className='w-fit sm:w-16 text-left sm:text-center text-xxs sm:text-xs opacity-60'>{eve.time}'</div>
                     <div className='sm:w-[calc(100%-64px)] flex w-full justify-between'>
                     <div className='w-[calc(50%-35px)] '>
                         {
                         (eve.card && eve.home_fault) && (
-                            <div className='flex gap-1 justify-end items-center text-xs'>
+                            <div className='flex gap-1 justify-end items-center sm:text-base text-xxs'>
                             {
                                 eve.home_fault
                             }
@@ -36,7 +36,7 @@ const ExtraTimeEvent = ({events}) => {
                         {
                         (eve.home_scorer && !isNaN(eve.score.slice(0,1))) && (
                             <div className='flex gap-1 justify-end text-xs items-center'>
-                            <div className='flex flex-col items-end'>
+                            <div className='flex flex-col items-end text-xxs sm:text-base'>
                                 <div className=' '>{eve.home_scorer}</div>
                                 {
                                 eve.home_assist && (
@@ -62,8 +62,8 @@ const ExtraTimeEvent = ({events}) => {
                             (!Array.isArray(eve.home_scorer) && eve.score === 'substitution') && (
                                 <div className='flex gap-1 justify-end items-center '>
                                     <div className=' flex items-end text-xxs flex-col'>
-                                        <div><span className=' text-green-600'>In:</span> {eve.home_scorer.in}</div>
-                                        <div><span className=' text-red-900'>Out:</span> {eve.home_scorer.out}</div>
+                                        <div className=' text-right'><span className=' text-green-600'>In:</span> {eve.home_scorer.in}</div>
+                                        <div className=' text-right'><span className=' text-red-900'>Out:</span> {eve.home_scorer.out}</div>
                                     </div>
                                     <img src={sub} className='opacity-70 h-5 w-5' alt="" />
                                 </div>
@@ -88,7 +88,7 @@ const ExtraTimeEvent = ({events}) => {
                             <img src={(eve.away_scorer.includes('(o.g.)') || eve.away_scorer.includes('(OG)')) ? ogball : ball} alt="" className='w-[20px] h-[20px]'/>
                             <div className=' opacity-70 absolute top-[-5px] right-0'>{eve.info === 'Penalty' || eve.away_scorer.includes('PG') ? 'p' : ''}</div>
                             </div>
-                            <div className='flex flex-col'>
+                            <div className='flex flex-col sm:text-base'>
                                 <div className=' '>{eve.away_scorer}</div>
                                 <div className=' flex gap-1 items-center font-semibold opacity-70'>
                                     {eve.away_assist && (
@@ -103,7 +103,7 @@ const ExtraTimeEvent = ({events}) => {
                         
                         }
                         {(eve.card && eve.away_fault) && (
-                        <div className='flex gap-1 items-center text-xs'>
+                        <div className='flex gap-1 items-center sm:text-base text-xxs'>
                             <div className={`${eve.card === 'yellow card' ? 'bg-yellow-500' : 'bg-red-700'} w-3 h-4 sm:w-4 sm:h-5 rounded-[2px]`}></div>
                             {
                             eve.away_fault
