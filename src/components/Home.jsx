@@ -54,7 +54,7 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
       </div>
         <Countries countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues}/>
       </div>
-      <div className={` block fixed lg:hidden shadow-sm bottom-[-5px] w-full  bg-customBg3 z-10 p-3 `}>
+      <div className={` block fixed lg:hidden shadow-sm bottom-[-5px] w-full  bg-customBg3 z-10 p-3 left-0`}>
         <ClickAwayListener>
           <div className={`${showCalendar ? 'block' : 'hidden'}  bg-customBg3 shadow-sm rounded-t-xl absolute bottom-[52px] animate-dis left-0 `} onBlur={() => {setShowCalendar(false) ;console.log('yoo')} } tabIndex={-1}  ref={focus} onFocus={console.log('yii')}>
             <Calendar value={calenderDate}  onChange={handleDateChange} className={` text-customBg mb-2 bg-transparent border-none w-full bg-opacity-50 `} minDetail='year' maxDetail='month'/>
@@ -62,7 +62,7 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
           </div>
 
         </ClickAwayListener>
-        <div className={` flex justify-between`}>
+        <div className={` flex justify-between w-full `}>
           <img src={calendar} onClick={() => {setShowCalendar((prev) => !prev);  }} className=' h-7' alt="" />
           <img src={searchLogo} className=' h-7' onClick={handleSearchToggleClick} alt="" />
         </div>
