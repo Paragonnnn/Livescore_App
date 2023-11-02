@@ -7,9 +7,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        customBg: '#94B0DA',
+        customBg: '#9BF3F0',
         customBg2: '#00000031',
-        customBg3: '#173753',
+        customBg3: '#0F1A20',
         border : '#151B54',
         orange: '#f39c12',
         lightOrange: '#f39d12c0',
@@ -40,13 +40,23 @@ export default {
           '0%': { height : '0'},
           '100%': { height : '100%'},
           
+        },
+        zoom: {
+          '0%': {transform: 'scaleX(50%)'},
+          '100%': {transform : 'scaleX(100%)'}
+        },
+        swipe: {
+          '0%': {transform: 'translateX(-50%)'},
+          '100%': {transform: 'translateX(0%)'}
         }
         
       }, 
       animation: {
         dis: 'dis .3s',
         show: 'show linear .3s',
-        dat: 'dat .3s'
+        dat: 'dat .3s',
+        zoom: 'zoom .3s',
+        swipe: 'swipe .3s'
       },
 
     },
@@ -55,3 +65,4 @@ export default {
 }
 
 
+173753

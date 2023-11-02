@@ -7,7 +7,7 @@ import PenaltyShootOutEvent from './PenaltyShootOutEvent'
 const Event = ({events,statToggle}) => {
   return (
     <div className={``}>
-        <div className={`${statToggle.includes('Events') ? 'block' : 'hidden'} p-2  bg-customBg2 rounded text-gray-400`}>
+        <div className={`${statToggle.includes('Events') ? 'block' : 'hidden'} p-2  bg-customBg2 rounded text-gray-400 lg:animate-zoom animate-swipe`}>
           {/* <div className=' bg-customBg  w-fit px-4 rounded-full mb-2'>Events</div> */}
             <FirstHalfEvent events={events}/>
             <SecondHalfEvent events={events}/>

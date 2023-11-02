@@ -92,20 +92,20 @@ const Table = () => {
 
         {table.length != 0  &&   (
             
-        <div className='bg-customBg2  divide-y divide-black border border-solid border-lighterOrange rounded-md px-1'>
+        <div className='bg-customBg2  divide-y divide-black shadow-sm rounded-md px-1 mb-5'>
             <div className='px-4 py-2'>
-                <button className={`${changeTable === 'all' ? 'border-orange text-orange' : 'text-white '} text-[20px] py-1 px-6 rounded-full border border-solid border-white mr-4 hover:opacity-80`} onClick={all}>All</button>
-                <button className={`${changeTable === 'home' ? 'border-orange text-orange' : 'text-white '} text-[20px] py-1 px-6 rounded-full border border-solid border-white mr-4 hover:opacity-80`} onClick={home}>Home</button>
-                <button className={`${changeTable === 'away' ? 'border-orange text-orange' : 'text-white '} text-[20px] py-1 px-6 rounded-full border border-solid border-white hover:opacity-80`} onClick={away}>Away</button>
+                <button className={`${changeTable === 'all' ? 'border-orange text-orange' : 'text-white '} text-base sm:text-[20px] py-[2px] sm:py-1 p-3 sm:px-6 rounded-full border border-solid border-white mr-4 hover:opacity-80`} onClick={all}>All</button>
+                <button className={`${changeTable === 'home' ? 'border-orange text-orange' : 'text-white '} text-base sm:text-[20px] py-[2px] sm:py-1 p-3 sm:px-6 rounded-full border border-solid border-white mr-4 hover:opacity-80`} onClick={home}>Home</button>
+                <button className={`${changeTable === 'away' ? 'border-orange text-orange' : 'text-white '} text-base sm:text-[20px] py-[2px] sm:py-1 p-3 sm:px-6 rounded-full border border-solid border-white hover:opacity-80`} onClick={away}>Away</button>
 
             </div>
             
             <section className=''>
             
-                <section className='text-white flex justify-between md:p-4 p-1 text-xs'>
+                <section className='text-white flex justify-between md:p-4 p-1 text-xxs md:text-base'>
                     {/* <div className='p-2 w-fit border border-solid border-lighterOrange'>S/P</div> */}
                     <div className='md:p-2 p-1 w-fit '>Club</div>
-                    <section className='flex justify-between md:w-[350px] w-[200px] '>
+                    <section className='flex justify-between md:w-[350px] w-[150px] '>
                         <div className='md:p-2 p-1 '>MP</div>
                         <div className='md:p-2 p-1 '>W</div>
                         <div className='md:p-2 p-1 '>D</div>
@@ -126,10 +126,10 @@ const Table = () => {
                             
                             <div className='md:p-2 p-1 flex items-center gap-2' >
                             <div className='md:p-2 p-1 '>{table.standing_place}.</div>
-                                <img className='w-6 rounded-full h-6' src={table.team_logo} alt="" />
-                                <Link className='text-xs sm:text-sm  md:text-lg' to={`/team/${table.standing_team.replace(/ +/g, '-')}/${table.team_key}`}>{table.standing_team}</Link> 
+                                <img className='w-4 rounded-full h-4 sm:w-6 sm:h-6' src={table.team_logo} alt="" />
+                                <Link className='text-xs sm:text-sm md:text-lg' to={`/team/${table.standing_team.replace(/ +/g, '-')}/${table.team_key}`}>{table.standing_team}</Link>
                             </div>
-                            <section className='flex justify-between md:w-[350px] w-[200px] '>
+                            <section className='flex justify-between md:w-[350px] w-[150px] text-xxs md:text-base '>
                                 <div className='md:p-2 p-1'>{table.standing_P}</div>
                                 <div className='md:p-2 p-1'>{table.standing_W}</div>
                                 <div className='md:p-2 p-1'>{table.standing_D}</div>
@@ -155,16 +155,16 @@ const Table = () => {
             table.length != 0 &&  (
                 <div className='  h-fit w-full bg-customBg2 divide-y divide-black px-4 sticky top-[80px] '>
                     <div className='text-white text-2xl md:text-[40px] text-center'>League Top Scorers</div>
-                    <div className='text-[24px] text-white flex justify-between p-2'>
+                    <div className=' text-[20px] sm:text-[24px] text-white flex justify-between p-2'>
                         <div>Player</div>
                         <div>Goals</div>
                     </div>
                     {
-                        <div className='text-white divide-y divide-black'>
+                        <div className='text-white divide-y divide-black sm:base text-xs'>
                             {
                                 topScorers &&
                                 topScorers.map((top,index) => (
-                                    <div className='flex justify-between p-2' key={index}>
+                                    <div className='flex justify-between p-2 py-2' key={index}>
                                         <div>
                                             {index+1}. {top.player_name}
                                         

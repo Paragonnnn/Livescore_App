@@ -13,16 +13,20 @@
   --primary-color: #1E1E1E;
 }
 body{
-  background-color: #173753;
+  background-color: #4A051C;
 }
 .scroll_bar::-webkit-scrollbar {
   width: 6px;
   background-color: #00000031;
   color: #ffffff67;
 }
-
+.fixtures_scroll::-webkit-scrollbar{
+  width: 7px;
+  background-color: #f39c12;
+}
 .scroll_bar::-webkit-scrollbar-thumb {
   border-radius: 6px;
+  background-color: #3498db;
 }
 
 /* .dis{

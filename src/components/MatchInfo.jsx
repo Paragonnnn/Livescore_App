@@ -7,7 +7,7 @@ const MatchInfo = ({statToggle, match}) => {
 
       
     <div>
-        <div className={`${statToggle.includes('Match Info') ? 'block' : 'hidden'}`}>
+        <div className={`${statToggle.includes('Match Info') ? 'block' : 'hidden'} lg:animate-zoom animate-swipe`}>
             {
                 match && 
                 match.map((match,index) => (

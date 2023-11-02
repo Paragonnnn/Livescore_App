@@ -257,14 +257,14 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
         {fixturesError && (
             <Error />
         )}
-        <div className='  '>
+        <div className=' mb-14'>
 
         {
             // !(loading && error) &&
             (fixtures && leagues && !loadingFixtures) &&
             leagues.map((league,index) => (
                 (!isLive ? (check.includes(league.league_key) && liveCheck.includes(league.league_key)) : check.includes(league.league_key)) &&
-                <div key={league.league_key} className={`border border-black border-solid mb-4 first:rounded-t-lg last:rounded-b-lg divide-y divide-black `}>
+                <div key={league.league_key} className={`border border-black border-solid mb-4 first:rounded-t-lg last:rounded-b-lg divide-y divide-black`}>
                         {(check.includes(league.league_key) )
                         &&
                         <div className=' text-customBg py-2 px-3 text-xs  flex gap-1 items-center '>
@@ -295,7 +295,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                             (league.league_key == fixture.league_key ) &&
 
                              
-                                <div to={`/fixture/${fixture.event_key}`} key={fixture.event_key} className={`${windowWidth < 1024 ? 'hover:opacity-70 transition ' : ''}text-gray-400 text-xs p-2 flex gap-2 relative `} onClick={() => handleClick(fixture)}>
+                                <div to={`/fixture/${fixture.event_key}`} key={fixture.event_key} className={`${windowWidth > 1024 ? 'hover:opacity-70 transition ' : ''}text-gray-400 text-xs p-2 flex gap-2 relative `} onClick={() => handleClick(fixture)}>
                 
                                 {/* <div>{fixture.country_name}</div> */}
                                 {/* <h1>{fixture.league_name}</h1> */}

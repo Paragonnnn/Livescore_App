@@ -7,7 +7,7 @@ import CurrentFixtures from './CurrentFixtures'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 import { teamLogo } from '..'
-
+import ClickAwayListener from 'react-click-away-listener'
 
 const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, loadingFixtures, fixturesError, currentFixture, setCurrentFixture, liveCheck, windowWidth, calenderDate, setCalenderDate, handleDateChange,handleDateFocus,maxDate, showCalendar, setShowCalendar,handleSearchToggleClick}) => {
 
@@ -55,10 +55,13 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
         <Countries countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues}/>
       </div>
       <div className={` block fixed lg:hidden shadow-sm bottom-[-5px] w-full  bg-customBg3 z-10 p-3 `}>
-        <div className={`${showCalendar ? 'block' : 'hidden'}  bg-customBg3 shadow-sm rounded-t-xl absolute bottom-[52px] animate-dis left-0 `} onBlur={() => {setShowCalendar(false) ;console.log('yoo')} } tabIndex={-1}  ref={focus} onFocus={console.log('yii')}>
-          <Calendar value={calenderDate}  onChange={handleDateChange} className={` text-customBg mb-2 bg-transparent border-none w-full bg-opacity-50 `} minDetail='year' maxDetail='month'/>
-          <div  onClick={() => {setCalenderDate(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`); setShowCalendar(false)}} className='  px-3 py-2 rounded-full text-customBg  w-fit mb-4 cursor-pointer hover:opacity-80 active:opacity-60'>Today</div>
-         </div>
+        <ClickAwayListener>
+          <div className={`${showCalendar ? 'block' : 'hidden'}  bg-customBg3 shadow-sm rounded-t-xl absolute bottom-[52px] animate-dis left-0 `} onBlur={() => {setShowCalendar(false) ;console.log('yoo')} } tabIndex={-1}  ref={focus} onFocus={console.log('yii')}>
+            <Calendar value={calenderDate}  onChange={handleDateChange} className={` text-customBg mb-2 bg-transparent border-none w-full bg-opacity-50 `} minDetail='year' maxDetail='month'/>
+            <div  onClick={() => {setCalenderDate(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`); setShowCalendar(false)}} className='  px-3 py-2 rounded-full text-customBg  w-fit mb-4 cursor-pointer hover:opacity-80 active:opacity-60'>Today</div>
+          </div>
+
+        </ClickAwayListener>
         <div className={` flex justify-between`}>
           <img src={calendar} onClick={() => {setShowCalendar((prev) => !prev);  }} className=' h-7' alt="" />
           <img src={searchLogo} className=' h-7' onClick={handleSearchToggleClick} alt="" />

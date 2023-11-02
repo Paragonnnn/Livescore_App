@@ -1,5 +1,5 @@
 import React from 'react'
-import { ball,ogball,assist,sub } from '..'
+import { ball,ogball,assist,sub,subIn,subOut } from '..'
 
 const SecondHalfEvent = ({events}) => {
   return (
@@ -62,17 +62,20 @@ const SecondHalfEvent = ({events}) => {
                                     (!Array.isArray(eve.home_scorer) && eve.score === 'substitution') && (
                                         <div className='flex gap-1 justify-end items-center '>
                                             <div className=' flex items-end text-xxs flex-col'>
-                                                <div className=' text-right'><span className=' text-green-600'>In:</span> {eve.home_scorer.in}</div>
-                                                <div className=' text-right'><span className=' text-red-900'>Out:</span> {eve.home_scorer.out}</div>
+                                                <div className=' text-right'> {eve.home_scorer.in}</div>
+                                                <div className=' text-right opacity-70'> {eve.home_scorer.out}</div>
                                             </div>
-                                            <img src={sub} className='opacity-70 h-5 w-5' alt="" />
+                                            <div className=' flex flex-col  '>
+                                              <img src={subIn} className='opacity-70 w-4  ' alt="" />
+                                              <img src={subOut} className='opacity-70  w-4  ' alt="" />
+                                            </div> 
                                         </div>
                                     )
                                     }
                                   
 
                                 </div>
-                                <div className='w-[50px] text-xs flex items-center justify-center '>
+                                <div className='w-[50px] text-xs flex items-center justify-center border-l border-r border-solid border-black'>
                                   {
                                     ((eve.home_scorer || eve.away_scorer) && !isNaN(eve.score.slice(0,1))) && (
                                       eve.score
@@ -113,10 +116,13 @@ const SecondHalfEvent = ({events}) => {
 
                                         (!Array.isArray(eve.away_scorer) && eve.score === 'substitution') && (
                                             <div className='flex gap-1  items-center '>
-                                                <img src={sub} className='opacity-70 h-5 w-5' alt="" />
+                                                <div className=' flex flex-col  '>
+                                                  <img src={subIn} className='opacity-70 w-4  ' alt="" />
+                                                  <img src={subOut} className='opacity-70  w-4  ' alt="" />
+                                                </div> 
                                                 <div className=' flex justify-center text-xxs flex-col'>
-                                                    <div >{eve.away_scorer.in} <span className=' text-green-600'>:In</span></div>
-                                                    <div>{eve.away_scorer.out} <span className=' text-red-900'>:Out</span> </div>
+                                                    <div >{eve.away_scorer.in} </div>
+                                                    <div className=' opacity-70'>{eve.away_scorer.out}  </div>
                                                 </div>
                                             </div>
                                         )

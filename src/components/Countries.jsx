@@ -54,7 +54,7 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
                     search.trim().toLowerCase() === '' ? country : country.country_name.toLowerCase().includes(search.toLowerCase())
                 )).slice(0,seeAll).map((country,index) => (
                     <div key={country.country_key} className=''>
-                        <div    className='text-gray-400 flex items-center justify-between w-full p-1 cursor-pointer' onClick={() => handleClick(index)}>
+                        <div    className='text-gray-400 flex items-center justify-between w-full px-1 py-2 cursor-pointer' onClick={() => handleClick(index)}>
                             <div className='country_name_div'>
                                 <h2 className='text-gray-400'>{country.country_name}</h2>
                             </div>

@@ -6,7 +6,7 @@ const HeadToHead = ({statToggle, hToH}) => {
     const year = date.getFullYear()
   return (
     <div className=''>
-        <div className={`${statToggle.includes('H2H') ? 'block' : 'hidden'}  divide-y divide-black`}>
+        <div className={`${statToggle.includes('H2H') ? 'block' : 'hidden'}  divide-y divide-black lg:animate-zoom animate-swipe`}>
           {
               hToH &&
               hToH.map(h => (

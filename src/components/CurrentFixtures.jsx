@@ -116,12 +116,12 @@ const CurrentFixtures = ({}) => {
     },[match])
     
   return (
-    <div className='grid lg:grid-cols-2 gap-4'>
-      <div className='col-span-1 w-full  mx-auto mb-4'>
+    <div className=' gap-4'>
+      <div className=''>
+      <div className=' w-full  mx-auto mb-4'>
         <CurrentFixtureInfo match={match} odds={odds} handleClick={handleClick} handleSeeMore={handleSeeMore} bookie={bookie} seeMore={seeMore}/>
       </div>
-      <div className='col-span-1'>
-        <div className='flex gap-4 overflow-x-scroll m-auto w-[95vw] justify-between mb-3 p-3 rounded text-customBg  text-xs sm:text-lg border-b-2 border-solid border-black bg-customBg2 '>
+        <div className='fixtures_scroll flex gap-4 overflow-x-scroll m-auto w-[95vw] sm:w-full justify-between mb-3 p-3 rounded text-customBg  text-xs sm:text-lg border-b-2 border-solid border-black bg-customBg2 '>
           {events && <div onClick={handleStatToggle} className={`${statToggle.includes('Events') ? ' text-customBg3 bg-customBg border border-solid border-customBg ' : ''} border border-solid border-customBg px-2 sm:px-3 rounded-full cursor-pointer flex-shrink-0`} > Events</div>}
           {hToH && (hToH.length !== 0) && <div onClick={handleStatToggle} className={`${statToggle.includes('H2H') ? ' text-customBg3 bg-customBg border border-solid border-customBg ' : ''}  border border-solid border-customBg px-2 sm:px-3 rounded-full cursor-pointer flex-shrink-0`} > H2H</div>}
           {stats && (stats.length !== 0) && <div onClick={handleStatToggle} className={`${statToggle.includes('Stats') ? ' text-customBg3 bg-customBg border border-solid border-customBg ' : ''} border border-solid border-customBg px-2 sm:px-3 rounded-full cursor-pointer flex-shrink-0`} >Stats</div>}

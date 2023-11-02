@@ -3,7 +3,7 @@ import React from 'react'
 const Odds = ({statToggle, odds, handleClick, bookie, }) => {
   return (
     <div>
-        <div className={`${statToggle.includes('Odds') ? 'block' : 'hidden'}`}>
+        <div className={`${statToggle.includes('Odds') ? 'block' : 'hidden'} lg:animate-zoom animate-swipe`}>
           {
             odds &&
             odds.filter(odd => (odd.odd_bookmakers === '1xBet' || odd.odd_bookmakers === 'Betway')).map(odd => (

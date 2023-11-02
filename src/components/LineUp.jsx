@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 const LineUp = ({statToggle, lineUp}) => {
   return (
     <div>
-        <div className={`${statToggle.includes('Line-Up') ? 'block' : 'hidden'} flex justify-between flex-col sm:flex-row`}>
+        
+        <div className={`${statToggle.includes('Line-Up') ? 'block' : 'hidden'} flex justify-between flex-col sm:flex-row lg:animate-zoom animate-swipe`}>
             <div className=' sm:w-[48%] w-full  '>
                 <div className='  divide-y divide-black'>
                     {
@@ -15,7 +16,7 @@ const LineUp = ({statToggle, lineUp}) => {
                                 ))
                                 ))
                             }
-                            <div className=' text-base sm:text-lg font-semibold text-customBg text-center'>Home Line-Up</div>
+                            <div className=' text-base sm:text-lg font-semibold text-customBg text-center sm:text-left'>Home Line-Up</div>
                     {
                         lineUp &&
                         lineUp.map((lineUp,index) => (
@@ -38,7 +39,7 @@ const LineUp = ({statToggle, lineUp}) => {
 
                 </div>
                 <div className='divide-y divide-black'>
-                    <div className=' text-base sm:text-lg text-center font-semibold mt-4 text-customBg'>Home Sub</div>
+                    <div className=' text-base sm:text-lg text-center sm:text-left font-semibold mt-4 text-customBg'>Home Sub</div>
                     {
                         lineUp && 
                         lineUp.map(lineUp => (
