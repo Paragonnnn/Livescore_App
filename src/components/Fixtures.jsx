@@ -304,7 +304,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                                     <Link className='absolute h-full w-full z-[1] bg-transparent top-[-2px] left-[-2px]' to={`/fixture/${fixture.league_name.replace(/ +/g,'-')}/${fixture.event_home_team.replace(/ +/g,'-')}-${fixture.event_away_team.replace(/ +/g,'-')}/${fixture.event_key}`}></Link>
 
                                 }
-                                <div className='text-xxs  text-gray-300 flex flex-col justify-center items-center overflow-hidden '>
+                                <div className='text-xxs  text-gray-300 flex flex-col justify-center items-center overflow-hidden border-r border-solid border-black'>
                                     <div>
                                         {fixture.event_time}
                                     </div>
