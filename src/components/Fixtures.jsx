@@ -257,7 +257,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
         {fixturesError && (
             <Error />
         )}
-        <div className=' mb-14'>
+        <div className={`  mb-14`}>
 
         {
             // !(loading && error) &&
