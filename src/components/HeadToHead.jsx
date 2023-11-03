@@ -6,7 +6,7 @@ const HeadToHead = ({statToggle, hToH}) => {
     const year = date.getFullYear()
   return (
     <div className=''>
-        <div className={`${statToggle.includes('H2H') ? 'block' : 'hidden'}  divide-y divide-black lg:animate-zoom animate-swipe`}>
+        <div className={`${statToggle.includes('H2H') ? 'block' : 'hidden'}  divide-y divide-black animate-zoom`}>
           {
               hToH &&
               hToH.map(h => (
@@ -15,18 +15,24 @@ const HeadToHead = ({statToggle, hToH}) => {
                         <div>{h.league_name}</div>
                     </div>
                     <div className=' text-gray-400'>
-                        <div className='flex gap-8 items-center'>
-                            <div className='flex flex-col items-center w-14 mt-2'>
+                        <div className='flex  items-center'>
+                            <div className='flex flex-col items-center w-16 mt-2 border-r border-solid border-black opacity-70 text-xs'>
                                 <div>{h.event_date.slice(0,h.event_date.indexOf('-')) === year.toString() ? h.event_date.slice(h.event_date.indexOf('-') + 1 ,h.event_date.lenght) : h.event_date.slice(0,h.event_date.indexOf('-'))}</div>
                                 <div>{h.event_status === 'Finished' && 'FT'}</div>
                             </div>
-                            <Link to={`/fixture/${h.league_name.replace(/ +/g,'-')}/${h.event_home_team.replace(/ +/g,'-')}-${h.event_away_team.replace(/ +/g,'-')}/${h.event_key}`} className='w-full mt-2'>
+                            <Link to={`/fixture/${h.league_name.replace(/ +/g,'-')}/${h.event_home_team.replace(/ +/g,'-')}-${h.event_away_team.replace(/ +/g,'-')}/${h.event_key}`} className='w-full mt-2 px-2'>
                                 <div className='flex justify-between '>
-                                    <div>{h.event_home_team}</div>
+                                    <div className='flex gap-1 items-center'>
+                                        <img src={h.home_team_logo} className=' h-3 w-3' alt="" />
+                                        <div>{h.event_home_team}</div>
+                                    </div>
                                     <div className=' pr-1'>{h.event_final_result.slice(0,h.event_final_result.indexOf('-'))}</div>
                                 </div>
-                                <div className='flex justify-between'>
-                                    <div>{h.event_away_team}</div>
+                                <div className='flex justify-between '>
+                                    <div className='flex gap-1 items-center'>
+                                        <img src={h.away_team_logo} className=' h-3 w-3' alt="" />
+                                        <div>{h.event_away_team}</div>
+                                    </div>
                                     <div className=' pr-1'>{h.event_final_result.slice(h.event_final_result.indexOf('-') + 1,h.event_final_result.lenght)}</div>
                                 </div>
 

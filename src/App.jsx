@@ -185,7 +185,7 @@ const App = () => {
       
       <div className='bg-customBg3 shadow-sm  w-full  sticky top-[-2px] rounded-b-xl z-10'>
         <div className='m-auto  max-w-[1440px] flex items-center justify-between relative'>
-          <Link to={'/'}><h3 className='text-[25px] md:text-[40px] px-2 md:px-4 py-2 mb-2 text-customBg font-bold'>Paragon</h3></Link>
+          <Link to={'/'}><h3 className='text-[25px] md:text-[40px] px-2 md:px-4 py-1 sm:py-2 mb-2 text-customBg font-bold'>Paragon</h3></Link>
           <div className='px-2 '>
             <img src={searchLogo} alt="" className=' h-6 w-6 block lg:hidden' onClick={handleSearchToggleClick}/>
             {

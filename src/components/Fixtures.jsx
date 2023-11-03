@@ -112,7 +112,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                 <button onClick={all} className={`${isLive ? ' border border-solid border-customBg': 'text-gray-400 '}  px-3 rounded-full transition duration-200 ease-in-out`}>All</button>
                 <button onClick={live} className={`${!isLive ? ' border border-solid border-customBg': 'text-gray-400'}  transition duration-200 ease-in px-3 rounded-full flex  items-center gap-1`}>Live <div className='text-xs text-live font-bold'>
                         ({
-                        fixtures?.filter(fixture => fixture.event_live === '1').length
+                        fixtures?.filter(fixture => fixture.event_live === '1' && fixture.event_status !== 'Finished').length
                     })
                     </div>
                     </button>

@@ -42,7 +42,7 @@ export default {
           
         },
         zoom: {
-          '0%': {transform: 'scaleX(50%)'},
+          '0%': {transform: 'scaleX(80%)'},
           '100%': {transform : 'scaleX(100%)'}
         },
         swipe: {
@@ -66,3 +66,4 @@ export default {
 
 
 173753
+// 8EB19D

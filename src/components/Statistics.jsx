@@ -4,6 +4,9 @@ const Statistics = ({statToggle, stats}) => {
   return (
     <div>
         <div className={`${statToggle.includes('Stats') ? 'block' : 'hidden'} divide-y divide-black bg-customBg2 px-4 py-1 lg:animate-zoom animate-swipe`}>
+          {
+            stats.lenght === 0 ? <div>no stats</div> : 
+            <>
               {
                 stats &&
                 stats.map(stat => (
@@ -28,6 +31,9 @@ const Statistics = ({statToggle, stats}) => {
                   ))
                 ))
               }
+            </>
+          }
+            
         </div>
     </div>
   )

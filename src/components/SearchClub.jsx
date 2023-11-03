@@ -20,7 +20,7 @@ const SearchClub = ({setSearchClub, windowWidth, showSearch, handleSearchChange,
             <input onFocus={() => setFocus(true)} className={` w-full bg-transparent outline-none block lg:hidden border border-solid border-customBg rounded text-gray-400 p-2 `} onChange={handleSearchChange} value={searchClub} id="" />
 
           </div>
-          <ClickAwayListener >
+          <div >
             <div className={`${focus || windowWidth < 1024 ? 'block' : 'hidden'} ${!toggleSearch && windowWidth < 1024 ? 'hidden' : ''}  overflow-y-scroll scroll_bar h-[100vh] lg:h-[80vh]  bg-customBg3 shadow-sm   left-[0] mt-4  lg:min-w-[350px] px-2 py-1 divide-y divide-black lg:absolute animate-dis`}>
               {
                 clubs && 
@@ -56,7 +56,7 @@ const SearchClub = ({setSearchClub, windowWidth, showSearch, handleSearchChange,
               }
             </div>
 
-          </ClickAwayListener>
+          </div>
 
         </div>
     </div>
