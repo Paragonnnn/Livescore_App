@@ -19,8 +19,8 @@ const FirstHalfEvent = ({events}) => {
               }
               {
                 <div className='flex gap-4 sm:justify-between items-center py-2'>
-                  <div className='w-fit sm:w-16 text-left sm:text-center text-xxs sm:text-xs opacity-60'>{eve.time}'</div>
-                  <div className='sm:w-[calc(100%-64px)] flex  w-full justify-between '>
+                  {/* <div className='w-fit sm:w-16 text-left sm:text-center text-xxs sm:text-xs opacity-60'>{eve.time}'</div> */}
+                  <div className=' flex  w-full justify-between '>
                     <div className='w-[calc(50%-35px)] '>
                       {
                         (eve.card && eve.home_fault) && (
@@ -49,7 +49,7 @@ const FirstHalfEvent = ({events}) => {
 
                             </div>
                             <div className='relative'>
-                            <img src={(eve.home_scorer.includes('(o.g.)') || eve.home_scorer.includes('(OG)')) ? ogball : ball} alt="" className='w-[20px] h-[20px]'/>
+                            <img src={(eve.home_scorer.includes('(o.g.)') || eve.home_scorer.includes('(OG)')) ? ogball : ball} alt="" className='w-[16px] h-[16px]'/>
                             <div className=' opacity-70 absolute top-[-5px] right-0'>{eve.info === 'Penalty' || eve.home_scorer.includes('PG') ? 'p' : ''}</div>
                             </div>
                           </div>
@@ -73,19 +73,20 @@ const FirstHalfEvent = ({events}) => {
 
 
                     </div>
-                    <div className='w-[50px] text-xs flex items-center justify-center border-l border-r border-solid border-black'>
-                      {
-                        ((eve.home_scorer || eve.away_scorer) && !isNaN(eve.score.slice(0,1))) && (
-                          eve.score
-                        )
-                      }
-                    </div>
+                    <div className='w-[50px] text-xxs sm:text-xs opacity-60 flex items-center flex-col gap-1 justify-center border-l border-r border-solid border-black'>
+                        {eve.time}'
+                        {
+                          ((eve.home_scorer || eve.away_scorer) && !isNaN(eve.score.slice(0,1))) && (
+                            <div>({eve.score})</div>
+                          )
+                        }
+                      </div>
                     <div className='w-[calc(50%-35px)] '>
                       {
                         (eve.away_scorer && !isNaN(eve.score.slice(0,1))) && (
                           <div className='flex gap-1 items-center text-xs'>
                             <div className='relative'>
-                            <img src={(eve.away_scorer.includes('(o.g.)') || eve.away_scorer.includes('(OG)')) ? ogball : ball} alt="" className='w-[20px] h-[20px] '/>
+                            <img src={(eve.away_scorer.includes('(o.g.)') || eve.away_scorer.includes('(OG)')) ? ogball : ball} alt="" className='w-[16px] h-[16px] '/>
                             <div className=' opacity-70 absolute top-[-5px] right-0'>{eve.info === 'Penalty' || eve.away_scorer.includes('PG') ? 'p' : ''}</div>
                             </div>
                             <div className='flex flex-col '>

@@ -19,8 +19,8 @@ const ExtraTimeEvent = ({events}) => {
                 }
                 {
                 <div className='flex gap-4 sm:justify-between items-center py-2'>
-                    <div className='w-fit sm:w-16 text-left sm:text-center text-xxs sm:text-xs opacity-60'>{eve.time}'</div>
-                    <div className='sm:w-[calc(100%-64px)] flex w-full justify-between'>
+                    {/* <div className='w-fit sm:w-16 text-left sm:text-center text-xxs sm:text-xs opacity-60'>{eve.time}'</div> */}
+                    <div className=' flex w-full justify-between'>
                     <div className='w-[calc(50%-35px)] '>
                         {
                         (eve.card && eve.home_fault) && (
@@ -76,10 +76,11 @@ const ExtraTimeEvent = ({events}) => {
                         
 
                     </div>
-                    <div className='w-[50px] text-xs flex items-center justify-center '>
+                    <div className='w-[50px] text-xxs sm:text-xs opacity-60 flex items-center flex-col gap-1 justify-center border-l border-r border-solid border-black'>
+                        {eve.time}'
                         {
                         ((eve.home_scorer || eve.away_scorer) && !isNaN(eve.score.slice(0,1))) && (
-                            eve.score
+                            <div>({eve.score})</div>
                         )
                         }
                     </div>

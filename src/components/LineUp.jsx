@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const LineUp = ({statToggle, lineUp}) => {
+const LineUp = ({statToggle, lineUp, windowWidth}) => {
   return (
-    <div>
-        
-        <div className={`${statToggle.includes('Line-Up') ? 'block' : 'hidden'} flex justify-between flex-col sm:flex-row lg:animate-zoom animate-swipe`}>
+    <div className=' '>
+        <div className={`${windowWidth < 1024 && (statToggle.includes('Line-Up') ? 'block' : 'hidden')} flex justify-between flex-col sm:flex-row lg:animate-zoom animate-swipe bg-customBg2 p-2 rounded`}>
+        <div className=' text-lg font-bold text-customBg'>Line Up</div>
             <div className=' sm:w-[48%] w-full  '>
                 <div className='  divide-y divide-black'>
                     {

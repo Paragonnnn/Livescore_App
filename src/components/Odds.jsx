@@ -1,14 +1,21 @@
 import React from 'react'
 
-const Odds = ({statToggle, odds, handleClick, bookie, }) => {
+const Odds = ({statToggle, odds, handleClick, bookie,windowWidth }) => {
   return (
     <div>
-        <div className={`${statToggle.includes('Odds') ? 'block' : 'hidden'} lg:animate-zoom animate-swipe text-gray-400`}>
+        <div className={`${windowWidth < 1024 && (statToggle.includes('Odds') ? 'block' : 'hidden')} lg:animate-zoom animate-swipe text-gray-400`}>
           {
             odds &&
-            odds.filter(odd => (odd.odd_bookmakers === '1xBet' || odd.odd_bookmakers === 'Betway')).map(odd => (
+            odds.filter(odd => (odd.odd_bookmakers === '1xBet' || odd.odd_bookmakers === 'Betway')).map((odd,index) => (
               <div key={odd.odd_bookmakers} className=' w-full '>
-                <div onClick={handleClick}>{odd.odd_bookmakers}</div>
+                {
+                  index === 0 &&
+                  <div className=' grid grid-cols-2 gap-2  '>
+                    <div className={`${bookie === '1xBet'? 'border-b-2  border-solid border-gray-700': ''}  pb-1 cursor-pointer flex justify-center items-center`} onClick={handleClick}>1xBet</div>
+                    <div className={`${bookie === 'Betway'? 'border-b-2  border-solid border-gray-700': ''}  pb-1 cursor-pointer flex justify-center items-center`} onClick={handleClick}>Betway</div>
+                  </div>
+
+                }
                 
                 {odd.odd_bookmakers === bookie &&
 

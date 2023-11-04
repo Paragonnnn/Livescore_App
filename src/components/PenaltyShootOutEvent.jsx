@@ -19,7 +19,7 @@ const PenaltyShootOutEvent = ({events}) => {
                           }
                           {
                             <div className='flex justify-between py-2 items-center'>
-                              <div className='w-16 text-center text-xs '>{eve.time}</div>
+                              {/* <div className='w-16 text-center text-xs '>{eve.time}</div> */}
                               <div className='w-[calc(100%-64px)] flex justify-between '>
                                 <div className='w-[calc(50%-35px)] '>
                                   {
@@ -59,10 +59,11 @@ const PenaltyShootOutEvent = ({events}) => {
                                   
 
                                 </div>
-                                <div className='w-[50px] text-xs flex items-center justify-center '>
+                                <div className='w-[50px] text-xxs sm:text-xs opacity-60 flex items-center flex-col gap-1 justify-center border-l border-r border-solid border-black'>
+                                  {eve.time}'
                                   {
-                                    (eve.home_scorer || eve.away_scorer) && (
-                                      eve.score
+                                    ((eve.home_scorer || eve.away_scorer) && !isNaN(eve.score.slice(0,1))) && (
+                                      <div>({eve.score})</div>
                                     )
                                   }
                                 </div>

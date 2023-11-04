@@ -9,7 +9,7 @@ import LineUp from './LineUp'
 import CurrentFixtureInfo from './CurrentFixtureInfo'
 import MatchInfo from './MatchInfo'
 
-const CurrentFixtures = ({}) => {
+const CurrentFixtures = ({windowWidth}) => {
     const [loading, setLoading] = useState(false)
     const [match,setMatch] = useState([])
     const [hToH, setHToH] = useState([])
@@ -117,6 +117,21 @@ const CurrentFixtures = ({}) => {
     
   return (
     <div className=' gap-4'>
+      {
+        windowWidth > 1024 ? (
+          <div className=' grid grid-cols-5 gap-4'>
+            <div className=' col-span-2'>
+              <CurrentFixtureInfo match={match} />
+              <Odds statToggle={statToggle} odds={odds} handleClick={handleClick} bookie={bookie} windowWidth={windowWidth}/>
+              <Event events={events} statToggle={statToggle}/> 
+            </div>
+            <div className=' col-span-3'>
+             <LineUp statToggle={statToggle} lineUp={lineUp} windowWidth={windowWidth}/>
+            </div>
+          </div>
+
+        ) : (
+
       <div className=''>
       <div className=' w-full  mx-auto mb-4'>
         <CurrentFixtureInfo match={match} odds={odds} handleClick={handleClick} handleSeeMore={handleSeeMore} bookie={bookie} seeMore={seeMore}/>
@@ -132,25 +147,28 @@ const CurrentFixtures = ({}) => {
           
         </div>
         <div>
-          <Event events={events} statToggle={statToggle}/> 
+          <Event events={events} statToggle={statToggle} windowWidth={windowWidth}/> 
         </div>
         <div>
-          <HeadToHead statToggle={statToggle} hToH={hToH}/>
+          <HeadToHead statToggle={statToggle} hToH={hToH} windowWidth={windowWidth}/>
         </div>
         <div>
-          <Odds statToggle={statToggle} odds={odds} handleClick={handleClick} bookie={bookie}/>
+          <Odds statToggle={statToggle} odds={odds} handleClick={handleClick} bookie={bookie} windowWidth={windowWidth}/>
         </div>
         
         <div>
-          <Statistics statToggle={statToggle} stats={stats}/>
+          <Statistics statToggle={statToggle} stats={stats} windowWidth={windowWidth}/>
         </div>
         <div>
-          <LineUp statToggle={statToggle} lineUp={lineUp}/>
+          <LineUp statToggle={statToggle} lineUp={lineUp} windowWidth={windowWidth}/>
         </div>
         <div>
-          <MatchInfo match={match} statToggle={statToggle} />
+          <MatchInfo match={match} statToggle={statToggle} windowWidth={windowWidth}/>
         </div>
       </div>
+        )
+
+      }
     </div>
   )
 }

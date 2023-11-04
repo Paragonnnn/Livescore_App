@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Statistics = ({statToggle, stats}) => {
+const Statistics = ({statToggle, stats,windowWidth}) => {
   return (
     <div>
-        <div className={`${statToggle.includes('Stats') ? 'block' : 'hidden'} divide-y divide-black bg-customBg2 px-4 py-1 lg:animate-zoom animate-swipe`}>
+        <div className={`${windowWidth <1024 && (statToggle.includes('Stats') ? 'block' : 'hidden')} divide-y divide-black bg-customBg2 px-4 py-1 lg:animate-zoom animate-swipe`}>
           {
             stats.lenght === 0 ? <div>no stats</div> : 
             <>

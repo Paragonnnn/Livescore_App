@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const HeadToHead = ({statToggle, hToH}) => {
+const HeadToHead = ({statToggle, hToH,windowWidth}) => {
     const date = new Date
     const year = date.getFullYear()
   return (
     <div className=''>
-        <div className={`${statToggle.includes('H2H') ? 'block' : 'hidden'}  divide-y divide-black animate-zoom`}>
+        <div className={`${windowWidth < 1024 && (statToggle.includes('H2H') ? 'block' : 'hidden')}  divide-y divide-black animate-zoom`}>
           {
               hToH &&
               hToH.map(h => (

@@ -218,7 +218,7 @@ const App = () => {
           <Route path='/countries' element={<Countries countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues}/>} />
           <Route path='/leagues/:countryname/:id' element={<Leagues />}/>
           <Route path='/table/:leaguename/:id' element={<Table/>} />
-          <Route path='/fixture/:league/:teamsname/:id' element={<CurrentFixtures />}/>
+          <Route path='/fixture/:league/:teamsname/:id' element={<CurrentFixtures windowWidth={windowWidth}/>}/>
           {/* <Route path='/fixtures' element={<Fixtures check={check} fixtures={fixtures} leagues={leagues} loadingFixtures={loadingFixtures} fixturesError={fixturesError}/>}/> */}
           <Route path='/team/:teamname/:id' element={<Teams leagues={leagues}/>}/>
           <Route path='/player/:playername/:id' element={<Players countries={countries} leagues={leagues}/>}/>

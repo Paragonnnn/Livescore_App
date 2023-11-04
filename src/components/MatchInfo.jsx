@@ -1,13 +1,13 @@
 import React from 'react'
 
-const MatchInfo = ({statToggle, match}) => {
+const MatchInfo = ({statToggle, match,windowWidth}) => {
     
   return (
 
 
       
     <div>
-        <div className={`${statToggle.includes('Match Info') ? 'block' : 'hidden'} lg:animate-zoom animate-swipe`}>
+        <div className={`${windowWidth <1024 && (statToggle.includes('Match Info') ? 'block' : 'hidden')} lg:animate-zoom animate-swipe`}>
             {
                 match && 
                 match.map((match,index) => (
