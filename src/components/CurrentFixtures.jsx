@@ -126,7 +126,8 @@ const CurrentFixtures = ({windowWidth}) => {
               <Event events={events} statToggle={statToggle}/> 
             </div>
             <div className=' col-span-3'>
-             <LineUp statToggle={statToggle} lineUp={lineUp} windowWidth={windowWidth}/>
+              <Statistics statToggle={statToggle} stats={stats} windowWidth={windowWidth}/>
+              <LineUp statToggle={statToggle} lineUp={lineUp} windowWidth={windowWidth}/>
             </div>
           </div>
 
@@ -136,13 +137,13 @@ const CurrentFixtures = ({windowWidth}) => {
       <div className=' w-full  mx-auto mb-4'>
         <CurrentFixtureInfo match={match} odds={odds} handleClick={handleClick} handleSeeMore={handleSeeMore} bookie={bookie} seeMore={seeMore}/>
       </div>
-        <div className='fixtures_scroll flex gap-4 overflow-x-scroll m-auto w-[95vw] sm:w-full justify-between mb-3 p-3 rounded text-customBg  text-base sm:text-lg border-b-2 border-solid border-black bg-customBg2 '>
-          {events && <div onClick={handleStatToggle} className={`${statToggle.includes('Events') ? ' text-customBg3 bg-customBg border border-solid border-customBg ' : ''} border border-solid border-customBg px-2 sm:px-3 rounded-full cursor-pointer flex-shrink-0 font-semibold`} > Events</div>}
-          {hToH && (hToH.length !== 0) && <div onClick={handleStatToggle} className={`${statToggle.includes('H2H') ? ' text-customBg3 bg-customBg border border-solid border-customBg ' : ''}  border border-solid border-customBg px-2 sm:px-3 rounded-full cursor-pointer flex-shrink-0 font-semibold`} > H2H</div>}
-          {stats && (stats.length !== 0) && <div onClick={handleStatToggle} className={`${statToggle.includes('Stats') ? ' text-customBg3 bg-customBg border border-solid border-customBg ' : ''} border border-solid border-customBg px-2 sm:px-3 rounded-full cursor-pointer flex-shrink-0 font-semibold`} >Stats</div>}
-          <div onClick={handleStatToggle} className={`${statToggle.includes('Line-Up') ? ' text-customBg3 bg-customBg border border-solid border-customBg ' : ''} border border-solid border-customBg px-2 sm:px-3 rounded-full cursor-pointer flex-shrink-0 font-semibold`} >Line-Up</div>
-          {odds && <div onClick={handleStatToggle} className={`${statToggle.includes('Odds') ? ' text-customBg3 bg-customBg border border-solid border-customBg ' : ''} border border-solid border-customBg px-2 sm:px-3 rounded-full cursor-pointer flex-shrink-0 font-semibold`} > Odds</div>}
-          {match && <div onClick={handleStatToggle} className={`${statToggle.includes('Match Info') ? ' text-customBg3 bg-customBg border border-solid border-customBg ' : ''} border border-solid border-customBg px-2 sm:px-3 rounded-full cursor-pointer flex-shrink-0 font-semibold`} > Match Info</div>}
+        <div className='fixtures_scroll flex gap-4 overflow-x-scroll m-auto w-[95vw] sm:w-full justify-between mb-3 py-2 px-3 rounded text-gray-400  text-base sm:text-lg  bg-customBg2 '>
+          {events && <div onClick={handleStatToggle} className={`${statToggle.includes('Events') ? '   border-b-2 border-solid border-customBg ' : ''} s px-2 sm:px-3  cursor-pointer flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`} > Events</div>}
+          {hToH && (hToH.length !== 0) && <div onClick={handleStatToggle} className={`${statToggle.includes('H2H') ? '   border-b-2 border-solid border-customBg ' : ''}  s px-2 sm:px-3  cursor-pointer flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`} > H2H</div>}
+          {stats && (stats.length !== 0) && <div onClick={handleStatToggle} className={`${statToggle.includes('Stats') ? '   border-b-2 border-solid border-customBg ' : ''} s px-2 sm:px-3  cursor-pointer flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`} >Stats</div>}
+          <div onClick={handleStatToggle} className={`${statToggle.includes('Line-Up') ? '   border-b-2 border-solid border-customBg ' : ''} s px-2 sm:px-3  cursor-pointer flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`} >Line-Up</div>
+          {odds && <div onClick={handleStatToggle} className={`${statToggle.includes('Odds') ? '   border-b-2 border-solid border-customBg ' : ''} s px-2 sm:px-3  cursor-pointer flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`} > Odds</div>}
+          {match && <div onClick={handleStatToggle} className={`${statToggle.includes('Match Info') ? '   border-b-2 border-solid border-customBg ' : ''} s px-2 sm:px-3  cursor-pointer flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`} > Match Info</div>}
           
           
         </div>

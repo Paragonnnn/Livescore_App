@@ -29,78 +29,6 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
         console.log(currentFixture);
         console.log('hi');
     }
-    // const [fixtures, setFixtures] = useState([])
-    // const [loading, setLoading] = useState(false)
-    // const [error, setError] = useState(false)
-    // const [check, setCheck] = useState([])
-
-    // let api_key = import.meta.env.VITE_api_key
-    // let date = new Date
-    // let month = date.getMonth() + 1
-    // let currentYear = date.getFullYear()
-    // let day = date.getDate()
-    
-    
-    
-    // useEffect(() => {
-    //     setLoading(true)
-    //     async function getData() {
-    //       await fetch(`https://apiv2.allsportsapi.com/football/?met=Countries&APIkey=${api_key}`)
-    //     .then((res) => res.json())
-    //     .then(json => {
-    //       setError(false)
-    //         setCountries(json.result)
-    //         setLoading(false)
-    //         // console.log(json.result);
-    //     })
-    //     .catch(err => {
-    //       setLoading(false)
-    //       setError(true)
-    //       console.log(err)
-    //     })
-    //     }
-    //     getData()  
-    // }, [])
-    
-    // useEffect(() => {
-    //     async function getData() {
-    //         setLoading(true)
-    //         await fetch(`https://apiv2.allsportsapi.com/football/?met=Fixtures&leagueId=${leagues.map(league => (
-    //             league.league_key
-    //         ))}&APIkey=${api_key}&from=${currentYear}-${month}-${day}&to=${currentYear}-${month}-${day}`)
-    //         .then(res => res.json())
-    //         .then(json => {
-    //             setFixtures(json.result)
-    //             setLoading(false)
-    //             setCheck(
-    //                 json.result.map(fixture => (
-    //                     (
-    //                         !check.includes(fixture.league_key) && fixture.league_key 
-    //                     )
-                        
-    //                 ))
-    //             )
-    //             console.log(json.result);
-    //         })
-    //         .catch(err => {
-    //             setLoading(false)
-    //             setError(true)
-    //             console.log(err);
-    //         })
-    //     }
-    //     getData()
-    // },[])
-    // useEffect(() => {
-    //     setCheck(
-    //             fixtures.map(fixture => (
-    //                 (
-    //                     !check.includes(fixture.league_key) && fixture.league_key 
-    //                 )
-                    
-    //             ))
-    //         )
-    //         console.log(check);
-    // },[fixtures]) 
     
         
     
@@ -261,7 +189,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
 
         {
             // !(loading && error) &&
-            (fixtures && leagues && !loadingFixtures) &&
+            (fixtures && leagues && !loadingFixtures && !fixturesError) &&
             leagues.map((league,index) => (
                 (!isLive ? (check.includes(league.league_key) && liveCheck.includes(league.league_key)) : check.includes(league.league_key)) &&
                 <div key={league.league_key} className={`border border-black border-solid mb-4 first:rounded-t-lg last:rounded-b-lg divide-y divide-black`}>
@@ -304,7 +232,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                                     <Link className='absolute h-full w-full z-[1] bg-transparent top-[-2px] left-[-2px]' to={`/fixture/${fixture.league_name.replace(/ +/g,'-')}/${fixture.event_home_team.replace(/ +/g,'-')}-${fixture.event_away_team.replace(/ +/g,'-')}/${fixture.event_key}`}></Link>
 
                                 }
-                                <div className='text-xxs  text-gray-300 flex flex-col justify-center items-center overflow-hidden border-r border-solid border-black'>
+                                <div className='text-xxs  text-gray-300 flex flex-col justify-center items-center overflow-hidden '>
                                     <div>
                                         {fixture.event_time}
                                     </div>

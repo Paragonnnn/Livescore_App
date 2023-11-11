@@ -12,6 +12,9 @@ import calendar from './assets/calendar.svg'
 import back from './assets/back.svg'
 import subIn from './assets/subIn.svg'
 import subOut from './assets/subOut.svg'
+import stadium from './assets/stadium.svg'
+import whistle from './assets/whistle.svg'
+import calendar2 from './assets/calendar2.svg'
 
 
 
@@ -29,5 +32,8 @@ export {
     calendar,
     back,
     subIn,
-    subOut
+    subOut,
+    stadium,
+    whistle,
+    calendar2
 }

@@ -3,7 +3,7 @@ import { ball, ogball, assist,sub,subIn,subOut } from '..'
 
 const FirstHalfEvent = ({events}) => {
   return (
-    <div className='divide-y divide-black border-b border-solid border-black'>
+    <div className='divide-y-2 divide-customBg2 border-b border-solid border-gray-700'>
         {
           events &&
           events.filter(eve => eve.info_time === '1st Half').sort((a,b) => (
@@ -11,10 +11,10 @@ const FirstHalfEvent = ({events}) => {
           )).map((eve, index) => (
             (eve.home_scorer || eve.away_scorer || eve.home_fault || eve.away_fault) && 
 
-            <div key={index} className='py-2 divide-y divide-black '>
+            <div key={index} className='py-2 divide-y-2 divide-customBg2'>
               {
                 index === 0 && (
-                  <div className=' text-center mb-2'>First Half</div>
+                  <div className=' text-center bg-customBg2 mt-[-10px] mb-2 text-lg p-2'>First Half</div>
                 )
               }
               {
@@ -73,7 +73,7 @@ const FirstHalfEvent = ({events}) => {
 
 
                     </div>
-                    <div className='w-[50px] text-xxs sm:text-xs opacity-60 flex items-center flex-col gap-1 justify-center border-l border-r border-solid border-black'>
+                    <div className='w-[50px] text-xxs sm:text-xs opacity-60 flex items-center flex-col gap-1 justify-center border-l border-r border-solid border-gray-700'>
                         {eve.time}'
                         {
                           ((eve.home_scorer || eve.away_scorer) && !isNaN(eve.score.slice(0,1))) && (

@@ -3,7 +3,7 @@ import { ball,ogball,assist,sub,subIn,subOut } from '..'
 
 const SecondHalfEvent = ({events}) => {
   return (
-    <div className='divide-y divide-gray-700'>
+    <div className='divide-y-2 divide-customBg2'>
         {
                       events &&
                       events.filter(eve => eve.info_time === '2nd Half').sort((a,b) => (
@@ -11,7 +11,7 @@ const SecondHalfEvent = ({events}) => {
                       )).map((eve, index) => (
                         (eve.home_scorer || eve.away_scorer || eve.home_fault || eve.away_fault) && 
                         
-                        <div key={index} className='py-2 divide-y divide-gray-700'>
+                        <div key={index} className='py-2 divide-y-2 divide-customBg2'>
                           {
                             index === 0 && (
                               <div className=' text-center mb-2'>Second Half</div>
@@ -75,7 +75,7 @@ const SecondHalfEvent = ({events}) => {
                                   
 
                                 </div>
-                                <div className='w-[50px] text-xxs sm:text-xs opacity-60 flex items-center flex-col gap-1 justify-center border-l border-r border-solid border-black'>
+                                <div className='w-[50px] text-xxs sm:text-xs opacity-60 flex items-center flex-col gap-1 justify-center border-l border-r border-solid border-gray-700'>
                                   {eve.time}'
                                   {
                                     ((eve.home_scorer || eve.away_scorer) && !isNaN(eve.score.slice(0,1))) && (
@@ -91,7 +91,7 @@ const SecondHalfEvent = ({events}) => {
                                         <img src={(eve.away_scorer.includes('(o.g.)') || eve.away_scorer.includes('(OG)')) ? ogball : ball} alt="" className='w-[16px] h-[16px]'/>
                                         <div className=' opacity-70 absolute top-[-5px] right-0'>{eve.info === 'Penalty' || eve.away_scorer.includes('PG') ? 'p' : ''}</div>
                                         </div>
-                                        <div className='flex flex-col text-xxs sm:text-base'>
+                                        <div className='flex flex-col text-xxs sm:text-xs'>
                                           <div className=' '>{eve.away_scorer}</div>
                                           <div className=' flex gap-1 items-center font-semibold opacity-70'>
                                               {eve.away_assist && (

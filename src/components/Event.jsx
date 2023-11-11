@@ -7,7 +7,7 @@ import PenaltyShootOutEvent from './PenaltyShootOutEvent'
 const Event = ({events,statToggle,windowWidth}) => {
   return (
     <div className={``}>
-      <div className={`${windowWidth < 1024 && (statToggle.includes('Events') ? 'block' : 'hidden')} p-2  bg-customBg2 rounded text-gray-400 lg:animate-zoom animate-swipe`}>
+      <div className={`${windowWidth < 1024 && (statToggle.includes('Events') ? 'block' : 'hidden')} p-2  shadow-sm rounded text-gray-400 lg:animate-zoom animate-swipe`}>
       {
         events.length === 0 ? <div>no event</div> : 
         <>

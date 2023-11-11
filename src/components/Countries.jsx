@@ -65,7 +65,7 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
                                 className=' w-7 h-7 cursor-pointer'
                             />
                         </div>
-                        <div className={`${activeIndex.includes(index) ? 'block' : 'hidden'} p-2 divide-y divide-black  transition-all duration-300`}>
+                        <div className={`${activeIndex.includes(index) ? 'block animate-countryDropDown' : 'hidden'} p-2 divide-y divide-black  transition-all duration-300`}>
                             {
                                 leagues.map((league) => (
                                     (league.country_key == country.country_key) &&

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 *,*::after,*::before{
-  font-family: sans-serif;
+  font-family: monospace;
   margin: 0;
   padding: 0;
   text-decoration: none;
@@ -13,7 +13,7 @@
   --primary-color: #1E1E1E;
 }
 body{
-  background-color: #0F1A20;
+  background-color: #000;
 }
 .scroll_bar::-webkit-scrollbar {
   width: 6px;
@@ -27,6 +27,7 @@ body{
   border-radius: 6px;
   background-color: #3498db;
 }
+
 
 /* .dis{
   animation: show 1s;

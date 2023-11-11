@@ -7,9 +7,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        customBg: '#6E7295',
-        customBg2: '#00000031',
-        customBg3: '#0F1A20',
+        customBg: '#04A777',
+        customBg2: '#ffffff11',
+        customBg3: '#000000',
         border : '#151B54',
         orange: '#f39c12',
         lightOrange: '#f39d12c0',
@@ -18,11 +18,11 @@ export default {
         loading: '#ffffff10'
       },
       textColor : {
-        'gray-400': '#d9dcd6'
+        'gray-400': '#fff'
 
       },
       boxShadow: {
-        sm: '0 0 5px 2px #0000007c'
+        sm: '0 0 5px 2px #ffffff11'
       },
       fontSize: {
         'xxs': '.6rem'
@@ -48,7 +48,15 @@ export default {
         swipe: {
           '0%': {transform: 'translateX(-50%)'},
           '100%': {transform: 'translateX(0%)'}
-        }
+        },
+        sel: {
+          '0%': {borderWidth: '0%'},
+          '100%': {borderWidth: '100%'}
+        },
+        countryDropDown: {
+          '0%': {opacity: '.5',height: '0'},
+          '100%': {borderWidth: '1',height: '100%'}
+        },
         
       }, 
       animation: {
@@ -56,7 +64,9 @@ export default {
         show: 'show linear .3s',
         dat: 'dat .3s',
         zoom: 'zoom .3s',
-        swipe: 'swipe .3s'
+        swipe: 'swipe .3s',
+        sel: 'sel .3s',
+        countryDropDown: 'countryDropDown .5s'
       },
 
     },

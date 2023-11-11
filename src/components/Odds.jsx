@@ -11,7 +11,7 @@ const Odds = ({statToggle, odds, handleClick, bookie,windowWidth }) => {
                 {
                   index === 0 &&
                   <div className=' grid grid-cols-2 gap-2  '>
-                    <div className={`${bookie === '1xBet'? 'border-b-2  border-solid border-gray-700': ''}  pb-1 cursor-pointer flex justify-center items-center`} onClick={handleClick}>1xBet</div>
+                    <div className={`${bookie === '1xBet'? 'border-b-2  border-solid border-gray-700': ''}  pb-1 cursor-pointer flex justify-center items-center animate-sel`} onClick={handleClick}>1xBet</div>
                     <div className={`${bookie === 'Betway'? 'border-b-2  border-solid border-gray-700': ''}  pb-1 cursor-pointer flex justify-center items-center`} onClick={handleClick}>Betway</div>
                   </div>
 

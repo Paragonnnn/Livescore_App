@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 const LineUp = ({statToggle, lineUp, windowWidth}) => {
   return (
-    <div className=' '>
-        <div className={`${windowWidth < 1024 && (statToggle.includes('Line-Up') ? 'block' : 'hidden')} flex justify-between flex-col sm:flex-row lg:animate-zoom animate-swipe bg-customBg2 p-2 rounded`}>
-        <div className=' text-lg font-bold text-customBg'>Line Up</div>
+      <div className={`${windowWidth < 1024 && (statToggle.includes('Line-Up') ? 'block' : 'hidden')}`}>
+        <div className=' text-xl font-bold text-customBg bg-customBg2 mb-4 p-2 rounded '>Line Up</div>
+        <div className={` flex justify-between flex-col sm:flex-row lg:animate-zoom animate-swipe bg-customBg2 p-2 rounded `}>
             <div className=' sm:w-[48%] w-full  '>
                 <div className='  divide-y divide-black'>
                     {
@@ -16,11 +16,11 @@ const LineUp = ({statToggle, lineUp, windowWidth}) => {
                                 ))
                                 ))
                             }
-                            <div className=' text-base sm:text-lg font-semibold text-customBg text-center sm:text-left'>Home Line-Up</div>
                     {
                         lineUp &&
                         lineUp.map((lineUp,index) => (
                             <div key={index} className='divide-y divide-black'>
+                            <div className=' text-base sm:text-lg font-semibold text-customBg text-center sm:text-left'>Home Line-Up</div>
                                 {lineUp.home_team.starting_lineups.sort((a,b) => (
                             parseInt(a.player_position) - parseInt(b.player_position)
                         )).map((startingLineUp,index) => (

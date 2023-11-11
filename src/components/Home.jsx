@@ -104,8 +104,8 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
                         {fixture.event_home_team}
                       </div>
                     </Link> 
-                    <div className={`${fixture.event_live === '1' ? 'text-live   ' : 'text-black '} text-center col-span-1 text-gray-300`}>
-                      <div className=' lg:text-base xl:text-2xl'>{fixture.event_final_result}</div>
+                    <div className={`${fixture.event_live === '1' ? 'text-live   ' : 'text-black '} text-center col-span-1  text-gray-300`}>
+                      <div className=' lg:text-base xl:text-xl'>{fixture.event_final_result}</div>
                       <div className='text-base'>{fixture.event_status === 'Finished' ? 'FT' : fixture.event_status === 'Half Time' ? 'HT' : fixture.event_status}</div>
                     </div>
                     <Link to={`/team/${fixture.event_away_team.replace(/ +/g,'-')}/${fixture.away_team_key}`} className='text-center col-span-2 justify-self-end flex flex-col gap-1 justify-center items-center'>
@@ -131,7 +131,7 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
                                   <img src={scorer.home_scorer.includes('OG') || scorer.home_scorer.includes('o.g.') ? ogball : ball} className='lg:h-3 lg:w-3 xl:h-4 xl:w-4' alt="" />
                                   </div>
                                   {scorer.home_scorer}
-                                  <div className=' text-black'>({scorer.time}')</div>
+                                  <div className=' text-gray-400 opacity-40'>({scorer.time}')</div>
                                 </div>
                                 
                               </div>
@@ -147,7 +147,7 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
                             <div key={index}>
 
                               <div className='flex items-center justify-end py-1 gap-1'>
-                                <div className=' text-black'>({scorer.time}')</div>
+                                <div className=' text-gray-400 opacity-40'>({scorer.time}')</div>
                                 {scorer.away_scorer}
                                 <div className=' relative'>
                                 <img src={scorer.away_scorer.includes('OG') || scorer.away_scorer.includes('o.g.') ? ogball : ball} className='lg:h-3 lg:w-3 xl:h-4 xl:w-4' alt="" />
