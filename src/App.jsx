@@ -13,7 +13,7 @@ import SearchClub from './components/SearchClub'
 import parseISO from 'date-fns/parseISO'
 import { addDays, format, addMonths } from 'date-fns'
 import Calendar from 'react-calendar'
-import { calendar, searchLogo } from '.'
+import { calendar, darkMode, lightMode, searchLogo } from '.'
 
 
 const App = () => {
@@ -33,9 +33,12 @@ const App = () => {
     const [clubs, setClubs] = useState([])
     const [showCalendar, setShowCalendar] = useState(false)
     const [toggleSearch, setToggleSearch] = useState(false)
+    const [toggleMode,setToggleMode] = useState(true)
 
     const focus = useRef()
     
+    document.querySelector('body').style.backgroundColor = `${toggleMode ? 'white' : 'black'}`
+    console.log(document.querySelector('body'))
     const date = new Date()
     // const newDate = format(date, 'MM-dd-yyyy')
     // console.log(date);
@@ -181,13 +184,13 @@ const App = () => {
 
  
   return (
-    <div className='bg-customBg3 '>
+    <div className={`${toggleMode ? 'bg-customBg3' : 'bg-darkCustomBg3' }  `}>
       
-      <div className='bg-customBg3 shadow-sm  w-full  sticky top-[-2px] rounded-b-xl z-10'>
-        <div className='m-auto  max-w-[1440px] flex items-center justify-between relative'>
-          <Link to={'/'}><h3 className='text-[25px] md:text-[40px] px-2 md:px-4 py-1 sm:py-2 mb-2 text-customBg font-bold'>Paragon</h3></Link>
+      <div className={`${toggleMode ? 'bg-customBg3' : 'bg-darkCustomBg3'} border-b border-solid border-[#E8EDF3]  w-full  sticky top-[-2px] rounded-b-xl z-10`}>
+        <div className='m-auto  max-w-[1440px]  flex items-center justify-between relative'>
+          <Link to={'/'}><h3 className='text-[25px] md:text-[40px] px-2 md:px-4 py-1 sm:py-2 mb-2 text-customBg font-bold'>Paragon :)</h3></Link>
           <div className='px-2 '>
-            <img src={searchLogo} alt="" className=' h-6 w-6 block lg:hidden' onClick={handleSearchToggleClick}/>
+            {/* <img src={searchLogo} alt="" className=' h-6 w-6 block lg:hidden' onClick={handleSearchToggleClick}/> */}
             {
               windowWidth > 1024 &&
                 <div className=''>
@@ -196,7 +199,7 @@ const App = () => {
                 </div>
             }
           </div>
-          <div className=' hidden lg:block'></div>
+          <div className={`${toggleMode ? ' rotate-0 transition-transform' : '-rotate-180 transition-transform'} px-2 md:px-4 cursor-pointer animate-mode`} onClick={() => setToggleMode(prev => !prev)}><img src={`${toggleMode ? darkMode : lightMode}`} alt="" className={`  h-7 w-7`}  /></div>
         </div>
       </div>
         <div className={`${toggleSearch ? 'block animate-dis' : 'hidden animate-dat'} h-full static  w-full   `}> 
@@ -214,7 +217,7 @@ const App = () => {
 
         <Routes>
           
-          <Route path='/' element={<Home countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues} check={check} fixtures={fixtures}  loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture} liveCheck={liveCheck} windowWidth={windowWidth} calenderDate={calenderDate} setCalenderDate={setCalenderDate} handleDateChange={handleDateChange} handleDateFocus={handleDateFocus} showCalendar={showCalendar} setShowCalendar={setShowCalendar} handleSearchToggleClick={handleSearchToggleClick}/>}/>
+          <Route path='/' element={<Home countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues} check={check} fixtures={fixtures}  loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture} liveCheck={liveCheck} windowWidth={windowWidth} calenderDate={calenderDate} setCalenderDate={setCalenderDate} handleDateChange={handleDateChange} handleDateFocus={handleDateFocus} showCalendar={showCalendar} setShowCalendar={setShowCalendar} handleSearchToggleClick={handleSearchToggleClick} toggleMode={toggleMode}/>}/>
           <Route path='/countries' element={<Countries countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues}/>} />
           <Route path='/leagues/:countryname/:id' element={<Leagues />}/>
           <Route path='/table/:leaguename/:id' element={<Table/>} />

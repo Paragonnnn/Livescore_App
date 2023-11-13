@@ -5,7 +5,7 @@ import Error from './Error';
 import { arrowDown, arrowUp } from '../index.js';
 import Header from './Header';
 
-const Countries = ({loadingCountries, countries, error, leagues}) => {
+const Countries = ({loadingCountries, countries, error, leagues, toggleMode}) => {
     const [search, setSearch] = useState('')
     const [show, setShow] = useState()
     const [check, setCheck] = useState()
@@ -33,8 +33,8 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
     }
     
   return (
-    <div className=' shadow-sm text-white p-4 bg-customBg2'>
-        <Header setSearch={setSearch} search={search}/>
+    <div className='  text-white p-4 bg-customBg2'>
+        <Header setSearch={setSearch} search={search} toggleMode={toggleMode}/>
         
         {
             error && (
@@ -48,15 +48,15 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
             )
 
         }
-        <div className='divide-y divide-black '>
+        <div className='divide-y divide-gray-400 divide-opacity-20 '>
             {
                 countries.filter((country) => (
                     search.trim().toLowerCase() === '' ? country : country.country_name.toLowerCase().includes(search.toLowerCase())
                 )).slice(0,seeAll).map((country,index) => (
                     <div key={country.country_key} className=''>
-                        <div    className='text-gray-400 flex items-center justify-between w-full px-1 py-2 cursor-pointer' onClick={() => handleClick(index)}>
-                            <div className='country_name_div'>
-                                <h2 className='text-gray-400'>{country.country_name}</h2>
+                        <div    className={`${toggleMode ? 'text-darkText' : 'text-lightText'} flex items-center justify-between w-full px-1 py-2 cursor-pointer`} onClick={() => handleClick(index)}>
+                            <div className='  w-[70%] overflow-hidden '>
+                                <h2 className=''>{country.country_name}</h2>
                             </div>
                             <img src={country.country_logo} alt="" className='w-4 h-4 rounded-full'/>
                             <img 
@@ -65,7 +65,7 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
                                 className=' w-7 h-7 cursor-pointer'
                             />
                         </div>
-                        <div className={`${activeIndex.includes(index) ? 'block animate-countryDropDown' : 'hidden'} p-2 divide-y divide-black  transition-all duration-300`}>
+                        <div className={`${activeIndex.includes(index) ? 'block animate-countryDropDown' : 'hidden'} ${toggleMode ? 'text-darkText' : 'text-lightText'} p-2 divide-y divide-gray-400 divide-opacity-20  transition-all duration-300`}>
                             {
                                 leagues.map((league) => (
                                     (league.country_key == country.country_key) &&
@@ -91,3 +91,10 @@ const Countries = ({loadingCountries, countries, error, leagues}) => {
 }
 
 export default Countries
+
+// width: 70%;
+//   height: 100%;
+//   overflow: hidden;
+//   display: flex;
+//   align-items: center;
+//   color: black;

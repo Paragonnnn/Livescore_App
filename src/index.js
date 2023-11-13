@@ -15,6 +15,8 @@ import subOut from './assets/subOut.svg'
 import stadium from './assets/stadium.svg'
 import whistle from './assets/whistle.svg'
 import calendar2 from './assets/calendar2.svg'
+import lightMode from './assets/lightMode.svg'
+import darkMode from './assets/darkMode.svg'
 
 
 
@@ -35,5 +37,7 @@ export {
     subOut,
     stadium,
     whistle,
-    calendar2
+    calendar2,
+    lightMode,
+    darkMode
 }

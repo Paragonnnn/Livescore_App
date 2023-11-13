@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Header = ({setSearch, search}) => {
+const Header = ({setSearch, search,toggleMode}) => {
   return (
     <div className='mb-1'>
         <input 
@@ -8,7 +8,7 @@ const Header = ({setSearch, search}) => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder='Search Country...'
-            className='bg-transparent outline-none border border-solid border-black p-2 w-full'
+            className={`bg-transparent outline-none border border-solid border-black p-2 w-full ${toggleMode ? 'text-darkText' : 'text-lightText'} `}
         />
     </div>
   )

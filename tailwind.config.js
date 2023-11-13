@@ -7,18 +7,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        customBg: '#04A777',
-        customBg2: '#ffffff11',
-        customBg3: '#000000',
+        customBg: '#2563EB',
+        customBg2: '#2563EB10',
+        customBg3: '#fff',
+        darkCustomBg3: '#101419',
         border : '#151B54',
         orange: '#f39c12',
         lightOrange: '#f39d12c0',
         lighterOrange: '#f39d1241',
         live: '#F3A712',
-        loading: '#ffffff10'
+        loading: '#ffffff10',
+        darkText: '#000',
+        lightText: '#ffffff'
       },
       textColor : {
-        'gray-400': '#fff'
+        'gray-400': '#B1B2B4'
 
       },
       boxShadow: {
@@ -50,13 +53,17 @@ export default {
           '100%': {transform: 'translateX(0%)'}
         },
         sel: {
-          '0%': {borderWidth: '0%'},
-          '100%': {borderWidth: '100%'}
+          '0%': {width: '0%'},
+          '100%': {width: '100%'}
         },
         countryDropDown: {
           '0%': {opacity: '.5',height: '0'},
           '100%': {borderWidth: '1',height: '100%'}
         },
+        mode: {
+          '0%': {transform: 'rotate(-20deg)'},
+          '100%': {transform: 'rotate(0deg)'}
+        }
         
       }, 
       animation: {
@@ -66,7 +73,8 @@ export default {
         zoom: 'zoom .3s',
         swipe: 'swipe .3s',
         sel: 'sel .3s',
-        countryDropDown: 'countryDropDown .5s'
+        countryDropDown: 'countryDropDown .5s',
+        mode: 'mode 1s'
       },
 
     },

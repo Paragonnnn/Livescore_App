@@ -12,7 +12,7 @@ const LineUp = ({statToggle, lineUp, windowWidth}) => {
                         lineUp && 
                         lineUp.map((coach) => (
                             coach.home_team.coaches.map((coache,index) => (
-                                <div key={index}>{coache.coache}(coach)</div>
+                                <div key={index} className=' text-gray-400'>{coache.coache}(coach)</div>
                                 ))
                                 ))
                             }
