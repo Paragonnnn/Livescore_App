@@ -37,7 +37,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
         <div className='  bg-customBg2 rounded-md sm:p-4 p-2  '>
             <div className=' text-gray-400 p-2 mb-2 text-lg' >
                 <div className=' flex  w-fit  rounded-full p-1'>
-                <button onClick={all} className={`${isLive ? ' border border-solid border-customBg': ' '} ${toggleMode ? 'text-darkText' : 'text-lightText'} px-3 rounded-full transition duration-200 ease-in-out`}>All</button>
+                <button onClick={all} className={`${isLive ? ' border border-solid border-customBg': ' '} ${toggleMode ? 'text-darkText' : 'text-lightText'} px-3 rounded-full  transition duration-200 ease-in-out`}>All</button>
                 <button onClick={live} className={`${!isLive ? ' border border-solid border-customBg': ''} ${toggleMode ? 'text-darkText' : 'text-lightText'} transition duration-200 ease-in px-3 rounded-full flex  items-center gap-1`}>Live <div className='text-xs text-live font-bold'>
                         ({
                         fixtures?.filter(fixture => fixture.event_live === '1' && fixture.event_status !== 'Finished').length

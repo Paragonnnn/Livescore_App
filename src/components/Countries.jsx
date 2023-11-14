@@ -31,9 +31,12 @@ const Countries = ({loadingCountries, countries, error, leagues, toggleMode}) =>
     const handleSeeAll = () => {
         setSeeAll(countries.lenght)
     }
+    const handleSeeLess = () => {
+        setSeeAll(20)
+    }
     
   return (
-    <div className='  text-white p-4 bg-customBg2'>
+    <div className='   px-4 bg-customBg2 sticky top-[90px] max-h-[90vh] overflow-y-scroll'>
         <Header setSearch={setSearch} search={search} toggleMode={toggleMode}/>
         
         {
@@ -82,7 +85,16 @@ const Countries = ({loadingCountries, countries, error, leagues, toggleMode}) =>
                 
             }
 
-            <div onClick={handleSeeAll} className=' cursor-pointer text-center'>See All</div>
+            {
+                seeAll === 20 &&
+                <div onClick={handleSeeAll} className={`${toggleMode ? 'text-darkText' : 'text-lightText'} cursor-pointer text-center `}>See All</div>
+
+            }
+            {
+                seeAll === countries.lenght &&
+                <div onClick={handleSeeLess} className={`${toggleMode ? 'text-darkText' : 'text-lightText'} cursor-pointer text-center `}>See Less</div>
+
+            }
             
 
         </div>
