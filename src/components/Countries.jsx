@@ -36,14 +36,14 @@ const Countries = ({loadingCountries, countries, error, leagues, toggleMode}) =>
     }
     
   return (
-    <div className='   px-4 bg-customBg2 sticky top-[90px] max-h-[90vh] overflow-y-scroll'>
+    <div className='   px-1 bg-customBg2 sticky top-[90px] max-h-[90vh]'>
         <Header setSearch={setSearch} search={search} toggleMode={toggleMode}/>
         
-        {
+        {/* {
             error && (
                 <Error />
             )
-        }
+        } */}
         {
             loadingCountries && (
                 <Loading />
@@ -51,7 +51,7 @@ const Countries = ({loadingCountries, countries, error, leagues, toggleMode}) =>
             )
 
         }
-        <div className='divide-y divide-gray-400 divide-opacity-20 '>
+        <div className='divide-y divide-gray-400 divide-opacity-20 overflow-y-scroll countries-scroll max-h-[90vh] px-2 '>
             {
                 countries.filter((country) => (
                     search.trim().toLowerCase() === '' ? country : country.country_name.toLowerCase().includes(search.toLowerCase())
@@ -64,7 +64,7 @@ const Countries = ({loadingCountries, countries, error, leagues, toggleMode}) =>
                             <img src={country.country_logo} alt="" className='w-4 h-4 rounded-full'/>
                             <img 
                                 src={activeIndex.includes(index) ? arrowUp : arrowDown} 
-                                alt="" 
+                                alt=""
                                 className=' w-7 h-7 cursor-pointer'
                             />
                         </div>
@@ -86,12 +86,12 @@ const Countries = ({loadingCountries, countries, error, leagues, toggleMode}) =>
             }
 
             {
-                seeAll === 20 &&
+                (seeAll === 20 && !error) &&
                 <div onClick={handleSeeAll} className={`${toggleMode ? 'text-darkText' : 'text-lightText'} cursor-pointer text-center `}>See All</div>
 
             }
             {
-                seeAll === countries.lenght &&
+                (seeAll === countries.lenght && !error) &&
                 <div onClick={handleSeeLess} className={`${toggleMode ? 'text-darkText' : 'text-lightText'} cursor-pointer text-center `}>See Less</div>
 
             }

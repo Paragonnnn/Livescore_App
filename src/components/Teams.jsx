@@ -54,7 +54,7 @@ const Teams = () => {
         getData()
     },[id])
   return (
-    <div className='  p-4 lg:grid grid-cols-5 gap-4'>
+    <div className='  md:p-4 lg:grid grid-cols-5 gap-4'>
         {
             loading && (
                 <Loading />
@@ -65,12 +65,12 @@ const Teams = () => {
         {
 
         }
-        <div className=' bg-customBg2 p-4 h-fit col-span-3 '>
+        <div className=' bg-customBg2 p-1 md:p-4 h-fit col-span-3 '>
             {
                 teams.map((team) => (
                     <div key={team.team_key} className=' '>
-                        <div className=' bg-black gap-12 p-4 rounded-xl mb-5 bg-opacity-40 w-full flex items-center'>
-                            <img src={team.team_logo} alt="" className=' h-24'/>
+                        <div className=' bg-customBg2 gap-12 p-4 rounded-xl mb-5 bg-opacity-40 w-full flex items-center'>
+                            <img src={team.team_logo} alt="" className=' h-16 md:h-24'/>
                             <div>
                                 <div className='text-3xl font-bold text-gray-300'>{team.team_name} </div>
                             </div>

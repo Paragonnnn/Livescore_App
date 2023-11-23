@@ -117,7 +117,7 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
                   </div>
                   <div className={` ${toggleMode ? 'text-darkText' : 'text-lightText'} flex justify-between lg:text-xxs xl:text-xs  mt-2`}>
 
-                    <div>
+                    <div className=' w-1/2'>
                       {fixture && 
                         fixture.goalscorers.map((scorer,index) => (
                           (scorer.home_scorer &&
@@ -130,8 +130,11 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
 
                                   <img src={scorer.home_scorer.includes('OG') || scorer.home_scorer.includes('o.g.') ? ogball : ball} className='lg:h-3 lg:w-3 xl:h-4 xl:w-4' alt="" />
                                   </div>
+                                  <div className=' '>
                                   {scorer.home_scorer}
-                                  <div className={`${toggleMode ? 'text-darkText' : 'text-lightText'}  opacity-40`}>({scorer.time}')</div>
+                                  <span className={`${toggleMode ? 'text-darkText' : 'text-lightText'}  opacity-40 ml-1`}>({scorer.time}')</span>
+
+                                  </div>
                                 </div>
                                 
                               </div>
@@ -139,16 +142,19 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
                         ))
                       }
                     </div>
-                    <div>
+                    <div className=' w-1/2'>
                       {fixture && 
                         fixture.goalscorers.map((scorer,index) => (
                           (
                             scorer.away_scorer &&
                             <div key={index}>
 
-                              <div className='flex items-center justify-end py-1 gap-1'>
-                                <div className={`${toggleMode ? 'text-darkText' : 'text-lightText'}  opacity-40`}>({scorer.time}')</div>
-                                {scorer.away_scorer}
+                              <div className='flex items-center justify-end py-1 gap-1 '>
+                                <div>
+                                  <span className={`${toggleMode ? 'text-darkText' : 'text-lightText'}  opacity-40 mr-1`}>({scorer.time}')</span>
+                                  <span className=' text-right'>{scorer.away_scorer}</span>
+                                  
+                                </div>
                                 <div className=' relative'>
                                 <img src={scorer.away_scorer.includes('OG') || scorer.away_scorer.includes('o.g.') ? ogball : ball} className='lg:h-3 lg:w-3 xl:h-4 xl:w-4' alt="" />
                                 <div className=' text-xxs absolute top-[-5px] right-[0px]'>{scorer.info === 'Penalty' || scorer.away_scorer.includes('PG') ? 'p' : ''}</div>

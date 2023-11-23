@@ -28,7 +28,14 @@
   border-radius: 6px;
   background-color: #3498db;
 }
-
+.countries-scroll::-webkit-scrollbar{
+  width: 4px;
+  /* color: #ffffff67; */
+}
+.countries-scroll::-webkit-scrollbar-thumb{
+  border-radius: 6px;
+  background-color: #2a86ff38;
+}
 
 /* .dis{
   animation: show 1s;

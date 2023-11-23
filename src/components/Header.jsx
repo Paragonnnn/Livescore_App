@@ -2,7 +2,7 @@ import React from 'react'
 
 const Header = ({setSearch, search,toggleMode}) => {
   return (
-    <div className='mb-1 pt-2 sticky top-[0]  w-full '>
+    <div className='mb-1 pt-2 px-1 sticky top-[0]  w-full '>
         <input 
             type="text" 
             value={search}

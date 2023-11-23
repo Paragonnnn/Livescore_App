@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        customBg: '#2563EB',
-        customBg2: '#2563EB10',
+        customBg: '#2A86FF',
+        customBg2: '#2A86FF10',
         customBg3: '#fff',
         darkCustomBg3: '#101419',
         border : '#151B54',
@@ -25,7 +25,8 @@ export default {
 
       },
       boxShadow: {
-        sm: '0 0 5px 2px #ffffff11'
+        sm: '0 0 2px 2px #ffffff11',
+        light: '0 0 2px 2px #00000011'
       },
       fontSize: {
         'xxs': '.6rem'

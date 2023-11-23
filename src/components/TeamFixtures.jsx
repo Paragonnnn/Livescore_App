@@ -12,8 +12,8 @@ const TeamFixtures = ({teamFixtures}) => {
     <div>
         <div className={` divide-y divide-black`}>
             <div className='flex gap-4 bg-customBg2 text-customBg p-2'>
-                <div className={`${filterFixtures === 'Fixtures' ? 'bg-customBg text-customBg2' : ''} cursor-pointer px-3  border border-solid border-customBg rounded-full hover:bg-opacity-90 active:bg-opacity-80`} onClick={() => setFilterFixtures('Fixtures')}>Fixtures</div>
-                <div className={`${filterFixtures === 'Results' ? 'bg-customBg text-customBg2' : ''} cursor-pointer px-3  border border-solid border-customBg rounded-full hover:bg-opacity-90 active:bg-opacity-80`} onClick={() => setFilterFixtures('Results')}>results</div>
+                <div className={`${filterFixtures === 'Fixtures' ? 'bg-customBg text-white' : ''} cursor-pointer px-3 py-1 font-bold text-lg border border-solid border-customBg rounded-full hover:bg-opacity-90 active:bg-opacity-80`} onClick={() => setFilterFixtures('Fixtures')}>Fixtures</div>
+                <div className={`${filterFixtures === 'Results' ? 'bg-customBg text-white' : ''} cursor-pointer px-3 py-1 font-bold text-lg border border-solid border-customBg rounded-full hover:bg-opacity-90 active:bg-opacity-80`} onClick={() => setFilterFixtures('Results')}>results</div>
             </div>
           {
               teamFixtures &&
