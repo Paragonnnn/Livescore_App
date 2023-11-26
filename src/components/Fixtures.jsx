@@ -212,7 +212,7 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                                 return fixture
                             }
                             else {
-                                return fixture.event_live === '1'
+                                return fixture.event_live === '1' && fixture.event_status !== 'Finished'
                             }
                             
                             
