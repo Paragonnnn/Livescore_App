@@ -51,7 +51,7 @@ const Countries = ({loadingCountries, countries, error, leagues, toggleMode}) =>
             )
 
         }
-        <div className='divide-y divide-gray-400 divide-opacity-20 overflow-y-scroll countries-scroll max-h-[90vh] px-2 '>
+        <div className='divide-y divide-gray-400 divide-opacity-20 overflow-y-scroll countries-scroll max-h-[90vh] px-2'>
             {
                 countries.filter((country) => (
                     search.trim().toLowerCase() === '' ? country : country.country_name.toLowerCase().includes(search.toLowerCase())
