@@ -33,7 +33,7 @@ const App = () => {
     const [clubs, setClubs] = useState([])
     const [showCalendar, setShowCalendar] = useState(false)
     const [toggleSearch, setToggleSearch] = useState(false)
-    const [toggleMode,setToggleMode] = useState(true)
+    const [toggleMode,setToggleMode] = useState(false)
 
     const focus = useRef()
     
