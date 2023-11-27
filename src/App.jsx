@@ -151,7 +151,7 @@ const App = () => {
             setLiveCheck(
                 json.result.map(fixture => (
                     (
-                        !check.includes(fixture.league_key)  && fixture.event_live === '1' && (fixture.league_key)
+                        !check.includes(fixture.league_key)  && fixture.event_live === '1' && fixture.event_status !== 'Finished' && (fixture.league_key)
                     )
                     
                 ))
