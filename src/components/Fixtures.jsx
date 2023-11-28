@@ -220,10 +220,10 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
                             // leagues.map(league => (
                                 
                             // )) 
-                            (league.league_key == fixture.league_key ) &&
+                            (league.league_key == fixture.league_key ) && 
 
                              
-                                <div to={`/fixture/${fixture.event_key}`} key={fixture.event_key} className={`${windowWidth > 1024 ? 'hover:opacity-70 transition ' : ''}${toggleMode ? 'text-darkText' : ' text-lightText'} text-xs p-2 flex gap-2 relative `} onClick={() => handleClick(fixture)} tabIndex={0}>
+                                <div key={fixture.event_key} className={`${windowWidth > 1024 ? 'hover:opacity-70 transition ' : ''}${toggleMode ? 'text-darkText' : ' text-lightText'} text-xs p-2 flex gap-2 relative `} onClick={() => handleClick(fixture)} tabIndex={1}>
                 
                                 {/* <div>{fixture.country_name}</div> */}
                                 {/* <h1>{fixture.league_name}</h1> */}
