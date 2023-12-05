@@ -17,6 +17,9 @@ import whistle from './assets/whistle.svg'
 import calendar2 from './assets/calendar2.svg'
 import lightMode from './assets/lightMode.svg'
 import darkMode from './assets/darkMode.svg'
+import lightStadium from './assets/lightStadium.svg'
+import darkWhistle from './assets/darkWhistle.svg'
+import darkCalendar from './assets/darkCalendar.svg'
 
 
 
@@ -39,5 +42,8 @@ export {
     whistle,
     calendar2,
     lightMode,
-    darkMode
+    darkMode,
+    lightStadium,
+    darkWhistle,
+    darkCalendar
 }

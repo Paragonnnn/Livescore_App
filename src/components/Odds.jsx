@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Odds = ({statToggle, odds, handleClick, bookie,windowWidth }) => {
+const Odds = ({statToggle, odds, handleClick, bookie,windowWidth,toggleMode }) => {
   return (
     <div>
-        <div className={`${windowWidth < 1024 && (statToggle.includes('Odds') ? 'block' : 'hidden')} lg:animate-zoom animate-swipe text-gray-400`}>
+        <div className={`${windowWidth < 1024 && (statToggle.includes('Odds') ? 'block' : 'hidden')} ${toggleMode? 'text-darkText' : 'text-lightText'} lg:animate-zoom animate-swipe `}>
           {
             odds &&
             odds.filter(odd => (odd.odd_bookmakers === '1xBet' || odd.odd_bookmakers === 'Betway')).map((odd,index) => (
@@ -11,8 +11,8 @@ const Odds = ({statToggle, odds, handleClick, bookie,windowWidth }) => {
                 {
                   index === 0 &&
                   <div className=' grid grid-cols-2 gap-2 mb-4'>
-                    <div className={`${bookie === '1xBet'? 'after:block after:bg-gray-700 after:w-full after:h-1 after:animate-sel': ''}  pb-1 cursor-pointer flex flex-col gap-1  items-center `} onClick={handleClick}>1xBet</div>
-                    <div className={`${bookie === 'Betway'? 'after:block after:bg-gray-700 after:w-full after:h-1 after:animate-sel': ''}  pb-1 cursor-pointer flex flex-col gap-1  items-center`} onClick={handleClick}>Betway</div>
+                    <button className={`${bookie === '1xBet'? 'after:block after:bg-gray-700 after:w-full after:h-1 after:animate-sel': ''}  pb-1 cursor-pointer flex flex-col gap-1  items-center `} onClick={handleClick}>1xBet</button>
+                    <button className={`${bookie === 'Betway'? 'after:block after:bg-gray-700 after:w-full after:h-1 after:animate-sel': ''}  pb-1 cursor-pointer flex flex-col gap-1  items-center`} onClick={handleClick}>Betway</button>
                   </div>
 
                 }

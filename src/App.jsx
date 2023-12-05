@@ -184,7 +184,7 @@ const App = () => {
 
  
   return (
-    <div className={`${toggleMode ? 'bg-customBg3' : 'bg-darkCustomBg3' }  `}>
+    <div className={`${toggleMode ? 'bg-customBg3' : 'bg-darkCustomBg3' } `}>
       
       <div className={`${toggleMode ? 'bg-customBg3 shadow-light' : 'bg-darkCustomBg3 shadow-sm'}   w-full  sticky top-[-2px] rounded-b-xl z-10`}>
         <div className='m-auto  max-w-[1440px]  flex items-center justify-between relative'>
@@ -199,10 +199,10 @@ const App = () => {
                 </div>
             }
           </div>
-          <div className={`${toggleMode ? ' rotate-0 transition-transform' : '-rotate-180 transition-transform'} px-2 md:px-4 cursor-pointer animate-mode`} onClick={() => setToggleMode(prev => !prev)}><img src={`${toggleMode ? darkMode : lightMode}`} alt="" className={`  h-7 w-7`}  /></div>
+          <button className={`${toggleMode ? ' rotate-0 transition-transform' : '-rotate-180 transition-transform'} px-2 md:px-4 cursor-pointer animate-mode`} onClick={() => setToggleMode(prev => !prev)}><img src={`${toggleMode ? darkMode : lightMode}`} alt="" className={`  h-7 w-7`}  /></button>
         </div>
       </div>
-        <div className={`${toggleSearch ? 'block animate-dis' : 'hidden animate-dat'} h-full static  w-full   `}> 
+        <div className={`${toggleSearch ? 'block animate-dis' : 'hidden animate-dat'} h-full static  w-full `}> 
             {
               windowWidth < 1024 &&
                 <div className=' '>
@@ -221,7 +221,7 @@ const App = () => {
           <Route path='/countries' element={<Countries countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues}/>} />
           <Route path='/leagues/:countryname/:id' element={<Leagues />}/>
           <Route path='/table/:leaguename/:id' element={<Table/>} />
-          <Route path='/fixture/:league/:teamsname/:id' element={<CurrentFixtures windowWidth={windowWidth}/>}/>
+          <Route path='/fixture/:league/:teamsname/:id' element={<CurrentFixtures toggleMode={toggleMode} windowWidth={windowWidth}/>}/>
           {/* <Route path='/fixtures' element={<Fixtures check={check} fixtures={fixtures} leagues={leagues} loadingFixtures={loadingFixtures} fixturesError={fixturesError}/>}/> */}
           <Route path='/team/:teamname/:id' element={<Teams leagues={leagues}/>}/>
           <Route path='/player/:playername/:id' element={<Players countries={countries} leagues={leagues}/>}/>

@@ -9,7 +9,7 @@ export default {
       colors: {
         customBg: '#2A86FF',
         customBg2: '#2A86FF10',
-        customBg3: '#fff',
+        customBg3: '#F7F7FF',
         darkCustomBg3: '#101419',
         border : '#151B54',
         orange: '#f39c12',
@@ -57,6 +57,10 @@ export default {
           '0%': {width: '0%'},
           '100%': {width: '100%'}
         },
+        sel2: {
+          '0%': {width: '0%',scale: '0'},
+          '100%': {width: '100%',scale: '120%'}
+        },
         countryDropDown: {
           '0%': {opacity: '.5',height: '0'},
           '100%': {borderWidth: '1',height: '100%'}
@@ -74,6 +78,7 @@ export default {
         zoom: 'zoom .3s',
         swipe: 'swipe .3s',
         sel: 'sel .3s',
+        sel2: 'sel .3s',
         countryDropDown: 'countryDropDown .5s',
         mode: 'mode 1s'
       },

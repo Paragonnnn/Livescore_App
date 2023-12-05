@@ -1,7 +1,7 @@
 import React from 'react'
 import { ball, ogball, assist,sub,subIn,subOut } from '..'
 
-const FirstHalfEvent = ({events}) => {
+const FirstHalfEvent = ({events,toggleMode}) => {
   return (
     <div className='divide-y-2 divide-customBg2 border-b border-solid border-gray-700'>
         {

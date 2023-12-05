@@ -9,7 +9,7 @@ import LineUp from './LineUp'
 import CurrentFixtureInfo from './CurrentFixtureInfo'
 import MatchInfo from './MatchInfo'
 
-const CurrentFixtures = ({windowWidth}) => {
+const CurrentFixtures = ({toggleMode, windowWidth}) => {
     const [loading, setLoading] = useState(false)
     const [match,setMatch] = useState([])
     const [hToH, setHToH] = useState([])
@@ -121,50 +121,50 @@ const CurrentFixtures = ({windowWidth}) => {
         windowWidth > 1024 ? (
           <div className=' grid grid-cols-5 gap-4'>
             <div className=' col-span-2'>
-              <CurrentFixtureInfo match={match} />
-              <Odds statToggle={statToggle} odds={odds} handleClick={handleClick} bookie={bookie} windowWidth={windowWidth}/>
-              <Event events={events} statToggle={statToggle}/> 
+              <CurrentFixtureInfo match={match} toggleMode={toggleMode}/>
+              <Odds statToggle={statToggle} odds={odds} handleClick={handleClick} bookie={bookie} windowWidth={windowWidth} toggleMode={toggleMode}/>
+              <Event events={events} statToggle={statToggle} toggleMode={toggleMode}/> 
             </div>
             <div className=' col-span-3'>
-              <Statistics statToggle={statToggle} stats={stats} windowWidth={windowWidth}/>
-              <LineUp statToggle={statToggle} lineUp={lineUp} windowWidth={windowWidth}/>
+              <Statistics statToggle={statToggle} stats={stats} windowWidth={windowWidth} toggleMode={toggleMode}/>
+              <LineUp statToggle={statToggle} lineUp={lineUp} windowWidth={windowWidth} toggleMode={toggleMode}/>
             </div>
           </div>
 
-        ) : (
-
-      <div className=''>
+) : (
+  
+  <div className=''>
       <div className=' w-full  mx-auto mb-4'>
-        <CurrentFixtureInfo match={match} odds={odds} handleClick={handleClick} handleSeeMore={handleSeeMore} bookie={bookie} seeMore={seeMore}/>
+        <CurrentFixtureInfo match={match} odds={odds} handleClick={handleClick} handleSeeMore={handleSeeMore} bookie={bookie} seeMore={seeMore} toggleMode={toggleMode}/>
       </div>
-        <div className='fixtures_scroll flex gap-4 overflow-x-scroll m-auto w-[95vw] sm:w-full justify-between mb-3 py-2 px-3 rounded text-gray-400  text-base sm:text-lg  bg-customBg2 '>
-          {events && <div onClick={handleStatToggle} className={`${statToggle.includes('Events') ? '   border-b-2 border-solid border-customBg ' : ''} s px-2 sm:px-3  cursor-pointer flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`} > Events</div>}
-          {hToH && (hToH.length !== 0) && <div onClick={handleStatToggle} className={`${statToggle.includes('H2H') ? '   border-b-2 border-solid border-customBg ' : ''}  s px-2 sm:px-3  cursor-pointer flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`} > H2H</div>}
-          {stats && (stats.length !== 0) && <div onClick={handleStatToggle} className={`${statToggle.includes('Stats') ? '   border-b-2 border-solid border-customBg ' : ''} s px-2 sm:px-3  cursor-pointer flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`} >Stats</div>}
-          <div onClick={handleStatToggle} className={`${statToggle.includes('Line-Up') ? '   border-b-2 border-solid border-customBg ' : ''} s px-2 sm:px-3  cursor-pointer flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`} >Line-Up</div>
-          {odds && <div onClick={handleStatToggle} className={`${statToggle.includes('Odds') ? '   border-b-2 border-solid border-customBg ' : ''} s px-2 sm:px-3  cursor-pointer flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`} > Odds</div>}
-          {match && <div onClick={handleStatToggle} className={`${statToggle.includes('Match Info') ? '   border-b-2 border-solid border-customBg ' : ''} s px-2 sm:px-3  cursor-pointer flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`} > Match Info</div>}
+        <div className={`${toggleMode ? 'text-darkText' : 'text-lightText' } fixtures_scroll flex gap-4 overflow-x-scroll m-auto w-[95vw] sm:w-full justify-between mb-3 py-2 px-3 rounded   text-base sm:text-lg  bg-customBg2 `}>
+          {match && <button onClick={handleStatToggle} className={`${statToggle.includes('Match Info') ? 'text-customBg after:block after:bg-customBg after:w-[100%] after:scale-[120%] after:h-[2px] after:animate-sel2   ' : ''} px-2 sm:px-3  cursor-pointer flex flex-col items-center flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`} > Match Info</button>}
+          {events && <button onClick={handleStatToggle} className={`${statToggle.includes('Events') ? '  text-customBg after:block after:bg-customBg after:w-[100%] after:scale-[120%] after:h-[2px] after:animate-sel2  ' : ''}  sm:px-3 px-2 cursor-pointer flex flex-col items-center flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700 `} > Events</button>}
+          {hToH && (hToH.length !== 0) && <button onClick={handleStatToggle} className={`${statToggle.includes('H2H') ? '   text-customBg after:block after:bg-customBg after:w-[100%] after:scale-[120%] after:h-[2px] after:animate-sel2  ' : ''}  px-2 sm:px-3  cursor-pointer flex flex-col items-center flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`} > H2H</button>}
+          {stats && (stats.length !== 0) && <button onClick={handleStatToggle} className={`${statToggle.includes('Stats') ? '   text-customBg after:block after:bg-customBg after:w-[100%] after:scale-[120%] after:h-[2px] after:animate-sel2  ' : ''} px-2 sm:px-3  cursor-pointer flex flex-col items-center flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`} >Stats</button>}
+          <button onClick={handleStatToggle} className={`${statToggle.includes('Line-Up') ? '  text-customBg after:block after:bg-customBg after:w-[100%] after:scale-[120%] after:h-[2px] after:animate-sel2   ' : ''} px-2 sm:px-3  cursor-pointer flex flex-col items-center flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`} >Line-Up</button>
+          {odds && <button onClick={handleStatToggle} className={`${statToggle.includes('Odds') ? '  text-customBg after:block after:bg-customBg after:w-[100%] after:scale-[120%] after:h-[2px] after:animate-sel2   ' : ''} px-2 sm:px-3  cursor-pointer flex flex-col items-center flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`} > Odds</button>}
           
           
         </div>
         <div>
-          <Event events={events} statToggle={statToggle} windowWidth={windowWidth}/> 
+          <MatchInfo match={match} statToggle={statToggle} windowWidth={windowWidth} toggleMode={toggleMode}/>
         </div>
         <div>
-          <HeadToHead statToggle={statToggle} hToH={hToH} windowWidth={windowWidth}/>
+          <Event events={events} statToggle={statToggle} windowWidth={windowWidth} toggleMode={toggleMode}/> 
         </div>
         <div>
-          <Odds statToggle={statToggle} odds={odds} handleClick={handleClick} bookie={bookie} windowWidth={windowWidth}/>
+          <HeadToHead statToggle={statToggle} hToH={hToH} windowWidth={windowWidth} toggleMode={toggleMode}/>
+        </div>
+        <div>
+          <Odds statToggle={statToggle} odds={odds} handleClick={handleClick} bookie={bookie} windowWidth={windowWidth} toggleMode={toggleMode}/>
         </div>
         
         <div>
-          <Statistics statToggle={statToggle} stats={stats} windowWidth={windowWidth}/>
+          <Statistics statToggle={statToggle} stats={stats} windowWidth={windowWidth} toggleMode={toggleMode}/>
         </div>
         <div>
-          <LineUp statToggle={statToggle} lineUp={lineUp} windowWidth={windowWidth}/>
-        </div>
-        <div>
-          <MatchInfo match={match} statToggle={statToggle} windowWidth={windowWidth}/>
+          <LineUp statToggle={statToggle} lineUp={lineUp} windowWidth={windowWidth} toggleMode={toggleMode}/>
         </div>
       </div>
         )

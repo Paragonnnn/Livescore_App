@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const LineUp = ({statToggle, lineUp, windowWidth}) => {
+const LineUp = ({statToggle, lineUp, windowWidth,toggleMode}) => {
   return (
-      <div className={`${windowWidth < 1024 && (statToggle.includes('Line-Up') ? 'block' : 'hidden')}`}>
+      <div className={`${windowWidth < 1024 && (statToggle.includes('Line-Up') ? 'block' : 'hidden')} ${toggleMode? 'text-darkText' : 'text-lightText'}`}>
         <div className=' text-xl font-bold text-customBg bg-customBg2 mb-4 p-2 rounded '>Line Up</div>
         <div className={` flex justify-between flex-col sm:flex-row lg:animate-zoom animate-swipe bg-customBg2 p-2 rounded `}>
             <div className=' sm:w-[48%] w-full  '>
@@ -12,7 +12,7 @@ const LineUp = ({statToggle, lineUp, windowWidth}) => {
                         lineUp && 
                         lineUp.map((coach) => (
                             coach.home_team.coaches.map((coache,index) => (
-                                <div key={index} className=' text-gray-400'>{coache.coache}(coach)</div>
+                                <div key={index} className=' '>{coache.coache}(coach)</div>
                                 ))
                                 ))
                             }
@@ -24,7 +24,7 @@ const LineUp = ({statToggle, lineUp, windowWidth}) => {
                                 {lineUp.home_team.starting_lineups.sort((a,b) => (
                             parseInt(a.player_position) - parseInt(b.player_position)
                         )).map((startingLineUp,index) => (
-                                    <div key={index} className='py-2 flex gap-2 px-2 text-xs sm:text-base text-gray-400'>
+                                    <div key={index} className='py-2 flex gap-2 px-2 text-xs sm:text-base '>
                                         <Link to={`/player/${startingLineUp.player.replace(/ +/g, '-')}/${startingLineUp.player_key}`} className=''>
                                             {startingLineUp.player}
                                         </Link>
@@ -44,7 +44,7 @@ const LineUp = ({statToggle, lineUp, windowWidth}) => {
                         lineUp && 
                         lineUp.map(lineUp => (
                             lineUp.home_team.substitutes.map((sub,index) => (
-                                <div key={index} className='py-2 flex gap-2 px-2 text-xs sm:text-base text-gray-400'>
+                                <div key={index} className='py-2 flex gap-2 px-2 text-xs sm:text-base '>
                                     <Link to={`/player/${sub.player.replace(/ +/g, '-')}/${sub.player_key}`}>
                                         {sub.player}
 
@@ -71,7 +71,7 @@ const LineUp = ({statToggle, lineUp, windowWidth}) => {
                     {
                         lineUp &&
                         lineUp.map((lineUp,index) => (
-                            <div key={index} className='divide-y divide-black text-gray-400'>
+                            <div key={index} className='divide-y divide-black '>
                                 {lineUp.away_team.starting_lineups.sort((a,b) => (
                             parseInt(a.player_position) - parseInt(b.player_position)
                         )).map((startingLineUp,index) => (
@@ -98,7 +98,7 @@ const LineUp = ({statToggle, lineUp, windowWidth}) => {
                         lineUp && 
                         lineUp.map(lineUp => (
                             lineUp.away_team.substitutes.map((sub,index) => (
-                                <div key={index} className='py-2 flex sm:justify-end px-2 text-xs sm:text-base text-gray-400'>
+                                <div key={index} className='py-2 flex sm:justify-end px-2 text-xs sm:text-base '>
                                     <div className=' flex sm:flex-row flex-row-reverse gap-2'>
                                         <div className=' opacity-60'>({sub.player_number})</div>
                                         <Link to={`/player/${sub.player.replace(/ +/g, '-')}/${sub.player_key}`}>
