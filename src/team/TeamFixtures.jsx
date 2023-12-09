@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const TeamFixtures = ({teamFixtures}) => {
+const TeamFixtures = ({teamFixtures,teamResults}) => {
 
     const [filterFixtures,setFilterFixtures] = useState('Fixtures')
 
@@ -16,8 +16,8 @@ const TeamFixtures = ({teamFixtures}) => {
                 <div className={`${filterFixtures === 'Results' ? 'bg-customBg text-white' : ''} cursor-pointer px-3 py-1 font-bold text-lg border border-solid border-customBg rounded-full hover:bg-opacity-90 active:bg-opacity-80`} onClick={() => setFilterFixtures('Results')}>results</div>
             </div>
           {
-              teamFixtures &&
-              teamFixtures.filter(past => (filterFixtures === 'Fixtures' && !past.event_final_result.includes('?') ? past.event_status === '' : past.event_status !== '')).reverse().map(h => (
+              ( teamFixtures) &&
+              teamFixtures.map(h => (
                 <div key={h.event_key} className=' py-4  divide-y divide-black '>
                     <div className=' mb-2 text-lg font-semibold rounded bg-customBg2 text-customBg p-2'>
                         <div>{h.league_name}</div>

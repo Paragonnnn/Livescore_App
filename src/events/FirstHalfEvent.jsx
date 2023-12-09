@@ -7,7 +7,7 @@ const FirstHalfEvent = ({events,toggleMode}) => {
         {
           events &&
           events.filter(eve => eve.info_time === '1st Half').sort((a,b) => (
-            parseInt(a.time) - parseInt(b.time)
+            eval(a.time) - eval(b.time)
           )).map((eve, index) => (
             (eve.home_scorer || eve.away_scorer || eve.home_fault || eve.away_fault) && 
 

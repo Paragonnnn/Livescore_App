@@ -2,6 +2,7 @@ import React from 'react'
 
 const Odds = ({statToggle, odds, handleClick, bookie,windowWidth,toggleMode }) => {
   return (
+    
     <div>
         <div className={`${windowWidth < 1024 && (statToggle.includes('Odds') ? 'block' : 'hidden')} ${toggleMode? 'text-darkText' : 'text-lightText'} lg:animate-zoom animate-swipe `}>
           {
@@ -26,7 +27,7 @@ const Odds = ({statToggle, odds, handleClick, bookie,windowWidth,toggleMode }) =
                       </div>
                       <div className=' grid grid-cols-3 gap-2'>
                           <a href={`${bookie === '1xBet' ? 'https://1xbet.com/' : 'https://betway.com/'}`} target='_blank'>
-                        <div className=' border border-solid border-gray-700  bg-customBg2 flex justify-center flex-col items-center py-1 rounded'>
+                        <div className={` border border-solid border-gray-700  bg-customBg2 flex justify-center flex-col items-center py-1 rounded after:block after:bg-gray-700 after:w-[${odd.odd_1 * 10}%] after:h-1`}>
                             <span className=' opacity-60 text-xxs sm:text-xs'>1</span>
                             <div className='text-xs sm:text-base'>{odd.odd_1}</div>
 

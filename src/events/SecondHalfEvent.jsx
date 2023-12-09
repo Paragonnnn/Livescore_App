@@ -7,7 +7,7 @@ const SecondHalfEvent = ({events}) => {
         {
                       events &&
                       events.filter(eve => eve.info_time === '2nd Half').sort((a,b) => (
-                        parseInt(a.time) - parseInt(b.time)
+                        eval(a.time) - eval(b.time)
                       )).map((eve, index) => (
                         (eve.home_scorer || eve.away_scorer || eve.home_fault || eve.away_fault) && 
                         
@@ -35,7 +35,7 @@ const SecondHalfEvent = ({events}) => {
                                   }
                                   {
                                     (eve.home_scorer && !isNaN(eve.score.slice(0,1))) && (
-                                      <div className='flex gap-1 justify-end  items-center sm:text-base text-xxs'>
+                                      <div className='flex gap-1 justify-end  items-center sm:text-xs text-xxs'>
                                         <div className='flex flex-col items-end'>
                                           <div className=' '>{eve.home_scorer}</div>
                                           {

@@ -1,5 +1,6 @@
 import React from 'react'
 import { calendar2, darkCalendar, darkWhistle, lightStadium, stadium, whistle } from '..'
+import Calendar from '../svg/calendar'
 
 const MatchInfo = ({statToggle, match,windowWidth,toggleMode}) => {
     
@@ -22,7 +23,8 @@ const MatchInfo = ({statToggle, match,windowWidth,toggleMode}) => {
                             {match.event_referee}
                         </div>
                         <div className=' border-2 border-solid border-customBg2 px-3 py-2 rounded '>
-                            <img src={toggleMode? darkCalendar: calendar2} alt="" className=' h-5 w-5 opacity-60'/>
+                            <Calendar toggleMode={toggleMode}/>
+                            {/* <img src={toggleMode? darkCalendar: calendar2} alt="" /> */}
                             {match.event_date}
                         </div>
                     </div>
