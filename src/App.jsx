@@ -70,6 +70,7 @@ const App = () => {
       `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`
     );
     setShowCalendar(false);
+    setCheck([])
   };
   const handleDateFocus = (e) => {
     // e.key && e.code === "Backspace" && e.preventDefault();
@@ -163,7 +164,10 @@ const App = () => {
           );
           console.log(json.result);
           console.log(liveCheck);
-          console.log(check);
+          console.log(json.result.map(
+            (fixture) =>
+              !check.includes(fixture.league_key) && fixture.league_key
+          ));
         })
         .catch((err) => {
           setLoadingFixtures(false);
