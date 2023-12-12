@@ -34,7 +34,7 @@ const Countries = ({loadingCountries, countries, error, leagues, toggleMode}) =>
     }
     
   return (
-    <div className='   px-1 bg-customBg2 sticky top-[90px] max-h-[90vh]'>
+    <div className='   px-1 bg-customBg2 sticky top-[90px] max-h-[100%] '>
         <Header setSearch={setSearch} search={search} toggleMode={toggleMode}/>
         
         {/* {
@@ -85,12 +85,12 @@ const Countries = ({loadingCountries, countries, error, leagues, toggleMode}) =>
 
             {
                 (seeAll === 20 && !error) &&
-                <div onClick={handleSeeAll} className={`${toggleMode ? 'text-darkText' : 'text-lightText'} cursor-pointer text-center `}>See All</div>
+                <div onClick={handleSeeAll} className={`${toggleMode ? 'text-darkText' : 'text-lightText'} cursor-pointer text-center mb-28 pt-2`}>See All</div>
 
             }
             {
                 (seeAll === countries.lenght && !error) &&
-                <div onClick={handleSeeLess} className={`${toggleMode ? 'text-darkText' : 'text-lightText'} cursor-pointer text-center `}>See Less</div>
+                <div onClick={handleSeeLess} className={`${toggleMode ? 'text-darkText' : 'text-lightText'} cursor-pointer text-center mb-28 pt-2`}>See Less</div>
 
             }
             

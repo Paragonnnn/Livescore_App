@@ -262,7 +262,8 @@ const App = () => {
       <div className=" max-w-[1440px] m-auto  lg:p-4 p-1">
         <Routes>
           <Route
-            path="/"
+            path="/:date"
+            
             element={
               <Home
                 countries={countries}

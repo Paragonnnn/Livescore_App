@@ -16,8 +16,8 @@ const TeamFixtures = ({teamFixtures,teamResults}) => {
                 <div className={`${filterFixtures === 'Results' ? 'bg-customBg text-white' : ''} cursor-pointer px-3 py-1 font-bold text-lg border border-solid border-customBg rounded-full hover:bg-opacity-90 active:bg-opacity-80`} onClick={() => setFilterFixtures('Results')}>results</div>
             </div>
           {
-              ( teamFixtures) &&
-              teamFixtures.map(h => (
+              ( teamFixtures && teamResults) &&
+              (filterFixtures == 'Fixtures' ? teamFixtures : teamResults).reverse().map(h => (
                 <div key={h.event_key} className=' py-4  divide-y divide-black '>
                     <div className=' mb-2 text-lg font-semibold rounded bg-customBg2 text-customBg p-2'>
                         <div>{h.league_name}</div>

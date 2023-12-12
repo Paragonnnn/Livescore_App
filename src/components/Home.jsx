@@ -54,6 +54,7 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
       </div>
         <Countries countries={countries} loadingCountries={loadingCountries} error={error} leagues={leagues} toggleMode={toggleMode}/>
       </div>
+        <div className={`${showCalendar ? 'block' : 'hidden'}  backdrop-blur-xl fixed top-0 left-0 w-full h-full bg-white opacity-10`}></div>
       <div className={`${toggleMode? 'bg-customBg3':'bg-darkCustomBg3'} block fixed lg:hidden bottom-[-5px] w-full  z-10 p-3 left-0`}>
         <div>
           <div className={`${showCalendar ? 'block' : 'hidden'}  ${toggleMode? 'bg-customBg3':'bg-darkCustomBg3'} rounded-t-xl absolute bottom-[52px] animate-dis left-0 `}  tabIndex={-1}  ref={focus} onFocus={console.log('yii')}>

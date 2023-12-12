@@ -57,7 +57,7 @@ const Teams = () => {
           setTeamFixtures(
             json.result.filter(
               (past) =>
-                past.event_status == "" &&
+                
                 new Date(past.event_date) >=
                   new Date(
                     `${date.getFullYear()}-${
