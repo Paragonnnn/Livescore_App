@@ -275,7 +275,7 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
           <div
             className={`${
               toggleMode ? "text-darkText" : "text-lightText"
-            } fixtures_scroll flex gap-4 overflow-x-scroll m-auto w-[95vw] sm:w-full justify-between mb-3 py-2 px-3 rounded   text-base sm:text-lg  bg-customBg2 `}
+            } fixtures_scroll flex gap-4 overflow-x-scroll m-auto w-[95vw] sm:w-full justify-between mb-3 py-2 px-3 rounded text-base sm:text-lg  bg-customBg2 `}
           >
             {match && (
               <button
@@ -284,7 +284,7 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
                   statToggle.includes("Match Info")
                     ? "text-customBg after:block after:bg-customBg after:w-[100%] after:scale-[120%] after:h-[2px] after:animate-sel2   "
                     : ""
-                } px-2 sm:px-3  cursor-pointer flex flex-col items-center flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`}
+                } px-2 sm:px-3  cursor-pointer flex flex-col items-center flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700 active:bg-opacity-30`}
               >
                 {" "}
                 Match Info
@@ -297,7 +297,7 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
                   statToggle.includes("Events")
                     ? "  text-customBg after:block after:bg-customBg after:w-[100%] after:scale-[120%] after:h-[2px] after:animate-sel2  "
                     : ""
-                }  sm:px-3 px-2 cursor-pointer flex flex-col items-center flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700 `}
+                }  sm:px-3 px-2 cursor-pointer flex flex-col items-center flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700 active:bg-opacity-30 `}
               >
                 {" "}
                 Events
@@ -310,7 +310,7 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
                   statToggle.includes("H2H")
                     ? "   text-customBg after:block after:bg-customBg after:w-[100%] after:scale-[120%] after:h-[2px] after:animate-sel2  "
                     : ""
-                }  px-2 sm:px-3  cursor-pointer flex flex-col items-center flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`}
+                }  px-2 sm:px-3  cursor-pointer flex flex-col items-center flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700 active:bg-opacity-30`}
               >
                 {" "}
                 H2H
@@ -323,7 +323,7 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
                   statToggle.includes("Stats")
                     ? "   text-customBg after:block after:bg-customBg after:w-[100%] after:scale-[120%] after:h-[2px] after:animate-sel2  "
                     : ""
-                } px-2 sm:px-3  cursor-pointer flex flex-col items-center flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`}
+                } px-2 sm:px-3  cursor-pointer flex flex-col items-center flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700 active:bg-opacity-30`}
               >
                 Stats
               </button>
@@ -334,7 +334,7 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
                 statToggle.includes("Line-Up")
                   ? "  text-customBg after:block after:bg-customBg after:w-[100%] after:scale-[120%] after:h-[2px] after:animate-sel2   "
                   : ""
-              } px-2 sm:px-3  cursor-pointer flex flex-col items-center flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`}
+              } px-2 sm:px-3  cursor-pointer flex flex-col items-center flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700 active:bg-opacity-30`}
             >
               Line-Up
             </button>
@@ -345,7 +345,7 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
                   statToggle.includes("Odds")
                     ? "  text-customBg after:block after:bg-customBg after:w-[100%] after:scale-[120%] after:h-[2px] after:animate-sel2   "
                     : ""
-                } px-2 sm:px-3  cursor-pointer flex flex-col items-center flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700`}
+                } px-2 sm:px-3  cursor-pointer flex flex-col items-center flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700 active:bg-opacity-30`}
               >
                 {" "}
                 Odds

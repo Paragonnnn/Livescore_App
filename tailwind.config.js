@@ -68,6 +68,10 @@ export default {
         mode: {
           '0%': {transform: 'rotate(-20deg)'},
           '100%': {transform: 'rotate(0deg)'}
+        },
+        translate: {
+          '0%': {transform: 'translateX(0)'},
+          '100%': {transform: 'translateX(32px)'}
         }
         
       }, 
@@ -80,7 +84,8 @@ export default {
         sel: 'sel .3s',
         sel2: 'sel .3s',
         countryDropDown: 'countryDropDown .5s',
-        mode: 'mode 1s'
+        mode: 'mode 1s',
+        translate: 'translate .3s'
       },
 
     },

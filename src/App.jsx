@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Countries from "./components/Countries";
 import Leagues from "./components/Leagues";
-import { Link } from "react-router-dom";
+import { Link, useRoutes, useNavigate, useLocation } from "react-router-dom";
 import Home from "./components/Home";
 import { Routes, Route } from "react-router-dom";
 import Teams from "./team/Teams";
@@ -14,6 +14,8 @@ import parseISO from "date-fns/parseISO";
 import { addDays, format, addMonths } from "date-fns";
 import Calendar from "react-calendar";
 import { calendar, darkMode, lightMode, searchLogo } from ".";
+import Dark from "./svg/Dark";
+import Light from "./svg/Light";
 
 const App = () => {
   const [countries, setCountries] = useState([]);
@@ -36,6 +38,8 @@ const App = () => {
 
   const focus = useRef();
 
+  const history = useNavigate()
+  const {pathname} = useLocation()
   document.querySelector("body").style.backgroundColor = `${
     toggleMode ? "#F7F7FF" : "#101419"
   }`;
@@ -64,12 +68,19 @@ const App = () => {
     console.log(date);
     setCalenderDate(
       `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
-    );
-    console.log(date.toISOString().split("T")[0]);
-    console.log(
-      `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`
-    );
-    setShowCalendar(false);
+      );
+      console.log(date.toISOString().split("T")[0]);
+      console.log(
+        `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`
+        );
+        setShowCalendar(false);
+        if (new Date() == new Date(calenderDate)) {
+          history('/')
+        } else{
+
+          history(`/${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
+        }
+        console.log(new Date(calenderDate));
     setCheck([])
   };
   const handleDateFocus = (e) => {
@@ -182,7 +193,7 @@ const App = () => {
     //   clearTimeout(timeoutId);
     // };
     getData();
-  }, [calenderDate]);
+  }, [calenderDate, history]);
 
   // useEffect(() => {
   //   async function getData() {
@@ -227,14 +238,15 @@ const App = () => {
               toggleMode
                 ? " rotate-0 transition-transform"
                 : "-rotate-180 transition-transform"
-            } px-2 md:px-4 cursor-pointer animate-mode`}
+            } px-2 md:px-4 cursor-pointer animate-mode `}
             onClick={() => setToggleMode((prev) => !prev)}
           >
-            <img
+            {/* <img
               src={`${toggleMode ? darkMode : lightMode}`}
               alt=""
               className={`  h-7 w-7`}
-            />
+            /> */}
+            {toggleMode ? <Dark /> : <Light />}
           </button>
         </div>
       </div>
@@ -261,6 +273,35 @@ const App = () => {
 
       <div className=" max-w-[1440px] m-auto  lg:p-4 p-1">
         <Routes>
+          <Route
+            path="/"
+            
+            element={
+              <Home
+                countries={countries}
+                loadingCountries={loadingCountries}
+                error={error}
+                leagues={leagues}
+                check={check}
+                fixtures={fixtures}
+                loadingFixtures={loadingFixtures}
+                fixturesError={fixturesError}
+                currentFixture={currentFixture}
+                setCurrentFixture={setCurrentFixture}
+                liveCheck={liveCheck}
+                windowWidth={windowWidth}
+                calenderDate={calenderDate}
+                setCalenderDate={setCalenderDate}
+                handleDateChange={handleDateChange}
+                handleDateFocus={handleDateFocus}
+                showCalendar={showCalendar}
+                setShowCalendar={setShowCalendar}
+                handleSearchToggleClick={handleSearchToggleClick}
+                toggleMode={toggleMode}
+                history={history}
+              />
+            }
+          />
           <Route
             path="/:date"
             
@@ -301,7 +342,7 @@ const App = () => {
             }
           />
           <Route path="/leagues/:countryname/:id" element={<Leagues />} />
-          <Route path="/table/:leaguename/:id" element={<Table />} />
+          <Route path="/table/:leaguename/:id" element={<Table toggleMode={toggleMode}/>} />
           <Route
             path="/fixture/:league/:teamsname/:id"
             element={
@@ -314,7 +355,7 @@ const App = () => {
           {/* <Route path='/fixtures' element={<Fixtures check={check} fixtures={fixtures} leagues={leagues} loadingFixtures={loadingFixtures} fixturesError={fixturesError}/>}/> */}
           <Route
             path="/team/:teamname/:id"
-            element={<Teams leagues={leagues} />}
+            element={<Teams leagues={leagues} toggleMode={toggleMode}/>}
           />
           <Route
             path="/player/:playername/:id"

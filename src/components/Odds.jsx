@@ -12,8 +12,8 @@ const Odds = ({statToggle, odds, handleClick, bookie,windowWidth,toggleMode }) =
                 {
                   index === 0 &&
                   <div className=' grid grid-cols-2 gap-2 mb-4'>
-                    <button className={`${bookie === '1xBet'? 'after:block after:bg-gray-700 after:w-full after:h-1 after:animate-sel': ''}  pb-1 cursor-pointer flex flex-col gap-1  items-center `} onClick={handleClick}>1xBet</button>
-                    <button className={`${bookie === 'Betway'? 'after:block after:bg-gray-700 after:w-full after:h-1 after:animate-sel': ''}  pb-1 cursor-pointer flex flex-col gap-1  items-center`} onClick={handleClick}>Betway</button>
+                    <button className={`${bookie === '1xBet'? 'after:block after:bg-customBg after:bg-opacity-50 after:w-full after:h-1 after:animate-sel': ''}  pb-1 cursor-pointer flex flex-col gap-1  items-center `} onClick={handleClick}>1xBet</button>
+                    <button className={`${bookie === 'Betway'? 'after:block after:bg-customBg after:bg-opacity-50 after:w-full after:h-1 after:animate-sel': ''}  pb-1 cursor-pointer flex flex-col gap-1  items-center`} onClick={handleClick}>Betway</button>
                   </div>
 
                 }
@@ -27,7 +27,7 @@ const Odds = ({statToggle, odds, handleClick, bookie,windowWidth,toggleMode }) =
                       </div>
                       <div className=' grid grid-cols-3 gap-2'>
                           <a href={`${bookie === '1xBet' ? 'https://1xbet.com/' : 'https://betway.com/'}`} target='_blank'>
-                        <div className={` border border-solid border-gray-700  bg-customBg2 flex justify-center flex-col items-center py-1 rounded after:block after:bg-gray-700 after:w-[${odd.odd_1 * 10}%] after:h-1`}>
+                        <div className={` border border-solid border-gray-700  bg-customBg2 flex justify-center flex-col items-center py-1 rounded `}>
                             <span className=' opacity-60 text-xxs sm:text-xs'>1</span>
                             <div className='text-xs sm:text-base'>{odd.odd_1}</div>
 

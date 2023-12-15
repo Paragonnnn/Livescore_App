@@ -14,7 +14,7 @@ const ExtraTimeEvent = ({events}) => {
             <div key={index} className='py-2 divide-y-2 divide-customBg2'>
                 {
                 index === 0 && (
-                    <div className=' text-center mb-2'>Extratime</div>
+                    <div className=' text-center bg-customBg2 mb-2 text-lg p-2'>Extratime</div>
                 )
                 }
                 {

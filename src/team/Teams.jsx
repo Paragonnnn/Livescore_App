@@ -7,7 +7,7 @@ import Midfielders from "./team_players/Midfielders";
 import Forwards from "./team_players/Forwards";
 import TeamFixtures from "./TeamFixtures";
 
-const Teams = () => {
+const Teams = ({toggleMode}) => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isCap, setIsCap] = useState([]);
@@ -82,7 +82,7 @@ const Teams = () => {
     getData();
   }, [id]);
   return (
-    <div className="  md:p-4 lg:grid grid-cols-5 gap-4">
+    <div className={`${toggleMode ? 'text-darkText':'text-lightText'}  md:p-4 lg:grid grid-cols-5 gap-4`}>
       {loading && <Loading />}
       {}
       <div className=" bg-customBg2 p-1 md:p-4 h-fit col-span-3 ">
@@ -91,23 +91,23 @@ const Teams = () => {
             <div className=" bg-customBg2 gap-12 p-4 rounded-xl mb-5 bg-opacity-40 w-full flex items-center">
               <img src={team.team_logo} alt="" className=" h-16 md:h-24" />
               <div>
-                <div className="text-3xl font-bold text-gray-300">
+                <div className="text-3xl font-bold ">
                   {team.team_name}{" "}
                 </div>
               </div>
             </div>
 
             <div>
-              <GoalKeepers team={team} />
-              <Defenders team={team} />
-              <Midfielders team={team} />
-              <Forwards team={team} />
+              <GoalKeepers team={team} toggleMode={toggleMode}/>
+              <Defenders team={team} toggleMode={toggleMode}/>
+              <Midfielders team={team} toggleMode={toggleMode}/>
+              <Forwards team={team} toggleMode={toggleMode}/>
             </div>
           </div>
         ))}
       </div>
       <div className=" col-span-2">
-        <TeamFixtures teamFixtures={teamFixtures} teamResults={teamResults} />
+        <TeamFixtures teamFixtures={teamFixtures} teamResults={teamResults} toggleMode={toggleMode}/>
       </div>
     </div>
   );
