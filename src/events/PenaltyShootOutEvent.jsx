@@ -14,13 +14,13 @@ const PenaltyShootOutEvent = ({events}) => {
                         <div key={index} className='py-2 divide-y-2 divide-customBg2'>
                           {
                             index === 0 && (
-                              <div className=' text-center mb-2'>Penalty Shoot-Out</div>
+                              <div className=' text-center bg-customBg2  mb-2 text-lg p-2'>Penalty Shoot-Out</div>
                             )
                           }
                           {
                             <div className='flex justify-between py-2 items-center'>
                               {/* <div className='w-16 text-center text-xs '>{eve.time}</div> */}
-                              <div className='w-[calc(100%-64px)] flex justify-between '>
+                              <div className='flex  w-full justify-between '>
                                 <div className='w-[calc(50%-35px)] '>
                                   {
                                     (eve.card && eve.home_fault) && (

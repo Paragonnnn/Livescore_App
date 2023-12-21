@@ -2,7 +2,7 @@ import React from "react";
 import FirstHalfEvent from "./FirstHalfEvent";
 import SecondHalfEvent from "./SecondHalfEvent";
 import ExtraTimeEvent from "./ExtraTimeEvent";
-import PenaltyShootOutEvent from "../components/PenaltyShootOutEvent";
+import PenaltyShootOutEvent from "./PenaltyShootOutEvent";
 
 const Event = ({ events, statToggle, windowWidth, toggleMode }) => {
   return (

@@ -42,6 +42,7 @@ const Table = ({toggleMode}) => {
         .then((json) => {
           setTable(json.result.total);
           setMappedTable(json.result.total);
+          console.log(json.result.total);
           setHomeTable(json.result.home);
           setAwayTable(json.result.away);
           setError(false);
@@ -98,7 +99,7 @@ const Table = ({toggleMode}) => {
               >
                 Home
               </button>
-              <button
+              <button 
                 className={`${
                   changeTable === "away"
                     ? "border-customBg text-customBg"
@@ -180,7 +181,7 @@ const Table = ({toggleMode}) => {
                 <div>Goals</div>
               </div>
               {
-                <div className=" divide-y divide-black sm:base text-xs">
+                <div className=" divide-y divide-black sm:text-base text-xs">
                   {topScorers &&
                     topScorers.map((top, index) => (
                       <div

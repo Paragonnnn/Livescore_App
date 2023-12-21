@@ -35,7 +35,7 @@ const FirstHalfEvent = ({events,toggleMode}) => {
                       }
                       {
                         (eve.home_scorer && !isNaN(eve.score.slice(0,1))) && (
-                          <div className='flex gap-1 justify-end items-center sm:text-base text-xxs'>
+                          <div className='flex gap-1 justify-end items-center sm:text-xs text-xxs'>
                             <div className='flex flex-col items-end'>
                               <div className=' '>{eve.home_scorer}</div>
                                   {eve.home_assist && (
@@ -59,7 +59,7 @@ const FirstHalfEvent = ({events,toggleMode}) => {
 
                         (!Array.isArray(eve.home_scorer) && eve.score === 'substitution') && (
                             <div className='flex gap-1 justify-end items-center '>
-                                <div className=' flex items-end text-xxs flex-col'>
+                                <div className=' flex items-end sm:text-xs text-xxs flex-col'>
                                     <div className=' text-right'> {eve.home_scorer.in}</div>
                                     <div className=' text-right opacity-70'>{eve.home_scorer.out}</div>
                                 </div>
@@ -106,7 +106,7 @@ const FirstHalfEvent = ({events,toggleMode}) => {
                         
                       }
                       {(eve.card && eve.away_fault) && (
-                        <div className='flex gap-1 items-center text-base text-xxs'>
+                        <div className='flex gap-1 items-center sm:text-xs text-xxs'>
                           <div className={`${eve.card === 'yellow card' ? 'bg-yellow-500' : eve.card === 'red card' ?'bg-red-700' : ''} w-3 h-4 sm:w-4 sm:h-5 rounded-[2px]`}></div>
                           <div>{eve.away_fault}</div>
                         </div>
@@ -119,7 +119,7 @@ const FirstHalfEvent = ({events,toggleMode}) => {
                                     <img src={subIn} className='opacity-70 w-4  ' alt="" />
                                     <img src={subOut} className='opacity-70  w-4  ' alt="" />
                                   </div> 
-                                  <div className=' flex justify-center text-xxs flex-col'>
+                                  <div className=' flex justify-center sm:text-xs text-xxs flex-col'>
                                       <div>{eve.away_scorer.in} </div>
                                       <div className=' opacity-70'>{eve.away_scorer.out} </div>
                                   </div>

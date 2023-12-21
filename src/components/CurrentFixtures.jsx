@@ -157,7 +157,7 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
   useEffect(() => {
     async function getData() {
       await fetch(
-        `https://apiv2.allsportsapi.com/football/?met=Fixtures&matchId=${id}&timezone=Africa/Lagos&APIkey=${api_key}`
+        `https://apiv2.allsportsapi.com/football/?met=Fixtures&withPlayerStats=1&matchId=${id}&timezone=Africa/Lagos&APIkey=${api_key}`
       )
         .then((res) => res.json())
         .then((json) => {
@@ -230,6 +230,12 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
         <div className=" grid grid-cols-5 gap-4">
           <div className=" col-span-2">
             <CurrentFixtureInfo match={match} toggleMode={toggleMode} />
+            <MatchInfo
+              match={match}
+              statToggle={statToggle}
+              windowWidth={windowWidth}
+              toggleMode={toggleMode}
+            />
             <Odds
               statToggle={statToggle}
               odds={odds}
