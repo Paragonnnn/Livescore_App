@@ -8,6 +8,7 @@ import Odds from "./Odds";
 import LineUp from "./LineUp";
 import CurrentFixtureInfo from "./CurrentFixtureInfo";
 import MatchInfo from "./MatchInfo";
+import Standing from "./Standing";
 
 const CurrentFixtures = ({ toggleMode, windowWidth }) => {
   const [loading, setLoading] = useState(false);
@@ -24,7 +25,18 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
   const [statToggle, setStatToggle] = useState("Events");
   const [lineUp, setLineUp] = useState([]);
   const [sub, setSub] = useState([]);
+  const [playerStat, setPlayerStat] = useState([]);
+  const [getLeagueId, setGetLeagueId] = useState(null);
+  const [table, setTable] = useState([]);
+  const [homeTable, setHomeTable] = useState([]);
+  const [awayTable, setAwayTable] = useState([]);
+  const [mappedTable, setMappedTable] = useState(table);
+  const [changeTable, setChangeTable] = useState("all");
+  const [getHomeTeamId,setGetHomeTeamId] = useState(null)
+  const [getAwayTeamId,setGetAwayTeamId] = useState(null)
+
   const { id } = useParams();
+  console.log(useParams());
 
   const handleClick = (e) => {
     let book = e.target.innerHTML;
@@ -42,6 +54,21 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
     // if (!statToggle.includes(current)) {
     //   setStatToggle([current])
     // }
+  };
+  const home = () => {
+    setChangeTable("home");
+    setMappedTable(homeTable);
+    console.log(changeTable);
+  };
+  const away = () => {
+    setChangeTable("away");
+    setMappedTable(awayTable);
+    console.log(changeTable);
+  };
+  const all = () => {
+    setChangeTable("all");
+    setMappedTable(table);
+    console.log(changeTable);
   };
 
   // for (let i = 0; i < 101; i++) {
@@ -162,11 +189,16 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
         .then((res) => res.json())
         .then((json) => {
           setMatch(json.result);
-          console.log(json.result);
+          setGetLeagueId(parseFloat(json.result.map((id) => id.league_key)));
+          setGetHomeTeamId(parseFloat(json.result.map((id) => id.home_team_key)));
+          setGetAwayTeamId(parseFloat(json.result.map((id) => id.away_team_key)));
+          console.log(parseFloat(json.result.map((id) => id.league_key)));
           setStats(json.result.map((s) => s.statistics));
           setLineUp(json.result.map((s) => s.lineups));
+          setPlayerStat(json.result.map((s) => s.player_stats));
           console.log(json.result.map((s) => s.lineups));
           console.log(json.result.map((s) => s.statistics));
+          console.log(json.result.map((s) => s.player_stats));
           // setEvents((json.result.cards).concat(json.result.goalscorers))
           // setCards(json.result.map(c => (c.cards)))
           // setGoalscorers(json.result.map(g => (g.goalscorers)))
@@ -224,6 +256,23 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
     getData();
   }, [match]);
 
+  useEffect(() => {
+    async function getData() {
+      await fetch(
+        `https://apiv2.allsportsapi.com/football/?&met=Standings&leagueId=${getLeagueId}&APIkey=${api_key}`
+      )
+        .then((res) => res.json())
+        .then((json) => {
+          setTable(json.result.total);
+          setHomeTable(json.result.home);
+          setAwayTable(json.result.away);
+          setMappedTable(json.result.total);
+          console.log(json.result);
+        });
+    }
+    getData();
+  }, [getLeagueId]);
+
   return (
     <div className=" gap-4">
       {windowWidth > 1024 ? (
@@ -262,6 +311,18 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
               lineUp={lineUp}
               windowWidth={windowWidth}
               toggleMode={toggleMode}
+              playerStat={playerStat}
+            />
+            <Standing
+              table={table}
+              changeTable={changeTable}
+              mappedTable={mappedTable}
+              toggleMode={toggleMode}
+              all={all}
+              home={home}
+              away={away}
+              getAwayTeamId={getAwayTeamId}
+              getHomeTeamId={getHomeTeamId}
             />
           </div>
         </div>
@@ -357,6 +418,19 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
                 Odds
               </button>
             )}
+            {table && (
+              <button
+                onClick={handleStatToggle}
+                className={`${
+                  statToggle.includes("Table")
+                    ? "  text-customBg after:block after:bg-customBg after:w-[100%] after:scale-[120%] after:h-[2px] after:animate-sel2   "
+                    : ""
+                } px-2 sm:px-3  cursor-pointer flex flex-col items-center flex-shrink-0 font-medium sm:font-semibold active:bg-gray-700 active:bg-opacity-30`}
+              >
+                {" "}
+                Table
+              </button>
+            )}
           </div>
           <div>
             <MatchInfo
@@ -407,6 +481,21 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
               lineUp={lineUp}
               windowWidth={windowWidth}
               toggleMode={toggleMode}
+            />
+          </div>
+          <div>
+            <Standing
+              table={table}
+              changeTable={changeTable}
+              mappedTable={mappedTable}
+              toggleMode={toggleMode}
+              all={all}
+              home={home}
+              away={away}
+              statToggle={statToggle}
+              windowWidth={windowWidth}
+              getAwayTeamId={getAwayTeamId}
+              getHomeTeamId={getHomeTeamId}
             />
           </div>
         </div>

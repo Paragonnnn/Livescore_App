@@ -8,6 +8,7 @@ import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 import { teamLogo } from '..'
 import ClickAwayListener from 'react-click-away-listener'
+import SearchTeamAndPlayer from './SearchTeamAndPlayer'
 
 const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, loadingFixtures, fixturesError, currentFixture, setCurrentFixture, liveCheck, windowWidth, calenderDate, setCalenderDate, handleDateChange,handleDateFocus,maxDate, showCalendar, setShowCalendar,handleSearchToggleClick, toggleMode}) => {
 
@@ -24,8 +25,8 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
       <Link to={`/fixtures`}>
         <button>fixtures</button>
       </Link> */}
-      
       <div className='hidden lg:block col-span-3'>
+      {/* <SearchTeamAndPlayer /> */}
         <div className=' bg-customBg2 rounded-t'>
           <Calendar value={calenderDate} onChange={handleDateChange} className={` text-customBg mb-2 bg-transparent border-none  bg-opacity-50 w-full`} minDetail='year' maxDetail='month'/>
           <div onClick={() => setCalenderDate(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)} className='  px-3 py-2 rounded-full text-customBg  w-fit mb-4 cursor-pointer hover:opacity-80 active:opacity-60'>Today</div>
@@ -98,18 +99,18 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
               currentFixture.map(fixture => (
                 <div key={fixture.event_key} className=''>
                   <div>{fixture.event_date}</div>
-                  <div className=' w-full border border-solid border-gray-400 border-opacity-20 p-2 grid grid-cols-5 items-center rounded'>
-                    <Link to={`/team/${fixture.event_home_team.replace(/ +/g,'-')}/${fixture.home_team_key}`} className='text-center col-span-2 justify-self-start flex flex-col gap-1 justify-center items-center'>
+                  <div className=' w-full border border-solid border-gray-400 border-opacity-20 p-2 flex  items-center rounded'>
+                    <Link to={`/team/${fixture.event_home_team.replace(/ +/g,'-')}/${fixture.home_team_key}`} className='text-center w-1/3 justify-self-start flex flex-col gap-1 justify-center items-center'>
                       <img src={fixture.home_team_logo} alt="" className='w-[50px]'/>
                       <div className={` ${toggleMode ? 'text-darkText' : 'text-lightText'} text-xxs xl:text-xs `}>
                         {fixture.event_home_team}
                       </div>
                     </Link> 
-                    <div className={`${fixture.event_live === '1' ? 'text-live   ' : 'text-black '} text-center col-span-1 ${toggleMode ? 'text-darkText' : 'text-lightText'} `}>
+                    <div className={`${fixture.event_live === '1' ? 'text-live   ' : 'text-black '} text-center w-1/3 ${toggleMode ? 'text-darkText' : 'text-lightText'} `}>
                       <div className=' lg:text-base xl:text-xl'>{fixture.event_final_result}</div>
                       <div className='text-base'>{fixture.event_status === 'Finished' ? 'FT' : fixture.event_status === 'Half Time' ? 'HT' : fixture.event_status}</div>
                     </div>
-                    <Link to={`/team/${fixture.event_away_team.replace(/ +/g,'-')}/${fixture.away_team_key}`} className='text-center col-span-2 justify-self-end flex flex-col gap-1 justify-center items-center'>
+                    <Link to={`/team/${fixture.event_away_team.replace(/ +/g,'-')}/${fixture.away_team_key}`} className='text-center w-1/3 justify-self-end flex flex-col gap-1 justify-center items-center'>
                       <img src={fixture.away_team_logo} alt="" className='w-[50px]'/>
                       <div className={` ${toggleMode ? 'text-darkText' : 'text-lightText'} text-xxs xl:text-xs `}>
                         {fixture.event_away_team}

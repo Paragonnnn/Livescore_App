@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const LineUp = ({ statToggle, lineUp, windowWidth, toggleMode }) => {
+const LineUp = ({
+  statToggle,
+  lineUp,
+  windowWidth,
+  toggleMode,
+  playerStat,
+}) => {
+  const [showStatToggle, setShowStatToggle] = useState(false);
+  const [clickedPlayer, setClickedPlayer] = useState(null);
+  const showPlayerStat = (clickedPlayerKey) => {
+    if (!showStatToggle) {
+      setShowStatToggle(true);
+      console.log(showStatToggle);
+      setClickedPlayer(clickedPlayerKey);
+    }
+  };
   return (
     <div
       className={`${
         windowWidth < 1024 &&
         (statToggle.includes("Line-Up") ? "block" : "hidden")
-      } ${toggleMode ? "text-darkText" : "text-lightText"}`}
+      } ${toggleMode ? "text-darkText" : "text-lightText"} relative`}
     >
       <div className=" text-xl font-bold text-customBg bg-customBg2 mb-4 p-2 rounded ">
         Line Up
@@ -44,22 +59,51 @@ const LineUp = ({ statToggle, lineUp, windowWidth, toggleMode }) => {
                           key={index}
                           className="py-2 flex gap-2 px-2 text-xs sm:text-base "
                         >
-                          <Link
-                            to={`/player/${startingLineUp.player.replace(
-                              / +/g,
-                              "-"
-                            )}/${startingLineUp.player_key}`}
-                            className=" flex gap-4 items-center"
+                          <div
+                            className=" flex gap-4 items-center cursor-pointer"
+                            onClick={() =>
+                              showPlayerStat(startingLineUp.player_key)
+                            }
                           >
                             <div className="  opacity-60 border-2 border-solid border-white h-7 w-7 flex justify-center items-center rounded-full">
                               {startingLineUp.player_number}
                             </div>
                             {startingLineUp.player}
-                          </Link>
+                          </div>
                         </div>
                       ))}
                   </div>
                 ))}
+              <div
+                className={`${
+                  showStatToggle ? "visible" : "invisible"
+                } absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] border border-solid border-red-600 `}
+              >
+                {playerStat &&
+                  playerStat.map((stat) => (
+                    <div>
+                      {stat.home
+                        .filter((stat) => stat.player_key == clickedPlayer)
+                        .map((stat) => (
+                          <div>
+                            {stat.player_name}
+                            {stat.player_position}
+                            <Link
+                              to={`/player/${stat.player_name.replace(
+                                / +/g,
+                                "-"
+                              )}/${stat.player_key}`}
+                            >
+                              see player
+                            </Link>
+                            <div onClick={() => setShowStatToggle(false)}>
+                              X
+                            </div>
+                          </div>
+                        ))}
+                    </div>
+                  ))}
+              </div>
             </div>
           </div>
           <div className="divide-y divide-black">
@@ -118,23 +162,50 @@ const LineUp = ({ statToggle, lineUp, windowWidth, toggleMode }) => {
                         className=" py-2 flex sm:justify-end px-2 text-xs sm:text-base"
                       >
                         <div className=" flex sm:flex-row flex-row-reverse gap-2">
-                          <Link
-                            to={`/player/${startingLineUp.player.replace(
-                              / +/g,
-                              "-"
-                            )}/${startingLineUp.player_key}`}
-                            className=" flex gap-4 items-center"
+                          <div
+                            className=" flex gap-4 items-center cursor-pointer"
+                            onClick={() =>
+                              showPlayerStat(startingLineUp.player_key)
+                            }
                           >
                             {startingLineUp.player}
-                          <div className="opacity-60 border-2 border-solid border-white h-7 w-7 flex justify-center items-center rounded-full">
-                            {startingLineUp.player_number}
+                            <div className="opacity-60 border-2 border-solid border-white h-7 w-7 flex justify-center items-center rounded-full">
+                              {startingLineUp.player_number}
+                            </div>
                           </div>
-                          </Link>
                         </div>
                       </div>
                     ))}
                 </div>
               ))}
+            <div
+              className={`${
+                showStatToggle ? "visible" : "invisible"
+              } absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] border border-solid border-red-600 `}
+            >
+              {playerStat &&
+                playerStat.map((stat) => (
+                  <div>
+                    {stat.away
+                      .filter((stat) => stat.player_key == clickedPlayer)
+                      .map((stat) => (
+                        <div>
+                          {stat.player_name}
+                          {stat.player_position}
+                          <Link
+                            to={`/player/${stat.player_name.replace(
+                              / +/g,
+                              "-"
+                            )}/${stat.player_key}`}
+                          >
+                            see player
+                          </Link>
+                          <div onClick={() => setShowStatToggle(false)}>X</div>
+                        </div>
+                      ))}
+                  </div>
+                ))}
+            </div>
           </div>
           <div className="divide-y divide-black ">
             <div className=" text-base sm:text-lg font-semibold mt-4 sm:text-right text-customBg text-center">
@@ -150,12 +221,14 @@ const LineUp = ({ statToggle, lineUp, windowWidth, toggleMode }) => {
                     <div className=" flex sm:flex-row flex-row-reverse gap-2">
                       <Link
                         to={`/player/${sub.player.replace(/ +/g, "-")}/${
-                            sub.player_key
+                          sub.player_key
                         }`}
                         className=" flex gap-4 items-center"
                       >
                         {sub.player}
-                        <div className="opacity-60 border-2 border-solid border-white h-7 w-7 flex justify-center items-center rounded-full">{sub.player_number}</div>
+                        <div className="opacity-60 border-2 border-solid border-white h-7 w-7 flex justify-center items-center rounded-full">
+                          {sub.player_number}
+                        </div>
                       </Link>
                     </div>
                   </div>
