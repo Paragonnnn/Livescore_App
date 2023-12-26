@@ -107,7 +107,7 @@ const Teams = ({toggleMode}) => {
         ))}
       </div>
       <div className=" col-span-2">
-        <TeamFixtures teamFixtures={teamFixtures} teamResults={teamResults} toggleMode={toggleMode}/>
+        <TeamFixtures teamFixtures={teamFixtures} teamResults={teamResults} toggleMode={toggleMode} id={id}/>
       </div>
     </div>
   );

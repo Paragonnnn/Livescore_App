@@ -26,28 +26,39 @@ const MatchInfo = ({ statToggle, match, windowWidth, toggleMode }) => {
             <div key={index} className=" flex flex-col gap-2">
               {match.event_stadium && (
                 <div className="border-2 border-solid border-customBg2 px-3 py-2 rounded w-full flex flex-col items-center gap-1">
+                  <div className=" flex gap-1 items-center">
                   <img
                     src={toggleMode ? lightStadium : stadium}
                     alt=""
                     className=" h-5 w-5 opacity-60"
-                  />
+                    />
+                    <div className=" opacity-70">(Stadium)</div>
+                  </div>
+                  
                   {match.event_stadium}
                 </div>
               )}
               <div className=" flex gap-3">
                 {match.event_referee && (
                   <div className="border-2 border-solid border-customBg2 px-3 py-2 rounded w-1/2 flex flex-col items-center gap-1">
-                    <img
+                    <div className=" flex gap-1 items-center">
+                      <img
                       src={toggleMode ? darkWhistle : whistle}
                       alt=""
                       className=" h-5 w-5 opacity-60"
                     />
+                    <div className=" opacity-70">(Refree)</div>
+                    </div>
+                    
                     {match.event_referee}
                   </div>
                 )}
                 {match.event_date && (
                   <div className=" border-2 border-solid border-customBg2 px-3 py-2 rounded w-1/2 flex flex-col items-center gap-1">
+                    <div className=" flex gap-1 items-center">
                     <Calendar toggleMode={toggleMode} />
+                    <div className=" opacity-70">(Date)</div>
+                    </div>
                     {/* <img src={toggleMode? darkCalendar: calendar2} alt="" /> */}
                     {match.event_date}
                   </div>

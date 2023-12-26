@@ -32,8 +32,11 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
   const [awayTable, setAwayTable] = useState([]);
   const [mappedTable, setMappedTable] = useState(table);
   const [changeTable, setChangeTable] = useState("all");
-  const [getHomeTeamId,setGetHomeTeamId] = useState(null)
-  const [getAwayTeamId,setGetAwayTeamId] = useState(null)
+  const [getHomeTeamId, setGetHomeTeamId] = useState(null);
+  const [getAwayTeamId, setGetAwayTeamId] = useState(null);
+  const [h2hHomeStat, setH2hHomeStat] = useState([]);
+  const [h2hDrawStat, setH2hDrawStat] = useState([]);
+  const [h2hAwayStat, setH2hAwayStat] = useState([]);
 
   const { id } = useParams();
   console.log(useParams());
@@ -190,8 +193,12 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
         .then((json) => {
           setMatch(json.result);
           setGetLeagueId(parseFloat(json.result.map((id) => id.league_key)));
-          setGetHomeTeamId(parseFloat(json.result.map((id) => id.home_team_key)));
-          setGetAwayTeamId(parseFloat(json.result.map((id) => id.away_team_key)));
+          setGetHomeTeamId(
+            parseFloat(json.result.map((id) => id.home_team_key))
+          );
+          setGetAwayTeamId(
+            parseFloat(json.result.map((id) => id.away_team_key))
+          );
           console.log(parseFloat(json.result.map((id) => id.league_key)));
           setStats(json.result.map((s) => s.statistics));
           setLineUp(json.result.map((s) => s.lineups));
@@ -237,6 +244,11 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
         .then((json) => {
           setHToH(json.result.H2H);
           console.log(json.result.H2H);
+          console.log(parseFloat(json.result.H2H.filter(h => eval(h.event_final_result) < 0).length)/parseFloat(json.result.H2H.filter(h => eval(h.event_final_result) == 0).length));
+          setH2hDrawStat(parseFloat(json.result.H2H.filter(h => eval(h.event_final_result) == 0).length))
+          setH2hHomeStat(parseFloat(json.result.H2H.filter(h => (getHomeTeamId == h.home_team_key && eval(h.event_final_result) > 0) || getHomeTeamId == h.away_team_key && eval(h.event_final_result) < 0).length))
+          setH2hAwayStat(parseFloat(json.result.H2H.filter(h => (getAwayTeamId == h.away_team_key && eval(h.event_final_result) < 0) || getAwayTeamId == h.home_team_key && eval(h.event_final_result) > 0).length))
+          
         })
         .catch((err) => {});
     }
@@ -454,6 +466,9 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
               hToH={hToH}
               windowWidth={windowWidth}
               toggleMode={toggleMode}
+              h2hAwayStat={h2hAwayStat}
+              h2hDrawStat={h2hDrawStat}
+              h2hHomeStat={h2hHomeStat}
             />
           </div>
           <div>
