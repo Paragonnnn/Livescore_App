@@ -233,10 +233,10 @@ const Fixtures = ({leagues, fixtures , check, fixturesError, loadingFixtures, cu
 
                                 }
                                 <div className={`${toggleMode ? ' text-darkText' : 'text-lightText'} text-xxs  flex flex-col justify-center items-center overflow-hidden `}>
-                                    <div>
+                                    <div className={`${fixture.event_live == 1 && fixture.event_status != 'Finished' ? 'hidden' : ''}`}>
                                         {fixture.event_time}
                                     </div>
-                                    <div className={`${ fixture.event_status !== 'Finished' && fixture.event_live ===  '1' ? ' text-live font-semi-bold  text-[.65rem]': '' } ' text-[.5rem] text-center font-semibold w-[40px] text-ellipsis overflow-hidden  '`}>
+                                    <div className={`${ fixture.event_status !== 'Finished' && fixture.event_live ===  '1' ? ' text-live font-bold  text-[.75rem] animate-pulse': '' } ' text-[.5rem] text-center font-semibold w-[40px] text-ellipsis overflow-hidden  '`}>
                                         {fixture.event_status === 'Finished' ? 'FT' : fixture.event_status === 'Half Time' ? 'HT' : fixture.event_status === 'After Pen.' ? 'AP' : fixture.event_status === 'Postponed' || fixture.event_status === 'Cancelled'  ? `${fixture.event_status.slice(0,4)}..` : fixture.event_status === '' ? '-' : !isNaN(+fixture.event_status || fixture.event_status.includes('+')) ? `${fixture.event_status}'` : `${fixture.event_status.slice(0,4)}.` }
                                     </div>
                                 </div>

@@ -12,7 +12,7 @@ const HeadToHead = ({
 }) => {
   const date = new Date();
   const year = date.getFullYear();
-  
+
   return (
     <div className="">
       <div
@@ -22,9 +22,33 @@ const HeadToHead = ({
         }  divide-y divide-black animate-zoom`}
       >
         <div className=" w-full flex">
-          <div className={` w-[${Math.round((h2hHomeStat / (h2hAwayStat + h2hDrawStat + h2hHomeStat)) * 100)}%] rounded-l-sm bg-green-600`}>{Math.round((h2hHomeStat / (h2hAwayStat + h2hDrawStat + h2hHomeStat)) * 100)}%</div>
-          <div className={` w-[${Math.round((h2hDrawStat / (h2hAwayStat + h2hDrawStat + h2hHomeStat)) * 100)}%] bg-gray-400`}>{Math.round((h2hDrawStat / (h2hAwayStat + h2hDrawStat + h2hHomeStat)) * 100)}%</div>
-          <div className={` w-[${Math.round((h2hAwayStat / (h2hAwayStat + h2hDrawStat + h2hHomeStat)) * 100)}%] rounded-r-sm bg-red-600`}>{Math.round((h2hAwayStat / (h2hAwayStat + h2hDrawStat + h2hHomeStat)) * 100)}%</div>
+          {h2hHomeStat > 0 && (
+            <div
+              className={` w-[${Math.round(
+                (h2hHomeStat / (h2hAwayStat + h2hDrawStat + h2hHomeStat)) * 100
+              )}%] rounded-l-sm bg-green-600`}
+            >
+              {h2hHomeStat}
+            </div>
+          )}
+          {h2hDrawStat > 0 && (
+            <div
+              className={` w-[${Math.round(
+                (h2hDrawStat / (h2hAwayStat + h2hDrawStat + h2hHomeStat)) * 100
+              )}%] bg-gray-400`}
+            >
+              {h2hDrawStat}
+            </div>
+          )}
+          {h2hAwayStat > 0 && (
+            <div
+              className={` w-[${Math.round(
+                (h2hAwayStat / (h2hAwayStat + h2hDrawStat + h2hHomeStat)) * 100
+              )}%] rounded-r-sm bg-red-600`}
+            >
+              {h2hAwayStat}
+            </div>
+          )}
         </div>
         {hToH &&
           hToH.map((h) => (

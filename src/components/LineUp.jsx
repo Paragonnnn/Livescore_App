@@ -117,20 +117,48 @@ const LineUp = ({
                     key={index}
                     className="py-2 flex gap-2 px-2 text-xs sm:text-base "
                   >
-                    <Link
-                      to={`/player/${sub.player.replace(/ +/g, "-")}/${
-                        sub.player_key
-                      }`}
-                      className=" flex gap-4 items-center"
+                    <div
+                      className=" flex gap-4 items-center cursor-pointer"
+                      onClick={() =>
+                        showPlayerStat(sub.player_key)
+                      }
                     >
                       <div className="opacity-60 border-2 border-solid border-white h-7 w-7 flex justify-center items-center rounded-full">
                         {sub.player_number}
                       </div>
                       {sub.player}
-                    </Link>
+                    </div>
                   </div>
                 ))
               )}
+               <div
+              className={`${
+                showStatToggle ? "visible" : "invisible"
+              } absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] border border-solid border-red-600 `}
+            >
+              {playerStat &&
+                playerStat.map((stat) => (
+                  <div>
+                    {stat.away
+                      .filter((stat) => stat.player_key == clickedPlayer)
+                      .map((stat) => (
+                        <div>
+                          {stat.player_name}
+                          {stat.player_position}
+                          <Link
+                            to={`/player/${stat.player_name.replace(
+                              / +/g,
+                              "-"
+                            )}/${stat.player_key}`}
+                          >
+                            see player
+                          </Link>
+                          <div onClick={() => setShowStatToggle(false)}>X</div>
+                        </div>
+                      ))}
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
         <div className=" sm:w-[48%] ">
@@ -161,9 +189,9 @@ const LineUp = ({
                         key={index}
                         className=" py-2 flex sm:justify-end px-2 text-xs sm:text-base"
                       >
-                        <div className=" flex sm:flex-row flex-row-reverse gap-2">
+                        <div className=" flex  gap-2">
                           <div
-                            className=" flex gap-4 items-center cursor-pointer"
+                            className=" flex gap-4 sm:flex-row flex-row-reverse items-center cursor-pointer"
                             onClick={() =>
                               showPlayerStat(startingLineUp.player_key)
                             }
@@ -219,21 +247,49 @@ const LineUp = ({
                     className="py-2 flex sm:justify-end px-2 text-xs sm:text-base "
                   >
                     <div className=" flex sm:flex-row flex-row-reverse gap-2">
-                      <Link
-                        to={`/player/${sub.player.replace(/ +/g, "-")}/${
-                          sub.player_key
-                        }`}
-                        className=" flex gap-4 items-center"
+                      <div
+                        className=" flex gap-4 items-center cursor-pointer sm:flex-row flex-row-reverse"
+                        onClick={() =>
+                          showPlayerStat(sub.player_key)
+                        }
                       >
                         {sub.player}
                         <div className="opacity-60 border-2 border-solid border-white h-7 w-7 flex justify-center items-center rounded-full">
                           {sub.player_number}
                         </div>
-                      </Link>
+                      </div>
                     </div>
                   </div>
                 ))
               )}
+               <div
+              className={`${
+                showStatToggle ? "visible" : "invisible"
+              } absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] border border-solid border-red-600 `}
+            >
+              {playerStat &&
+                playerStat.map((stat) => (
+                  <div>
+                    {stat.away
+                      .filter((stat) => stat.player_key == clickedPlayer)
+                      .map((stat) => (
+                        <div>
+                          {stat.player_name}
+                          {stat.player_position}
+                          <Link
+                            to={`/player/${stat.player_name.replace(
+                              / +/g,
+                              "-"
+                            )}/${stat.player_key}`}
+                          >
+                            see player
+                          </Link>
+                          <div onClick={() => setShowStatToggle(false)}>X</div>
+                        </div>
+                      ))}
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
       </div>

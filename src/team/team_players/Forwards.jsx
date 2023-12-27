@@ -9,7 +9,7 @@ const Forwards = ({team,toggleMode}) => {
 
             <div className='flex flex-col gap-5 px-2'>
                 {
-                    team.players.filter(player => player.player_type == 'Forwards').map((player) => (
+                    team.players?.filter(player => player.player_type == 'Forwards').map((player) => (
                         // player.player_type == 'Goalkeepers' &&
                         <Link key={player.player_key} to={`/player/${player.player_name.replace(/ +/g, '-')}/${player.player_key}`} className='w-full h-fit flex p-2 gap-4 items-center border border-solid border-gray-400 border-opacity-30 hover:opacity-90  rounded-xl'>
                             <div className=' relative'>

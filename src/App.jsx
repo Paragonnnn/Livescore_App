@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Countries from "./components/Countries";
 import Leagues from "./components/Leagues";
-import { Link, useRoutes, useNavigate, useLocation } from "react-router-dom";
+import { Link, useRoutes, useNavigate, useLocation, useParams } from "react-router-dom";
 import Home from "./components/Home";
 import { Routes, Route } from "react-router-dom";
 import Teams from "./team/Teams";
@@ -11,7 +11,7 @@ import Players from "./components/Players";
 import CurrentFixtures from "./components/CurrentFixtures";
 import SearchClub from "./components/SearchClub";
 import parseISO from "date-fns/parseISO";
-import { addDays, format, addMonths } from "date-fns";
+import { addDays, format, addMonths, set } from "date-fns";
 import Calendar from "react-calendar";
 import { calendar, darkMode, lightMode, searchLogo } from ".";
 import Dark from "./svg/Dark";
@@ -37,9 +37,9 @@ const App = () => {
   const [toggleMode, setToggleMode] = useState(false);
 
   const focus = useRef();
-
-  const history = useNavigate()
-  const {pathname} = useLocation()
+  const {id} = useParams()
+  // const history = useNavigate()
+  // const {pathname} = useLocation()
   document.querySelector("body").style.backgroundColor = `${
     toggleMode ? "#F7F7FF" : "#101419"
   }`;
@@ -57,13 +57,13 @@ const App = () => {
     };
 
     window.addEventListener("resize", handleResize);
-
+    
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
   console.log(windowWidth);
-
+  
   const handleDateChange = (date) => {
     console.log(date);
     setCalenderDate(
@@ -75,13 +75,13 @@ const App = () => {
         );
         setShowCalendar(false);
         if (new Date() == new Date(calenderDate)) {
-          history('/')
-        } else{
 
-          history(`/${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
-        }
+        } 
+        // history(`/${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
         console.log(new Date(calenderDate));
-    setCheck([])
+        setCheck([])
+        console.log('hi');
+        console.log(fixtures);
   };
   const handleDateFocus = (e) => {
     // e.key && e.code === "Backspace" && e.preventDefault();
@@ -298,38 +298,11 @@ const App = () => {
                 setShowCalendar={setShowCalendar}
                 handleSearchToggleClick={handleSearchToggleClick}
                 toggleMode={toggleMode}
-                history={history}
+                setCheck={setCheck}
               />
             }
           />
-          <Route
-            path="/:date"
-            
-            element={
-              <Home
-                countries={countries}
-                loadingCountries={loadingCountries}
-                error={error}
-                leagues={leagues}
-                check={check}
-                fixtures={fixtures}
-                loadingFixtures={loadingFixtures}
-                fixturesError={fixturesError}
-                currentFixture={currentFixture}
-                setCurrentFixture={setCurrentFixture}
-                liveCheck={liveCheck}
-                windowWidth={windowWidth}
-                calenderDate={calenderDate}
-                setCalenderDate={setCalenderDate}
-                handleDateChange={handleDateChange}
-                handleDateFocus={handleDateFocus}
-                showCalendar={showCalendar}
-                setShowCalendar={setShowCalendar}
-                handleSearchToggleClick={handleSearchToggleClick}
-                toggleMode={toggleMode}
-              />
-            }
-          />
+          
           <Route
             path="/countries"
             element={
@@ -359,7 +332,7 @@ const App = () => {
           />
           <Route
             path="/player/:playername/:id"
-            element={<Players countries={countries} leagues={leagues} />}
+            element={<Players countries={countries} leagues={leagues} toggleMode={toggleMode} />}
           />
         </Routes>
       </div>
