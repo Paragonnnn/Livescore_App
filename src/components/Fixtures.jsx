@@ -54,7 +54,7 @@ const Fixtures = ({
               toggleMode ? "text-darkText" : "text-lightText"
             } px-3 rounded-full  transition duration-200 ease-in-out`}
           >
-            All({fixtures.length})
+            All
           </button>
           <button
             onClick={live}
@@ -364,7 +364,7 @@ const Fixtures = ({
                                           <div
                                           className={`${
                                             (c.card == "red card" && c.home_fault && i == 0)
-                                            ? " bg-red-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-xxs text-black"
+                                            ? " bg-red-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black"
                                             : ""
                                           } `}
                                           >
@@ -378,7 +378,7 @@ const Fixtures = ({
                                           <div
                                           className={`${
                                             (c.card == "yellow card" && c.home_fault && i == 0)
-                                                ? " bg-yellow-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-xxs text-black"
+                                                ? " bg-yellow-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black"
                                                 : ""
                                             } `}
                                           >
@@ -409,7 +409,7 @@ const Fixtures = ({
                                           <div
                                             className={`${
                                               (c.card == "red card" && c.away_fault && i == 0)
-                                                ? " bg-red-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-xxs text-black"
+                                                ? " bg-red-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black"
                                                 : ""
                                             } `}
                                           >
@@ -423,7 +423,7 @@ const Fixtures = ({
                                           <div
                                           className={`${
                                             (c.card == "yellow card" && c.away_fault && i == 0)
-                                                ? " bg-yellow-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-xxs text-black"
+                                                ? " bg-yellow-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black"
                                                 : ""
                                             } `}
                                           >
