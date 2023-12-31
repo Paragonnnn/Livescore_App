@@ -31,6 +31,9 @@ export default {
       fontSize: {
         'xxs': '.6rem'
       },
+      screens: {
+        xs: '400px'
+      },
       keyframes: {
         dis : {
           '0%': { transform : 'translateY(100%)'},

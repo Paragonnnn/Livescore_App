@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import PlayerStat from "./PlayerStat";
+import ClickAwayListener from "react-click-away-listener";
 
 const LineUp = ({
   statToggle,
@@ -10,6 +12,26 @@ const LineUp = ({
 }) => {
   const [showStatToggle, setShowStatToggle] = useState(false);
   const [clickedPlayer, setClickedPlayer] = useState(null);
+  const reff = useRef(null);
+  useEffect(() => {
+    document.addEventListener("mousedown", (e) => {
+      if (!reff.current.contains(e.target)) {
+        setShowStatToggle(false);
+        console.log(e.target);
+      }
+    });
+  }, []);
+
+  // document.onclick = function(e) {
+  //   if (!reff.current.contains(e.target)) {
+  //     console.log('outside');
+  //     setShowStatToggle(false)
+  //     // setToggleSearch(false)
+  //   }else {
+  //     console.log('inside');
+  //   }
+  // }
+
   const showPlayerStat = (clickedPlayerKey) => {
     if (!showStatToggle) {
       setShowStatToggle(true);
@@ -22,11 +44,12 @@ const LineUp = ({
       className={`${
         windowWidth < 1024 &&
         (statToggle.includes("Line-Up") ? "block" : "hidden")
-      } ${toggleMode ? "text-darkText" : "text-lightText"} relative`}
+      } ${toggleMode ? "text-darkText" : "text-lightText"} `}
     >
       <div className=" text-xl font-bold text-customBg bg-customBg2 mb-4 p-2 rounded ">
         Line Up
       </div>
+      <span>Click on player to see player stat</span>
       <div
         className={` flex justify-between flex-col sm:flex-row lg:animate-zoom animate-swipe bg-customBg2 p-2 rounded `}
       >
@@ -77,7 +100,8 @@ const LineUp = ({
               <div
                 className={`${
                   showStatToggle ? "visible" : "invisible"
-                } absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] border border-solid border-red-600 `}
+                } fixed bottom-2 right-2 w-full md:w-[400px]  an `}
+                ref={reff}
               >
                 {playerStat &&
                   playerStat.map((stat) => (
@@ -85,21 +109,11 @@ const LineUp = ({
                       {stat.home
                         .filter((stat) => stat.player_key == clickedPlayer)
                         .map((stat) => (
-                          <div>
-                            {stat.player_name}
-                            {stat.player_position}
-                            <Link
-                              to={`/player/${stat.player_name.replace(
-                                / +/g,
-                                "-"
-                              )}/${stat.player_key}`}
-                            >
-                              see player
-                            </Link>
-                            <div onClick={() => setShowStatToggle(false)}>
-                              X
-                            </div>
-                          </div>
+                          <PlayerStat
+                            reff={reff}
+                            stat={stat}
+                            setShowStatToggle={setShowStatToggle}
+                          />
                         ))}
                     </div>
                   ))}
@@ -119,9 +133,7 @@ const LineUp = ({
                   >
                     <div
                       className=" flex gap-4 items-center cursor-pointer"
-                      onClick={() =>
-                        showPlayerStat(sub.player_key)
-                      }
+                      onClick={() => showPlayerStat(sub.player_key)}
                     >
                       <div className="opacity-60 border-2 border-solid border-white h-7 w-7 flex justify-center items-center rounded-full">
                         {sub.player_number}
@@ -131,10 +143,11 @@ const LineUp = ({
                   </div>
                 ))
               )}
-               <div
+            <div
               className={`${
-                showStatToggle ? "visible" : "invisible"
-              } absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] border border-solid border-red-600 `}
+                showStatToggle ? "block" : "hidden"
+              } fixed bottom-2 right-2  md:w-[400px]  an `}
+              ref={reff}
             >
               {playerStat &&
                 playerStat.map((stat) => (
@@ -142,19 +155,11 @@ const LineUp = ({
                     {stat.away
                       .filter((stat) => stat.player_key == clickedPlayer)
                       .map((stat) => (
-                        <div>
-                          {stat.player_name}
-                          {stat.player_position}
-                          <Link
-                            to={`/player/${stat.player_name.replace(
-                              / +/g,
-                              "-"
-                            )}/${stat.player_key}`}
-                          >
-                            see player
-                          </Link>
-                          <div onClick={() => setShowStatToggle(false)}>X</div>
-                        </div>
+                        <PlayerStat
+                          reff={reff}
+                          stat={stat}
+                          setShowStatToggle={setShowStatToggle}
+                        />
                       ))}
                   </div>
                 ))}
@@ -209,7 +214,8 @@ const LineUp = ({
             <div
               className={`${
                 showStatToggle ? "visible" : "invisible"
-              } absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] border border-solid border-red-600 `}
+              } fixed bottom-2 right-2  w-full md:w-[400px]`}
+              ref={reff}
             >
               {playerStat &&
                 playerStat.map((stat) => (
@@ -217,19 +223,12 @@ const LineUp = ({
                     {stat.away
                       .filter((stat) => stat.player_key == clickedPlayer)
                       .map((stat) => (
-                        <div>
-                          {stat.player_name}
-                          {stat.player_position}
-                          <Link
-                            to={`/player/${stat.player_name.replace(
-                              / +/g,
-                              "-"
-                            )}/${stat.player_key}`}
-                          >
-                            see player
-                          </Link>
-                          <div onClick={() => setShowStatToggle(false)}>X</div>
-                        </div>
+                        <PlayerStat
+                          reff={reff}
+                          stat={stat}
+                          setShowStatToggle={setShowStatToggle}
+                          toggleMode={toggleMode}
+                        />
                       ))}
                   </div>
                 ))}
@@ -249,9 +248,7 @@ const LineUp = ({
                     <div className=" flex sm:flex-row flex-row-reverse gap-2">
                       <div
                         className=" flex gap-4 items-center cursor-pointer sm:flex-row flex-row-reverse"
-                        onClick={() =>
-                          showPlayerStat(sub.player_key)
-                        }
+                        onClick={() => showPlayerStat(sub.player_key)}
                       >
                         {sub.player}
                         <div className="opacity-60 border-2 border-solid border-white h-7 w-7 flex justify-center items-center rounded-full">
@@ -262,10 +259,11 @@ const LineUp = ({
                   </div>
                 ))
               )}
-               <div
+            <div
               className={`${
                 showStatToggle ? "visible" : "invisible"
-              } absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] border border-solid border-red-600 `}
+              } fixed bottom-2 right-2 w-full md:w-[400px an `}
+              ref={reff}
             >
               {playerStat &&
                 playerStat.map((stat) => (
@@ -273,19 +271,11 @@ const LineUp = ({
                     {stat.away
                       .filter((stat) => stat.player_key == clickedPlayer)
                       .map((stat) => (
-                        <div>
-                          {stat.player_name}
-                          {stat.player_position}
-                          <Link
-                            to={`/player/${stat.player_name.replace(
-                              / +/g,
-                              "-"
-                            )}/${stat.player_key}`}
-                          >
-                            see player
-                          </Link>
-                          <div onClick={() => setShowStatToggle(false)}>X</div>
-                        </div>
+                        <PlayerStat
+                          reff={reff}
+                          stat={stat}
+                          setShowStatToggle={setShowStatToggle}
+                        />
                       ))}
                   </div>
                 ))}

@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import Countries from "./components/Countries";
 import Leagues from "./components/Leagues";
-import { Link, useRoutes, useNavigate, useLocation, useParams } from "react-router-dom";
+import {
+  Link,
+  useRoutes,
+  useNavigate,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import Home from "./components/Home";
 import { Routes, Route } from "react-router-dom";
 import Teams from "./team/Teams";
@@ -35,9 +41,11 @@ const App = () => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [toggleSearch, setToggleSearch] = useState(false);
   const [toggleMode, setToggleMode] = useState(false);
+  const [focus, setFocus] = useState(false);
+  const [homeRedCards, setHomeRedCards] = useState([]);
+  const [awayRedCards, setAwayRedCards] = useState([]);
 
-  const focus = useRef();
-  const {id} = useParams()
+  const { id } = useParams();
   // const history = useNavigate()
   // const {pathname} = useLocation()
   document.querySelector("body").style.backgroundColor = `${
@@ -57,31 +65,31 @@ const App = () => {
     };
 
     window.addEventListener("resize", handleResize);
-    
+
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
   console.log(windowWidth);
-  
+  console.log(focus);
+
   const handleDateChange = (date) => {
     console.log(date);
     setCalenderDate(
       `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
-      );
-      console.log(date.toISOString().split("T")[0]);
-      console.log(
-        `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`
-        );
-        setShowCalendar(false);
-        if (new Date() == new Date(calenderDate)) {
-
-        } 
-        // history(`/${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
-        console.log(new Date(calenderDate));
-        setCheck([])
-        console.log('hi');
-        console.log(fixtures);
+    );
+    console.log(date.toISOString().split("T")[0]);
+    console.log(
+      `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`
+    );
+    setShowCalendar(false);
+    if (new Date() == new Date(calenderDate)) {
+    }
+    // history(`/${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
+    console.log(new Date(calenderDate));
+    setCheck([]);
+    console.log("hi");
+    console.log(fixtures);
   };
   const handleDateFocus = (e) => {
     // e.key && e.code === "Backspace" && e.preventDefault();
@@ -173,12 +181,33 @@ const App = () => {
                 fixture.league_key
             )
           );
+          setHomeRedCards(
+            json.result.map(c => (
+              c.cards.filter(
+                (c) => c.card == "red card" && c.home_fault
+              )
+            ))
+          );
+          console.log(json.result.map(c => (
+            c.cards.filter(c => (
+              c.card == "red card" && c.away_fault
+            ))
+          )));
+          setAwayRedCards(
+            json.result.map(c => (
+              c.cards.filter(
+                (c) => c.card == "red card" && c.away_fault
+              )
+            ))
+          );
           console.log(json.result);
           console.log(liveCheck);
-          console.log(json.result.map(
-            (fixture) =>
-              !check.includes(fixture.league_key) && fixture.league_key
-          ));
+          console.log(
+            json.result.map(
+              (fixture) =>
+                !check.includes(fixture.league_key) && fixture.league_key
+            )
+          );
         })
         .catch((err) => {
           setLoadingFixtures(false);
@@ -213,6 +242,11 @@ const App = () => {
         <div className="m-auto  max-w-[1440px]  flex items-center justify-between relative">
           <Link to={"/"}>
             <h3 className="text-[25px] md:text-[40px] px-2 md:px-4 py-1 sm:py-2 mb-2 text-customBg font-bold">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/c/c0/Santa_hat.svg"
+                alt=""
+                className=" h-5 md:h-8 absolute left-[-4px] md:left-[-10px] top-2 rotate-[-15deg]"
+              />
               Paragon :)
             </h3>
           </Link>
@@ -229,6 +263,9 @@ const App = () => {
                   setSearchClub={setSearchClub}
                   clubs={leagues.concat(countries)}
                   windowWidth={windowWidth}
+                  toggleMode={toggleMode}
+                  focus={focus}
+                  setFocus={setFocus}
                 />
               </div>
             )}
@@ -266,6 +303,9 @@ const App = () => {
               setSearchClub={setSearchClub}
               clubs={leagues.concat(countries)}
               windowWidth={windowWidth}
+              toggleMode={toggleMode}
+              focus={focus}
+              setFocus={setFocus}
             />
           </div>
         )}
@@ -275,7 +315,6 @@ const App = () => {
         <Routes>
           <Route
             path="/"
-            
             element={
               <Home
                 countries={countries}
@@ -299,10 +338,13 @@ const App = () => {
                 handleSearchToggleClick={handleSearchToggleClick}
                 toggleMode={toggleMode}
                 setCheck={setCheck}
+                toggleSearch={toggleSearch}
+                homeRedCards={homeRedCards}
+                awayRedCards={awayRedCards}
               />
             }
           />
-          
+
           <Route
             path="/countries"
             element={
@@ -315,7 +357,10 @@ const App = () => {
             }
           />
           <Route path="/leagues/:countryname/:id" element={<Leagues />} />
-          <Route path="/table/:leaguename/:id" element={<Table toggleMode={toggleMode}/>} />
+          <Route
+            path="/table/:leaguename/:id"
+            element={<Table toggleMode={toggleMode} />}
+          />
           <Route
             path="/fixture/:league/:teamsname/:id"
             element={
@@ -328,11 +373,17 @@ const App = () => {
           {/* <Route path='/fixtures' element={<Fixtures check={check} fixtures={fixtures} leagues={leagues} loadingFixtures={loadingFixtures} fixturesError={fixturesError}/>}/> */}
           <Route
             path="/team/:teamname/:id"
-            element={<Teams leagues={leagues} toggleMode={toggleMode}/>}
+            element={<Teams leagues={leagues} toggleMode={toggleMode} />}
           />
           <Route
             path="/player/:playername/:id"
-            element={<Players countries={countries} leagues={leagues} toggleMode={toggleMode} />}
+            element={
+              <Players
+                countries={countries}
+                leagues={leagues}
+                toggleMode={toggleMode}
+              />
+            }
           />
         </Routes>
       </div>

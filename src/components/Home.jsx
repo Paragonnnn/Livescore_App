@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useRef,useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Countries from './Countries'
 import Fixtures from './Fixtures'
@@ -9,11 +9,23 @@ import 'react-calendar/dist/Calendar.css';
 import { teamLogo } from '..'
 import ClickAwayListener from 'react-click-away-listener'
 import SearchTeamAndPlayer from './SearchTeamAndPlayer'
+import Calendar2 from '../svg/Calendar2'
+import SearchSvg from '../svg/SearchSvg'
 
-const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, loadingFixtures, fixturesError, currentFixture, setCurrentFixture, liveCheck, windowWidth, calenderDate, setCalenderDate, handleDateChange,handleDateFocus,maxDate, showCalendar, setShowCalendar,handleSearchToggleClick, toggleMode, setCheck}) => {
+
+const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, loadingFixtures, fixturesError, currentFixture, setCurrentFixture, liveCheck, windowWidth, calenderDate, setCalenderDate, handleDateChange,handleDateFocus,maxDate, showCalendar, setShowCalendar,handleSearchToggleClick, toggleMode, setCheck,focus,toggleSearch,homeRedCards,awayRedCards}) => {
 
   const [picker, setPicker] = useState(null)
   const date = new Date
+  const calendarRef = useRef(null);
+  useEffect(() => {
+    document.addEventListener("mousedown", (e) => {
+      if (!calendarRef.current.contains(e.target)) {
+        setShowCalendar(false);
+        console.log(e.target);
+      }
+    });
+  }, []);
 
   return (
     <div className='grid grid-cols-1 lg:grid-cols-11 h-[100%] gap-4'>
@@ -58,19 +70,19 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
         <div className={`${showCalendar ? 'block' : 'hidden'}  backdrop-blur-xl fixed top-0 left-0 w-full h-full bg-white opacity-10`}></div>
       <div className={`${toggleMode? 'bg-customBg3':'bg-darkCustomBg3'} block fixed lg:hidden bottom-[-5px] w-full  z-10 p-3 left-0`}>
         <div>
-          <div className={`${showCalendar ? 'block' : 'hidden'}  ${toggleMode? 'bg-customBg3':'bg-darkCustomBg3'} rounded-t-xl absolute bottom-[52px] animate-dis left-0 `}  tabIndex={-1}  ref={focus} onFocus={console.log('yii')}>
+          <div className={`${showCalendar ? 'block' : 'hidden'}  ${toggleMode? 'bg-customBg3':'bg-darkCustomBg3'} rounded-t-xl absolute bottom-[52px] animate-dis left-0 `}  tabIndex={-1} onFocus={console.log('yii')} ref={calendarRef}>
             <Calendar value={calenderDate}  onChange={handleDateChange} className={` text-customBg mb-2 bg-transparent border-none w-full bg-opacity-50 `} minDetail='year' maxDetail='month'/>
             <div  onClick={() => {setCalenderDate(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`); setShowCalendar(false) ; setCheck([])}} className='  px-3 py-2 rounded-full text-customBg  w-fit mb-4 cursor-pointer hover:opacity-80 active:opacity-60'>Today</div>
           </div>
 
         </div>
         <div className={` flex justify-between w-full `}>
-          <img src={calendar} onClick={() => {setShowCalendar((prev) => !prev);  }} className=' h-7' alt="" />
-          <img src={searchLogo} className=' h-7' onClick={handleSearchToggleClick} alt="" />
+          <Calendar2 setShowCalendar={setShowCalendar}/>
+          <SearchSvg handleSearchToggleClick={handleSearchToggleClick}/>
         </div>
       </div>
       <div className='col-span-5'>
-        <Fixtures check={check} fixtures={fixtures} leagues={leagues} loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture} liveCheck={liveCheck} windowWidth={windowWidth} toggleMode={toggleMode}/>
+        <Fixtures check={check} fixtures={fixtures} leagues={leagues} loadingFixtures={loadingFixtures} fixturesError={fixturesError} currentFixture={currentFixture} setCurrentFixture={setCurrentFixture} liveCheck={liveCheck} windowWidth={windowWidth} toggleMode={toggleMode} toggleSearch={toggleSearch}/>
       </div>
       
       <div className='hidden lg:block col-span-3 sticky top-[90px] text-black bg-customBg2 p-4 h-fit'>

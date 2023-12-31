@@ -17,7 +17,7 @@ const CurrentFixtureInfo = ({match,toggleMode}) => {
                         {match.event_home_team}
                       </div>
                     </div> 
-                    <div className={`${match.event_live === '1' ? 'text-live   ' : ''} text-center   w-1/3`}>
+                    <div className={`${(match.event_live === '1' && match.event_status != 'Finished') ? 'text-live   ' : ''} text-center   w-1/3`}>
                       <div className=' lg:text-base xl:text-2xl'>{match.event_final_result}</div>
                       <div className='text-base'>{match.event_status === 'Finished' ? 'FT' : match.event_status === 'Half Time' ? 'HT' : match.event_status}</div>
                     </div>

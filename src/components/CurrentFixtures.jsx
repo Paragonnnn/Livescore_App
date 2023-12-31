@@ -496,6 +496,7 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
               lineUp={lineUp}
               windowWidth={windowWidth}
               toggleMode={toggleMode}
+              playerStat={playerStat}
             />
           </div>
           <div>
