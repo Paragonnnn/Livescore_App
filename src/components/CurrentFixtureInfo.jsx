@@ -1,11 +1,37 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Loading from './Loading'
 
 
-const CurrentFixtureInfo = ({match,toggleMode}) => {
+const CurrentFixtureInfo = ({match,toggleMode,loading}) => {
   return (
     <div className={`${toggleMode? 'text-darkText' : 'text-lightText'}`}>
+      {
+        loading && (
+          <div>
+                  <div className='p-2 flex justify-between items-center'>
+                    <div className=' flex flex-col justify-center gap-2 items-center w-1/3'>
+                      <div className=' h-12 w-12  bg-[#ffffff10] animate-pulse rounded-xl'></div>
+                      <div className='bg-[#ffffff10] w-16 h-4'></div>
+                    </div>
+                    <div className=' w-1/3 flex justify-center'>
+
+                    <div className=' h-4 w-8 bg-[#ffffff10] animate-pulse'></div>
+                    </div>
+                    <div className=' flex flex-col justify-center gap-2 items-center w-1/3'>
+                      <div className=' h-12 w-12  bg-[#ffffff10] animate-pulse rounded-xl'></div>
+                      <div className=' w-16 bg-[#ffffff10] h-4'></div>
+                    </div>
+                  </div>
+                  <div className='flex justify-center '>
+                    <div className=' h-10 w-36 bg-[#ffffff10] mt-6 rounded'></div>
+                  </div>
+                  
+                </div>
+        )
+      }
         {
+          (match && !loading) &&
           match.map(match => (
             <div key={match.event_key}>
               {/* {match.event_home_team} vs {match.event_away_team} */}

@@ -185,6 +185,7 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
 
   const api_key = import.meta.env.VITE_api_key;
   useEffect(() => {
+    setLoading(true)
     async function getData() {
       await fetch(
         `https://apiv2.allsportsapi.com/football/?met=Fixtures&withPlayerStats=1&matchId=${id}&timezone=Africa/Lagos&APIkey=${api_key}`
@@ -227,8 +228,11 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
                 return a.concat(c);
               }, [])
           );
+          setLoading(false)
         })
-        .catch((err) => {});
+        .catch((err) => {
+          
+        });
     }
     getData();
   }, [id]);
@@ -290,12 +294,13 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
       {windowWidth > 1024 ? (
         <div className=" grid grid-cols-5 gap-4">
           <div className=" col-span-2">
-            <CurrentFixtureInfo match={match} toggleMode={toggleMode} />
+            <CurrentFixtureInfo match={match} toggleMode={toggleMode} loading={loading}/>
             <MatchInfo
               match={match}
               statToggle={statToggle}
               windowWidth={windowWidth}
               toggleMode={toggleMode}
+              
             />
             <Odds
               statToggle={statToggle}

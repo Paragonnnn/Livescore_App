@@ -40,7 +40,7 @@ const MatchInfo = ({ statToggle, match, windowWidth, toggleMode }) => {
               )}
               <div className=" flex gap-3">
                 {match.event_referee && (
-                  <div className="border-2 border-solid border-customBg2 px-3 py-2 rounded w-1/2 flex flex-col items-center gap-1">
+                  <div className="border-2 border-solid border-customBg2 px-3 py-2 rounded flex-auto flex flex-col items-center gap-1">
                     <div className=" flex gap-1 items-center">
                       <img
                       src={toggleMode ? darkWhistle : whistle}
@@ -54,7 +54,7 @@ const MatchInfo = ({ statToggle, match, windowWidth, toggleMode }) => {
                   </div>
                 )}
                 {match.event_date && (
-                  <div className=" border-2 border-solid border-customBg2 px-3 py-2 rounded w-1/2 flex flex-col items-center gap-1">
+                  <div className=" border-2 border-solid border-customBg2 px-3 py-2 rounded flex-auto flex flex-col items-center gap-1">
                     <div className=" flex gap-1 items-center">
                     <Calendar toggleMode={toggleMode} />
                     <div className=" opacity-70">(Date)</div>

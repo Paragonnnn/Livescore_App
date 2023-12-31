@@ -42,8 +42,7 @@ const App = () => {
   const [toggleSearch, setToggleSearch] = useState(false);
   const [toggleMode, setToggleMode] = useState(false);
   const [focus, setFocus] = useState(false);
-  const [homeRedCards, setHomeRedCards] = useState([]);
-  const [awayRedCards, setAwayRedCards] = useState([]);
+  
 
   const { id } = useParams();
   // const history = useNavigate()
@@ -181,25 +180,7 @@ const App = () => {
                 fixture.league_key
             )
           );
-          setHomeRedCards(
-            json.result.map(c => (
-              c.cards.filter(
-                (c) => c.card == "red card" && c.home_fault
-              )
-            ))
-          );
-          console.log(json.result.map(c => (
-            c.cards.filter(c => (
-              c.card == "red card" && c.away_fault
-            ))
-          )));
-          setAwayRedCards(
-            json.result.map(c => (
-              c.cards.filter(
-                (c) => c.card == "red card" && c.away_fault
-              )
-            ))
-          );
+          
           console.log(json.result);
           console.log(liveCheck);
           console.log(
@@ -339,8 +320,7 @@ const App = () => {
                 toggleMode={toggleMode}
                 setCheck={setCheck}
                 toggleSearch={toggleSearch}
-                homeRedCards={homeRedCards}
-                awayRedCards={awayRedCards}
+                
               />
             }
           />

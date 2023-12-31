@@ -13,7 +13,7 @@ import Calendar2 from '../svg/Calendar2'
 import SearchSvg from '../svg/SearchSvg'
 
 
-const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, loadingFixtures, fixturesError, currentFixture, setCurrentFixture, liveCheck, windowWidth, calenderDate, setCalenderDate, handleDateChange,handleDateFocus,maxDate, showCalendar, setShowCalendar,handleSearchToggleClick, toggleMode, setCheck,focus,toggleSearch,homeRedCards,awayRedCards}) => {
+const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, loadingFixtures, fixturesError, currentFixture, setCurrentFixture, liveCheck, windowWidth, calenderDate, setCalenderDate, handleDateChange,handleDateFocus,maxDate, showCalendar, setShowCalendar,handleSearchToggleClick, toggleMode, setCheck,focus,toggleSearch,}) => {
 
   const [picker, setPicker] = useState(null)
   const date = new Date
