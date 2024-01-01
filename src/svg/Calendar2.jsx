@@ -1,8 +1,8 @@
 import React from "react";
 
-const Calendar2 = ({setShowCalendar,calendarRef}) => {
+const Calendar2 = ({setShowCalendar,}) => {
   return (
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={() => {setShowCalendar((prev) => !prev);  }} className=' stroke-customBg h-7 'ref={calendarRef}>
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={() => {setShowCalendar((prev) => !prev);  }} className=' stroke-customBg h-7 '>
       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
       <g
         id="SVGRepo_tracerCarrier"

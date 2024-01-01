@@ -77,7 +77,7 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
 
         </div>
         <div className={` flex justify-between w-full `}>
-          <Calendar2 setShowCalendar={setShowCalendar} calendarRef={calendarRef} />
+          <Calendar2 setShowCalendar={setShowCalendar}  />
           <SearchSvg handleSearchToggleClick={handleSearchToggleClick} setFocus={setFocus}/>
         </div>
       </div>
