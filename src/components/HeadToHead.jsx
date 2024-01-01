@@ -19,7 +19,7 @@ const HeadToHead = ({
         className={`${
           windowWidth < 1024 &&
           (statToggle.includes("H2H") ? "block" : "hidden")
-        }  divide-y divide-black animate-zoom`}
+        }   animate-zoom`}
       >
         <div className=" w-full flex">
           {h2hHomeStat > 0 && (
@@ -49,6 +49,12 @@ const HeadToHead = ({
               {h2hAwayStat}
             </div>
           )}
+        </div>
+        <div className=" flex gap-4 my-1">
+        <div className={`${toggleMode ? 'text-darkText': 'text-lightText'} flex gap-1 items-center`}><div className=" h-2 w-2 rounded-full bg-green-600"></div>Home</div>
+        <div className={`${toggleMode ? 'text-darkText': 'text-lightText'} flex gap-1 items-center`}><div className=" h-2 w-2 rounded-full bg-gray-400"></div>Draw</div>
+        <div className={`${toggleMode ? 'text-darkText': 'text-lightText'} flex gap-1 items-center`}><div className=" h-2 w-2 rounded-full bg-red-600"></div>Away</div>
+
         </div>
         {hToH &&
           hToH.map((h) => (

@@ -12,7 +12,7 @@ const SearchClub = ({setSearchClub, windowWidth, showSearch, handleSearchChange,
   const refOne = useRef(null)
   useEffect(() => {
     document.addEventListener("mousedown", (e) => {
-      if (!refOne.current.contains(e.target)) {
+      if (!refOne.current.contains(e.target) && windowWidth > 1024) {
         // setShowSearch(false);
         setFocus(false)
         console.log(e.target);
@@ -40,7 +40,7 @@ const SearchClub = ({setSearchClub, windowWidth, showSearch, handleSearchChange,
         <div className=''>
           <div className={`flex gap-4 items-center px-2 pt-2`}>
             <img src={back} alt="" className=' h-6 lg:hidden block' onClick={() => setToggleSearch(false)}/>
-            <input onFocus={() => setFocus(true)} className={` w-full bg-transparent outline-none block lg:hidden border border-solid focus:border-customBg rounded  p-2 `} onChange={handleSearchChange} value={searchClub} id=""/>
+            <input onFocus={() => setFocus(true)} className={` w-full bg-transparent outline-none block lg:hidden border border-solid focus:border-customBg rounded  p-2 `} onChange={handleSearchChange} value={searchClub} id="" ref={refOne}/>
 
           </div>
           <div className=''>

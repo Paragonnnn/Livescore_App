@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 const PlayerStat = ({ stat, setShowStatToggle,toggleMode,reff }) => {
   return (
     <div className={` bg-darkCustomBg3 text-white p-4 animate-dis`} ref={reff}>
+      <div className=" flex justify-between">
       <h2 ref={reff} className=" text-xl">{stat.player_name}</h2>
+      <div onClick={() => setShowStatToggle(false)} className=" text-2xl">X</div>
+      
+      </div>
       <div ref={reff} className=""><span>Position: </span>{stat.player_position}</div>
       {(stat.player_position !== 'Goalkeepers' && stat.player_minutes_played != 0) && (
         <div>
@@ -28,7 +32,6 @@ const PlayerStat = ({ stat, setShowStatToggle,toggleMode,reff }) => {
 
         </div>
       )}
-      <div onClick={() => setShowStatToggle(false)}>X</div>
       <Link
         to={`/player/${stat.player_name.replace(/ +/g, "-")}/${
           stat.player_key

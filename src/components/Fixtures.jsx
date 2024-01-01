@@ -240,10 +240,10 @@ const Fixtures = ({
                         <div className="flex flex-col">
                           <Link
                             className={` opacity-90`}
-                            to={`/leagues/${league.country_name.replace(
+                            to={`/table/${league.league_name.replace(
                               / +/g,
                               "-"
-                            )}/${league.country_key}`}
+                            )}/${league.league_key}`}
                           >
                             {league.country_name}
                           </Link>
@@ -358,7 +358,7 @@ const Fixtures = ({
                                   />
                                   <div className="flex justify-between items-center  w-full">
                                     <div className=" text-xs sm:text-base flex items-center gap-[1px] sm:gap-[2px]">
-                                      {fixture.event_home_team}
+                                      <span className=" mr-1 sm:mr-2 ">{fixture.event_home_team}</span>
                                       {fixture.cards.filter((c,i) => (
                                         c.card == "red card" && c.home_fault)).map((c,i) => (
                                           <div
@@ -403,7 +403,7 @@ const Fixtures = ({
                                   />
                                   <div className="flex justify-between items-center w-full">
                                     <div className=" text-xs sm:text-base flex items-center gap-[1px] sm:gap-[2px] ">
-                                      {fixture.event_away_team}
+                                      <span className=" mr-1 sm:mr-2">{fixture.event_away_team}</span>
                                       {fixture.cards.filter((c,i) => (
                                         c.card == "red card" && c.away_fault)).map((c,i) => (
                                           <div

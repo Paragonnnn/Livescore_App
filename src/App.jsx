@@ -104,6 +104,7 @@ const App = () => {
     if (!toggleSearch) {
       setSearchClub("");
     }
+    setFocus(true)
   };
   const api_key = import.meta.env.VITE_api_key;
 
@@ -320,6 +321,7 @@ const App = () => {
                 toggleMode={toggleMode}
                 setCheck={setCheck}
                 toggleSearch={toggleSearch}
+                setFocus={setFocus}
                 
               />
             }

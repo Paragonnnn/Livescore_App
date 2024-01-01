@@ -13,7 +13,7 @@ import Calendar2 from '../svg/Calendar2'
 import SearchSvg from '../svg/SearchSvg'
 
 
-const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, loadingFixtures, fixturesError, currentFixture, setCurrentFixture, liveCheck, windowWidth, calenderDate, setCalenderDate, handleDateChange,handleDateFocus,maxDate, showCalendar, setShowCalendar,handleSearchToggleClick, toggleMode, setCheck,focus,toggleSearch,}) => {
+const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, loadingFixtures, fixturesError, currentFixture, setCurrentFixture, liveCheck, windowWidth, calenderDate, setCalenderDate, handleDateChange,handleDateFocus,maxDate, showCalendar, setShowCalendar,handleSearchToggleClick, toggleMode, setCheck,focus,toggleSearch,setFocus}) => {
 
   const [picker, setPicker] = useState(null)
   const date = new Date
@@ -70,15 +70,15 @@ const Home = ({ countries, loadingCountries, error, leagues, check, fixtures, lo
         <div className={`${showCalendar ? 'block' : 'hidden'}  backdrop-blur-xl fixed top-0 left-0 w-full h-full bg-white opacity-10`}></div>
       <div className={`${toggleMode? 'bg-customBg3':'bg-darkCustomBg3'} block fixed lg:hidden bottom-[-5px] w-full  z-10 p-3 left-0`}>
         <div>
-          <div className={`${showCalendar ? 'block' : 'hidden'}  ${toggleMode? 'bg-customBg3':'bg-darkCustomBg3'} rounded-t-xl absolute bottom-[52px] animate-dis left-0 `}  tabIndex={-1} onFocus={console.log('yii')} ref={calendarRef}>
+          <div className={`${showCalendar ? 'block' : 'hidden'}  ${toggleMode? 'bg-customBg3':'bg-darkCustomBg3'} rounded-t-xl absolute bottom-[52px] animate-dis left-0 w-full `}  tabIndex={-1} onFocus={console.log('yii')} ref={calendarRef}>
             <Calendar value={calenderDate}  onChange={handleDateChange} className={` text-customBg mb-2 bg-transparent border-none w-full bg-opacity-50 `} minDetail='year' maxDetail='month'/>
             <div  onClick={() => {setCalenderDate(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`); setShowCalendar(false) ; setCheck([])}} className='  px-3 py-2 rounded-full text-customBg  w-fit mb-4 cursor-pointer hover:opacity-80 active:opacity-60'>Today</div>
           </div>
 
         </div>
         <div className={` flex justify-between w-full `}>
-          <Calendar2 setShowCalendar={setShowCalendar}/>
-          <SearchSvg handleSearchToggleClick={handleSearchToggleClick}/>
+          <Calendar2 setShowCalendar={setShowCalendar} calendarRef={calendarRef} />
+          <SearchSvg handleSearchToggleClick={handleSearchToggleClick} setFocus={setFocus}/>
         </div>
       </div>
       <div className='col-span-5'>

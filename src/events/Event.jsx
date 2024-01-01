@@ -16,7 +16,7 @@ const Event = ({ events, statToggle, windowWidth, toggleMode }) => {
         } p-2  shadow-sm rounded lg:animate-zoom animate-swipe`}
       >
         {events.length === 0 ? (
-          <div>no event</div>
+          <div>no event yet</div>
         ) : (
           <>
             {/* <div className=' bg-customBg  w-fit px-4 rounded-full mb-2'>Events</div> */}
