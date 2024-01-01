@@ -5,7 +5,7 @@ const Statistics = ({statToggle, stats,windowWidth,toggleMode}) => {
     <div>
         <div className={`${windowWidth <1024 && (statToggle.includes('Stats') ? 'block' : 'hidden')} divide-y divide-black shadow-sm px-4 py-1 lg:animate-zoom animate-swipe`}>
           {
-            stats.map(s => (s.length == 0)) ? <div>no stats yet</div> : 
+            stats.length == 0 ? <div>no stats yet</div> : 
             <>
               {
                 stats &&
