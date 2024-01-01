@@ -364,7 +364,7 @@ const Fixtures = ({
                                           <div
                                           className={`${
                                             (c.card == "red card" && c.home_fault && i == 0)
-                                            ? " bg-red-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black"
+                                            ? " bg-red-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black mr-[2px]"
                                             : ""
                                           } `}
                                           >
@@ -409,7 +409,7 @@ const Fixtures = ({
                                           <div
                                             className={`${
                                               (c.card == "red card" && c.away_fault && i == 0)
-                                                ? " bg-red-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black"
+                                                ? " bg-red-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black mr-[2px]"
                                                 : ""
                                             } `}
                                           >
