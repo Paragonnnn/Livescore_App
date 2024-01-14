@@ -17,7 +17,6 @@ const Fixtures = ({
   windowWidth,
   toggleMode,
   toggleSearch,
-  
 }) => {
   const [isLive, setIsLive] = useState(true);
 
@@ -315,7 +314,8 @@ const Fixtures = ({
                                 <div
                                   className={`${
                                     fixture.event_live == 1 ||
-                                    fixture.event_status == "Finished"
+                                    fixture.event_status == "Finished" ||
+                                    fixture.event_status === "After Pen."
                                       ? "hidden"
                                       : ""
                                   }`}
@@ -336,6 +336,8 @@ const Fixtures = ({
                                     ? "HT"
                                     : fixture.event_status === "After Pen."
                                     ? "AP"
+                                    : fixture.event_status === "After ET"
+                                    ? "AET"
                                     : fixture.event_status === "Postponed" ||
                                       fixture.event_status === "Cancelled"
                                     ? `${fixture.event_status.slice(0, 4)}..`
@@ -358,34 +360,61 @@ const Fixtures = ({
                                   />
                                   <div className="flex justify-between items-center  w-full">
                                     <div className=" text-xs sm:text-base flex items-center gap-[1px] sm:gap-[2px]">
-                                      <span className=" mr-1 sm:mr-2 ">{fixture.event_home_team}</span>
-                                      {fixture.cards.filter((c,i) => (
-                                        c.card == "red card" && c.home_fault)).map((c,i) => (
-                                          <div
-                                          className={`${
-                                            (c.card == "red card" && c.home_fault && i == 0)
-                                            ? " bg-red-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black mr-[2px]"
-                                            : ""
-                                          } `}
+                                      <span className=" mr-1 sm:mr-2 ">
+                                        {fixture.event_home_team}
+                                      </span>
+                                      {fixture.cards
+                                        .filter(
+                                          (c, i) =>
+                                            c.card == "red card" && c.home_fault
+                                        )
+                                        .map((c, i) => (
+                                          <div key={i}
+                                            className={`${
+                                              c.card == "red card" &&
+                                              c.home_fault &&
+                                              i == 0
+                                                ? " bg-red-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black mr-[2px]"
+                                                : ""
+                                            } `}
                                           >
-                                          {(i == 0 && fixture.cards.filter((c,i) => (
-                                            c.card == "red card" && c.home_fault)).length != 0) && fixture.cards.filter((c,i) => (
-                                              c.card == "red card" && c.home_fault)).length}
-                                        </div>
-                                      ))}
-                                      {fixture.cards.filter((c,i) => (
-                                        c.card == "yellow card" && c.home_fault)).map((c,i) => (
-                                          <div
-                                          className={`${
-                                            (c.card == "yellow card" && c.home_fault && i == 0)
+                                            {i == 0 &&
+                                              fixture.cards.filter(
+                                                (c, i) =>
+                                                  c.card == "red card" &&
+                                                  c.home_fault
+                                              ).length != 0 &&
+                                              fixture.cards.filter(
+                                                (c, i) =>
+                                                  c.card == "red card" &&
+                                                  c.home_fault
+                                              ).length}
+                                          </div>
+                                        ))}
+                                      {fixture.cards
+                                        .filter(
+                                          (c, i) =>
+                                            c.card == "yellow card" &&
+                                            c.home_fault
+                                        )
+                                        .map((c, i) => (
+                                          <div key={i}
+                                            className={`${
+                                              c.card == "yellow card" &&
+                                              c.home_fault &&
+                                              i == 0
                                                 ? " bg-yellow-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black"
                                                 : ""
                                             } `}
                                           >
-                                          {(i == 0) && fixture.cards.filter((c,i) => (
-                                            c.card == "yellow card" && c.home_fault)).length}
-                                        </div>
-                                      ))}
+                                            {i == 0 &&
+                                              fixture.cards.filter(
+                                                (c, i) =>
+                                                  c.card == "yellow card" &&
+                                                  c.home_fault
+                                              ).length}
+                                          </div>
+                                        ))}
                                     </div>
                                     <div className="text-xs">
                                       {fixture.event_final_result.slice(
@@ -403,36 +432,63 @@ const Fixtures = ({
                                   />
                                   <div className="flex justify-between items-center w-full">
                                     <div className=" text-xs sm:text-base flex items-center gap-[1px] sm:gap-[2px] ">
-                                      <span className=" mr-1 sm:mr-2">{fixture.event_away_team}</span>
-                                      {fixture.cards.filter((c,i) => (
-                                        c.card == "red card" && c.away_fault)).map((c,i) => (
-                                          <div
+                                      <span className=" mr-1 sm:mr-2">
+                                        {fixture.event_away_team}
+                                      </span>
+                                      {fixture.cards
+                                        .filter(
+                                          (c, i) =>
+                                            c.card == "red card" && c.away_fault
+                                        )
+                                        .map((c, i) => (
+                                          <div key={i}
                                             className={`${
-                                              (c.card == "red card" && c.away_fault && i == 0)
+                                              c.card == "red card" &&
+                                              c.away_fault &&
+                                              i == 0
                                                 ? " bg-red-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black mr-[2px]"
                                                 : ""
                                             } `}
                                           >
-                                          {(i == 0 && fixture.cards.filter((c,i) => (
-                                        c.card == "red card" && c.away_fault)).length != 0) && fixture.cards.filter((c,i) => (
-                                        c.card == "red card" && c.away_fault)).length}
-                                        </div>
-                                      ))}
-                                      {fixture.cards.filter((c,i) => (
-                                        c.card == "yellow card" && c.away_fault)).map((c,i) => (
-                                          <div
-                                          className={`${
-                                            (c.card == "yellow card" && c.away_fault && i == 0)
+                                            {i == 0 &&
+                                              fixture.cards.filter(
+                                                (c, i) =>
+                                                  c.card == "red card" &&
+                                                  c.away_fault
+                                              ).length != 0 &&
+                                              fixture.cards.filter(
+                                                (c, i) =>
+                                                  c.card == "red card" &&
+                                                  c.away_fault
+                                              ).length}
+                                          </div>
+                                        ))}
+                                      {fixture.cards
+                                        .filter(
+                                          (c, i) =>
+                                            c.card == "yellow card" &&
+                                            c.away_fault
+                                        )
+                                        .map((c, i) => (
+                                          <div key={i}
+                                            className={`${
+                                              c.card == "yellow card" &&
+                                              c.away_fault &&
+                                              i == 0
                                                 ? " bg-yellow-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black"
                                                 : ""
                                             } `}
                                           >
-                                          {(i == 0) && fixture.cards.filter((c,i) => (
-                                            c.card == "yellow card" && c.away_fault)).length}
-                                        </div>
-                                      ))}
+                                            {i == 0 &&
+                                              fixture.cards.filter(
+                                                (c, i) =>
+                                                  c.card == "yellow card" &&
+                                                  c.away_fault
+                                              ).length}
+                                          </div>
+                                        ))}
                                     </div>
-                                    <div className="text-xs" >
+                                    <div className="text-xs">
                                       {fixture.event_final_result.slice(
                                         fixture.event_final_result.indexOf(
                                           "-"

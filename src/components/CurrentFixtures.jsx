@@ -9,6 +9,7 @@ import LineUp from "./LineUp";
 import CurrentFixtureInfo from "./CurrentFixtureInfo";
 import MatchInfo from "./MatchInfo";
 import Standing from "./Standing";
+import useWebSocket from "react-use-websocket";
 
 const CurrentFixtures = ({ toggleMode, windowWidth }) => {
   const [loading, setLoading] = useState(false);
@@ -40,7 +41,40 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
 
   const { id } = useParams();
   console.log(useParams());
+  const api_key = import.meta.env.VITE_api_key;
 
+  const socketUrl = `wss://wss.allsportsapi.com/live_events?APIkey=${api_key}&matchId=${id}`;
+  const {
+    sendMessage,
+    sendJsonMessage,
+    lastMessage,
+    lastJsonMessage,
+    readyState,
+    getWebSocket,
+  } = useWebSocket(socketUrl, {
+    onOpen: () => console.log(lastJsonMessage, lastMessage),
+    //Will attempt to reconnect on all close events, such as server shutting down
+  });
+
+  useEffect(() => {
+    console.log(lastJsonMessage);
+    if (lastJsonMessage !== null ) {
+      setMatch(lastJsonMessage);
+      console.log(lastJsonMessage?.map((s) => s.statistics));
+      setStats(lastJsonMessage.map((s) => s.statistics));
+      // setPlayerStat(lastJsonMessage.map((s) => s.player_stats));
+      setEvents(
+        lastJsonMessage
+          .map((c) => c.cards)
+          .concat(lastJsonMessage.map((g) => g.goalscorers))
+          .concat(lastJsonMessage.map((s) => s.substitutes))
+          .reduce((a, c) => {
+            return a.concat(c);
+          }, [])
+      );
+      
+    }
+  }, [lastJsonMessage]);
   const handleClick = (e) => {
     let book = e.target.innerHTML;
     setBookie(book);
@@ -183,9 +217,8 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
 
   let per = "w-[53%]";
 
-  const api_key = import.meta.env.VITE_api_key;
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     async function getData() {
       await fetch(
         `https://apiv2.allsportsapi.com/football/?met=Fixtures&withPlayerStats=1&matchId=${id}&timezone=Africa/Lagos&APIkey=${api_key}`
@@ -228,11 +261,9 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
                 return a.concat(c);
               }, [])
           );
-          setLoading(false)
+          setLoading(false);
         })
-        .catch((err) => {
-          
-        });
+        .catch((err) => {});
     }
     getData();
   }, [id]);
@@ -248,11 +279,44 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
         .then((json) => {
           setHToH(json.result.H2H);
           console.log(json.result.H2H);
-          console.log(parseFloat(json.result.H2H.filter(h => eval(h.event_final_result) < 0).length)/parseFloat(json.result.H2H.filter(h => eval(h.event_final_result) == 0).length));
-          setH2hDrawStat(parseFloat(json.result.H2H.filter(h => eval(h.event_final_result) == 0).length))
-          setH2hHomeStat(parseFloat(json.result.H2H.filter(h => (getHomeTeamId == h.home_team_key && eval(h.event_final_result) > 0) || getHomeTeamId == h.away_team_key && eval(h.event_final_result) < 0).length))
-          setH2hAwayStat(parseFloat(json.result.H2H.filter(h => (getAwayTeamId == h.away_team_key && eval(h.event_final_result) < 0) || getAwayTeamId == h.home_team_key && eval(h.event_final_result) > 0).length))
-          
+          console.log(
+            parseFloat(
+              json.result.H2H.filter((h) => eval(h.event_final_result) < 0)
+                .length
+            ) /
+              parseFloat(
+                json.result.H2H.filter((h) => eval(h.event_final_result) == 0)
+                  .length
+              )
+          );
+          setH2hDrawStat(
+            parseFloat(
+              json.result.H2H.filter((h) => eval(h.event_final_result) == 0)
+                .length
+            )
+          );
+          setH2hHomeStat(
+            parseFloat(
+              json.result.H2H.filter(
+                (h) =>
+                  (getHomeTeamId == h.home_team_key &&
+                    eval(h.event_final_result) > 0) ||
+                  (getHomeTeamId == h.away_team_key &&
+                    eval(h.event_final_result) < 0)
+              ).length
+            )
+          );
+          setH2hAwayStat(
+            parseFloat(
+              json.result.H2H.filter(
+                (h) =>
+                  (getAwayTeamId == h.away_team_key &&
+                    eval(h.event_final_result) < 0) ||
+                  (getAwayTeamId == h.home_team_key &&
+                    eval(h.event_final_result) > 0)
+              ).length
+            )
+          );
         })
         .catch((err) => {});
     }
@@ -294,13 +358,16 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
       {windowWidth > 1024 ? (
         <div className=" grid grid-cols-5 gap-4">
           <div className=" col-span-2">
-            <CurrentFixtureInfo match={match} toggleMode={toggleMode} loading={loading}/>
+            <CurrentFixtureInfo
+              match={match}
+              toggleMode={toggleMode}
+              loading={loading}
+            />
             <MatchInfo
               match={match}
               statToggle={statToggle}
               windowWidth={windowWidth}
               toggleMode={toggleMode}
-              
             />
             <Odds
               statToggle={statToggle}

@@ -22,6 +22,7 @@ import Calendar from "react-calendar";
 import { calendar, darkMode, lightMode, searchLogo } from ".";
 import Dark from "./svg/Dark";
 import Light from "./svg/Light";
+import useWebSocket from "react-use-websocket";
 
 const App = () => {
   const [countries, setCountries] = useState([]);
@@ -42,7 +43,25 @@ const App = () => {
   const [toggleSearch, setToggleSearch] = useState(false);
   const [toggleMode, setToggleMode] = useState(false);
   const [focus, setFocus] = useState(false);
-  
+
+  const api_key = import.meta.env.VITE_api_key;
+  const socketUrl = `wss://wss.allsportsapi.com/live_events?APIkey=${api_key}`;
+  const {
+    sendMessage,
+    sendJsonMessage,
+    lastMessage,
+    lastJsonMessage,
+    readyState,
+    getWebSocket,
+  } = useWebSocket(socketUrl, {
+    onOpen: () => console.log(lastJsonMessage, lastMessage),
+    //Will attempt to reconnect on all close events, such as server shutting down
+  });
+
+  useEffect(() => {
+    console.log(lastJsonMessage);
+    
+  }, [lastMessage, lastJsonMessage]);
 
   const { id } = useParams();
   // const history = useNavigate()
@@ -104,9 +123,8 @@ const App = () => {
     if (!toggleSearch) {
       setSearchClub("");
     }
-    setFocus(true)
+    setFocus(true);
   };
-  const api_key = import.meta.env.VITE_api_key;
 
   useEffect(() => {
     setLoadingCountries(true);
@@ -181,7 +199,7 @@ const App = () => {
                 fixture.league_key
             )
           );
-          
+
           console.log(json.result);
           console.log(liveCheck);
           console.log(
@@ -322,7 +340,6 @@ const App = () => {
                 setCheck={setCheck}
                 toggleSearch={toggleSearch}
                 setFocus={setFocus}
-                
               />
             }
           />
