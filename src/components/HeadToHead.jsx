@@ -26,7 +26,7 @@ const HeadToHead = ({
             <div
               className={` w-[${Math.round(
                 (h2hHomeStat / (h2hAwayStat + h2hDrawStat + h2hHomeStat)) * 100
-              )}%] rounded-l-sm bg-green-600`}
+              )}%] rounded-l-sm bg-green-600 px-1`}
             >
               {h2hHomeStat}
             </div>
@@ -35,7 +35,7 @@ const HeadToHead = ({
             <div
               className={` w-[${Math.round(
                 (h2hDrawStat / (h2hAwayStat + h2hDrawStat + h2hHomeStat)) * 100
-              )}%] bg-gray-400`}
+              )}%] bg-gray-400 px-1`}
             >
               {h2hDrawStat}
             </div>
@@ -44,7 +44,7 @@ const HeadToHead = ({
             <div
               className={` w-[${Math.round(
                 (h2hAwayStat / (h2hAwayStat + h2hDrawStat + h2hHomeStat)) * 100
-              )}%] rounded-r-sm bg-red-600`}
+              )}%] rounded-r-sm bg-red-600 px-1`}
             >
               {h2hAwayStat}
             </div>
