@@ -45,7 +45,7 @@ const TeamFixtures = ({ teamFixtures, teamResults, toggleMode, id }) => {
                     <div className="flex flex-col items-center w-14 mt-2">
                       <div
                         className={`${
-                          h.event_live == 1 ? "hidden" : ""
+                          h.event_live == 1 && h.event_status != 'Finished' ?  "hidden" : ""
                         }`}
                       >
                         {h.event_date.slice(0, h.event_date.indexOf("-")) ===
@@ -58,7 +58,7 @@ const TeamFixtures = ({ teamFixtures, teamResults, toggleMode, id }) => {
                       </div>
                       <div
                         className={`${
-                          h.event_live == 1 ? "text-orange animate-pulse" : ""
+                          h.event_live == 1 && h.event_status != 'Finished' ? "text-orange animate-pulse" : ""
                         } text-xs`}
                       >
                         {h.event_status === "Finished" ? (
@@ -86,7 +86,7 @@ const TeamFixtures = ({ teamFixtures, teamResults, toggleMode, id }) => {
                         <div>{h.event_home_team}</div>
                         <div
                           className={`${
-                            h.event_live == 1 ? "text-orange" : ""
+                            h.event_live == 1 && h.event_status != 'Finished' ? "text-orange" : ""
                           } pr-1 `}
                         >
                           {h.event_final_result.slice(
@@ -99,7 +99,7 @@ const TeamFixtures = ({ teamFixtures, teamResults, toggleMode, id }) => {
                         <div>{h.event_away_team}</div>
                         <div
                           className={`${
-                            h.event_live == 1 ? "text-orange" : ""
+                            h.event_live == 1 && h.event_status != 'Finished' ? "text-orange" : ""
                           } pr-1 `}
                         >
                           {h.event_final_result.slice(

@@ -315,7 +315,9 @@ const Fixtures = ({
                                   className={`${
                                     fixture.event_live == 1 ||
                                     fixture.event_status == "Finished" ||
-                                    fixture.event_status === "After Pen."
+                                    fixture.event_status === "After Pen." ||
+                                    fixture.event_status === 'After ET' ||
+                                    fixture.event_status === 'Postponed'
                                       ? "hidden"
                                       : ""
                                   }`}
@@ -416,7 +418,7 @@ const Fixtures = ({
                                           </div>
                                         ))}
                                     </div>
-                                    <div className="text-xs">
+                                    <div className={`${fixture.event_live == '1' && fixture.event_status !== 'Finished' ? 'text-live' : ''} text-xs`}>
                                       {fixture.event_final_result.slice(
                                         0,
                                         fixture.event_final_result.indexOf("-")
@@ -488,7 +490,7 @@ const Fixtures = ({
                                           </div>
                                         ))}
                                     </div>
-                                    <div className="text-xs">
+                                    <div className={`${fixture.event_live == '1' && fixture.event_status !== 'Finished' ? 'text-live' : ''} text-xs`}>
                                       {fixture.event_final_result.slice(
                                         fixture.event_final_result.indexOf(
                                           "-"
