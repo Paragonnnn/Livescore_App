@@ -55,7 +55,7 @@ const Countries = ({loadingCountries, countries, error, leagues, toggleMode}) =>
                     search.trim().toLowerCase() === '' ? country : country.country_name.toLowerCase().includes(search.toLowerCase())
                 )).slice(0,seeAll).map((country,index) => (
                     <div key={country.country_key} className=''>
-                        <div    className={`${toggleMode ? 'text-darkText' : 'text-lightText'} flex items-center justify-between w-full px-1 py-2 cursor-pointer`} onClick={() => handleClick(index)}>
+                        <div    className={`${toggleMode ? 'text-darkText' : 'text-lightText'} flex items-center justify-between w-full px-1 pt-1 cursor-pointer`} onClick={() => handleClick(index)}>
                             <div className='  w-[70%] overflow-hidden '>
                                 <h2 className=''>{country.country_name}</h2>
                             </div>
@@ -66,7 +66,7 @@ const Countries = ({loadingCountries, countries, error, leagues, toggleMode}) =>
                                 className=' w-7 h-7 cursor-pointer'
                             />
                         </div>
-                        <div className={`${activeIndex.includes(index) ? 'block animate-countryDropDown' : 'hidden'} ${toggleMode ? 'text-darkText' : 'text-lightText'} p-2 divide-y divide-gray-400 divide-opacity-20  transition-all duration-300`}>
+                        <div className={`${activeIndex.includes(index) ? ' visible h-full animate-countryDropDown' : ' animate-countryDropUp invisible h-0 opacity-0'} ${toggleMode ? 'text-darkText' : 'text-lightText'} p-2 divide-y divide-gray-400 divide-opacity-20  transition-all duration-300 `}>
                             {
                                 leagues.map((league) => (
                                     (league.country_key == country.country_key) &&

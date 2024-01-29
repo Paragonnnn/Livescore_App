@@ -68,6 +68,10 @@ export default {
           '0%': {opacity: '.5',height: '0'},
           '100%': {borderWidth: '1',height: '100%'}
         },
+        countryDropUp: {
+          '0%': {opacity: '.5',height: '0'},
+          '100%': {borderWidth: '1',height: '100%'}
+        },
         mode: {
           '0%': {transform: 'rotate(-20deg)'},
           '100%': {transform: 'rotate(0deg)'}
@@ -86,7 +90,8 @@ export default {
         swipe: 'swipe .3s',
         sel: 'sel .3s',
         sel2: 'sel .3s',
-        countryDropDown: 'countryDropDown .5s',
+        countryDropDown: 'countryDropDown .1s',
+        countryDropUp: 'countryDropUp .1s',
         mode: 'mode 1s',
         translate: 'translate .3s'
       },
