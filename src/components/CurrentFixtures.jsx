@@ -58,7 +58,7 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
 
   useEffect(() => {
     console.log(lastJsonMessage);
-    if (lastJsonMessage !== null ) {
+    if (lastJsonMessage !== null) {
       setMatch(lastJsonMessage);
       console.log(lastJsonMessage?.map((s) => s.statistics));
       setStats(lastJsonMessage.map((s) => s.statistics));
@@ -72,7 +72,6 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
             return a.concat(c);
           }, [])
       );
-      
     }
   }, [lastJsonMessage]);
   const handleClick = (e) => {
@@ -397,6 +396,18 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
               toggleMode={toggleMode}
               playerStat={playerStat}
             />
+            <div className="  my-4 px-1 shadow-sm max-h-96 overflow-y-scroll scroll_bar">
+              <span className=" text-center text-white text-xl block">H2H</span>
+              <HeadToHead
+                statToggle={statToggle}
+                hToH={hToH}
+                windowWidth={windowWidth}
+                toggleMode={toggleMode}
+                h2hAwayStat={h2hAwayStat}
+                h2hDrawStat={h2hDrawStat}
+                h2hHomeStat={h2hHomeStat}
+              />
+            </div>
             <Standing
               table={table}
               changeTable={changeTable}

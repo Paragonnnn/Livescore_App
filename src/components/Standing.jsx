@@ -14,6 +14,11 @@ const Standing = ({
   getAwayTeamId,
   getHomeTeamId,
 }) => {
+  
+  // for (let i = 0; i < table.length; i++) {
+  //   const element = table[i]
+  //   console.log(element.team_key)
+  // }
   return (
     <div
       className={`${
@@ -69,6 +74,7 @@ const Standing = ({
                 <div className="md:p-2 p-1 hidden sm:block">GA</div>
                 <div className="md:p-2 p-1 ">GD</div>
                 <div className="md:p-2 p-1 ">Pts</div>
+                <div className="md:p-2 p-1 ">Form</div>
               </section>
             </section>
           </section>
@@ -123,6 +129,7 @@ const Standing = ({
                       {table.standing_A}
                     </div>
                     <div className="md:p-2 p-1">{table.standing_GD}</div>
+                    <div className="md:p-2 p-1">{table.standing_PTS}</div>
                     <div className="md:p-2 p-1">{table.standing_PTS}</div>
                   </section>
                 </section>

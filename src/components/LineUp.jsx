@@ -46,9 +46,7 @@ const LineUp = ({
         (statToggle.includes("Line-Up") ? "block" : "hidden")
       } ${toggleMode ? "text-darkText" : "text-lightText"} `}
     >
-      {lineUp.length == 0 ? (
-        <div>No line up yet</div>
-      ) : (
+      {lineUp.map(l => l.home_team.starting_lineups.length == 0 ? <div>No line up yet</div> :   (
         <>
           <div className=" text-xl font-bold text-customBg bg-customBg2 mb-4 p-2 rounded ">
             Line Up
@@ -288,6 +286,8 @@ const LineUp = ({
             </div>
           </div>
         </>
+        
+      ) 
       )}
     </div>
   );

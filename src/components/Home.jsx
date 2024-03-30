@@ -39,6 +39,8 @@ const Home = ({
   focus,
   toggleSearch,
   setFocus,
+  lastJsonMessage,
+  reCheck
 }) => {
   const [picker, setPicker] = useState(null);
   const date = new Date();
@@ -175,6 +177,7 @@ const Home = ({
       <div className="col-span-5">
         <Fixtures
           check={check}
+          reCheck={reCheck}
           fixtures={fixtures}
           leagues={leagues}
           loadingFixtures={loadingFixtures}
@@ -185,6 +188,7 @@ const Home = ({
           windowWidth={windowWidth}
           toggleMode={toggleMode}
           toggleSearch={toggleSearch}
+          lastJsonMessage={lastJsonMessage}
         />
       </div>
       <div className="hidden lg:block col-span-3 sticky top-[90px] text-black bg-customBg2 p-4 h-fit">

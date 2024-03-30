@@ -23,6 +23,8 @@ import { calendar, darkMode, lightMode, searchLogo } from ".";
 import Dark from "./svg/Dark";
 import Light from "./svg/Light";
 import useWebSocket from "react-use-websocket";
+import { Notifications } from "react-push-notification";
+
 
 const App = () => {
   const [countries, setCountries] = useState([]);
@@ -35,6 +37,7 @@ const App = () => {
   const [fixtures, setFixtures] = useState([]);
   const [newFixtures, setNewFixtures] = useState([]);
   const [check, setCheck] = useState([]);
+  const [reCheck, setReCheck] = useState([])
   const [liveCheck, setLiveCheck] = useState([]);
   const [currentFixture, setCurrentFixture] = useState([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -90,7 +93,7 @@ const App = () => {
   // const history = useNavigate()
   // const {pathname} = useLocation()
   document.querySelector("body").style.backgroundColor = `${
-    toggleMode ? "#F7F7FF" : "#101419"
+    toggleMode ? "#F7F7FF" : "#10162F"
   }`;
   console.log(document.querySelector("body"));
   const date = new Date();
@@ -128,6 +131,7 @@ const App = () => {
     }
     // history(`/${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
     console.log(new Date(calenderDate));
+    
     setCheck([]);
     console.log("hi");
     console.log(fixtures);
@@ -213,22 +217,28 @@ const App = () => {
                 !check.includes(fixture.league_key) && fixture.league_key
             )
           );
+          // setReCheck(
+          //   json.result.map(
+          //     (fixture) =>
+          //       !check.includes(fixture.league_key) && fixture.league_key
+          //   )
+          // )
           setLiveCheck(
             json.result.map(
               (fixture) =>
-                !check.includes(fixture.league_key) &&
+              !check.includes(fixture.league_key) &&
                 fixture.event_live === "1" &&
                 fixture.event_status !== "Finished" &&
                 fixture.league_key
             )
-          );
-
+            );
+            
           console.log(json.result);
           console.log(liveCheck);
           console.log(
             json.result.map(
               (fixture) =>
-                !check.includes(fixture.league_key) && fixture.league_key
+              !check.includes(fixture.league_key) && fixture.league_key
             )
           );
         })
@@ -242,9 +252,10 @@ const App = () => {
 
     // Clean up the timer when the component unmounts
     // return () => {
-    //   clearTimeout(timeoutId);
-    // };
-    getData();
+      //   clearTimeout(timeoutId);
+      // };
+      getData();
+      // setCheck([])
   }, [calenderDate, history]);
 
   // useEffect(() => {
@@ -255,6 +266,7 @@ const App = () => {
 
   return (
     <div className={`${toggleMode ? "bg-customBg3" : "bg-darkCustomBg3"} `}>
+      <Notifications />
       <div
         className={`${
           toggleMode
@@ -345,6 +357,7 @@ const App = () => {
                 error={error}
                 leagues={leagues}
                 check={check}
+                reCheck={reCheck}
                 fixtures={fixtures}
                 loadingFixtures={loadingFixtures}
                 fixturesError={fixturesError}
@@ -363,6 +376,7 @@ const App = () => {
                 setCheck={setCheck}
                 toggleSearch={toggleSearch}
                 setFocus={setFocus}
+                lastJsonMessage={lastJsonMessage}
               />
             }
           />

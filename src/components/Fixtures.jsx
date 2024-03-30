@@ -4,6 +4,7 @@ import Error from "./Error";
 import Countries from "./Countries";
 import { Link } from "react-router-dom";
 import { max } from "mathjs";
+import addNotification from "react-push-notification";
 
 const Fixtures = ({
   leagues,
@@ -17,9 +18,25 @@ const Fixtures = ({
   windowWidth,
   toggleMode,
   toggleSearch,
+  lastJsonMessage,
+  reCheck
 }) => {
   const [isLive, setIsLive] = useState(true);
+  // const [checkCheck, setCheckCheck] = useState([])
+  const [notificationMessage, setNotificationMessage] = useState([])
 
+  // useEffect(() => {
+  //   if (check != []) {
+  //     setCheckCheck([])
+  //     setCheckCheck(check)
+  //     console.log('checkkkkk');
+  //   } else(check == []); {
+  //     setCheckCheck([])
+  //     setCheckCheck(reCheck)
+  //     console.log('not checkkkk');
+  //   }
+  // },[check])
+  
   const all = () => {
     setIsLive(true);
   };
@@ -36,6 +53,23 @@ const Fixtures = ({
     console.log(currentFixture);
     console.log("hi");
   };
+  // const buttonClick = () => {
+  //   addNotification({
+  //     title: `${notificationMessage?.map((f) => f.event_final_result)}`,
+  //     subtitle: "This is a subtitle",
+  //     message: `${notificationMessage?.map((f) => `${f.event_home_team} - ${f.event_away_team}`)}`,
+  //     theme: "darkblue",
+  //     native: true, // when using native, your OS will handle theming.
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   console.log("new fixtures");
+  //   setNotificationMessage(lastJsonMessage?.filter(l => l.event_key == '1226019'))
+  //   if (lastJsonMessage?.map((f) => f.event_key == "1226019")) {
+  //     buttonClick();
+  //   }
+  // }, [lastJsonMessage]);
 
   return (
     <div
@@ -76,6 +110,9 @@ const Fixtures = ({
               )
             </div>
           </button>
+          {/* <button onClick={buttonClick} className="button">
+            Hello world.
+          </button> */}
         </div>
       </div>
       {loadingFixtures && (
@@ -220,14 +257,14 @@ const Fixtures = ({
             leagues.map(
               (league, index) =>
                 (!isLive
-                  ? check.includes(league.league_key) &&
+                  ? check?.includes(league.league_key) &&
                     liveCheck.includes(league.league_key)
-                  : check.includes(league.league_key)) && (
+                  : check?.includes(league.league_key)) && (
                   <div
                     key={league.league_key}
                     className={`border border-gray-400 border-solid mb-4 first:rounded-t-lg last:rounded-b-lg divide-y divide-gray-400 border-opacity-20 divide-opacity-20`}
                   >
-                    {check.includes(league.league_key) && (
+                    {check?.includes(league.league_key) && (
                       <div
                         className={` text-customBg py-2 px-3 text-xs  flex gap-1 items-center `}
                       >
@@ -316,8 +353,8 @@ const Fixtures = ({
                                     fixture.event_live == 1 ||
                                     fixture.event_status == "Finished" ||
                                     fixture.event_status === "After Pen." ||
-                                    fixture.event_status === 'After ET' ||
-                                    fixture.event_status === 'Postponed'
+                                    fixture.event_status === "After ET" ||
+                                    fixture.event_status === "Postponed"
                                       ? "hidden"
                                       : ""
                                   }`}
@@ -371,7 +408,8 @@ const Fixtures = ({
                                             c.card == "red card" && c.home_fault
                                         )
                                         .map((c, i) => (
-                                          <div key={i}
+                                          <div
+                                            key={i}
                                             className={`${
                                               c.card == "red card" &&
                                               c.home_fault &&
@@ -400,7 +438,8 @@ const Fixtures = ({
                                             c.home_fault
                                         )
                                         .map((c, i) => (
-                                          <div key={i}
+                                          <div
+                                            key={i}
                                             className={`${
                                               c.card == "yellow card" &&
                                               c.home_fault &&
@@ -418,7 +457,14 @@ const Fixtures = ({
                                           </div>
                                         ))}
                                     </div>
-                                    <div className={`${fixture.event_live == '1' && fixture.event_status !== 'Finished' ? 'text-live' : ''} text-xs`}>
+                                    <div
+                                      className={`${
+                                        fixture.event_live == "1" &&
+                                        fixture.event_status !== "Finished"
+                                          ? "text-live"
+                                          : ""
+                                      } text-xs`}
+                                    >
                                       {fixture.event_final_result.slice(
                                         0,
                                         fixture.event_final_result.indexOf("-")
@@ -443,7 +489,8 @@ const Fixtures = ({
                                             c.card == "red card" && c.away_fault
                                         )
                                         .map((c, i) => (
-                                          <div key={i}
+                                          <div
+                                            key={i}
                                             className={`${
                                               c.card == "red card" &&
                                               c.away_fault &&
@@ -472,7 +519,8 @@ const Fixtures = ({
                                             c.away_fault
                                         )
                                         .map((c, i) => (
-                                          <div key={i}
+                                          <div
+                                            key={i}
                                             className={`${
                                               c.card == "yellow card" &&
                                               c.away_fault &&
@@ -490,7 +538,14 @@ const Fixtures = ({
                                           </div>
                                         ))}
                                     </div>
-                                    <div className={`${fixture.event_live == '1' && fixture.event_status !== 'Finished' ? 'text-live' : ''} text-xs`}>
+                                    <div
+                                      className={`${
+                                        fixture.event_live == "1" &&
+                                        fixture.event_status !== "Finished"
+                                          ? "text-live"
+                                          : ""
+                                      } text-xs`}
+                                    >
                                       {fixture.event_final_result.slice(
                                         fixture.event_final_result.indexOf(
                                           "-"

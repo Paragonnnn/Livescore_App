@@ -21,11 +21,16 @@
   background-color: #00000031;
   color: #ffffff67;
 }
+
 .fixtures_scroll::-webkit-scrollbar{
   display: none;
 }
 .scroll_bar::-webkit-scrollbar-thumb {
   border-radius: 6px;
+  background-color: #3498db;
+}
+.scroll_bar:hover:-webkit-scrollbar-thumb {
+  border-radius: 8px;
   background-color: #3498db;
 }
 .countries-scroll::-webkit-scrollbar{

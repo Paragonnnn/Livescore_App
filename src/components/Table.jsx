@@ -13,8 +13,20 @@ const Table = ({ toggleMode }) => {
   const [error, setError] = useState(false);
   const [topScorers, setTopScorers] = useState([]);
   const [changeTable, setChangeTable] = useState("all");
+  const [results, setResults] = useState([]);
 
   const { id } = useParams();
+  const date = new Date();
+  console.log(date);
+  const fromDate = `${date.getFullYear() - 3}-${
+    date.getMonth() + 1
+  }-${date.getDate()}`;
+  const toDate = `${date.getFullYear() + 1}-${
+    date.getMonth() + 1
+  }-${date.getDate()}`;
+  console.log(fromDate, toDate, date);
+  const [from, setFrom] = useState(fromDate);
+  const [to, setTo] = useState(toDate);
   const home = () => {
     setChangeTable("home");
     setMappedTable(homeTable);
@@ -69,6 +81,22 @@ const Table = ({ toggleMode }) => {
         .catch((err) => {});
     }
     getData();
+  }, [id]);
+  useEffect(() => {
+    table?.map((t) => {
+
+      console.log(t.team_key)
+      async function getData() {
+        await fetch(
+          `https://apiv2.allsportsapi.com/football/?met=Fixtures&teamId=76&APIkey=${api_key}&from=${from}&to=${to}`
+        )
+          .then((res) => res.json)
+          .then((json) => {
+            console.log(json.result);
+          });
+      }
+      getData();
+    })
   }, [id]);
 
   return (
