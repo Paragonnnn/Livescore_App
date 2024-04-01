@@ -93,7 +93,7 @@ const App = () => {
   // const history = useNavigate()
   // const {pathname} = useLocation()
   document.querySelector("body").style.backgroundColor = `${
-    toggleMode ? "#F7F7FF" : "#10162F"
+    toggleMode ? "#F7F7FF" : "#101419"
   }`;
   console.log(document.querySelector("body"));
   const date = new Date();
