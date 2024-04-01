@@ -4,7 +4,6 @@ import Error from "./Error";
 import Countries from "./Countries";
 import { Link } from "react-router-dom";
 import { max } from "mathjs";
-import addNotification from "react-push-notification";
 
 const Fixtures = ({
   leagues,

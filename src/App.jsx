@@ -23,7 +23,6 @@ import { calendar, darkMode, lightMode, searchLogo } from ".";
 import Dark from "./svg/Dark";
 import Light from "./svg/Light";
 import useWebSocket from "react-use-websocket";
-import { Notifications } from "react-push-notification";
 
 
 const App = () => {
