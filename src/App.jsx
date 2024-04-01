@@ -265,7 +265,7 @@ const App = () => {
 
   return (
     <div className={`${toggleMode ? "bg-customBg3" : "bg-darkCustomBg3"} `}>
-      <Notifications />
+      {/* <Notifications /> */}
       <div
         className={`${
           toggleMode
