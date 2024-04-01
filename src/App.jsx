@@ -24,7 +24,6 @@ import Dark from "./svg/Dark";
 import Light from "./svg/Light";
 import useWebSocket from "react-use-websocket";
 
-
 const App = () => {
   const [countries, setCountries] = useState([]);
   const [loadingCountries, setLoadingCountries] = useState(false);
@@ -36,7 +35,7 @@ const App = () => {
   const [fixtures, setFixtures] = useState([]);
   const [newFixtures, setNewFixtures] = useState([]);
   const [check, setCheck] = useState([]);
-  const [reCheck, setReCheck] = useState([])
+  const [reCheck, setReCheck] = useState([]);
   const [liveCheck, setLiveCheck] = useState([]);
   const [currentFixture, setCurrentFixture] = useState([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -64,29 +63,31 @@ const App = () => {
   useEffect(() => {
     if (lastJsonMessage !== null && fixtures) {
       console.log(lastJsonMessage);
-      
+
       console.log([lastJsonMessage.map((l) => l.event_key)]);
-      fixtures.map(f => {
+      fixtures.map((f) => {
         // console.log(lastJsonMessage.find(l => l.event_key === f.event_key))
         function replaceItems(fixtures, lastJsonMessage) {
-          return fixtures.map(f => {
+          return fixtures.map((f) => {
             // Check if there is a matching ID in the lastJsonMessage
-            let replacementItem = lastJsonMessage.find(l => l.event_key === f.event_key);
-        
+            let replacementItem = lastJsonMessage.find(
+              (l) => l.event_key === f.event_key
+            );
+
             // If there is a match, use the replacement item, otherwise use the original item
             return replacementItem ? replacementItem : f;
           });
         }
-        
+
         // Use the function to get the updated array
         let updatedArray = replaceItems(fixtures, lastJsonMessage);
-        
+
         // console.log(updatedArray);
-        return setFixtures(updatedArray)
-      })
+        return setFixtures(updatedArray);
+      });
     }
     // setNewFixtures([lastJsonMessage.map((l) => l.event_key)]);
-  }, [ lastJsonMessage]);
+  }, [lastJsonMessage]);
 
   const { id } = useParams();
   // const history = useNavigate()
@@ -130,7 +131,7 @@ const App = () => {
     }
     // history(`/${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
     console.log(new Date(calenderDate));
-    
+
     setCheck([]);
     console.log("hi");
     console.log(fixtures);
@@ -225,19 +226,19 @@ const App = () => {
           setLiveCheck(
             json.result.map(
               (fixture) =>
-              !check.includes(fixture.league_key) &&
+                !check.includes(fixture.league_key) &&
                 fixture.event_live === "1" &&
                 fixture.event_status !== "Finished" &&
                 fixture.league_key
             )
-            );
-            
+          );
+
           console.log(json.result);
           console.log(liveCheck);
           console.log(
             json.result.map(
               (fixture) =>
-              !check.includes(fixture.league_key) && fixture.league_key
+                !check.includes(fixture.league_key) && fixture.league_key
             )
           );
         })
@@ -251,10 +252,10 @@ const App = () => {
 
     // Clean up the timer when the component unmounts
     // return () => {
-      //   clearTimeout(timeoutId);
-      // };
-      getData();
-      // setCheck([])
+    //   clearTimeout(timeoutId);
+    // };
+    getData();
+    // setCheck([])
   }, [calenderDate, history]);
 
   // useEffect(() => {
@@ -276,12 +277,12 @@ const App = () => {
         <div className="m-auto  max-w-[1440px]  flex items-center justify-between relative">
           <Link to={"/"}>
             <h3 className="text-[25px] md:text-[40px] px-2 md:px-4 py-1 sm:py-2 mb-2 text-customBg font-bold">
-              <img
+              {/* <img
                 src="https://upload.wikimedia.org/wikipedia/commons/c/c0/Santa_hat.svg"
                 alt=""
                 className=" h-5 md:h-8 absolute left-[-4px] md:left-[-10px] top-2 rotate-[-15deg]"
-              />
-              Paragon :)
+              /> */}
+              ParaScore :)
             </h3>
           </Link>
           <div className="px-2 ">
