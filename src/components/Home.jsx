@@ -49,7 +49,7 @@ const Home = ({
     document.addEventListener("mousedown", (e) => {
       if (!calendarRef.current.contains(e.target)) {
         setShowCalendar(false);
-        console.log(e.target);
+        // console.log(e.target);
       }
     });
   }, []);
@@ -133,7 +133,7 @@ const Home = ({
               toggleMode ? "bg-customBg3" : "bg-darkCustomBg3"
             } rounded-t-xl absolute bottom-[50px] animate-dis left-0 w-full `}
             tabIndex={-1}
-            onFocus={console.log("yii")}
+            // onFocus={console.log("yii")}
             ref={calendarRef}
           >
             <Calendar

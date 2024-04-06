@@ -49,8 +49,8 @@ const Fixtures = ({
     } else {
       setCurrentFixture([id]);
     }
-    console.log(currentFixture);
-    console.log("hi");
+    // console.log(currentFixture);
+    // console.log("hi");
   };
   // const buttonClick = () => {
   //   addNotification({
@@ -305,7 +305,7 @@ const Fixtures = ({
                           );
                         }
                       })
-                      .map(
+                      .sort((a,b )=> a.event_time.slice(0,a.event_time.indexOf(':')) - b.event_time.slice(0,b.event_time.indexOf(':'))).map(
                         (fixture, index) =>
                           // leagues.map(league => (
 

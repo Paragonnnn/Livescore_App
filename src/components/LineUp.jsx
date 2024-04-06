@@ -17,7 +17,7 @@ const LineUp = ({
     document.addEventListener("mousedown", (e) => {
       if (!reff.current.contains(e.target)) {
         setShowStatToggle(false);
-        console.log(e.target);
+        // console.log(e.target);
       }
     });
   }, []);
@@ -35,7 +35,7 @@ const LineUp = ({
   const showPlayerStat = (clickedPlayerKey) => {
     if (!showStatToggle) {
       setShowStatToggle(true);
-      console.log(showStatToggle);
+      // console.log(showStatToggle);
       setClickedPlayer(clickedPlayerKey);
     }
   };

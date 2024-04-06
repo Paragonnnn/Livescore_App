@@ -14,7 +14,7 @@ const Countries = ({loadingCountries, countries, error, leagues, toggleMode}) =>
     
     
     const handleClick = (index) => {
-        console.log(activeIndex);
+        // console.log(activeIndex);
         
         if (activeIndex.includes(index)) {
             

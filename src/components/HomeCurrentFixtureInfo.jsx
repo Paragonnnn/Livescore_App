@@ -38,12 +38,12 @@ const HomeCurrentFixtureInfo = ({
     readyState,
     getWebSocket,
   } = useWebSocket(socketUrl, {
-    onOpen: () => console.log(lastJsonMessage, lastMessage),
+    // onOpen: () => console.log(lastJsonMessage, lastMessage),
     //Will attempt to reconnect on all close events, such as server shutting down
   });
 
   useEffect(() => {
-    console.log(lastJsonMessage);
+    // console.log(lastJsonMessage);
     if (lastJsonMessage !== null && currentFixture) {
         lastJsonMessage.map(l => {
             if (l.event_key == currentFixtureId) {

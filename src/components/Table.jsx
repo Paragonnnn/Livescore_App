@@ -18,30 +18,30 @@ const Table = ({ toggleMode }) => {
 
   const { id } = useParams();
   const date = new Date();
-  console.log(date);
+  // console.log(date);
   const fromDate = `${date.getFullYear() - 3}-${
     date.getMonth() + 1
   }-${date.getDate()}`;
   const toDate = `${date.getFullYear() + 1}-${
     date.getMonth() + 1
   }-${date.getDate()}`;
-  console.log(fromDate, toDate, date);
+  // console.log(fromDate, toDate, date);
   const [from, setFrom] = useState(fromDate);
   const [to, setTo] = useState(toDate);
   const home = () => {
     setChangeTable("home");
     setMappedTable(homeTable);
-    console.log(changeTable);
+    // console.log(changeTable);
   };
   const away = () => {
     setChangeTable("away");
     setMappedTable(awayTable);
-    console.log(changeTable);
+    // console.log(changeTable);
   };
   const all = () => {
     setChangeTable("all");
     setMappedTable(table);
-    console.log(changeTable);
+    // console.log(changeTable);
   };
 
   const api_key = import.meta.env.VITE_api_key;
@@ -56,9 +56,9 @@ const Table = ({ toggleMode }) => {
         .then((json) => {
           setTable(json.result.total);
           setTeamKeys(json.result.total.map(k => k.team_key))
-          console.log(json.result.total.map(k => k.team_key));
+          // console.log(json.result.total.map(k => k.team_key));
           setMappedTable(json.result.total);
-          console.log(json.result.total);
+          // console.log(json.result.total);
           setHomeTable(json.result.home);
           setAwayTable(json.result.away);
           setError(false);
@@ -79,7 +79,7 @@ const Table = ({ toggleMode }) => {
         .then((res) => res.json())
         .then((scorers) => {
           setTopScorers(scorers.result);
-          console.log(scorers.result);
+          // console.log(scorers.result);
         })
         .catch((err) => {});
     }
@@ -112,7 +112,7 @@ const Table = ({ toggleMode }) => {
               )
                 .then((res) => res.json)
                 .then((json) => {
-                  console.log(json.result);
+                  // console.log(json.result);
                   data = json.result;
                 });
               
@@ -126,7 +126,7 @@ const Table = ({ toggleMode }) => {
       const fetchedData = await Promise.all(promiseArray);
   
       // Now fetchedData contains the data fetched for each key
-      console.log(fetchedData);
+      // console.log(fetchedData);
   }
   
   // Call the function to fetch all data

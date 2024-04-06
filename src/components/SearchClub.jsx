@@ -15,7 +15,7 @@ const SearchClub = ({setSearchClub, windowWidth, showSearch, handleSearchChange,
       if (!refOne.current.contains(e.target) && windowWidth > 1024) {
         // setShowSearch(false);
         setFocus(false)
-        console.log(e.target);
+        // console.log(e.target);
       }
     });
   }, []);
@@ -31,7 +31,7 @@ const SearchClub = ({setSearchClub, windowWidth, showSearch, handleSearchChange,
   //     console.log('no');
   //   }
   // }
-  console.log(refOne);
+  // console.log(refOne);
  
   return (
     <div className={`${toggleMode ? 'text-darkText' : 'text-lightText'} w-full relative `} ref={refOne}>

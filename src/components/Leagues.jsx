@@ -21,11 +21,11 @@ const Leagues = () => {
                 setError(false)
                 setLoading(false)
                 setLeagues(json.result)
-                console.log(json.result);
+                // console.log(json.result);
             })
             .catch(err => {
-                console.log(err)
-                console.log('errors');
+                // console.log(err)
+                // console.log('errors');
                 setError(true)
                 setLoading(false)
             })

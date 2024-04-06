@@ -59,15 +59,15 @@ const App = () => {
     readyState,
     getWebSocket,
   } = useWebSocket(socketUrl, {
-    onOpen: () => console.log(lastJsonMessage, lastMessage),
+    // onOpen: () => console.log(lastJsonMessage, lastMessage),
     //Will attempt to reconnect on all close events, such as server shutting down
   });
 
   useEffect(() => {
     if (lastJsonMessage !== null && fixtures) {
-      console.log(lastJsonMessage);
+      // console.log(lastJsonMessage);
 
-      console.log([lastJsonMessage.map((l) => l.event_key)]);
+      // console.log([lastJsonMessage.map((l) => l.event_key)]);
       fixtures.map((f) => {
         // console.log(lastJsonMessage.find(l => l.event_key === f.event_key))
         function replaceItems(fixtures, lastJsonMessage) {
@@ -98,7 +98,7 @@ const App = () => {
   document.querySelector("body").style.backgroundColor = `${
     toggleMode ? "#F7F7FF" : "#101419"
   }`;
-  console.log(document.querySelector("body"));
+  // console.log(document.querySelector("body"));
   const date = new Date();
   // const newDate = format(date, 'MM-dd-yyyy')
   // console.log(date);
@@ -117,27 +117,27 @@ const App = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  console.log(windowWidth);
-  console.log(focus);
+  // console.log(windowWidth);
+  // console.log(focus);
 
   const handleDateChange = (date) => {
-    console.log(date);
+    // console.log(date);
     setCalenderDate(
       `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
     );
-    console.log(date.toISOString().split("T")[0]);
-    console.log(
-      `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`
-    );
+    // console.log(date.toISOString().split("T")[0]);
+    // console.log(
+    //   `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`
+    // );
     setShowCalendar(false);
     if (new Date() == new Date(calenderDate)) {
     }
     // history(`/${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
-    console.log(new Date(calenderDate));
+    // console.log(new Date(calenderDate));
 
     setCheck([]);
-    console.log("hi");
-    console.log(fixtures);
+    // console.log("hi");
+    // console.log(fixtures);
   };
   const handleDateFocus = (e) => {
     // e.key && e.code === "Backspace" && e.preventDefault();
@@ -168,12 +168,12 @@ const App = () => {
           setCountries(json.result);
           setClubs(json.result);
           setLoadingCountries(false);
-          console.log(json.result);
+          // console.log(json.result);
         })
         .catch((err) => {
           setLoadingCountries(false);
           setError(true);
-          console.log(err);
+          // console.log(err);
         });
     }
     getData();
@@ -190,11 +190,11 @@ const App = () => {
           setError(false);
           setLoadingLeagues(false);
           setLeagues(json.result);
-          console.log(json.result);
+          // console.log(json.result);
         })
         .catch((err) => {
-          console.log(err);
-          console.log("errors");
+          // console.log(err);
+          // console.log("errors");
           setError(true);
           setLoadingLeagues(false);
         });
@@ -211,7 +211,7 @@ const App = () => {
         .then((res) => res.json())
         .then((json) => {
           setFixtures(json.result);
-          console.log(json.result);
+          // console.log(json.result);
           setLoadingFixtures(false);
           setCurrentFixture(json.result.slice(0, 1));
           setCheck(
@@ -236,19 +236,19 @@ const App = () => {
             )
           );
 
-          console.log(json.result);
-          console.log(liveCheck);
-          console.log(
-            json.result.map(
-              (fixture) =>
-                !check.includes(fixture.league_key) && fixture.league_key
-            )
-          );
+          // console.log(json.result);
+          // console.log(liveCheck);
+        //   console.log(
+        //     json.result.map(
+        //       (fixture) =>
+        //         !check.includes(fixture.league_key) && fixture.league_key
+        //     )
+        //   );
         })
         .catch((err) => {
           setLoadingFixtures(false);
           setFixturesError(true);
-          console.log(err);
+          // console.log(err);
         });
     }
     // const timeoutId = setTimeout(getData(), 2000);

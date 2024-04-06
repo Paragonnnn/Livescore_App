@@ -17,14 +17,14 @@ const Teams = ({toggleMode}) => {
   const api_key = import.meta.env.VITE_api_key;
 
   const date = new Date();
-  console.log(date);
+  // console.log(date);
   const fromDate = `${date.getFullYear() - 3}-${
     date.getMonth() + 1
   }-${date.getDate()}`;
   const toDate = `${date.getFullYear() + 1}-${
     date.getMonth() + 1
   }-${date.getDate()}`;
-  console.log(fromDate, toDate, date);
+  // console.log(fromDate, toDate, date);
   const [from, setFrom] = useState(fromDate);
   const [to, setTo] = useState(toDate);
   useEffect(() => {
@@ -37,13 +37,13 @@ const Teams = ({toggleMode}) => {
         .then((json) => {
           setTeams(json.result);
           setLoading(false);
-          console.log(json.result);
+          // console.log(json.result);
           json.result.map((team) =>
             team.players.map((cap) => setIsCap(cap.player_is_captain))
           );
-          console.log(isCap);
+          // console.log(isCap);
         })
-        .catch((err) => console.log(err));
+        // .catch((err) => console.log(err));
     }
     getData();
   }, [id]);
