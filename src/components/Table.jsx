@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, json, useParams } from "react-router-dom";
 import Error from "./Error";
 import Loading from "./Loading";
 import Standing from "./Standing";
@@ -13,6 +13,7 @@ const Table = ({ toggleMode }) => {
   const [error, setError] = useState(false);
   const [topScorers, setTopScorers] = useState([]);
   const [changeTable, setChangeTable] = useState("all");
+  const [teamKeys, setTeamKeys] = useState([]);
   const [results, setResults] = useState([]);
 
   const { id } = useParams();
@@ -54,6 +55,8 @@ const Table = ({ toggleMode }) => {
         .then((res) => res.json())
         .then((json) => {
           setTable(json.result.total);
+          setTeamKeys(json.result.total.map(k => k.team_key))
+          console.log(json.result.total.map(k => k.team_key));
           setMappedTable(json.result.total);
           console.log(json.result.total);
           setHomeTable(json.result.home);
@@ -82,22 +85,53 @@ const Table = ({ toggleMode }) => {
     }
     getData();
   }, [id]);
-  useEffect(() => {
-    table?.map((t) => {
+  // useEffect(() => {
+  //   teamKeys?.map((k) => {
 
-      console.log(t.team_key)
-      async function getData() {
-        await fetch(
-          `https://apiv2.allsportsapi.com/football/?met=Fixtures&teamId=76&APIkey=${api_key}&from=${from}&to=${to}`
-        )
-          .then((res) => res.json)
-          .then((json) => {
-            console.log(json.result);
-          });
-      }
-      getData();
-    })
-  }, [id]);
+      
+  //     async function getData() {
+  //       await fetch(
+  //         `https://apiv2.allsportsapi.com/football/?met=Fixtures&teamId=${k}&APIkey=${api_key}&from=${from}&to=${to}`
+  //       )
+  //         .then((res) => res.json)
+  //         .then((json) => {
+  //           console.log(json.result);
+  //         });
+  //     }
+  //     getData();
+  //   })
+  // }, [id]);
+  useEffect(() => {
+    async function fetchAllData() {
+      // Use map() to create an array of promises for fetching data for each key
+      const promiseArray = teamKeys.map(async (key) => {
+          // Logic to fetch data based on the key
+          let data
+          await fetch(
+                `https://apiv2.allsportsapi.com/football/?met=Fixtures&teamId=${key}&APIkey=${api_key}&from=${from}&to=${to}`
+              )
+                .then((res) => res.json)
+                .then((json) => {
+                  console.log(json.result);
+                  data = json.result;
+                });
+              
+          // This could be fetching data from an API, a database, etc.
+          // Replace this with your actual implementation for fetching data
+          
+          return data;
+      });
+  
+      // Use Promise.all() to await all promises and get the fetched data
+      const fetchedData = await Promise.all(promiseArray);
+  
+      // Now fetchedData contains the data fetched for each key
+      console.log(fetchedData);
+  }
+  
+  // Call the function to fetch all data
+  fetchAllData();
+  },[id])
 
   return (
     <div className="">

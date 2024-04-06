@@ -23,6 +23,9 @@ import { calendar, darkMode, lightMode, searchLogo } from ".";
 import Dark from "./svg/Dark";
 import Light from "./svg/Light";
 import useWebSocket from "react-use-websocket";
+import { inject } from '@vercel/analytics';
+ 
+inject();
 
 const App = () => {
   const [countries, setCountries] = useState([]);
