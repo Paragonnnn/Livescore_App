@@ -20,11 +20,12 @@ import parseISO from "date-fns/parseISO";
 import { addDays, format, addMonths, set } from "date-fns";
 import Calendar from "react-calendar";
 import { calendar, darkMode, lightMode, searchLogo } from ".";
+import ParaScoreLogo from "./svg/ParaScoreLogo";
 import Dark from "./svg/Dark";
 import Light from "./svg/Light";
 import useWebSocket from "react-use-websocket";
-import { inject } from '@vercel/analytics';
- 
+import { inject } from "@vercel/analytics";
+
 inject();
 
 const App = () => {
@@ -238,12 +239,12 @@ const App = () => {
 
           // console.log(json.result);
           // console.log(liveCheck);
-        //   console.log(
-        //     json.result.map(
-        //       (fixture) =>
-        //         !check.includes(fixture.league_key) && fixture.league_key
-        //     )
-        //   );
+          //   console.log(
+          //     json.result.map(
+          //       (fixture) =>
+          //         !check.includes(fixture.league_key) && fixture.league_key
+          //     )
+          //   );
         })
         .catch((err) => {
           setLoadingFixtures(false);
@@ -279,13 +280,13 @@ const App = () => {
       >
         <div className="m-auto  max-w-[1440px]  flex items-center justify-between relative">
           <Link to={"/"}>
-            <h3 className="text-[25px] md:text-[40px] px-2 md:px-4 py-1 sm:py-2 mb-2 text-customBg font-bold">
+            <h3 className="text-[25px] md:text-[40px] px-2 md:px-4 py-1 sm:py-2 mb-2 text-customBg font-bold flex items-center">
               {/* <img
                 src="https://upload.wikimedia.org/wikipedia/commons/c/c0/Santa_hat.svg"
                 alt=""
                 className=" h-5 md:h-8 absolute left-[-4px] md:left-[-10px] top-2 rotate-[-15deg]"
               /> */}
-              ParaScore :)
+              <span>ParaSc</span> <ParaScoreLogo /> <span>re</span>
             </h3>
           </Link>
           <div className="px-2 ">

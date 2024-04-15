@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        customBg: '#3F8EFC',
+        customBg: '#1D9BF0',
         customBg2: '#2A86FF10',
         customBg3: '#F7F7FF',
         darkCustomBg3: '#101419',
@@ -26,7 +26,8 @@ export default {
       },
       boxShadow: {
         sm: '0 0 2px 2px #ffffff11',
-        light: '0 0 2px 2px #00000011'
+        light: '0 0 2px 2px #00000011',
+        main: '0px 0px 17px 5px rgba(42,134,255,0.1)'
       },
       fontSize: {
         'xxs': '.6rem'
@@ -79,6 +80,10 @@ export default {
         translate: {
           '0%': {transform: 'translateX(0)'},
           '100%': {transform: 'translateX(32px)'}
+        },
+        toggle: {
+          '0%': {left: '2px'},
+          '100%': {right: '2px'}
         }
         
       }, 
@@ -93,7 +98,8 @@ export default {
         countryDropDown: 'countryDropDown .1s',
         countryDropUp: 'countryDropUp .1s',
         mode: 'mode 1s',
-        translate: 'translate .3s'
+        translate: 'translate .3s',
+        toggle: 'toggle 1s'
       },
 
     },

@@ -40,7 +40,7 @@ const Home = ({
   toggleSearch,
   setFocus,
   lastJsonMessage,
-  reCheck
+  reCheck,
 }) => {
   const [picker, setPicker] = useState(null);
   const date = new Date();
@@ -66,13 +66,18 @@ const Home = ({
       </Link> */}
       <div className="hidden lg:block col-span-3">
         {/* <SearchTeamAndPlayer /> */}
-        <div className=" bg-customBg2 rounded-t">
+        <div className=" bg-customBg2 rounded-xl">
           <Calendar
             value={calenderDate}
             onChange={handleDateChange}
-            className={` text-customBg mb-2 bg-transparent border-none  bg-opacity-50 w-full`}
+            className={`${
+              toggleMode ? "text-darkText" : "text-lightText"
+            } mb-2 bg-transparent border-none  bg-opacity-50 text-opacity-80 w-full px-1`}
             minDetail="year"
             maxDetail="month"
+            tileClassName={({ date }) =>
+              date.getDate() === new Date().getDate() ? "day_style" : ""
+            }
           />
           <div
             onClick={() => {
@@ -88,11 +93,11 @@ const Home = ({
         </div>
         {/* <DatePicker selected={calenderDate} onChange={date => setCalenderDate(date)} onKeyDown={handleDateFocus} /> */}
         {/* <input type="date" name="" pattern='' onKeyDown={handleDateFocus} onChange={handleDateChange} max={maxDate} value={calenderDate} className=' w-full outline-none bg-customBg2 mb-4 text-customBg p-2'/> */}
-        <div className=" bg-customBg2 px-2 mb-4 divide-y divide-black ">
+        <div className=" bg-customBg2 px-2 mb-4 divide-y divide-black rounded-xl">
           <div className=" text-xl text-customBg py-2">Top Leagues</div>
           <div className=" divide-y divide-gray-400 divide-opacity-20 ">
             {leagues &&
-              leagues.slice(6, 16).map((top) => (
+              leagues.slice(0, 13).map((top) => (
                 <div key={top.league_key} className=" px-1 py-2">
                   <Link
                     to={`/table/${top.league_name.replace(/ +/g, "-")}/${
@@ -103,7 +108,33 @@ const Home = ({
                     } flex justify-between `}
                   >
                     {top.league_name}
-                    <img src={top.league_logo} className=" h-5" alt="" />
+                    <img
+                      src={
+                        top.league_key === 302
+                          ? "https://upload.wikimedia.org/wikipedia/commons/0/0f/LaLiga_logo_2023.svg"
+                          : top.league_key === 152
+                          ? "https://upload.wikimedia.org/wikipedia/az/f/f2/Premier_League_Logo.svg"
+                          : top.league_key === 207
+                          ? "https://upload.wikimedia.org/wikipedia/commons/e/e9/Serie_A_logo_2022.svg"
+                          : top.league_key === 175
+                          ? "https://upload.wikimedia.org/wikipedia/az/f/f6/Bundesliga_%28Official_logo%29.png"
+                          : top.league_key === 168
+                          ? "https://upload.wikimedia.org/wikipedia/commons/f/fb/Ligue1_logo.png"
+                          : top.league_key === 344
+                          ? "https://upload.wikimedia.org/wikipedia/en/thumb/a/aa/Russian_Premier_League.svg/1024px-Russian_Premier_League.svg.png"
+                          : top.league_key === 266
+                          ? "https://upload.wikimedia.org/wikipedia/commons/0/0e/Liga_NOS_logo.png"
+                          : top.league_key === 4
+                          ? "https://upload.wikimedia.org/wikipedia/fr/5/52/UEFA_Europa_League_logo.png"
+                          : top.league_key === 3
+                          ? "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/UEFA_Champions_League.svg/1024px-UEFA_Champions_League.svg.png"
+                          : top.league_key === 683
+                          ? "https://upload.wikimedia.org/wikipedia/sr/b/bf/UEFA_Europa_Conference_League_logo.png"
+                          : top.league_logo
+                      }
+                      className=" h-5"
+                      alt=""
+                    />
                   </Link>
                 </div>
               ))}
@@ -160,7 +191,7 @@ const Home = ({
           </div>
         </div>
         <div className={` flex justify-between w-full`}>
-          <div >
+          <div>
             <Calendar2
               setShowCalendar={setShowCalendar}
               calendarRef={calendarRef}
@@ -191,12 +222,14 @@ const Home = ({
           lastJsonMessage={lastJsonMessage}
         />
       </div>
-      <div className="hidden lg:block col-span-3 sticky top-[90px] text-black bg-customBg2 p-4 h-fit">
-          
-      <HomeCurrentFixtureInfo loadingFixtures={loadingFixtures} currentFixture={currentFixture} toggleMode={toggleMode} setCurrentFixture={setCurrentFixture}/>
-
+      <div className="hidden lg:block col-span-3 sticky top-[90px] text-black rounded-xl bg-customBg2  p-4 h-fit">
+        <HomeCurrentFixtureInfo
+          loadingFixtures={loadingFixtures}
+          currentFixture={currentFixture}
+          toggleMode={toggleMode}
+          setCurrentFixture={setCurrentFixture}
+        />
       </div>
-      
 
       {/* {
         // <CurrentFixtures month={month} currentYear={currentYear} day={day} leagues={leagues} />

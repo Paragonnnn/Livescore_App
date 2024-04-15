@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ball,ogball } from "..";
+import { ball, ogball } from "..";
 import useWebSocket from "react-use-websocket";
 
 const HomeCurrentFixtureInfo = ({
   loadingFixtures,
   toggleMode,
   currentFixture,
-  setCurrentFixture
+  setCurrentFixture,
 }) => {
-//   const [newCurrentFixture, setNewCurrentFixture] = useState(currentFixture);
-  const [currentFixtureId, setCurrentFixtureId] = useState(currentFixture.map((c) => {
-    return c.event_key;
-  }));
+  //   const [newCurrentFixture, setNewCurrentFixture] = useState(currentFixture);
+  const [currentFixtureId, setCurrentFixtureId] = useState(
+    currentFixture.map((c) => {
+      return c.event_key;
+    })
+  );
+  const [homeScorers, setHomeScorers] = useState([]);
+  const [awayScorers, setAwayScorers] = useState([]);
 
-  
   useEffect(() => {
     if (currentFixture) {
       setCurrentFixtureId(
@@ -22,9 +25,19 @@ const HomeCurrentFixtureInfo = ({
           return c.event_key;
         })
       );
+      setHomeScorers(
+        currentFixture.map((c) => {
+          return c.goalscorers;
+        })
+      );
     }
 
-    console.log(currentFixtureId);
+    console.log(currentFixture);
+    console.log(
+      currentFixture?.map((c) => {
+        return c.goalscorers;
+      })
+    );
   }, [currentFixture]);
 
   const api_key = import.meta.env.VITE_api_key;
@@ -45,12 +58,11 @@ const HomeCurrentFixtureInfo = ({
   useEffect(() => {
     // console.log(lastJsonMessage);
     if (lastJsonMessage !== null && currentFixture) {
-        lastJsonMessage.map(l => {
-            if (l.event_key == currentFixtureId) {
-                setCurrentFixture(lastJsonMessage)
-            }
-        })
-      
+      lastJsonMessage.map((l) => {
+        if (l.event_key == currentFixtureId) {
+          setCurrentFixture(lastJsonMessage);
+        }
+      });
     }
   }, [lastJsonMessage]);
 

@@ -15,6 +15,9 @@ const Table = ({ toggleMode }) => {
   const [changeTable, setChangeTable] = useState("all");
   const [teamKeys, setTeamKeys] = useState([]);
   const [results, setResults] = useState([]);
+  const [leagueFixtures, setLeagueFixtures] = useState([]);
+  const [selectFrom, setSelectFrom] = useState(null)
+  const [selectTo, setSelectTo] = useState(null)
 
   const { id } = useParams();
   const date = new Date();
@@ -55,7 +58,7 @@ const Table = ({ toggleMode }) => {
         .then((res) => res.json())
         .then((json) => {
           setTable(json.result.total);
-          setTeamKeys(json.result.total.map(k => k.team_key))
+          setTeamKeys(json.result.total.map((k) => k.team_key));
           // console.log(json.result.total.map(k => k.team_key));
           setMappedTable(json.result.total);
           // console.log(json.result.total);
@@ -85,10 +88,22 @@ const Table = ({ toggleMode }) => {
     }
     getData();
   }, [id]);
+  useEffect(() => {
+    async function getData() {
+      await fetch(
+        `https://apiv2.allsportsapi.com/football/?met=Fixtures&leagueId=${id}&APIkey=${api_key}&from=${from}&to=${to}`
+      )
+        .then((res) => res.json())
+        .then((fix) => {
+          setLeagueFixtures(fix.result);
+          console.log(fix.result);
+        });
+    }
+    getData();
+  }, [id]);
   // useEffect(() => {
   //   teamKeys?.map((k) => {
 
-      
   //     async function getData() {
   //       await fetch(
   //         `https://apiv2.allsportsapi.com/football/?met=Fixtures&teamId=${k}&APIkey=${api_key}&from=${from}&to=${to}`
@@ -105,33 +120,33 @@ const Table = ({ toggleMode }) => {
     async function fetchAllData() {
       // Use map() to create an array of promises for fetching data for each key
       const promiseArray = teamKeys.map(async (key) => {
-          // Logic to fetch data based on the key
-          let data
-          await fetch(
-                `https://apiv2.allsportsapi.com/football/?met=Fixtures&teamId=${key}&APIkey=${api_key}&from=${from}&to=${to}`
-              )
-                .then((res) => res.json)
-                .then((json) => {
-                  // console.log(json.result);
-                  data = json.result;
-                });
-              
-          // This could be fetching data from an API, a database, etc.
-          // Replace this with your actual implementation for fetching data
-          
-          return data;
+        // Logic to fetch data based on the key
+        let data;
+        await fetch(
+          `https://apiv2.allsportsapi.com/football/?met=Fixtures&teamId=${key}&APIkey=${api_key}&from=${from}&to=${to}`
+        )
+          .then((res) => res.json)
+          .then((json) => {
+            // console.log(json.result);
+            data = json.result;
+          });
+
+        // This could be fetching data from an API, a database, etc.
+        // Replace this with your actual implementation for fetching data
+
+        return data;
       });
-  
+
       // Use Promise.all() to await all promises and get the fetched data
       const fetchedData = await Promise.all(promiseArray);
-  
+
       // Now fetchedData contains the data fetched for each key
       // console.log(fetchedData);
-  }
-  
-  // Call the function to fetch all data
-  fetchAllData();
-  },[id])
+    }
+
+    // Call the function to fetch all data
+    fetchAllData();
+  }, [id]);
 
   return (
     <div className="">
@@ -154,6 +169,10 @@ const Table = ({ toggleMode }) => {
         />
 
         <div className=" col-span-1 ">
+          <div>
+            <input type="date" name="" id="" onChange={e => setSelectFrom(e.target.value)} max='06-12-2021'/>
+            <input type="date" name="" id="" onChange={e => selectTo(e.target.value)}/>
+          </div>
           {topScorers && table.length != 0 && (
             <div className="  h-fit w-full bg-customBg2 divide-y divide-black px-4 sticky top-[80px] ">
               <div className=" text-2xl md:text-[40px] text-center py-2">

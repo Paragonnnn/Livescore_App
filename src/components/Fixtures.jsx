@@ -18,11 +18,12 @@ const Fixtures = ({
   toggleMode,
   toggleSearch,
   lastJsonMessage,
-  reCheck
+  reCheck,
 }) => {
   const [isLive, setIsLive] = useState(true);
   // const [checkCheck, setCheckCheck] = useState([])
-  const [notificationMessage, setNotificationMessage] = useState([])
+  const [notificationMessage, setNotificationMessage] = useState([]);
+  const [showCards, setShowCards] = useState(false);
 
   // useEffect(() => {
   //   if (check != []) {
@@ -35,7 +36,7 @@ const Fixtures = ({
   //     console.log('not checkkkk');
   //   }
   // },[check])
-  
+
   const all = () => {
     setIsLive(true);
   };
@@ -51,6 +52,10 @@ const Fixtures = ({
     }
     // console.log(currentFixture);
     // console.log("hi");
+  };
+  const handleShowCards = () => {
+    setShowCards((prev) => !prev);
+    console.log(showCards);
   };
   // const buttonClick = () => {
   //   addNotification({
@@ -74,44 +79,64 @@ const Fixtures = ({
     <div
       className={`${
         toggleSearch ? "hidden lg:block" : ""
-      }  bg-customBg2 rounded-md sm:p-4 p-2  `}
+      }  bg-customBg2 rounded-xl sm:p-4 p-2  `}
     >
       <div className=" text-gray-400 p-2 mb-2 text-lg">
-        <div className=" flex  w-fit  rounded-full p-1">
-          <button
-            onClick={all}
-            className={`${
-              isLive ? " border border-solid border-customBg" : " "
-            } ${
-              toggleMode ? "text-darkText" : "text-lightText"
-            } px-3 rounded-full  transition duration-200 ease-in-out`}
-          >
-            All
-          </button>
-          <button
-            onClick={live}
-            className={`${
-              !isLive ? " border border-solid border-customBg" : ""
-            } ${
-              toggleMode ? "text-darkText" : "text-lightText"
-            } transition duration-200 ease-in px-3 rounded-full flex items-center gap-1`}
-          >
-            Live{" "}
-            <div className="text-xs text-live font-bold mb-[-4px]">
-              (
-              {
-                fixtures?.filter(
-                  (fixture) =>
-                    fixture.event_live === "1" &&
-                    fixture.event_status !== "Finished"
-                ).length
-              }
-              )
-            </div>
-          </button>
+        <div className=" flex items-center w-full  rounded-full p-1 justify-between">
+          <div className=" flex">
+            <button
+              onClick={all}
+              className={`${
+                isLive ? " border border-solid border-customBg" : " "
+              } ${
+                toggleMode ? "text-darkText" : "text-lightText"
+              } px-3 rounded-full  transition duration-200 ease-in-out`}
+            >
+              All
+            </button>
+            <button
+              onClick={live}
+              className={`${
+                !isLive ? " border border-solid border-customBg" : ""
+              } ${
+                toggleMode ? "text-darkText" : "text-lightText"
+              } transition duration-200 ease-in px-3 rounded-full flex items-center gap-1`}
+            >
+              Live{" "}
+              <div className="text-xs text-live font-bold mb-[-4px]">
+                (
+                {
+                  fixtures?.filter(
+                    (fixture) =>
+                      fixture.event_live === "1" &&
+                      fixture.event_status !== "Finished"
+                  ).length
+                }
+                )
+              </div>
+            </button>
+          </div>
           {/* <button onClick={buttonClick} className="button">
             Hello world.
           </button> */}
+          <div className=" flex items-center gap-2">
+            <div className=" text-xxs">Show Cards</div>
+            <div
+              className={`${
+                showCards ? "" : ""
+              }  h-[18px] w-8  rounded-[18px] cursor-pointer relative flex items-center`}
+              onClick={handleShowCards}
+            >
+              <div
+                className={`${
+                  showCards ? "bg-customBg translate-x-[16px]" : " bg-gray-400 "
+                }  h-4 w-4 rounded-full transition-transform duration-700 transform z-10 `}
+              ></div>
+              <div
+                className={`h-[10px] w-full bg-gray-300 opacity-30 absolute rounded-xl`}
+              ></div>
+            </div>
+          </div>
         </div>
       </div>
       {loadingFixtures && (
@@ -305,7 +330,12 @@ const Fixtures = ({
                           );
                         }
                       })
-                      .sort((a,b )=> a.event_time.slice(0,a.event_time.indexOf(':')) - b.event_time.slice(0,b.event_time.indexOf(':'))).map(
+                      .sort(
+                        (a, b) =>
+                          a.event_time.slice(0, a.event_time.indexOf(":")) -
+                          b.event_time.slice(0, b.event_time.indexOf(":"))
+                      )
+                      .map(
                         (fixture, index) =>
                           // leagues.map(league => (
 
@@ -410,6 +440,8 @@ const Fixtures = ({
                                           <div
                                             key={i}
                                             className={`${
+                                              showCards ? "block" : "hidden"
+                                            } ${
                                               c.card == "red card" &&
                                               c.home_fault &&
                                               i == 0
@@ -440,6 +472,8 @@ const Fixtures = ({
                                           <div
                                             key={i}
                                             className={`${
+                                              showCards ? "block" : "hidden"
+                                            } ${
                                               c.card == "yellow card" &&
                                               c.home_fault &&
                                               i == 0
@@ -491,6 +525,8 @@ const Fixtures = ({
                                           <div
                                             key={i}
                                             className={`${
+                                              showCards ? "block" : "hidden"
+                                            } ${
                                               c.card == "red card" &&
                                               c.away_fault &&
                                               i == 0
@@ -521,6 +557,8 @@ const Fixtures = ({
                                           <div
                                             key={i}
                                             className={`${
+                                              showCards ? "block" : "hidden"
+                                            } ${
                                               c.card == "yellow card" &&
                                               c.away_fault &&
                                               i == 0
