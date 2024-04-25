@@ -51,15 +51,36 @@ const HeadToHead = ({
           )}
         </div>
         <div className=" flex gap-4 my-1">
-        <div className={`${toggleMode ? 'text-darkText': 'text-lightText'} flex gap-1 items-center`}><div className=" h-2 w-2 rounded-full bg-green-600"></div>Home</div>
-        <div className={`${toggleMode ? 'text-darkText': 'text-lightText'} flex gap-1 items-center`}><div className=" h-2 w-2 rounded-full bg-gray-400"></div>Draw</div>
-        <div className={`${toggleMode ? 'text-darkText': 'text-lightText'} flex gap-1 items-center`}><div className=" h-2 w-2 rounded-full bg-red-600"></div>Away</div>
-
+          <div
+            className={`${
+              toggleMode ? "text-darkText" : "text-lightText"
+            } flex gap-1 items-center`}
+          >
+            <div className=" h-2 w-2 rounded-full bg-green-600"></div>Home
+          </div>
+          <div
+            className={`${
+              toggleMode ? "text-darkText" : "text-lightText"
+            } flex gap-1 items-center`}
+          >
+            <div className=" h-2 w-2 rounded-full bg-gray-400"></div>Draw
+          </div>
+          <div
+            className={`${
+              toggleMode ? "text-darkText" : "text-lightText"
+            } flex gap-1 items-center`}
+          >
+            <div className=" h-2 w-2 rounded-full bg-red-600"></div>Away
+          </div>
         </div>
         {hToH &&
           hToH.map((h) => (
             <div key={h.event_key} className=" py-4  divide-y divide-black ">
-              <div className=" mb-2 text-lg font-semibold rounded bg-customBg2 text-customBg p-2">
+              <div
+                className={`${
+                  toggleMode ? "bg-customBgLight" : "bg-customBg2"
+                } mb-2 text-lg font-semibold rounded  text-customBg p-2`}
+              >
                 <div>{h.league_name}</div>
               </div>
               <div

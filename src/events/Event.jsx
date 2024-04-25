@@ -21,9 +21,9 @@ const Event = ({ events, statToggle, windowWidth, toggleMode }) => {
           <>
             {/* <div className=' bg-customBg  w-fit px-4 rounded-full mb-2'>Events</div> */}
             <FirstHalfEvent events={events} toggleMode={toggleMode} />
-            <SecondHalfEvent events={events} />
-            <ExtraTimeEvent events={events} />
-            <PenaltyShootOutEvent events={events} />
+            <SecondHalfEvent events={events} toggleMode={toggleMode}/>
+            <ExtraTimeEvent events={events} toggleMode={toggleMode}/>
+            <PenaltyShootOutEvent events={events} toggleMode={toggleMode}/>
           </>
         )}
       </div>

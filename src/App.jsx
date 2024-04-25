@@ -25,6 +25,11 @@ import Dark from "./svg/Dark";
 import Light from "./svg/Light";
 import useWebSocket from "react-use-websocket";
 import { inject } from "@vercel/analytics";
+import SignIn from "./components/Authentication/SignIn";
+import { auth } from "./firebase/firebase";
+import SignUp from "./components/Authentication/SignUp";
+import ClickAwayListener from "react-click-away-listener";
+import HamburgerMenu from "./components/HamburgerMenu";
 
 inject();
 
@@ -49,6 +54,8 @@ const App = () => {
   const [toggleSearch, setToggleSearch] = useState(false);
   const [toggleMode, setToggleMode] = useState(false);
   const [focus, setFocus] = useState(false);
+  const [profileToggle, setProfileToggle] = useState(false);
+  const [ham, setHam] = useState(false);
 
   const api_key = import.meta.env.VITE_api_key;
   const socketUrl = `wss://wss.allsportsapi.com/live_events?APIkey=${api_key}`;
@@ -93,11 +100,34 @@ const App = () => {
     // setNewFixtures([lastJsonMessage.map((l) => l.event_key)]);
   }, [lastJsonMessage]);
 
+  useEffect(() => {
+    setLiveCheck(
+      fixtures?.map(
+        (fixture) =>
+          // !check.includes(fixture.league_key) &&
+          fixture.event_live === "1" &&
+          fixture.event_status !== "Finished" &&
+          fixture.league_key
+      )
+    );
+    console.log(fixtures);
+    console.log(check);
+    console.log(
+      fixtures?.map(
+        (fixture) =>
+          // !check.includes(fixture.league_key) &&
+          fixture.event_live === "1" &&
+          fixture.event_status !== "Finished" &&
+          fixture.league_key
+      )
+    );
+  }, [lastJsonMessage]);
+
   const { id } = useParams();
   // const history = useNavigate()
   // const {pathname} = useLocation()
   document.querySelector("body").style.backgroundColor = `${
-    toggleMode ? "#F7F7FF" : "#101419"
+    toggleMode ? "#F7F7FF" : "#031525"
   }`;
   // console.log(document.querySelector("body"));
   const date = new Date();
@@ -237,7 +267,15 @@ const App = () => {
             )
           );
 
-          // console.log(json.result);
+          // console.log(
+          //   json.result.map(
+          //     (fixture) =>
+          //       !check.includes(fixture.league_key) &&
+          //       fixture.event_live === "1" &&
+          //       fixture.event_status !== "Finished" &&
+          //       fixture.league_key
+          //   )
+          // );
           // console.log(liveCheck);
           //   console.log(
           //     json.result.map(
@@ -276,7 +314,7 @@ const App = () => {
           toggleMode
             ? "bg-customBg3 shadow-light"
             : "bg-darkCustomBg3 shadow-sm"
-        }   w-full  sticky top-[-2px] rounded-b-xl z-10`}
+        }   w-full  sticky top-[-2px] rounded-b-xl z-50`}
       >
         <div className="m-auto  max-w-[1440px]  flex items-center justify-between relative">
           <Link to={"/"}>
@@ -309,21 +347,93 @@ const App = () => {
               </div>
             )}
           </div>
-          <button
-            className={`${
-              toggleMode
-                ? " rotate-0 transition-transform"
-                : "-rotate-180 transition-transform"
-            } px-2 md:px-4 cursor-pointer animate-mode `}
-            onClick={() => setToggleMode((prev) => !prev)}
-          >
-            {/* <img
+          <div className="flex items-center relative">
+            <div className=" flex gap-2 items-center">
+              <Link
+                to={"/signin"}
+                className={`${
+                  auth?.currentUser ? "hidden" : "block"
+                } border border-solid border-customBg px-2 py-1 rounded-lg hover:bg-customBg hover:text-lightText transition-colors duration-200 ${
+                  toggleMode ? "text-darkText" : "text-lightText"
+                }`}
+              >
+                Log in
+              </Link>
+              <Link
+                to={"/signup"}
+                className={`${
+                  auth?.currentUser ? "hidden" : "block"
+                } bg-customBg px-2 py-1 rounded-lg text-lightText`}
+              >
+                Sign Up
+              </Link>
+            </div>
+            <button
+              className={`${
+                toggleMode ? "bg-customBgLight" : "bg-customBg2 text-lightText"
+              } flex items-center gap-2 py-1 px-2 rounded-lg cursor-pointer hover:opacity-90 active:opacity-70`}
+              onClick={() => setProfileToggle((toggle) => !toggle)}
+            >
+              <div>
+                {auth?.currentUser?.displayName
+                  ? auth?.currentUser?.displayName.split(" ")[0]
+                  : auth?.currentUser?.email}
+              </div>
+              {
+                auth?.currentUser?.photoURL ? (
+                  <img
+                    src={auth.currentUser.photoURL}
+                    className=" h-7 w-7 rounded-full cursor-pointer"
+                  />
+                ) : auth?.currentUser?.email ? (
+                  <div className=" h-7 w-7 bg-customBg flex items-center justify-center text-lg font-bold rounded-full text-lightText cursor-pointer">
+                    {auth.currentUser.email.slice(0, 1).toUpperCase()}
+                  </div>
+                ) : (
+                  <></>
+                )
+                // <div>{auth.currentUser.photoURL}</div>
+              }
+            </button>
+            <ClickAwayListener
+              onClickAway={() => {
+                if (profileToggle === false) setProfileToggle(false);
+              }}
+            >
+              <div
+                className={`${
+                  profileToggle ? "block" : "hidden"
+                } absolute -bottom-10 right-0`}
+              >
+                drop
+              </div>
+            </ClickAwayListener>
+            <div className=" relative ">
+              <HamburgerMenu ham={ham} setHam={setHam} />
+              <div
+                className={`${
+                  ham ? "block" : "hidden"
+                } absolute right-0 -bottom-16 border border-solid border-red-400`}
+              >
+                <button
+                  className={`${
+                    toggleMode
+                      ? " rotate-0 transition-transform"
+                      : "-rotate-180 transition-transform"
+                  } px-2 md:px-4 cursor-pointer animate-mode `}
+                  onClick={() => setToggleMode((prev) => !prev)}
+                >
+                  {/* <img
               src={`${toggleMode ? darkMode : lightMode}`}
               alt=""
               className={`  h-7 w-7`}
             /> */}
-            {toggleMode ? <Dark /> : <Light />}
-          </button>
+                  {toggleMode ? <Dark /> : <Light />}
+                </button>
+            <button>Log out</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div
@@ -425,6 +535,8 @@ const App = () => {
               />
             }
           />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </div>
     </div>

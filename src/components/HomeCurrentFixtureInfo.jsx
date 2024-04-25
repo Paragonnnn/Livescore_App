@@ -89,7 +89,22 @@ const HomeCurrentFixtureInfo = ({
         {!loadingFixtures &&
           currentFixture?.map((fixture) => (
             <div key={fixture.event_key} className="">
-              <div>{fixture.event_date}</div>
+              <div>
+                <Link
+                  to={`/leagues/${fixture.country_name.replace(/ +/g, "-")}/${
+                    fixture.league_key
+                  }`}
+                >
+                  {fixture.country_name}
+                </Link>
+                <Link
+                  to={`/table/${fixture.league_name.replace(/ +/g, "-")}/${
+                    fixture.league_key
+                  }`}
+                >
+                  {fixture.league_name}
+                </Link>
+              </div>
               <div className=" w-full border border-solid border-gray-400 border-opacity-20 p-2 flex  items-center rounded">
                 <Link
                   to={`/team/${fixture.event_home_team.replace(/ +/g, "-")}/${
@@ -261,7 +276,7 @@ const HomeCurrentFixtureInfo = ({
                   )}-${fixture.event_away_team.replace(/ +/g, "-")}/${
                     fixture.event_key
                   }`}
-                  className={` text-lightText px-4 bg-customBg py-1 text-lg rounded hover:opacity-80 mt-3`}
+                  className={` text-lightText px-4 bg-customBg py-1 text-lg rounded hover:bg-opacity-80 mt-3`}
                 >
                   show more
                 </Link>

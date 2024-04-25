@@ -12,6 +12,7 @@
   "dependencies": {
     "@vercel/analytics": "^1.2.2",
     "date-fns": "^2.30.0",
+    "firebase": "^10.11.0",
     "mathjs": "^12.2.1",
     "react": "^18.2.0",
     "react-calendar": "^4.6.1",

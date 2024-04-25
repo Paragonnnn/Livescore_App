@@ -27,7 +27,9 @@ const Standing = ({
       } ${toggleMode ? "text-darkText" : "text-lightText"} col-span-2`}
     >
       {table.length != 0 && (
-        <div className="bg-customBg2  divide-y divide-black shadow-sm rounded-md px-1 mb-2 xs:mb-5">
+        <div className={`${
+          toggleMode ? "bg-customBgLight" : "bg-customBg2"
+        }  divide-y divide-black shadow-sm rounded-md px-1 mb-2 xs:mb-5`}>
           <div className="px-4 py-2">
             <button
               className={`${

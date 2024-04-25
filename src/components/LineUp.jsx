@@ -46,69 +46,126 @@ const LineUp = ({
         (statToggle.includes("Line-Up") ? "block" : "hidden")
       } ${toggleMode ? "text-darkText" : "text-lightText"} `}
     >
-      {lineUp.map(l => l.home_team.starting_lineups.length == 0 ? <div>No line up yet</div> :   (
-        <>
-          <div className=" text-xl font-bold text-customBg bg-customBg2 mb-4 p-2 rounded ">
-            Line Up
-          </div>
-          <span>Click on player to see player stat</span>
-          <div
-            className={` flex justify-between flex-col sm:flex-row lg:animate-zoom animate-swipe bg-customBg2 p-2 rounded `}
-          >
-            <div className=" sm:w-[48%] w-full  ">
-              <div className="  divide-y divide-black">
-                {lineUp &&
-                  lineUp.map((coach) =>
-                    coach.home_team.coaches.map((coache, index) => (
-                      <div key={index} className=" text-base">
-                        {coache.coache}
-                        <div className=" opacity-60">(coach)</div>
-                      </div>
-                    ))
-                  )}
-                <div className=" hover:">
+      {lineUp.map((l) =>
+        l.home_team.starting_lineups.length == 0 ? (
+          <div>No line up yet</div>
+        ) : (
+          <>
+            <div
+              className={`${
+                toggleMode ? "bg-customBgLight" : "bg-customBg2"
+              } text-xl font-bold text-customBg mb-4 p-2 rounded-lg `}
+            >
+              Line Up
+            </div>
+            <span>Click on player to see player stat</span>
+            <div
+              className={`${
+                toggleMode ? "bg-customBgLight" : "bg-customBg2"
+              } flex justify-between flex-col sm:flex-row lg:animate-zoom animate-swipe p-2 rounded-lg `}
+            >
+              <div className=" sm:w-[48%] w-full  ">
+                <div className="  divide-y divide-black">
                   {lineUp &&
-                    lineUp.map((lineUp, index) => (
-                      <div key={index} className="divide-y divide-black">
-                        <div className=" text-base sm:text-lg font-semibold text-customBg text-center sm:text-left">
-                          Home Line-Up
+                    lineUp.map((coach) =>
+                      coach.home_team.coaches.map((coache, index) => (
+                        <div key={index} className=" text-base">
+                          {coache.coache}
+                          <div className=" opacity-60">(coach)</div>
                         </div>
-                        {lineUp.home_team.starting_lineups
-                          .sort(
-                            (a, b) =>
-                              parseInt(a.player_position) -
-                              parseInt(b.player_position)
-                          )
-                          .map((startingLineUp, index) => (
-                            <div
-                              key={index}
-                              className="py-2 flex gap-2 px-2 text-xs sm:text-base "
-                            >
+                      ))
+                    )}
+                  <div className=" hover:">
+                    {lineUp &&
+                      lineUp.map((lineUp, index) => (
+                        <div key={index} className="divide-y divide-black">
+                          <div className=" text-base sm:text-lg font-semibold text-customBg text-center sm:text-left">
+                            Home Line-Up
+                          </div>
+                          {lineUp.home_team.starting_lineups
+                            .sort(
+                              (a, b) =>
+                                parseInt(a.player_position) -
+                                parseInt(b.player_position)
+                            )
+                            .map((startingLineUp, index) => (
                               <div
-                                className=" flex gap-4 items-center cursor-pointer"
-                                onClick={() =>
-                                  showPlayerStat(startingLineUp.player_key)
-                                }
+                                key={index}
+                                className="py-2 flex gap-2 px-2 text-xs sm:text-base "
                               >
-                                <div className="  opacity-60 border-2 border-solid border-white h-7 w-7 flex justify-center items-center rounded-full">
-                                  {startingLineUp.player_number}
+                                <div
+                                  className=" flex gap-4 items-center cursor-pointer"
+                                  onClick={() =>
+                                    showPlayerStat(startingLineUp.player_key)
+                                  }
+                                >
+                                  <div className="  opacity-60 border-2 border-solid border-gray-400  h-7 w-7 flex justify-center items-center rounded-full">
+                                    {startingLineUp.player_number}
+                                  </div>
+                                  {startingLineUp.player}
                                 </div>
-                                {startingLineUp.player}
                               </div>
+                            ))}
+                        </div>
+                      ))}
+                    <div
+                      className={`${
+                        showStatToggle ? "visible" : "invisible"
+                      } fixed bottom-2 right-2 w-full md:w-[400px]  an `}
+                      ref={reff}
+                    >
+                      {playerStat &&
+                        playerStat.map((stat) => (
+                          <div>
+                            {stat.home
+                              .filter(
+                                (stat) => stat.player_key == clickedPlayer
+                              )
+                              .map((stat) => (
+                                <PlayerStat
+                                  reff={reff}
+                                  stat={stat}
+                                  setShowStatToggle={setShowStatToggle}
+                                />
+                              ))}
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="divide-y divide-black">
+                  <div className=" text-base sm:text-lg text-center sm:text-left font-semibold mt-4 text-customBg">
+                    Home Sub
+                  </div>
+                  {lineUp &&
+                    lineUp.map((lineUp) =>
+                      lineUp.home_team.substitutes.map((sub, index) => (
+                        <div
+                          key={index}
+                          className="py-2 flex gap-2 px-2 text-xs sm:text-base "
+                        >
+                          <div
+                            className=" flex gap-4 items-center cursor-pointer"
+                            onClick={() => showPlayerStat(sub.player_key)}
+                          >
+                            <div className="opacity-60 border-2 border-solid border-gray-400 h-7 w-7 flex justify-center items-center rounded-full">
+                              {sub.player_number}
                             </div>
-                          ))}
-                      </div>
-                    ))}
+                            {sub.player}
+                          </div>
+                        </div>
+                      ))
+                    )}
                   <div
                     className={`${
-                      showStatToggle ? "visible" : "invisible"
-                    } fixed bottom-2 right-2 w-full md:w-[400px]  an `}
+                      showStatToggle ? "block" : "hidden"
+                    } fixed bottom-2 right-2  md:w-[400px]  an `}
                     ref={reff}
                   >
                     {playerStat &&
                       playerStat.map((stat) => (
                         <div>
-                          {stat.home
+                          {stat.away
                             .filter((stat) => stat.player_key == clickedPlayer)
                             .map((stat) => (
                               <PlayerStat
@@ -122,172 +179,125 @@ const LineUp = ({
                   </div>
                 </div>
               </div>
-              <div className="divide-y divide-black">
-                <div className=" text-base sm:text-lg text-center sm:text-left font-semibold mt-4 text-customBg">
-                  Home Sub
-                </div>
-                {lineUp &&
-                  lineUp.map((lineUp) =>
-                    lineUp.home_team.substitutes.map((sub, index) => (
-                      <div
-                        key={index}
-                        className="py-2 flex gap-2 px-2 text-xs sm:text-base "
-                      >
-                        <div
-                          className=" flex gap-4 items-center cursor-pointer"
-                          onClick={() => showPlayerStat(sub.player_key)}
-                        >
-                          <div className="opacity-60 border-2 border-solid border-white h-7 w-7 flex justify-center items-center rounded-full">
-                            {sub.player_number}
-                          </div>
-                          {sub.player}
+              <div className=" sm:w-[48%] ">
+                <div className="divide-y divide-black">
+                  {lineUp &&
+                    lineUp.map((coach) =>
+                      coach.away_team.coaches.map((coache, index) => (
+                        <div key={index} className=" sm:text-right text-base">
+                          {coache.coache}
+                          <div className=" opacity-60">(coach)</div>
                         </div>
-                      </div>
-                    ))
-                  )}
-                <div
-                  className={`${
-                    showStatToggle ? "block" : "hidden"
-                  } fixed bottom-2 right-2  md:w-[400px]  an `}
-                  ref={reff}
-                >
-                  {playerStat &&
-                    playerStat.map((stat) => (
-                      <div>
-                        {stat.away
-                          .filter((stat) => stat.player_key == clickedPlayer)
-                          .map((stat) => (
-                            <PlayerStat
-                              reff={reff}
-                              stat={stat}
-                              setShowStatToggle={setShowStatToggle}
-                            />
-                          ))}
-                      </div>
-                    ))}
-                </div>
-              </div>
-            </div>
-            <div className=" sm:w-[48%] ">
-              <div className="divide-y divide-black">
-                {lineUp &&
-                  lineUp.map((coach) =>
-                    coach.away_team.coaches.map((coache, index) => (
-                      <div key={index} className=" sm:text-right text-base">
-                        {coache.coache}
-                        <div className=" opacity-60">(coach)</div>
-                      </div>
-                    ))
-                  )}
-                <div className=" text-base sm:text-lg font-semibold sm:text-right text-customBg text-center">
-                  Away Line-Up
-                </div>
-                {lineUp &&
-                  lineUp.map((lineUp, index) => (
-                    <div key={index} className="divide-y divide-black ">
-                      {lineUp.away_team.starting_lineups
-                        .sort(
-                          (a, b) =>
-                            parseInt(a.player_position) -
-                            parseInt(b.player_position)
-                        )
-                        .map((startingLineUp, index) => (
-                          <div
-                            key={index}
-                            className=" py-2 flex sm:justify-end px-2 text-xs sm:text-base"
-                          >
-                            <div className=" flex  gap-2">
-                              <div
-                                className=" flex gap-4 sm:flex-row flex-row-reverse items-center cursor-pointer"
-                                onClick={() =>
-                                  showPlayerStat(startingLineUp.player_key)
-                                }
-                              >
-                                {startingLineUp.player}
-                                <div className="opacity-60 border-2 border-solid border-white h-7 w-7 flex justify-center items-center rounded-full">
-                                  {startingLineUp.player_number}
+                      ))
+                    )}
+                  <div className=" text-base sm:text-lg font-semibold sm:text-right text-customBg text-center">
+                    Away Line-Up
+                  </div>
+                  {lineUp &&
+                    lineUp.map((lineUp, index) => (
+                      <div key={index} className="divide-y divide-black ">
+                        {lineUp.away_team.starting_lineups
+                          .sort(
+                            (a, b) =>
+                              parseInt(a.player_position) -
+                              parseInt(b.player_position)
+                          )
+                          .map((startingLineUp, index) => (
+                            <div
+                              key={index}
+                              className=" py-2 flex sm:justify-end px-2 text-xs sm:text-base"
+                            >
+                              <div className=" flex  gap-2">
+                                <div
+                                  className=" flex gap-4 sm:flex-row flex-row-reverse items-center cursor-pointer"
+                                  onClick={() =>
+                                    showPlayerStat(startingLineUp.player_key)
+                                  }
+                                >
+                                  {startingLineUp.player}
+                                  <div className="opacity-60 border-2 border-solid border-gray-400  h-7 w-7 flex justify-center items-center rounded-full">
+                                    {startingLineUp.player_number}
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        ))}
-                    </div>
-                  ))}
-                <div
-                  className={`${
-                    showStatToggle ? "visible" : "invisible"
-                  } fixed bottom-2 right-2  w-full md:w-[400px]`}
-                  ref={reff}
-                >
-                  {playerStat &&
-                    playerStat.map((stat) => (
-                      <div>
-                        {stat.away
-                          .filter((stat) => stat.player_key == clickedPlayer)
-                          .map((stat) => (
-                            <PlayerStat
-                              reff={reff}
-                              stat={stat}
-                              setShowStatToggle={setShowStatToggle}
-                              toggleMode={toggleMode}
-                            />
                           ))}
                       </div>
                     ))}
+                  <div
+                    className={`${
+                      showStatToggle ? "visible" : "invisible"
+                    } fixed bottom-2 right-2  w-full md:w-[400px]`}
+                    ref={reff}
+                  >
+                    {playerStat &&
+                      playerStat.map((stat) => (
+                        <div>
+                          {stat.away
+                            .filter((stat) => stat.player_key == clickedPlayer)
+                            .map((stat) => (
+                              <PlayerStat
+                                reff={reff}
+                                stat={stat}
+                                setShowStatToggle={setShowStatToggle}
+                                toggleMode={toggleMode}
+                              />
+                            ))}
+                        </div>
+                      ))}
+                  </div>
                 </div>
-              </div>
-              <div className="divide-y divide-black ">
-                <div className=" text-base sm:text-lg font-semibold mt-4 sm:text-right text-customBg text-center">
-                  Away Sub
-                </div>
-                {lineUp &&
-                  lineUp.map((lineUp) =>
-                    lineUp.away_team.substitutes.map((sub, index) => (
-                      <div
-                        key={index}
-                        className="py-2 flex sm:justify-end px-2 text-xs sm:text-base "
-                      >
-                        <div className=" flex sm:flex-row flex-row-reverse gap-2">
-                          <div
-                            className=" flex gap-4 items-center cursor-pointer sm:flex-row flex-row-reverse"
-                            onClick={() => showPlayerStat(sub.player_key)}
-                          >
-                            {sub.player}
-                            <div className="opacity-60 border-2 border-solid border-white h-7 w-7 flex justify-center items-center rounded-full">
-                              {sub.player_number}
+                <div className="divide-y divide-black ">
+                  <div className=" text-base sm:text-lg font-semibold mt-4 sm:text-right text-customBg text-center">
+                    Away Sub
+                  </div>
+                  {lineUp &&
+                    lineUp.map((lineUp) =>
+                      lineUp.away_team.substitutes.map((sub, index) => (
+                        <div
+                          key={index}
+                          className="py-2 flex sm:justify-end px-2 text-xs sm:text-base "
+                        >
+                          <div className=" flex sm:flex-row flex-row-reverse gap-2">
+                            <div
+                              className=" flex gap-4 items-center cursor-pointer sm:flex-row flex-row-reverse"
+                              onClick={() => showPlayerStat(sub.player_key)}
+                            >
+                              {sub.player}
+                              <div className="opacity-60 border-2 border-solid border-gray-400  h-7 w-7 flex justify-center items-center rounded-full">
+                                {sub.player_number}
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    ))
-                  )}
-                <div
-                  className={`${
-                    showStatToggle ? "visible" : "invisible"
-                  } fixed bottom-2 right-2 w-full md:w-[400px an `}
-                  ref={reff}
-                >
-                  {playerStat &&
-                    playerStat.map((stat) => (
-                      <div>
-                        {stat.away
-                          .filter((stat) => stat.player_key == clickedPlayer)
-                          .map((stat) => (
-                            <PlayerStat
-                              reff={reff}
-                              stat={stat}
-                              setShowStatToggle={setShowStatToggle}
-                            />
-                          ))}
-                      </div>
-                    ))}
+                      ))
+                    )}
+                  <div
+                    className={`${
+                      showStatToggle ? "visible" : "invisible"
+                    } fixed bottom-2 right-2 w-full md:w-[400px an `}
+                    ref={reff}
+                  >
+                    {playerStat &&
+                      playerStat.map((stat) => (
+                        <div>
+                          {stat.away
+                            .filter((stat) => stat.player_key == clickedPlayer)
+                            .map((stat) => (
+                              <PlayerStat
+                                reff={reff}
+                                stat={stat}
+                                setShowStatToggle={setShowStatToggle}
+                              />
+                            ))}
+                        </div>
+                      ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </>
-        
-      ) 
+          </>
+        )
       )}
     </div>
   );

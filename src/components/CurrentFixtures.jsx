@@ -436,8 +436,10 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
           </div>
           <div
             className={`${
-              toggleMode ? "text-darkText" : "text-lightText"
-            } fixtures_scroll flex gap-4 overflow-x-scroll m-auto w-[95vw] sm:w-full justify-between mb-3 py-2 px-3 rounded text-base sm:text-lg  bg-customBg2 `}
+              toggleMode
+                ? "text-darkText bg-customBgLight"
+                : "text-lightText bg-customBg2"
+            } fixtures_scroll flex gap-4 overflow-x-scroll m-auto w-[95vw] sm:w-full justify-between mb-3 py-2 px-3 rounded text-base sm:text-lg   `}
           >
             {match && (
               <button

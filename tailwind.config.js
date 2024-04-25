@@ -8,9 +8,10 @@ export default {
     extend: {
       colors: {
         customBg: '#1D9BF0',
-        customBg2: '#2A86FF10',
+        customBg2: '#0F243A50',
+        customBgLight: '#0F243A10',
         customBg3: '#F7F7FF',
-        darkCustomBg3: '#101419',
+        darkCustomBg3: '#031525',
         border : '#151B54',
         orange: '#f39c12',
         lightOrange: '#f39d12c0',

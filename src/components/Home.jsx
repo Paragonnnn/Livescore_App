@@ -12,6 +12,7 @@ import SearchTeamAndPlayer from "./SearchTeamAndPlayer";
 import Calendar2 from "../svg/Calendar2";
 import SearchSvg from "../svg/SearchSvg";
 import HomeCurrentFixtureInfo from "./HomeCurrentFixtureInfo";
+import SIgnIn from "./Authentication/SignIn";
 
 const Home = ({
   countries,
@@ -55,7 +56,7 @@ const Home = ({
   }, []);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-11 h-[100%] gap-4">
+    <div className="grid grid-cols-1 lg:grid-cols-11 h-[100%] gap-2">
       {/* <h1>Livescore</h1>
       <Link to={`/countries`}>
         <button>show</button>
@@ -66,7 +67,11 @@ const Home = ({
       </Link> */}
       <div className="hidden lg:block col-span-3">
         {/* <SearchTeamAndPlayer /> */}
-        <div className=" bg-customBg2 rounded-xl">
+        <div
+          className={` ${
+            toggleMode ? " bg-customBgLight" : " bg-customBg2"
+          }  rounded-xl `}
+        >
           <Calendar
             value={calenderDate}
             onChange={handleDateChange}
@@ -75,25 +80,31 @@ const Home = ({
             } mb-2 bg-transparent border-none  bg-opacity-50 text-opacity-80 w-full px-1`}
             minDetail="year"
             maxDetail="month"
-            tileClassName={({ date }) =>
-              date.getDate() === new Date().getDate() ? "day_style" : ""
-            }
+            tileClassName={({ date }) => {
+              return date.getDate() === new Date().getDate()
+                ? "day_style"
+                : "date_hover";
+            }}
           />
-          <div
+          <button
             onClick={() => {
               setCalenderDate(
                 `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
               );
               setCheck([]);
             }}
-            className="  px-3 py-2 rounded-full text-customBg  w-fit mb-4 cursor-pointer hover:opacity-80 active:opacity-60"
+            className="  px-3 py-1 rounded-full text-white bg-customBg w-fit mb-4 cursor-pointer hover:opacity-80 active:opacity-60"
           >
             Today
-          </div>
+          </button>
         </div>
         {/* <DatePicker selected={calenderDate} onChange={date => setCalenderDate(date)} onKeyDown={handleDateFocus} /> */}
         {/* <input type="date" name="" pattern='' onKeyDown={handleDateFocus} onChange={handleDateChange} max={maxDate} value={calenderDate} className=' w-full outline-none bg-customBg2 mb-4 text-customBg p-2'/> */}
-        <div className=" bg-customBg2 px-2 mb-4 divide-y divide-black rounded-xl">
+        <div
+          className={` ${
+            toggleMode ? " bg-customBgLight" : " bg-customBg2"
+          }  px-2 mb-4 divide-y divide-black rounded-xl`}
+        >
           <div className=" text-xl text-customBg py-2">Top Leagues</div>
           <div className=" divide-y divide-gray-400 divide-opacity-20 ">
             {leagues &&
@@ -174,7 +185,7 @@ const Home = ({
               minDetail="year"
               maxDetail="month"
             />
-            <div
+            <button
               onClick={() => {
                 setCalenderDate(
                   `${date.getFullYear()}-${
@@ -184,10 +195,10 @@ const Home = ({
                 setShowCalendar(false);
                 setCheck([]);
               }}
-              className="  px-3 py-2 rounded-full text-customBg  w-fit mb-4 cursor-pointer hover:opacity-80 active:opacity-60"
+              className="  px-3 py-2 rounded-full text-white bg-customBg  w-fit mb-4 cursor-pointer hover:opacity-80 active:opacity-60"
             >
               Today
-            </div>
+            </button>
           </div>
         </div>
         <div className={` flex justify-between w-full`}>
@@ -222,7 +233,11 @@ const Home = ({
           lastJsonMessage={lastJsonMessage}
         />
       </div>
-      <div className="hidden lg:block col-span-3 sticky top-[90px] text-black rounded-xl bg-customBg2  p-4 h-fit">
+      <div
+        className={`${
+          toggleMode ? " bg-customBgLight" : " bg-customBg2"
+        } hidden lg:block col-span-3 sticky top-[90px] text-black rounded-xl bg-customBg2  p-4 h-fit`}
+      >
         <HomeCurrentFixtureInfo
           loadingFixtures={loadingFixtures}
           currentFixture={currentFixture}

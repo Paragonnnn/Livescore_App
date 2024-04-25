@@ -7,7 +7,7 @@ import Midfielders from "./team_players/Midfielders";
 import Forwards from "./team_players/Forwards";
 import TeamFixtures from "./TeamFixtures";
 
-const Teams = ({toggleMode}) => {
+const Teams = ({ toggleMode }) => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isCap, setIsCap] = useState([]);
@@ -42,8 +42,11 @@ const Teams = ({toggleMode}) => {
             team.players.map((cap) => setIsCap(cap.player_is_captain))
           );
           // console.log(isCap);
+          console.log(
+            json.result.map((i) => i.players.map((p) => p.player_image))
+          );
         })
-        // .catch((err) => console.log(err));
+        .catch((err) => console.log(err));
     }
     getData();
   }, [id]);
@@ -57,13 +60,12 @@ const Teams = ({toggleMode}) => {
           setTeamFixtures(
             json.result.filter(
               (past) =>
-                
                 new Date(past.event_date) >=
-                  new Date(
-                    `${date.getFullYear()}-${
-                      date.getMonth() + 1
-                    }-${date.getDate()}`
-                  )
+                new Date(
+                  `${date.getFullYear()}-${
+                    date.getMonth() + 1
+                  }-${date.getDate()}`
+                )
             )
           );
           setTeamResults(
@@ -76,13 +78,17 @@ const Teams = ({toggleMode}) => {
                   }-${date.getDate()}`
             )
           );
-          console.log(json.result);
+          // console.log(json.result);
         });
     }
     getData();
   }, [id]);
   return (
-    <div className={`${toggleMode ? 'text-darkText':'text-lightText'}  md:p-4 lg:grid grid-cols-5 gap-4`}>
+    <div
+      className={`${
+        toggleMode ? "text-darkText" : "text-lightText"
+      }  md:p-4 lg:grid grid-cols-5 gap-4`}
+    >
       {loading && <Loading />}
       {}
       <div className=" bg-customBg2 p-1 md:p-4 h-fit col-span-3 ">
@@ -91,23 +97,26 @@ const Teams = ({toggleMode}) => {
             <div className=" bg-customBg2 gap-12 p-4 rounded-xl mb-5 bg-opacity-40 w-full flex items-center">
               <img src={team.team_logo} alt="" className=" h-16 md:h-24" />
               <div>
-                <div className="text-3xl font-bold ">
-                  {team.team_name}{" "}
-                </div>
+                <div className="text-3xl font-bold ">{team.team_name} </div>
               </div>
             </div>
 
             <div>
-              <GoalKeepers team={team} toggleMode={toggleMode}/>
-              <Defenders team={team} toggleMode={toggleMode}/>
-              <Midfielders team={team} toggleMode={toggleMode}/>
-              <Forwards team={team} toggleMode={toggleMode}/>
+              <GoalKeepers team={team} toggleMode={toggleMode} />
+              <Defenders team={team} toggleMode={toggleMode} />
+              <Midfielders team={team} toggleMode={toggleMode} />
+              <Forwards team={team} toggleMode={toggleMode} />
             </div>
           </div>
         ))}
       </div>
       <div className=" col-span-2">
-        <TeamFixtures teamFixtures={teamFixtures} teamResults={teamResults} toggleMode={toggleMode} id={id}/>
+        <TeamFixtures
+          teamFixtures={teamFixtures}
+          teamResults={teamResults}
+          toggleMode={toggleMode}
+          id={id}
+        />
       </div>
     </div>
   );
