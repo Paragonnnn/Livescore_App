@@ -80,7 +80,7 @@ const Fixtures = ({
     <div
       className={`${
         toggleSearch ? "hidden lg:block" : ""
-      }   rounded-xl sm:px-4 px-2 relative ${toggleMode ? " " : " "} `}
+      }   rounded-xl sm:px-4 relative ${toggleMode ? " " : " "} `}
     >
       <div
         className={`${
@@ -145,7 +145,7 @@ const Fixtures = ({
         </div>
       </div>
       {loadingFixtures && (
-        <div className=" h-[100vh]">
+        <div className=" h-[100vh] px-2">
           <div className=" mb-4 divide-y rounded divide-gray-400 border border-solid border-gray-400 border-opacity-20 divide-opacity-20">
             <div className=" flex gap-2 items-center p-2">
               <div className=" w-6 h-6 rounded-full bg-gray-400 opacity-20 animate-pulse"></div>
