@@ -10,13 +10,14 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth, googleProvider } from "../../firebase/firebase";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const navigate = useNavigate();
   console.log(auth?.currentUser?.displayName);
 
   const signInWithGoogle = async () => {
@@ -24,6 +25,7 @@ const SignIn = () => {
     await signInWithPopup(auth, googleProvider)
       .then((userCredential) => {
         const user = userCredential.user;
+        navigate("/");
       })
       .catch((err) => {
         console.error(err.message);
@@ -33,6 +35,7 @@ const SignIn = () => {
   const signIn = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      navigate("/");
     } catch (err) {
       console.log(err);
     }

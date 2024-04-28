@@ -27,6 +27,7 @@ import useWebSocket from "react-use-websocket";
 import { inject } from "@vercel/analytics";
 import SignIn from "./components/Authentication/SignIn";
 import { auth } from "./firebase/firebase";
+import { signOut } from "firebase/auth";
 import SignUp from "./components/Authentication/SignUp";
 import ClickAwayListener from "react-click-away-listener";
 import HamburgerMenu from "./components/HamburgerMenu";
@@ -70,6 +71,19 @@ const App = () => {
     // onOpen: () => console.log(lastJsonMessage, lastMessage),
     //Will attempt to reconnect on all close events, such as server shutting down
   });
+
+  //sign out
+  const handleSignOut = () => {
+    if (confirm("Are you sure you want to sign out?")) {
+      signOut(auth)
+        .then(() => {
+          // Sign-out successful.
+        })
+        .catch((error) => {
+          // An error happened.
+        });
+    }
+  };
 
   useEffect(() => {
     if (lastJsonMessage !== null && fixtures) {
@@ -347,7 +361,7 @@ const App = () => {
               </div>
             )}
           </div>
-          <div className="flex items-center relative">
+          <div className="flex items-center relative gap-2">
             <div className=" flex gap-2 items-center">
               <Link
                 to={"/signin"}
@@ -368,33 +382,37 @@ const App = () => {
                 Sign Up
               </Link>
             </div>
-            <button
-              className={`${
-                toggleMode ? "bg-customBgLight" : "bg-customBg2 text-lightText"
-              } flex items-center gap-2 py-1 px-2 rounded-lg cursor-pointer hover:opacity-90 active:opacity-70`}
-              onClick={() => setProfileToggle((toggle) => !toggle)}
-            >
-              <div>
-                {auth?.currentUser?.displayName
-                  ? auth?.currentUser?.displayName.split(" ")[0]
-                  : auth?.currentUser?.email}
-              </div>
-              {
-                auth?.currentUser?.photoURL ? (
-                  <img
-                    src={auth.currentUser.photoURL}
-                    className=" h-7 w-7 rounded-full cursor-pointer"
-                  />
-                ) : auth?.currentUser?.email ? (
-                  <div className=" h-7 w-7 bg-customBg flex items-center justify-center text-lg font-bold rounded-full text-lightText cursor-pointer">
-                    {auth.currentUser.email.slice(0, 1).toUpperCase()}
-                  </div>
-                ) : (
-                  <></>
-                )
-                // <div>{auth.currentUser.photoURL}</div>
-              }
-            </button>
+            {auth.currentUser && (
+              <button
+                className={`${
+                  toggleMode
+                    ? "bg-customBgLight"
+                    : "bg-customBg2 text-lightText"
+                } flex items-center gap-2 py-1 px-2 rounded-lg cursor-pointer hover:opacity-90 active:opacity-70`}
+                onClick={() => setProfileToggle((toggle) => !toggle)}
+              >
+                <div>
+                  {auth?.currentUser?.displayName
+                    ? auth?.currentUser?.displayName.split(" ")[0]
+                    : auth?.currentUser?.email}
+                </div>
+                {
+                  auth?.currentUser?.photoURL ? (
+                    <img
+                      src={auth.currentUser.photoURL}
+                      className=" h-7 w-7 rounded-full cursor-pointer"
+                    />
+                  ) : auth?.currentUser?.email ? (
+                    <div className=" h-7 w-7 bg-customBg flex items-center justify-center text-lg font-bold rounded-full text-lightText cursor-pointer">
+                      {auth.currentUser.email.slice(0, 1).toUpperCase()}
+                    </div>
+                  ) : (
+                    <></>
+                  )
+                  // <div>{auth.currentUser.photoURL}</div>
+                }
+              </button>
+            )}
             <ClickAwayListener
               onClickAway={() => {
                 if (profileToggle === false) setProfileToggle(false);
@@ -413,14 +431,11 @@ const App = () => {
               <div
                 className={`${
                   ham ? "block" : "hidden"
-                } absolute right-0 -bottom-16 border border-solid border-red-400`}
+                } absolute right-0 -bottom-20  w-48 flex flex-col items-start p-2 gap-2 backdrop-blur-sm rounded-lg divide-y ${toggleMode ? 'border border-solid border-customBgLight text-darkText divide-customBgLight' : 'border border-solid border-customBg2 text-lightText divide-customBg2'}`}
               >
                 <button
-                  className={`${
-                    toggleMode
-                      ? " rotate-0 transition-transform"
-                      : "-rotate-180 transition-transform"
-                  } px-2 md:px-4 cursor-pointer animate-mode `}
+                  className={`
+                  cursor-pointer w-full`}
                   onClick={() => setToggleMode((prev) => !prev)}
                 >
                   {/* <img
@@ -428,9 +443,21 @@ const App = () => {
               alt=""
               className={`  h-7 w-7`}
             /> */}
-                  {toggleMode ? <Dark /> : <Light />}
+                  {toggleMode ? (
+                    <div className=" flex items-center justify-between">
+                      <div>Dark Mode </div>
+                      <Dark />
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-between">
+                      <div>Light Mode </div>
+                      <Light />
+                    </div>
+                  )}
                 </button>
-            <button>Log out</button>
+                {auth.currentUser && (
+                  <button onClick={handleSignOut} className=" w-full flex justify-start">Log out</button>
+                )}
               </div>
             </div>
           </div>

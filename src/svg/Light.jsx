@@ -2,7 +2,7 @@ import React from "react";
 
 const Light = () => {
   return (
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={`  h-6 w-6 z-20`}>
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={` w-4 h-4  md:h-5 md:w-5 z-20`}>
       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
       <g
         id="SVGRepo_tracerCarrier"

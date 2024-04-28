@@ -2,7 +2,7 @@ import React from "react";
 
 const Dark = ({toggleMode}) => {
   return (
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={` ${toggleMode ? 'opacity-60' : ''} h-6 w-6 z-20`}>
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={` ${toggleMode ? 'opacity-60' : ''} w-4 h-4 md:h-5 md:w-5 z-20`}>
       <g stroke-width="0" />
       <g stroke-linecap="round" stroke-linejoin="round" />
       <path

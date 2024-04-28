@@ -3,7 +3,7 @@ import Loading from "./Loading";
 import Error from "./Error";
 import Countries from "./Countries";
 import { Link } from "react-router-dom";
-import { max } from "mathjs";
+import { fix, max } from "mathjs";
 
 const Fixtures = ({
   leagues,
@@ -57,6 +57,7 @@ const Fixtures = ({
     setShowCards((prev) => !prev);
     console.log(showCards);
   };
+  
   // const buttonClick = () => {
   //   addNotification({
   //     title: `${notificationMessage?.map((f) => f.event_final_result)}`,
@@ -345,8 +346,8 @@ const Fixtures = ({
                         })
                         .sort(
                           (a, b) =>
-                            a.event_time.slice(0, a.event_time.indexOf(":")) -
-                            b.event_time.slice(0, b.event_time.indexOf(":"))
+                            a.event_time.replace(':','.') -
+                            b.event_time.replace(':','.')
                         )
                         .map(
                           (fixture, index) =>
@@ -531,7 +532,7 @@ const Fixtures = ({
                                     <div className="flex justify-between items-center w-full">
                                       <div className=" text-xs sm:text-base flex items-center gap-[1px] sm:gap-[2px] ">
                                         <span className=" mr-1 sm:mr-2">
-                                          {fixture.event_away_team}
+                                          {fixture.event_away_team} 
                                         </span>
                                         {fixture.cards
                                           .filter(

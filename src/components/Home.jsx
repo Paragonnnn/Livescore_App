@@ -93,7 +93,7 @@ const Home = ({
               );
               setCheck([]);
             }}
-            className="  px-3 py-1 rounded-full text-white bg-customBg w-fit mb-4 cursor-pointer hover:opacity-80 active:opacity-60"
+            className="  px-3 py-1 rounded-full text-white bg-customBg w-fit ml-4 mb-4 cursor-pointer hover:opacity-80 active:opacity-60"
           >
             Today
           </button>
@@ -103,7 +103,7 @@ const Home = ({
         <div
           className={` ${
             toggleMode ? " bg-customBgLight" : " bg-customBg2"
-          }  px-2 mb-4 divide-y divide-black rounded-xl`}
+          }  px-2 mb-4 divide-y divide-black rounded-xl mt-4`}
         >
           <div className=" text-xl text-customBg py-2">Top Leagues</div>
           <div className=" divide-y divide-gray-400 divide-opacity-20 ">
@@ -195,7 +195,7 @@ const Home = ({
                 setShowCalendar(false);
                 setCheck([]);
               }}
-              className="  px-3 py-2 rounded-full text-white bg-customBg  w-fit mb-4 cursor-pointer hover:opacity-80 active:opacity-60"
+              className="  px-3 py-2 rounded-full text-white bg-customBg  w-fit ml-4 mb-4 cursor-pointer hover:opacity-80 active:opacity-60"
             >
               Today
             </button>
