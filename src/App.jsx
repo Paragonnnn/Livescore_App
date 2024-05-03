@@ -31,6 +31,7 @@ import { signOut } from "firebase/auth";
 import SignUp from "./components/Authentication/SignUp";
 import ClickAwayListener from "react-click-away-listener";
 import HamburgerMenu from "./components/HamburgerMenu";
+import Favourites from "./components/Favourites";
 
 inject();
 
@@ -57,20 +58,32 @@ const App = () => {
   const [focus, setFocus] = useState(false);
   const [profileToggle, setProfileToggle] = useState(false);
   const [ham, setHam] = useState(false);
+  const [webSocketIndicator, setWebSocketIndicator] = useState(null)
 
   const api_key = import.meta.env.VITE_api_key;
   const socketUrl = `wss://wss.allsportsapi.com/live_events?APIkey=${api_key}`;
+  
+  
+  
+  
   const {
-    sendMessage,
-    sendJsonMessage,
-    lastMessage,
     lastJsonMessage,
     readyState,
     getWebSocket,
+    sendJsonMessage
   } = useWebSocket(socketUrl, {
-    // onOpen: () => console.log(lastJsonMessage, lastMessage),
+    // onOpen: () => setWebSocketIndicator(true),
+    // onClose: () => setWebSocketIndicator(false),
+    // onError: () => setWebSocketIndicator(false),
+    shouldReconnect: () => true,
+    // reconnectAttempts: 10,
+    // reconnectInterval: 3000,
     //Will attempt to reconnect on all close events, such as server shutting down
   });
+  
+  const connectSocket = () => {
+    useWebSocket(socketUrl)
+  }
 
   //sign out
   const handleSignOut = () => {
@@ -84,6 +97,22 @@ const App = () => {
         });
     }
   };
+
+  const hamRef = useRef()
+
+  useEffect(() => {
+    let outsideClick = (e) => {
+      if (!hamRef.current.contains(e.target)) {
+        setHam(false)
+        console.log(e.target);
+      }
+    }
+    document.addEventListener('mousedown', outsideClick)
+
+    return () => {
+      document.removeEventListener('mousedown', outsideClick)
+    }
+  })
 
   useEffect(() => {
     if (lastJsonMessage !== null && fixtures) {
@@ -112,6 +141,7 @@ const App = () => {
       });
     }
     // setNewFixtures([lastJsonMessage.map((l) => l.event_key)]);
+    console.log(readyState);
   }, [lastJsonMessage]);
 
   useEffect(() => {
@@ -124,8 +154,8 @@ const App = () => {
           fixture.league_key
       )
     );
-    console.log(fixtures);
-    console.log(check);
+    // console.log(fixtures);
+    // console.log(check);
     console.log(
       fixtures?.map(
         (fixture) =>
@@ -339,6 +369,8 @@ const App = () => {
                 className=" h-5 md:h-8 absolute left-[-4px] md:left-[-10px] top-2 rotate-[-15deg]"
               /> */}
               <span>ParaSc</span> <ParaScoreLogo /> <span>re</span>
+              <div className={`${readyState === 1 ? 'bg-green-500' : readyState === 0 ? 'bg-gray-400' : 'bg-red-500'} h-7 w-7 rounded-full`}></div>
+              {/* <button onClick={() => {sendJsonMessage({type: 'close_connection'}); console.log(readyState);}}>close</button> */}
             </h3>
           </Link>
           <div className="px-2 ">
@@ -367,7 +399,7 @@ const App = () => {
                 to={"/signin"}
                 className={`${
                   auth?.currentUser ? "hidden" : "block"
-                } border border-solid border-customBg px-2 py-1 rounded-lg hover:bg-customBg hover:text-lightText transition-colors duration-200 ${
+                } border border-solid border-customBg text-xs md:text-base px-2 py-1 rounded-lg hover:bg-customBg hover:text-lightText transition-colors duration-200 ${
                   toggleMode ? "text-darkText" : "text-lightText"
                 }`}
               >
@@ -377,7 +409,7 @@ const App = () => {
                 to={"/signup"}
                 className={`${
                   auth?.currentUser ? "hidden" : "block"
-                } bg-customBg px-2 py-1 rounded-lg text-lightText`}
+                } bg-customBg text-xs md:text-base px-2 py-1 rounded-lg text-lightText`}
               >
                 Sign Up
               </Link>
@@ -426,17 +458,19 @@ const App = () => {
                 drop
               </div>
             </ClickAwayListener>
-            <div className=" relative ">
-              <HamburgerMenu ham={ham} setHam={setHam} />
+            <div className=" relative pr-2">
+              <HamburgerMenu ham={ham} setHam={setHam} toggleMode={toggleMode}/>
               <div
                 className={`${
                   ham ? "block" : "hidden"
-                } absolute right-0 -bottom-20  w-48 flex flex-col items-start p-2 gap-2 backdrop-blur-sm rounded-lg divide-y ${toggleMode ? 'border border-solid border-customBgLight text-darkText divide-customBgLight' : 'border border-solid border-customBg2 text-lightText divide-customBg2'}`}
+                } absolute right-0 -bottom-14 md:-bottom-20  w-48 flex flex-col items-start p-2 gap-2 backdrop-blur-sm rounded-lg divide-y ${toggleMode ? 'border border-solid border-customBgLight text-darkText divide-customBgLight' : 'border border-solid border-customBg2 text-lightText divide-customBg2'}`}
+                ref={hamRef}
               >
                 <button
                   className={`
                   cursor-pointer w-full`}
                   onClick={() => setToggleMode((prev) => !prev)}
+                  ref={hamRef}
                 >
                   {/* <img
               src={`${toggleMode ? darkMode : lightMode}`}
@@ -444,19 +478,19 @@ const App = () => {
               className={`  h-7 w-7`}
             /> */}
                   {toggleMode ? (
-                    <div className=" flex items-center justify-between">
+                    <div className=" flex items-center justify-between" ref={hamRef}>
                       <div>Dark Mode </div>
                       <Dark />
                     </div>
                   ) : (
-                    <div className="flex items-center justify-between">
-                      <div>Light Mode </div>
+                    <div className="flex items-center justify-between" ref={hamRef}>
+                      <div ref={hamRef}>Light Mode </div>
                       <Light />
                     </div>
                   )}
                 </button>
                 {auth.currentUser && (
-                  <button onClick={handleSignOut} className=" w-full flex justify-start">Log out</button>
+                  <button onClick={handleSignOut} className=" w-full flex justify-start" ref={hamRef}>Log out</button>
                 )}
               </div>
             </div>
@@ -564,6 +598,7 @@ const App = () => {
           />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/favourites/" element={<Favourites />}></Route>
         </Routes>
       </div>
     </div>

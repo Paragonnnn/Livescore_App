@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const HamburgerMenu = ({ham,setHam}) => {
+const HamburgerMenu = ({ham,setHam,toggleMode}) => {
   
 
   const openHam = () => {
@@ -8,7 +8,7 @@ const HamburgerMenu = ({ham,setHam}) => {
   };
   return (
     <div
-      className={` h-6 w-6 flex flex-col justify-between cursor-pointer py-1`}
+      className={` h-6 w-6 flex flex-col justify-between cursor-pointer p-1 rounded-md ${toggleMode ? 'bg-customBgLight' : 'bg-customBg2'}`}
       onClick={openHam}
     >
       <div

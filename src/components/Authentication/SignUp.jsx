@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { auth } from "../../firebase/firebase";
+import { auth, db } from "../../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { collection, addDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
@@ -8,7 +9,9 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const user = auth.currentUser;
 
   const signUp = async () => {
     setError("");
@@ -18,7 +21,23 @@ const SignUp = () => {
         console.log(user);
         setEmail("");
         setPassword("");
-        navigate('/')
+        navigate("/");
+        addDoc(collection(db, "users"), {
+          name: user.displayName ? user.displayName : "",
+          email: user.email,
+          user_id: user.uid,
+          profile_img_url: user.photoURL ? user.photoURL : "",
+          favourites: {
+            leagues: [{}],
+            teams: [{}],
+          },
+        })
+          .then((data) => {
+            console.log("details uploaded");
+          })
+          .catch((err) => {
+            console.log(err, "error uploading data");
+          });
       })
       .catch((err) => {
         const message = err.message;
@@ -38,7 +57,10 @@ const SignUp = () => {
           </label>
           <input
             type="email"
-            onChange={(e) => {setEmail(e.target.value); setError('')}}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setError("");
+            }}
             value={email}
             placeholder="Enter your email"
             className=" bg-transparent outline-none border border-solid border-opacity-20 border-customBg focus:border-opacity-100 px-3 py-2 rounded-md transition-colors duration-200 text-gray-300"
@@ -50,7 +72,9 @@ const SignUp = () => {
           </label>
           <input
             type="password"
-            onChange={(e) => {setPassword(e.target.value); }}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
             value={password}
             placeholder="Enter your password"
             className=" bg-transparent outline-none border border-solid border-opacity-20 border-customBg focus:border-opacity-100 px-3 py-2 rounded-md transition-colors duration-200 text-gray-300"

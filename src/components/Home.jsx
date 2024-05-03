@@ -81,7 +81,7 @@ const Home = ({
             minDetail="year"
             maxDetail="month"
             tileClassName={({ date }) => {
-              return date.getDate() === new Date().getDate()
+              return date.getDate() === new Date().getDate() && date.getMonth() === new Date().getMonth()
                 ? "day_style"
                 : "date_hover";
             }}
@@ -108,7 +108,7 @@ const Home = ({
           <div className=" text-xl text-customBg py-2">Top Leagues</div>
           <div className=" divide-y divide-gray-400 divide-opacity-20 ">
             {leagues &&
-              leagues.slice(0, 13).map((top) => (
+              leagues.slice(6, 13).map((top) => (
                 <div key={top.league_key} className=" px-1 py-2">
                   <Link
                     to={`/table/${top.league_name.replace(/ +/g, "-")}/${
@@ -231,6 +231,7 @@ const Home = ({
           toggleMode={toggleMode}
           toggleSearch={toggleSearch}
           lastJsonMessage={lastJsonMessage}
+          showCalendar={showCalendar}
         />
       </div>
       <div

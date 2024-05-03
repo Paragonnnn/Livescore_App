@@ -17,6 +17,7 @@ const Fixtures = ({
   windowWidth,
   toggleMode,
   toggleSearch,
+  showCalendar,
   lastJsonMessage,
   reCheck,
 }) => {
@@ -80,7 +81,7 @@ const Fixtures = ({
     <div
       className={`${
         toggleSearch ? "hidden lg:block" : ""
-      }   rounded-xl sm:px-4 relative ${toggleMode ? " " : " "} `}
+      }   rounded-xl sm:px-4 relative ${showCalendar ? " blur-sm" : " "} `}
     >
       <div
         className={`${
