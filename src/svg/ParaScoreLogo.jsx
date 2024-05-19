@@ -14,7 +14,7 @@ const ParaScoreLogo = () => {
       viewBox="-30 32 194 194"
       xml:space="preserve"
       stroke="#3F8EFC"
-      className=" h-6 w-6 md:h-8 md:w-8"
+      className=" h-4 w-4 sm:h-5 sm:w-5 md:h-8 md:w-8"
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
       <g

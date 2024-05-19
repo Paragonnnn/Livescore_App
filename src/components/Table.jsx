@@ -18,6 +18,8 @@ const Table = ({ toggleMode }) => {
   const [leagueFixtures, setLeagueFixtures] = useState([]);
   const [selectFrom, setSelectFrom] = useState(null)
   const [selectTo, setSelectTo] = useState(null)
+  const [stageName, setStageName] = useState("Current");
+
 
   const { id } = useParams();
   const date = new Date();
@@ -32,11 +34,14 @@ const Table = ({ toggleMode }) => {
   const [from, setFrom] = useState(fromDate);
   const [to, setTo] = useState(toDate);
   const home = () => {
+    
     setChangeTable("home");
     setMappedTable(homeTable);
+    
     // console.log(changeTable);
   };
   const away = () => {
+    
     setChangeTable("away");
     setMappedTable(awayTable);
     // console.log(changeTable);
@@ -58,6 +63,7 @@ const Table = ({ toggleMode }) => {
         .then((res) => res.json())
         .then((json) => {
           setTable(json.result.total);
+          setStageName(json.result.total[0].stage_name);
           setTeamKeys(json.result.total.map((k) => k.team_key));
           // console.log(json.result.total.map(k => k.team_key));
           setMappedTable(json.result.total);
@@ -166,6 +172,7 @@ const Table = ({ toggleMode }) => {
           all={all}
           home={home}
           away={away}
+          stageName={stageName}
         />
 
         <div className=" col-span-1 ">

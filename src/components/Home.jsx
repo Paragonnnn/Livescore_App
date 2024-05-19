@@ -42,6 +42,7 @@ const Home = ({
   setFocus,
   lastJsonMessage,
   reCheck,
+  readyState
 }) => {
   const [picker, setPicker] = useState(null);
   const date = new Date();
@@ -81,7 +82,7 @@ const Home = ({
             minDetail="year"
             maxDetail="month"
             tileClassName={({ date }) => {
-              return date.getDate() === new Date().getDate() && date.getMonth() === new Date().getMonth()
+              return date.getDate() === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear()
                 ? "day_style"
                 : "date_hover";
             }}
@@ -232,12 +233,13 @@ const Home = ({
           toggleSearch={toggleSearch}
           lastJsonMessage={lastJsonMessage}
           showCalendar={showCalendar}
+          readyState={readyState}
         />
       </div>
       <div
         className={`${
           toggleMode ? " bg-customBgLight" : " bg-customBg2"
-        } hidden lg:block col-span-3 sticky top-[90px] text-black rounded-xl bg-customBg2  p-4 h-fit`}
+        } hidden lg:block col-span-3 sticky top-[70px] text-black rounded-xl bg-customBg2  p-4 h-fit`}
       >
         <HomeCurrentFixtureInfo
           loadingFixtures={loadingFixtures}

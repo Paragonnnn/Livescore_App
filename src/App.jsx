@@ -32,6 +32,9 @@ import SignUp from "./components/Authentication/SignUp";
 import ClickAwayListener from "react-click-away-listener";
 import HamburgerMenu from "./components/HamburgerMenu";
 import Favourites from "./components/Favourites";
+import SearchClub2 from "./components/SearchClub2";
+import SearchPlayers from "./components/SearchPlayers";
+import Person from "./svg/Person";
 
 inject();
 
@@ -64,7 +67,7 @@ const App = () => {
   const socketUrl = `wss://wss.allsportsapi.com/live_events?APIkey=${api_key}`;
   
   
-  
+  console.log(navigator.onLine);
   
   const {
     lastJsonMessage,
@@ -331,7 +334,7 @@ const App = () => {
         .catch((err) => {
           setLoadingFixtures(false);
           setFixturesError(true);
-          // console.log(err);
+          console.log(err);
         });
     }
     // const timeoutId = setTimeout(getData(), 2000);
@@ -362,14 +365,13 @@ const App = () => {
       >
         <div className="m-auto  max-w-[1440px]  flex items-center justify-between relative">
           <Link to={"/"}>
-            <h3 className="text-[25px] md:text-[40px] px-2 md:px-4 py-1 sm:py-2 mb-2 text-customBg font-bold flex items-center">
+            <h3 className=" text-xl sm:text-[25px] md:text-[40px] px-2 md:px-4 py-1 sm:py-2 mb-2 text-customBg font-bold flex items-center">
               {/* <img
                 src="https://upload.wikimedia.org/wikipedia/commons/c/c0/Santa_hat.svg"
                 alt=""
                 className=" h-5 md:h-8 absolute left-[-4px] md:left-[-10px] top-2 rotate-[-15deg]"
               /> */}
               <span>ParaSc</span> <ParaScoreLogo /> <span>re</span>
-              <div className={`${readyState === 1 ? 'bg-green-500' : readyState === 0 ? 'bg-gray-400' : 'bg-red-500'} h-7 w-7 rounded-full`}></div>
               {/* <button onClick={() => {sendJsonMessage({type: 'close_connection'}); console.log(readyState);}}>close</button> */}
             </h3>
           </Link>
@@ -377,7 +379,7 @@ const App = () => {
             {/* <img src={searchLogo} alt="" className=' h-6 w-6 block lg:hidden' onClick={handleSearchToggleClick}/> */}
             {windowWidth > 1024 && (
               <div className="">
-                <SearchClub
+                {/* <SearchClub
                   handleSearchToggleClick={handleSearchToggleClick}
                   toggleSearch={toggleSearch}
                   setToggleSearch={setToggleSearch}
@@ -389,7 +391,9 @@ const App = () => {
                   toggleMode={toggleMode}
                   focus={focus}
                   setFocus={setFocus}
-                />
+                /> */}
+                {/* <SearchClub2 /> */}
+                {/* <SearchPlayers /> */}
               </div>
             )}
           </div>
@@ -399,20 +403,21 @@ const App = () => {
                 to={"/signin"}
                 className={`${
                   auth?.currentUser ? "hidden" : "block"
-                } border border-solid border-customBg text-xs md:text-base px-2 py-1 rounded-lg hover:bg-customBg hover:text-lightText transition-colors duration-200 ${
-                  toggleMode ? "text-darkText" : "text-lightText"
+                } border border-solid text-xxs md:text-base px-2 md:px-3 md:py-1 py-[2px] rounded-md hover:bg-customBg hover:text-lightText transition-colors duration-200 flex items-center gap-2 hover:fill-white ${
+                  toggleMode ? "text-darkText bg-customBgLight border-gray-400  fill-black" : "text-lightText bg-customBg2 fill-white border-gray-700"
                 }`}
               >
+                <Person toggleMode={toggleMode} />
                 Log in
               </Link>
-              <Link
+              {/* <Link
                 to={"/signup"}
                 className={`${
                   auth?.currentUser ? "hidden" : "block"
-                } bg-customBg text-xs md:text-base px-2 py-1 rounded-lg text-lightText`}
+                } bg-customBg text-xxs md:text-base px-1 md:px-2 md:py-1 py-[2px] rounded-md text-lightText`}
               >
                 Sign Up
-              </Link>
+              </Link> */}
             </div>
             {auth.currentUser && (
               <button
@@ -459,7 +464,7 @@ const App = () => {
               </div>
             </ClickAwayListener>
             <div className=" relative pr-2">
-              <HamburgerMenu ham={ham} setHam={setHam} toggleMode={toggleMode}/>
+              {/* <HamburgerMenu ham={ham} setHam={setHam} toggleMode={toggleMode}/> */}
               <div
                 className={`${
                   ham ? "block" : "hidden"
@@ -552,6 +557,7 @@ const App = () => {
                 toggleSearch={toggleSearch}
                 setFocus={setFocus}
                 lastJsonMessage={lastJsonMessage}
+                readyState={readyState}
               />
             }
           />

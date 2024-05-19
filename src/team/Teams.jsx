@@ -6,6 +6,9 @@ import Defenders from "./team_players/Defenders";
 import Midfielders from "./team_players/Midfielders";
 import Forwards from "./team_players/Forwards";
 import TeamFixtures from "./TeamFixtures";
+import { auth,db } from "../firebase/firebase";
+import { updateDoc, doc } from "firebase/firestore";
+import Favourites from "../components/Favourites";
 
 const Teams = ({ toggleMode }) => {
   const [teams, setTeams] = useState([]);
@@ -15,6 +18,30 @@ const Teams = ({ toggleMode }) => {
   const [teamResults, setTeamResults] = useState([]);
   const { id } = useParams();
   const api_key = import.meta.env.VITE_api_key;
+
+
+  const user = auth.currentUser
+
+  const favouritesRef = doc(db, 'users', `${user.uid}`)
+
+  const addToFavourite = async (team) => {
+    console.log(team.team_name);
+    await updateDoc(favouritesRef, {
+      
+      favourites: [{
+        teams: [{...teams}],
+        leagues: [{
+          team: team.team_name,
+          team_key: team.team_key,
+          team_logo: team.team_logo
+        }]
+      }]
+    }).then(team => {
+      console.log(`${team} added to fav`);
+    }).catch(err => {
+      console.log(`${err} adding failed`);
+    })
+  }
 
   const date = new Date();
   // console.log(date);
@@ -99,6 +126,7 @@ const Teams = ({ toggleMode }) => {
               <div>
                 <div className="text-3xl font-bold ">{team.team_name} </div>
               </div>
+                <button onClick={() => addToFavourite(team)}>Add</button>
             </div>
 
             <div>

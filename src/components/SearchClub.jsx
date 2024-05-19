@@ -28,7 +28,7 @@ const SearchClub = ({
     document.addEventListener("mousedown", (e) => {
       if (!refOne.current.contains(e.target) && windowWidth > 1024) {
         // setShowSearch(false);
-        setFocus(false);
+        // setFocus(false);
         // console.log(e.target);
       }
     });

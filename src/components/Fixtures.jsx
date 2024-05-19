@@ -4,6 +4,7 @@ import Error from "./Error";
 import Countries from "./Countries";
 import { Link } from "react-router-dom";
 import { fix, max } from "mathjs";
+import LoadingFixtures from "./LoadingFixtures";
 
 const Fixtures = ({
   leagues,
@@ -20,6 +21,7 @@ const Fixtures = ({
   showCalendar,
   lastJsonMessage,
   reCheck,
+  readyState,
 }) => {
   const [isLive, setIsLive] = useState(true);
   // const [checkCheck, setCheckCheck] = useState([])
@@ -58,7 +60,7 @@ const Fixtures = ({
     setShowCards((prev) => !prev);
     console.log(showCards);
   };
-  
+
   // const buttonClick = () => {
   //   addNotification({
   //     title: `${notificationMessage?.map((f) => f.event_final_result)}`,
@@ -121,6 +123,17 @@ const Fixtures = ({
                 )
               </div>
             </button>
+            <div className="flex items-center">
+              <div
+                className={`${
+                  readyState === 1
+                    ? "bg-green-500"
+                    : readyState === 0
+                    ? "bg-gray-400"
+                    : "bg-red-500"
+                } h-1 w-1  rounded-full`}
+              ></div>
+            </div>
           </div>
           {/* <button onClick={buttonClick} className="button">
             Hello world.
@@ -146,134 +159,7 @@ const Fixtures = ({
         </div>
       </div>
       {loadingFixtures && (
-        <div className=" h-[100vh] px-2">
-          <div className=" mb-4 divide-y rounded divide-gray-400 border border-solid border-gray-400 border-opacity-20 divide-opacity-20">
-            <div className=" flex gap-2 items-center p-2">
-              <div className=" w-6 h-6 rounded-full bg-gray-400 opacity-20 animate-pulse"></div>
-              <div className="flex flex-col gap-1 ">
-                <div className=" h-3 w-20 bg-gray-400 opacity-10 animate-pulse "></div>
-                <div className=" h-3 w-24 bg-gray-400 opacity-10 animate-pulse "></div>
-              </div>
-            </div>
-            <div className=" p-2 flex gap-2 items-center">
-              <div className="flex flex-col gap-1 items-center">
-                <div className=" w-7 h-3 bg-gray-400 opacity-10 animate-pulse rounded-sm"></div>
-                <div className=" w-4 h-3 bg-gray-400 opacity-10 animate-pulse rounded-sm"></div>
-              </div>
-              <div className="flex flex-col gap-1">
-                <div className=" w-28 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-                <div className=" w-36 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-              </div>
-            </div>
-          </div>
-          <div className=" mb-4 divide-y rounded divide-gray-400 border border-solid border-gray-400 border-opacity-10 divide-opacity-10">
-            <div className=" flex gap-2 items-center p-2">
-              <div className=" w-6 h-6 rounded-full bg-gray-400 opacity-10 animate-pulse"></div>
-              <div className="flex flex-col gap-1">
-                <div className=" h-3 w-10 bg-gray-400 opacity-10 animate-pulse "></div>
-                <div className=" h-3 w-24 bg-gray-400 opacity-10 animate-pulse "></div>
-              </div>
-            </div>
-            <div className=" p-2 flex gap-2 items-center">
-              <div className="flex flex-col gap-1 items-center">
-                <div className=" w-7 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-                <div className=" w-4 h-3 bg-gray-400 opacity-10 animate-pulse "></div>
-              </div>
-              <div className="flex flex-col gap-1">
-                <div className=" w-28 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-                <div className=" w-36 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-              </div>
-            </div>
-            <div className=" p-2 flex gap-2 items-center">
-              <div className="flex flex-col gap-1 items-center">
-                <div className=" w-7 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-                <div className=" w-4 h-3 bg-gray-400 opacity-10 animate-pulse "></div>
-              </div>
-              <div className="flex flex-col gap-1">
-                <div className=" w-28 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-                <div className=" w-36 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-              </div>
-            </div>
-            <div className=" p-2 flex gap-2 items-center">
-              <div className="flex flex-col gap-1 items-center">
-                <div className=" w-7 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-                <div className=" w-4 h-3 bg-gray-400 opacity-10 animate-pulse "></div>
-              </div>
-              <div className="flex flex-col gap-1">
-                <div className=" w-28 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-                <div className=" w-36 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-              </div>
-            </div>
-          </div>
-          <div className=" mb-4  divide-y rounded divide-gray-400 border border-solid border-gray-400 border-opacity-10 divide-opacity-10">
-            <div className=" flex gap-2 items-center p-2">
-              <div className=" w-6 h-6 rounded-full bg-gray-400 opacity-10 animate-pulse"></div>
-              <div className="flex flex-col gap-1">
-                <div className=" h-3 w-10 bg-gray-400 opacity-10 animate-pulse "></div>
-                <div className=" h-3 w-24 bg-gray-400 opacity-10 animate-pulse "></div>
-              </div>
-            </div>
-            <div className=" p-2 flex gap-2 items-center">
-              <div className="flex flex-col gap-1 items-center">
-                <div className=" w-7 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-                <div className=" w-4 h-3 bg-gray-400 opacity-10 animate-pulse "></div>
-              </div>
-              <div className="flex flex-col gap-1">
-                <div className=" w-28 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-                <div className=" w-36 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-              </div>
-            </div>
-            <div className=" p-2 flex gap-2 items-center">
-              <div className="flex flex-col gap-1 items-center">
-                <div className=" w-7 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-                <div className=" w-4 h-3 bg-gray-400 opacity-10 animate-pulse "></div>
-              </div>
-              <div className="flex flex-col gap-1">
-                <div className=" w-28 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-                <div className=" w-36 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-              </div>
-            </div>
-          </div>
-          <div className=" mb-4  divide-y rounded divide-gray-400 border border-solid border-gray-400 border-opacity-10 divide-opacity-10">
-            <div className=" flex gap-2 items-center p-2">
-              <div className=" w-6 h-6 rounded-full bg-gray-400 opacity-10 animate-pulse"></div>
-              <div className="flex flex-col gap-1">
-                <div className=" h-3 w-10 bg-gray-400 opacity-10 animate-pulse "></div>
-                <div className=" h-3 w-24 bg-gray-400 opacity-10 animate-pulse "></div>
-              </div>
-            </div>
-            <div className=" p-2 flex gap-2 items-center">
-              <div className="flex flex-col gap-1 items-center">
-                <div className=" w-7 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-                <div className=" w-4 h-3 bg-gray-400 opacity-10 animate-pulse "></div>
-              </div>
-              <div className="flex flex-col gap-1">
-                <div className=" w-28 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-                <div className=" w-36 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-              </div>
-            </div>
-            <div className=" p-2 flex gap-2 items-center">
-              <div className="flex flex-col gap-1 items-center">
-                <div className=" w-7 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-                <div className=" w-4 h-3 bg-gray-400 opacity-10 animate-pulse "></div>
-              </div>
-              <div className="flex flex-col gap-1">
-                <div className=" w-28 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-                <div className=" w-36 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-              </div>
-            </div>
-            <div className=" p-2 flex gap-2 items-center">
-              <div className="flex flex-col gap-1 items-center">
-                <div className=" w-7 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-                <div className=" w-4 h-3 bg-gray-400 opacity-10 animate-pulse "></div>
-              </div>
-              <div className="flex flex-col gap-1">
-                <div className=" w-28 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-                <div className=" w-36 h-3 bg-gray-400 opacity-10 animate-pulse"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <LoadingFixtures toggleMode={toggleMode}/>
       )}
 
       {fixturesError && (
@@ -281,10 +167,15 @@ const Fixtures = ({
           <Error />
         </div>
       )}
+      {/* {
+        (liveCheck.length == 0 && !isLive) && 
+        <div>no live games</div>
+      } */}
       {!fixturesError && (
         <div
           className={`${
-            toggleMode ? "bg-customBgLight" : "bg-customBg2"
+            !loadingFixtures &&
+            (toggleMode ? "bg-customBgLight" : "bg-customBg2")
           }  mb-14 p-4 rounded-xl`}
         >
           {
@@ -347,8 +238,8 @@ const Fixtures = ({
                         })
                         .sort(
                           (a, b) =>
-                            a.event_time.replace(':','.') -
-                            b.event_time.replace(':','.')
+                            a.event_time.replace(":", ".") -
+                            b.event_time.replace(":", ".")
                         )
                         .map(
                           (fixture, index) =>
@@ -533,7 +424,7 @@ const Fixtures = ({
                                     <div className="flex justify-between items-center w-full">
                                       <div className=" text-xs sm:text-base flex items-center gap-[1px] sm:gap-[2px] ">
                                         <span className=" mr-1 sm:mr-2">
-                                          {fixture.event_away_team} 
+                                          {fixture.event_away_team}
                                         </span>
                                         {fixture.cards
                                           .filter(

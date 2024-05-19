@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { auth, db } from "../../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
@@ -22,15 +22,15 @@ const SignUp = () => {
         setEmail("");
         setPassword("");
         navigate("/");
-        addDoc(collection(db, "users"), {
-          name: user.displayName ? user.displayName : "",
-          email: user.email,
-          user_id: user.uid,
-          profile_img_url: user.photoURL ? user.photoURL : "",
-          favourites: {
-            leagues: [{}],
-            teams: [{}],
-          },
+        setDoc(doc(db, "users", `${user.uid}`), {
+          // name: user.displayName ? user.displayName : "",
+          // email: user.email,
+          // user_id: user.uid,
+          // profile_img_url: user.photoURL ? user.photoURL : "",
+          favouritesTeams: 
+            { 
+              teams: [{}] 
+            },
         })
           .then((data) => {
             console.log("details uploaded");

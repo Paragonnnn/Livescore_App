@@ -84,13 +84,13 @@ const Countries = ({
               <div
                 className={`${
                   activeIndex.includes(index)
-                    ? " visible h-full animate-countryDropDown"
-                    : " animate-countryDropUp invisible h-0 opacity-0"
+                    ? " visible h-full"
+                    : " invisible h-0 opacity-0"
                 } ${
                   toggleMode ? "text-darkText" : "text-lightText"
                 } p-2 divide-y divide-gray-400 divide-opacity-20  transition-all duration-300 `}
               >
-                {leagues.map(
+                {leagues?.map(
                   (league) =>
                     league.country_key == country.country_key && (
                       <div key={league.league_key} className="p-1">

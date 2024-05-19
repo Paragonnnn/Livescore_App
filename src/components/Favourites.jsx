@@ -1,23 +1,37 @@
-import React from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebase/firebase";
+import React, { useEffect, useState } from "react";
+import { collection, getDoc,doc } from "firebase/firestore";
+import { auth, db } from "../firebase/firebase";
 
 const Favourites = () => {
-  const getData = async () => {
+  const [favTeam, setFavteam] = useState()
+  const user = auth.currentUser
+  
+  useEffect(() => {
+    const getData = async () => {
+      console.log(user.uid);
+      const docRef = doc(db, "users", `${user.uid}`);
+      const docSnap = await getDoc(docRef);
+      console.log(docSnap.data().favourites.leagues);
+      setFavteam(docSnap.data().favourites.leagues)
+      console.log(favTeam);
+      // const querySnapshot = await getDocs(collection(db, "users"));
+      // console.log(querySnapshot.query);
+    };
     
-    const snapShot = await getDocs(collection(db,'users'))
-    snapShot.forEach((doc) => {
-        console.log({id: doc.id, ...doc.data()});
-    })
-    // const querySnapshot = await getDocs(collection(db, "users"));
-    // console.log(querySnapshot.query);
-  };
+    getData()
+  },[])
 
   return <div>
-    <button onClick={getData} className=" text-white">
+    <button  className=" text-white">
         Get data
-        {}
     </button>
+    <div>
+      
+      { favTeam?.map(fav => (
+        
+        <div>{fav.team}</div>
+      ))}
+    </div>
     
   </div>;
 };

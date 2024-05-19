@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Standing = ({
@@ -13,12 +13,17 @@ const Standing = ({
   windowWidth,
   getAwayTeamId,
   getHomeTeamId,
+  stageName,
 }) => {
-  
   // for (let i = 0; i < table.length; i++) {
   //   const element = table[i]
   //   console.log(element.team_key)
   // }
+  console.log(table);
+  console
+    .log
+    // mappedTable.map((t) => t.standing_place_type.includes("Relegation"))
+    ();
   return (
     <div
       className={`${
@@ -27,9 +32,11 @@ const Standing = ({
       } ${toggleMode ? "text-darkText" : "text-lightText"} col-span-2`}
     >
       {table.length != 0 && (
-        <div className={`${
-          toggleMode ? "bg-customBgLight" : "bg-customBg2"
-        }  divide-y divide-black shadow-sm rounded-md px-1 mb-2 xs:mb-5`}>
+        <div
+          className={`${
+            toggleMode ? "bg-customBgLight" : "bg-customBg2"
+          }  divide-y divide-black shadow-sm rounded-md px-1 mb-2 xs:mb-5`}
+        >
           <div className="px-4 py-2">
             <button
               className={`${
@@ -46,6 +53,8 @@ const Standing = ({
                 changeTable === "home" ? "border-customBg text-customBg" : " "
               } text-base sm:text-[20px] py-[2px] sm:py-1 p-3 sm:px-6 rounded-full border border-solid ${
                 toggleMode ? "border-darkText" : "border-lightText"
+              } ${
+                stageName === "Current" ? "" : "hidden"
               } mr-4 hover:opacity-80`}
               onClick={home}
             >
@@ -56,7 +65,7 @@ const Standing = ({
                 changeTable === "away" ? "border-customBg text-customBg" : " "
               } text-base sm:text-[20px] py-[2px] sm:py-1 p-3 sm:px-6 rounded-full border border-solid ${
                 toggleMode ? "border-darkText" : "border-lightText"
-              } hover:opacity-80`}
+              } ${stageName === "Current" ? "" : "hidden"} hover:opacity-80`}
               onClick={away}
             >
               Away
@@ -76,63 +85,79 @@ const Standing = ({
                 <div className="md:p-2 p-1 hidden sm:block">GA</div>
                 <div className="md:p-2 p-1 ">GD</div>
                 <div className="md:p-2 p-1 ">Pts</div>
-                <div className="md:p-2 p-1 ">Form</div>
+                {/* <div className="md:p-2 p-1 ">Form</div> */}
               </section>
             </section>
           </section>
           <section className="divide-y divide-black">
             {mappedTable &&
               mappedTable.map((table, index) => (
-                <section
-                  key={index}
-                  className={`  flex justify-between items-center gap-4 md:px-4 p-1 `}
-                >
-                  <div
+                <section key={index}>
+                  {/* <div>{table.league_round}</div> */}
+
+                  <section
                     className={`${
-                      getAwayTeamId == table.team_key
-                        ? "border-l-4 border-solid border-customBg"
-                        : ""
-                    } ${
-                      getHomeTeamId == table.team_key
-                        ? "border-l-4 border-solid border-customBg"
-                        : ""
-                    }  md:p-2 p-1 flex items-center gap-2 `}
+                      changeTable === "all" &&
+                      (table.standing_place_type.includes("Relegation")
+                        ? " bg-red-400"
+                        : table.standing_place_type.includes("Champions League")
+                        ? "bg-green-400"
+                        : table.standing_place_type.includes("Europa League")
+                        ? "bg-orange"
+                        : table.standing_place_type.includes(
+                            "Europa Conference League"
+                          )
+                        ? "bg-lightOrange"
+                        : "")
+                    }  flex justify-between items-center gap-4 md:px-4 p-1 `}
                   >
-                    <div className="md:p-2 p-1 ">{table.standing_place}.</div>
-                    <img
-                      className="w-4 rounded-full h-4 sm:w-6 sm:h-6"
-                      src={table.team_logo}
-                      alt=""
-                    />
-                    <Link
-                      className="text-xs sm:text-sm md:text-lg"
-                      to={`/team/${table.standing_team.replace(/ +/g, "-")}/${
-                        table.team_key
-                      }`}
+                    <div
+                      className={`${
+                        getAwayTeamId == table.team_key
+                          ? "border-l-4 border-solid border-customBg"
+                          : ""
+                      } ${
+                        getHomeTeamId == table.team_key
+                          ? "border-l-4 border-solid border-customBg"
+                          : ""
+                      }  md:p-2 p-1 flex items-center gap-2 `}
                     >
-                      {table.standing_team}
-                    </Link>
-                  </div>
-                  <section className="flex justify-between md:w-[350px] xs:w-[150px] w-[80px] text-xxs md:text-base ">
-                    <div className="md:p-2 p-1">{table.standing_P}</div>
-                    <div className="md:p-2 p-1 hidden xs:block">
-                      {table.standing_W}
+                      <div className="md:p-2 p-1 ">{table.standing_place}.</div>
+                      <img
+                        className="w-4 rounded-full h-4 sm:w-6 sm:h-6"
+                        src={table.team_logo}
+                        alt=""
+                      />
+                      <Link
+                        className="text-xs sm:text-sm md:text-lg"
+                        to={`/team/${table.standing_team.replace(/ +/g, "-")}/${
+                          table.team_key
+                        }`}
+                      >
+                        {table.standing_team}
+                      </Link>
                     </div>
-                    <div className="md:p-2 p-1 hidden xs:block">
-                      {table.standing_D}
-                    </div>
-                    <div className="md:p-2 p-1 hidden xs:block">
-                      {table.standing_L}
-                    </div>
-                    <div className="md:p-2 p-1 hidden sm:block">
-                      {table.standing_F}
-                    </div>
-                    <div className="md:p-2 p-1 hidden sm:block">
-                      {table.standing_A}
-                    </div>
-                    <div className="md:p-2 p-1">{table.standing_GD}</div>
-                    <div className="md:p-2 p-1">{table.standing_PTS}</div>
-                    <div className="md:p-2 p-1">{table.standing_PTS}</div>
+                    <section className="flex justify-between md:w-[350px] xs:w-[150px] w-[80px] text-xxs md:text-base ">
+                      <div className="md:p-2 p-1">{table.standing_P}</div>
+                      <div className="md:p-2 p-1 hidden xs:block">
+                        {table.standing_W}
+                      </div>
+                      <div className="md:p-2 p-1 hidden xs:block">
+                        {table.standing_D}
+                      </div>
+                      <div className="md:p-2 p-1 hidden xs:block">
+                        {table.standing_L}
+                      </div>
+                      <div className="md:p-2 p-1 hidden sm:block">
+                        {table.standing_F}
+                      </div>
+                      <div className="md:p-2 p-1 hidden sm:block">
+                        {table.standing_A}
+                      </div>
+                      <div className="md:p-2 p-1">{table.standing_GD}</div>
+                      <div className="md:p-2 p-1">{table.standing_PTS}</div>
+                      {/* <div className="md:p-2 p-1">{table.standing_PTS}</div> */}
+                    </section>
                   </section>
                 </section>
               ))}
