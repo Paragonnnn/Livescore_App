@@ -39,7 +39,7 @@ const Countries = ({
     <div
       className={`${
         toggleMode ? " bg-customBgLight" : " bg-customBg2"
-      } px-1  sticky top-[90px] max-h-[100%] `}
+      } px-1  sticky top-[60px] rounded-lg max-h-[100%] `}
     >
       <Header setSearch={setSearch} search={search} toggleMode={toggleMode} />
 

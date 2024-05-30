@@ -40,6 +40,8 @@ const Fixtures = ({
   //   }
   // },[check])
 
+  
+
   const all = () => {
     setIsLive(true);
   };
@@ -55,6 +57,84 @@ const Fixtures = ({
     }
     // console.log(currentFixture);
     // console.log("hi");
+  };
+  const homeYellowCard = (fixture) => {
+    return fixture.cards
+      .filter((c, i) => c.card == "yellow card" && c.home_fault)
+      .map((c, i) => (
+        <div
+          key={i}
+          className={`${showCards ? "block" : "hidden"} ${
+            c.card == "yellow card" && c.home_fault && i == 0
+              ? " bg-yellow-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black"
+              : ""
+          } `}
+        >
+          {i == 0 &&
+            fixture.cards.filter(
+              (c, i) => c.card == "yellow card" && c.home_fault
+            ).length}
+        </div>
+      ));
+  };
+  const awayYellowCard = (fixture) => {
+    return fixture.cards
+      .filter((c, i) => c.card == "yellow card" && c.away_fault)
+      .map((c, i) => (
+        <div
+          key={i}
+          className={`${showCards ? "block" : "hidden"} ${
+            c.card == "yellow card" && c.away_fault && i == 0
+              ? " bg-yellow-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black"
+              : ""
+          } `}
+        >
+          {i == 0 &&
+            fixture.cards.filter(
+              (c, i) => c.card == "yellow card" && c.away_fault
+            ).length}
+        </div>
+      ));
+  };
+  const homeRedCard = (fixture) => {
+    return fixture.cards
+      .filter((c, i) => c.card == "red card" && c.home_fault)
+      .map((c, i) => (
+        <div
+          key={i}
+          className={`${showCards ? "block" : "hidden"} ${
+            c.card == "red card" && c.home_fault && i == 0
+              ? " bg-red-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black mr-[2px]"
+              : ""
+          } `}
+        >
+          {i == 0 &&
+            fixture.cards.filter((c, i) => c.card == "red card" && c.home_fault)
+              .length != 0 &&
+            fixture.cards.filter((c, i) => c.card == "red card" && c.home_fault)
+              .length}
+        </div>
+      ));
+  };
+  const awayRedCard = (fixture) => {
+    return fixture.cards
+      .filter((c, i) => c.card == "red card" && c.away_fault)
+      .map((c, i) => (
+        <div
+          key={i}
+          className={`${showCards ? "block" : "hidden"} ${
+            c.card == "red card" && c.away_fault && i == 0
+              ? " bg-red-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black mr-[2px]"
+              : ""
+          } `}
+        >
+          {i == 0 &&
+            fixture.cards.filter((c, i) => c.card == "red card" && c.away_fault)
+              .length != 0 &&
+            fixture.cards.filter((c, i) => c.card == "red card" && c.away_fault)
+              .length}
+        </div>
+      ));
   };
   const handleShowCards = () => {
     setShowCards((prev) => !prev);
@@ -158,25 +238,24 @@ const Fixtures = ({
           </div>
         </div>
       </div>
-      {loadingFixtures && (
-        <LoadingFixtures toggleMode={toggleMode}/>
-      )}
+      {loadingFixtures && <LoadingFixtures toggleMode={toggleMode} />}
 
       {fixturesError && (
         <div className=" relative h-[50vh]">
           <Error />
         </div>
       )}
-      {/* {
-        (liveCheck.length == 0 && !isLive) && 
+      {console.log(fixtures.filter((f) => f.event_live === '1' && f.event_status != 'Finished').length)}
+      {
+        (fixtures.filter((f) => f.event_live === '1' && f.event_status != 'Finished').length) == '0' && !isLive && 
         <div>no live games</div>
-      } */}
-      {!fixturesError && (
+      }
+      {(!fixturesError ) && (
         <div
           className={`${
             !loadingFixtures &&
             (toggleMode ? "bg-customBgLight" : "bg-customBg2")
-          }  mb-14 p-4 rounded-xl`}
+          }  mb-14 p-4 rounded-xl `}
         >
           {
             // !(loading && error) &&
@@ -240,7 +319,7 @@ const Fixtures = ({
                           (a, b) =>
                             a.event_time.replace(":", ".") -
                             b.event_time.replace(":", ".")
-                        )
+                        ).sort((a, b) => a.event_key - b.event_key)
                         .map(
                           (fixture, index) =>
                             // leagues.map(league => (
@@ -338,65 +417,8 @@ const Fixtures = ({
                                         <span className=" mr-1 sm:mr-2 ">
                                           {fixture.event_home_team}
                                         </span>
-                                        {fixture.cards
-                                          .filter(
-                                            (c, i) =>
-                                              c.card == "red card" &&
-                                              c.home_fault
-                                          )
-                                          .map((c, i) => (
-                                            <div
-                                              key={i}
-                                              className={`${
-                                                showCards ? "block" : "hidden"
-                                              } ${
-                                                c.card == "red card" &&
-                                                c.home_fault &&
-                                                i == 0
-                                                  ? " bg-red-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black mr-[2px]"
-                                                  : ""
-                                              } `}
-                                            >
-                                              {i == 0 &&
-                                                fixture.cards.filter(
-                                                  (c, i) =>
-                                                    c.card == "red card" &&
-                                                    c.home_fault
-                                                ).length != 0 &&
-                                                fixture.cards.filter(
-                                                  (c, i) =>
-                                                    c.card == "red card" &&
-                                                    c.home_fault
-                                                ).length}
-                                            </div>
-                                          ))}
-                                        {fixture.cards
-                                          .filter(
-                                            (c, i) =>
-                                              c.card == "yellow card" &&
-                                              c.home_fault
-                                          )
-                                          .map((c, i) => (
-                                            <div
-                                              key={i}
-                                              className={`${
-                                                showCards ? "block" : "hidden"
-                                              } ${
-                                                c.card == "yellow card" &&
-                                                c.home_fault &&
-                                                i == 0
-                                                  ? " bg-yellow-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black"
-                                                  : ""
-                                              } `}
-                                            >
-                                              {i == 0 &&
-                                                fixture.cards.filter(
-                                                  (c, i) =>
-                                                    c.card == "yellow card" &&
-                                                    c.home_fault
-                                                ).length}
-                                            </div>
-                                          ))}
+                                        {homeRedCard(fixture)}
+                                        {homeYellowCard(fixture)}
                                       </div>
                                       <div
                                         className={`${
@@ -426,65 +448,8 @@ const Fixtures = ({
                                         <span className=" mr-1 sm:mr-2">
                                           {fixture.event_away_team}
                                         </span>
-                                        {fixture.cards
-                                          .filter(
-                                            (c, i) =>
-                                              c.card == "red card" &&
-                                              c.away_fault
-                                          )
-                                          .map((c, i) => (
-                                            <div
-                                              key={i}
-                                              className={`${
-                                                showCards ? "block" : "hidden"
-                                              } ${
-                                                c.card == "red card" &&
-                                                c.away_fault &&
-                                                i == 0
-                                                  ? " bg-red-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black mr-[2px]"
-                                                  : ""
-                                              } `}
-                                            >
-                                              {i == 0 &&
-                                                fixture.cards.filter(
-                                                  (c, i) =>
-                                                    c.card == "red card" &&
-                                                    c.away_fault
-                                                ).length != 0 &&
-                                                fixture.cards.filter(
-                                                  (c, i) =>
-                                                    c.card == "red card" &&
-                                                    c.away_fault
-                                                ).length}
-                                            </div>
-                                          ))}
-                                        {fixture.cards
-                                          .filter(
-                                            (c, i) =>
-                                              c.card == "yellow card" &&
-                                              c.away_fault
-                                          )
-                                          .map((c, i) => (
-                                            <div
-                                              key={i}
-                                              className={`${
-                                                showCards ? "block" : "hidden"
-                                              } ${
-                                                c.card == "yellow card" &&
-                                                c.away_fault &&
-                                                i == 0
-                                                  ? " bg-yellow-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black"
-                                                  : ""
-                                              } `}
-                                            >
-                                              {i == 0 &&
-                                                fixture.cards.filter(
-                                                  (c, i) =>
-                                                    c.card == "yellow card" &&
-                                                    c.away_fault
-                                                ).length}
-                                            </div>
-                                          ))}
+                                        {awayRedCard(fixture)}
+                                        {awayYellowCard(fixture)}
                                       </div>
                                       <div
                                         className={`${

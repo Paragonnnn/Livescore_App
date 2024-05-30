@@ -46,11 +46,11 @@ const LineUp = ({
         (statToggle.includes("Line-Up") ? "block" : "hidden")
       } ${toggleMode ? "text-darkText" : "text-lightText"} `}
     >
-      {lineUp.map((l) =>
+      {lineUp.map((l,index) =>
         l.home_team.starting_lineups.length == 0 ? (
           <div>No line up yet</div>
         ) : (
-          <>
+          <div key={index}>
             <div
               className={`${
                 toggleMode ? "bg-customBgLight" : "bg-customBg2"
@@ -115,17 +115,18 @@ const LineUp = ({
                       ref={reff}
                     >
                       {playerStat &&
-                        playerStat.map((stat) => (
-                          <div>
+                        playerStat.map((stat,index) => (
+                          <div >
                             {stat.home
                               .filter(
                                 (stat) => stat.player_key == clickedPlayer
                               )
-                              .map((stat) => (
+                              .map((stat,index) => (
                                 <PlayerStat
                                   reff={reff}
                                   stat={stat}
                                   setShowStatToggle={setShowStatToggle}
+                                  key={index}
                                 />
                               ))}
                           </div>
@@ -167,11 +168,12 @@ const LineUp = ({
                         <div>
                           {stat.away
                             .filter((stat) => stat.player_key == clickedPlayer)
-                            .map((stat) => (
+                            .map((stat,index) => (
                               <PlayerStat
                                 reff={reff}
                                 stat={stat}
                                 setShowStatToggle={setShowStatToggle}
+                                key={index}
                               />
                             ))}
                         </div>
@@ -235,12 +237,13 @@ const LineUp = ({
                         <div>
                           {stat.away
                             .filter((stat) => stat.player_key == clickedPlayer)
-                            .map((stat) => (
+                            .map((stat,index) => (
                               <PlayerStat
                                 reff={reff}
                                 stat={stat}
                                 setShowStatToggle={setShowStatToggle}
                                 toggleMode={toggleMode}
+                                key={index}
                               />
                             ))}
                         </div>
@@ -283,11 +286,12 @@ const LineUp = ({
                         <div>
                           {stat.away
                             .filter((stat) => stat.player_key == clickedPlayer)
-                            .map((stat) => (
+                            .map((stat,index) => (
                               <PlayerStat
                                 reff={reff}
                                 stat={stat}
                                 setShowStatToggle={setShowStatToggle}
+                                key={index}
                               />
                             ))}
                         </div>
@@ -296,7 +300,7 @@ const LineUp = ({
                 </div>
               </div>
             </div>
-          </>
+          </div>
         )
       )}
     </div>

@@ -1,6 +1,7 @@
 import React from "react";
 
 const Statistics = ({ statToggle, stats, windowWidth, toggleMode }) => {
+  console.log(stats);
   return (
     <div>
       <div
@@ -15,9 +16,9 @@ const Statistics = ({ statToggle, stats, windowWidth, toggleMode }) => {
           <>
             {stats &&
               stats.map((stat) =>
-                stat.map((s) => (
+                stat.map((s,index) => (
                   <div
-                    key={s.type}
+                    key={index}
                     className={`${
                       toggleMode ? "text-darkText" : "text-lightText"
                     } `}

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Loading from "./Loading";
+import Star from "../svg/Star";
 
 const CurrentFixtureInfo = ({ match, toggleMode, loading }) => {
   return (
@@ -45,20 +46,23 @@ const CurrentFixtureInfo = ({ match, toggleMode, loading }) => {
                 toggleMode ? "bg-customBgLight" : "bg-customBg2"
               } w-full p-2 px-3 flex items-center rounded mb-4 `}
             >
-              <div className="text-center  justify-self-start flex flex-col gap-1 w-1/3 justify-center items-center ">
-                <Link
-                  to={`/team/${match.event_home_team.replace(/ +/g, "-")}/${
-                    match.home_team_key
-                  }`}
-                >
-                  <img
-                    src={match.home_team_logo}
-                    alt=""
-                    className=" w-[40px] md:w-[50px]"
-                  />
-                </Link>
-                <div className="text-xxs md:text-xs">
-                  {match.event_home_team}
+              <div className="text-center flex gap-5 w-1/3 justify-center items-center ">
+                <Star team={match.event_home_team} teamData={{team: match.event_home_team, team_key: match.home_team_key, team_logo: match.home_team_logo, team_country: match.country_name}}/>
+                <div className="flex flex-col items-center gap-1">
+                  <Link
+                    to={`/team/${match.event_home_team.replace(/ +/g, "-")}/${
+                      match.home_team_key
+                    }`}
+                  >
+                    <img
+                      src={match.home_team_logo}
+                      alt=""
+                      className=" w-[40px] md:w-[50px]"
+                    />
+                  </Link>
+                  <div className="text-xxs md:text-xs">
+                    {match.event_home_team}
+                  </div>
                 </div>
               </div>
               <div
@@ -79,21 +83,24 @@ const CurrentFixtureInfo = ({ match, toggleMode, loading }) => {
                     : match.event_status}
                 </div>
               </div>
-              <div className="text-center  justify-self-end flex flex-col gap-1 justify-center items-center   w-1/3">
-                <Link
-                  to={`/team/${match.event_away_team.replace(/ +/g, "-")}/${
-                    match.away_team_key
-                  }`}
-                >
-                  <img
-                    src={match.away_team_logo}
-                    alt=""
-                    className="w-[40px] md:w-[50px]"
-                  />
-                </Link>
-                <div className="text-xxs md:text-xs">
-                  {match.event_away_team}
+              <div className="text-center  flex gap-5 justify-center items-center   w-1/3">
+                <div className="flex flex-col items-center gap-1">
+                  <Link
+                    to={`/team/${match.event_away_team.replace(/ +/g, "-")}/${
+                      match.away_team_key
+                    }`}
+                  >
+                    <img
+                      src={match.away_team_logo}
+                      alt=""
+                      className="w-[40px] md:w-[50px]"
+                    />
+                  </Link>
+                  <div className="text-xxs md:text-xs">
+                    {match.event_away_team}
+                  </div>
                 </div>
+                <Star team={match.event_away_team} teamData={{team: match.event_away_team, team_key: match.away_team_key, team_logo: match.away_team_logo, team_country: match.country_name}}/>
               </div>
             </div>
             <div className="flex justify-center">

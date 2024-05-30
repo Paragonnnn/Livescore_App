@@ -29,7 +29,7 @@ const SignUp = () => {
           // profile_img_url: user.photoURL ? user.photoURL : "",
           favouritesTeams: 
             { 
-              teams: [{}] 
+              teams: {}
             },
         })
           .then((data) => {

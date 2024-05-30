@@ -11,6 +11,7 @@ import {
 } from "firebase/auth";
 import { setDoc, } from "firebase/firestore";
 import { auth, googleProvider,db } from "../../firebase/firebase";
+import { doc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
@@ -26,7 +27,22 @@ const SignIn = () => {
     setError("");
     await signInWithPopup(auth, googleProvider)
       .then((userCredential) => {
-        
+        setDoc(doc(db, "users", `${user.uid}`), {
+          // name: user.displayName ? user.displayName : "",
+          // email: user.email,
+          // user_id: user.uid,
+          // profile_img_url: user.photoURL ? user.photoURL : "",
+          favouritesTeams: 
+            { 
+              teams: {}
+            },
+        })
+          .then(() => {
+            console.log("details uploaded");
+          })
+          .catch((err) => {
+            console.log(err, "error uploading data");
+          });
         navigate("/");
       })
       .catch((err) => {
@@ -37,22 +53,22 @@ const SignIn = () => {
   const signIn = async () => {
     await signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        setDoc(doc(db, "users", `${user.uid}`), {
-          name: user.displayName ? user.displayName : "",
-          email: user.email,
-          user_id: user.uid,
-          profile_img_url: user.photoURL ? user.photoURL : "",
-          favourites: 
-            { 
-              teams: [{}] 
-            }
-        })
-          .then(() => {
-            console.log("details uploaded");
-          })
-          .catch((err) => {
-            console.log(err, "error uploading data");
-          });
+        // setDoc(doc(db, "users", `${user.uid}`), {
+        //   // name: user.displayName ? user.displayName : "",
+        //   // email: user.email,
+        //   // user_id: user.uid,
+        //   // profile_img_url: user.photoURL ? user.photoURL : "",
+        //   favouritesTeams: 
+        //     { 
+        //       teams: {}
+        //     },
+        // })
+        //   .then(() => {
+        //     console.log("details uploaded");
+        //   })
+        //   .catch((err) => {
+        //     console.log(err, "error uploading data");
+        //   });
         navigate("/");
       })
       .catch((err) => {

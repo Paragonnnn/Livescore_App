@@ -93,7 +93,7 @@ const Standing = ({
             {mappedTable &&
               mappedTable.map((table, index) => (
                 <section key={index}>
-                  {/* <div>{table.league_round}</div> */}
+                  <div>{table.league_round}{Math.max(table.standing_place)}</div>
 
                   <section
                     className={`${
