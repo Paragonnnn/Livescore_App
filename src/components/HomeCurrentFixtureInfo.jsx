@@ -95,14 +95,14 @@ const HomeCurrentFixtureInfo = ({
                     fixture.league_key
                   }`}
                 >
-                  {fixture.country_name} 
+                  {/* {fixture.country_name}  */}
                 </Link>
                 
                 <Link
                   to={`/table/${fixture.league_name.replace(/ +/g, "-")}/${
                     fixture.league_key
                   }`}
-                  className=" ml-[6px]"
+                  className=" mb-[4px] text-gray-200"
                 >
                   {fixture.league_name}
                 </Link>
