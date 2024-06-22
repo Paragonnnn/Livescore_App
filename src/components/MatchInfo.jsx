@@ -20,7 +20,7 @@ const MatchInfo = ({ statToggle, match, windowWidth, toggleMode }) => {
           toggleMode ? "text-darkText" : "text-lightText"
         } lg:animate-zoom animate-swipe mb-4 `}
       >
-        <div className=" hidden lg:block">Match Info</div>
+        <div className=" hidden lg:block text-center mb-2 text-gray-200 text-lg">Match Info</div>
         {match &&
           match.map((match, index) => (
             <div key={index} className=" flex flex-col gap-2">

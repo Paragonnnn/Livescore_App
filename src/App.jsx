@@ -35,6 +35,7 @@ import Favourites from "./components/Favourites";
 import SearchClub2 from "./components/SearchClub2";
 import SearchPlayers from "./components/SearchPlayers";
 import Person from "./svg/Person";
+import WhatsappLogo from "./svg/WhatsappLogo";
 
 inject();
 
@@ -61,32 +62,27 @@ const App = () => {
   const [focus, setFocus] = useState(false);
   const [profileToggle, setProfileToggle] = useState(false);
   const [ham, setHam] = useState(false);
-  const [webSocketIndicator, setWebSocketIndicator] = useState(null)
+  const [webSocketIndicator, setWebSocketIndicator] = useState(null);
 
   const api_key = import.meta.env.VITE_api_key;
   const socketUrl = `wss://wss.allsportsapi.com/live_events?APIkey=${api_key}`;
-  
-  
+
   console.log(navigator.onLine);
-  
-  const {
-    lastJsonMessage,
-    readyState,
-    getWebSocket,
-    sendJsonMessage
-  } = useWebSocket(socketUrl, {
-    // onOpen: () => setWebSocketIndicator(true),
-    // onClose: () => setWebSocketIndicator(false),
-    // onError: () => setWebSocketIndicator(false),
-    shouldReconnect: () => true,
-    // reconnectAttempts: 10,
-    // reconnectInterval: 3000,
-    //Will attempt to reconnect on all close events, such as server shutting down
-  });
-  
+
+  const { lastJsonMessage, readyState, getWebSocket, sendJsonMessage } =
+    useWebSocket(socketUrl, {
+      // onOpen: () => setWebSocketIndicator(true),
+      // onClose: () => setWebSocketIndicator(false),
+      // onError: () => setWebSocketIndicator(false),
+      shouldReconnect: () => true,
+      // reconnectAttempts: 10,
+      // reconnectInterval: 3000,
+      //Will attempt to reconnect on all close events, such as server shutting down
+    });
+
   const connectSocket = () => {
-    useWebSocket(socketUrl)
-  }
+    useWebSocket(socketUrl);
+  };
 
   //sign out
   const handleSignOut = () => {
@@ -101,21 +97,21 @@ const App = () => {
     }
   };
 
-  const hamRef = useRef()
+  const hamRef = useRef();
 
   useEffect(() => {
     let outsideClick = (e) => {
       if (!hamRef.current.contains(e.target)) {
-        setHam(false)
+        setHam(false);
         console.log(e.target);
       }
-    }
-    document.addEventListener('mousedown', outsideClick)
+    };
+    document.addEventListener("mousedown", outsideClick);
 
     return () => {
-      document.removeEventListener('mousedown', outsideClick)
-    }
-  })
+      document.removeEventListener("mousedown", outsideClick);
+    };
+  });
 
   useEffect(() => {
     if (lastJsonMessage !== null && fixtures) {
@@ -404,7 +400,9 @@ const App = () => {
                 className={`${
                   auth?.currentUser ? "hidden" : "block"
                 } border border-solid text-xxs md:text-base px-2 md:px-3 md:py-1 py-[2px] rounded-md hover:bg-customBg hover:text-lightText transition-colors duration-200 flex items-center gap-2 hover:fill-white ${
-                  toggleMode ? "text-darkText bg-customBgLight border-gray-400  fill-black" : "text-lightText bg-customBg2 fill-white border-gray-700"
+                  toggleMode
+                    ? "text-darkText bg-customBgLight border-gray-400  fill-black"
+                    : "text-lightText bg-customBg2 fill-white border-gray-700"
                 }`}
               >
                 <Person toggleMode={toggleMode} />
@@ -459,7 +457,7 @@ const App = () => {
                 className={`${
                   profileToggle ? "block" : "hidden"
                 } absolute -bottom-10 right-0`}
-                onClick={handleSignOut} 
+                onClick={handleSignOut}
               >
                 drop
               </button>
@@ -469,7 +467,11 @@ const App = () => {
               <div
                 className={`${
                   ham ? "block" : "hidden"
-                } absolute right-0 -bottom-14 md:-bottom-20  w-48 flex flex-col items-start p-2 gap-2 backdrop-blur-sm rounded-lg divide-y ${toggleMode ? 'border border-solid border-customBgLight text-darkText divide-customBgLight' : 'border border-solid border-customBg2 text-lightText divide-customBg2'}`}
+                } absolute right-0 -bottom-14 md:-bottom-20  w-48 flex flex-col items-start p-2 gap-2 backdrop-blur-sm rounded-lg divide-y ${
+                  toggleMode
+                    ? "border border-solid border-customBgLight text-darkText divide-customBgLight"
+                    : "border border-solid border-customBg2 text-lightText divide-customBg2"
+                }`}
                 ref={hamRef}
               >
                 <button
@@ -484,25 +486,40 @@ const App = () => {
               className={`  h-7 w-7`}
             /> */}
                   {toggleMode ? (
-                    <div className=" flex items-center justify-between" ref={hamRef}>
+                    <div
+                      className=" flex items-center justify-between"
+                      ref={hamRef}
+                    >
                       <div>Dark Mode </div>
                       <Dark />
                     </div>
                   ) : (
-                    <div className="flex items-center justify-between" ref={hamRef}>
+                    <div
+                      className="flex items-center justify-between"
+                      ref={hamRef}
+                    >
                       <div ref={hamRef}>Light Mode </div>
                       <Light />
                     </div>
                   )}
                 </button>
                 {auth.currentUser && (
-                  <button onClick={handleSignOut} className=" w-full flex justify-start" ref={hamRef}>Log out</button>
+                  <button
+                    onClick={handleSignOut}
+                    className=" w-full flex justify-start"
+                    ref={hamRef}
+                  >
+                    Log out
+                  </button>
                 )}
               </div>
             </div>
           </div>
         </div>
       </div>
+      <a href="https://wa.link/pyj1aa">
+        <WhatsappLogo />
+      </a>
       <div
         className={`${
           toggleSearch ? "block animate-dis" : "hidden animate-dat"
@@ -605,7 +622,10 @@ const App = () => {
           />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/favourites/" element={<Favourites toggleMode={toggleMode} />}></Route>
+          <Route
+            path="/favourites/"
+            element={<Favourites toggleMode={toggleMode} />}
+          ></Route>
         </Routes>
       </div>
     </div>

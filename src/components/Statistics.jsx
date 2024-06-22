@@ -88,6 +88,7 @@ const Statistics = ({ statToggle, stats, windowWidth, toggleMode }) => {
               )}
           </>
         )}
+
       </div>
     </div>
   );
