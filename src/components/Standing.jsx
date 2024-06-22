@@ -85,7 +85,7 @@ const Standing = ({
                 <div className="md:p-2 p-1 hidden sm:block">GA</div>
                 <div className="md:p-2 p-1 ">GD</div>
                 <div className="md:p-2 p-1 ">Pts</div>
-                {/* <div className="md:p-2 p-1 ">Form</div> */}
+                <div className="md:p-2 p-1 ">Form</div>
               </section>
             </section>
           </section>
@@ -156,7 +156,7 @@ const Standing = ({
                       </div>
                       <div className="md:p-2 p-1">{table.standing_GD}</div>
                       <div className="md:p-2 p-1">{table.standing_PTS}</div>
-                      {/* <div className="md:p-2 p-1">{table.standing_PTS}</div> */}
+                      <div className="md:p-2 p-1">{table.standing_PTS}</div>
                     </section>
                   </section>
                 </section>
@@ -188,6 +188,9 @@ const Standing = ({
         </svg>{" "}
         Rotate your phone for more info.
       </div>
+      <div>{table?.slice(0,1).map((t) => {
+        return <div>Table last updated: {t.standing_updated}</div>
+      })}</div>
     </div>
   );
 };

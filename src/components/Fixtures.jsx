@@ -255,7 +255,7 @@ const Fixtures = ({
           className={`${
             !loadingFixtures &&
             (toggleMode ? "bg-customBgLight" : "bg-customBg2")
-          }  mb-14 p-4 rounded-xl `}
+          }  mb-14 p-3 md:p-4 rounded-xl `}
         >
           {
             // !(loading && error) &&

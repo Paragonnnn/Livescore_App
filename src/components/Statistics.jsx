@@ -52,7 +52,7 @@ const Statistics = ({ statToggle, stats, windowWidth, toggleMode }) => {
                                     : +s.home > +s.away
                                     ? " bg-green-500"
                                     : "bg-red-500"
-                                }  h-[6px] `
+                                }  h-[6px]`
                           }
                         ></div>
                       </div>

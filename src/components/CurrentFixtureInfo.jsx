@@ -35,11 +35,14 @@ const CurrentFixtureInfo = ({ match, toggleMode, loading }) => {
               className={`${
                 toggleMode
                   ? "text-darkText bg-customBgLight"
-                  : "text-lightText bg-customBg2"
-              } bg-customBg2 mb-2  p-2`}
+                  : "text-gray-200 bg-customBg2"
+              } bg-customBg2 mb-2  p-2 rounded-sm`}
             >
-              {match.event_date}
+              {/* {match.event_date} */}
+              <div className="px-2 text-base">
+
               {match.league_name}
+              </div>
             </div>
             <div
               className={`${

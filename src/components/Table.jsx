@@ -144,8 +144,8 @@ const Table = ({ toggleMode }) => {
       });
 
       // Use Promise.all() to await all promises and get the fetched data
-      const fetchedData = await Promise.all(promiseArray);
-
+      const fetchedData = await new Promise.all(promiseArray);
+      
       // Now fetchedData contains the data fetched for each key
       // console.log(fetchedData);
     }

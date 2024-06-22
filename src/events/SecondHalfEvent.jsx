@@ -3,7 +3,7 @@ import { ball, ogball, assist, sub, subIn, subOut } from "..";
 
 const SecondHalfEvent = ({ events, toggleMode }) => {
   return (
-    <div className="divide-y-2 divide-customBg2">
+    <div className="">
       {events &&
         events
           .filter((eve) => eve.info_time === "2nd Half")
@@ -14,7 +14,7 @@ const SecondHalfEvent = ({ events, toggleMode }) => {
                 eve.away_scorer ||
                 eve.home_fault ||
                 eve.away_fault) && (
-                <div key={index} className="py-2 divide-y-2 divide-customBg2">
+                <div key={index} className="py-2  ">
                   {index === 0 && (
                     <div
                       className={`${
@@ -25,9 +25,9 @@ const SecondHalfEvent = ({ events, toggleMode }) => {
                     </div>
                   )}
                   {
-                    <div className="flex gap-4 sm:justify-between items-center py-2">
+                    <div className="flex gap-4 sm:justify-between py-2">
                       {/* <div className='w-fit sm:w-16 text-left sm:text-center text-xxs sm:text-xs opacity-60'>{eve.time}'</div> */}
-                      <div className=" flex  w-full justify-between">
+                      <div className=" flex  w-full justify-between items-center">
                         <div className="w-[calc(50%-35px)] ">
                           {eve.card && eve.home_fault && (
                             <div className="flex gap-1 justify-end items-center sm:text-xs text-xxs">
@@ -105,12 +105,12 @@ const SecondHalfEvent = ({ events, toggleMode }) => {
                               </div>
                             )}
                         </div>
-                        <div className="w-[50px] text-xxs sm:text-xs opacity-60 flex items-center flex-col gap-1 justify-center border-l border-r border-solid border-gray-700">
-                          {eve.time}'
-                          {(eve.home_scorer || eve.away_scorer) &&
+                        <div className={`${index === 0 ? ' before:hidden' : ''} w-[40px] h-[40px] text-xxs sm:text-xs opacity-60 flex items-center gap-1 justify-center border-[2px] border-solid relative bg-customBg2 border-gray-700 rounded-full before:w-[2px] before:h-[34px] before:bg-gray-700 before:absolute before:-z-20  before:bottom-[36px] before:block`}>
+                          {eve.time}
+                          {/* {(eve.home_scorer || eve.away_scorer) &&
                             !isNaN(eve.score.slice(0, 1)) && (
                               <div>({eve.score})</div>
-                            )}
+                            )} */}
                         </div>
                         <div className="w-[calc(50%-35px)] ">
                           {eve.away_scorer && !isNaN(eve.score.slice(0, 1)) && (

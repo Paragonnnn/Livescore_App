@@ -27,7 +27,8 @@ const SignIn = () => {
     setError("");
     await signInWithPopup(auth, googleProvider)
       .then((userCredential) => {
-        setDoc(doc(db, "users", `${user.uid}`), {
+        // docSnap.data().favouritesTeams.teams &&
+        user && setDoc(doc(db, "users", `${user.uid}`), {
           // name: user.displayName ? user.displayName : "",
           // email: user.email,
           // user_id: user.uid,

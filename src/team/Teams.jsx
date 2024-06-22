@@ -9,6 +9,7 @@ import TeamFixtures from "./TeamFixtures";
 import { auth,db } from "../firebase/firebase";
 import { updateDoc, doc } from "firebase/firestore";
 import Favourites from "../components/Favourites";
+import Star from "../svg/Star";
 
 const Teams = ({ toggleMode }) => {
   const [teams, setTeams] = useState([]);
@@ -22,26 +23,26 @@ const Teams = ({ toggleMode }) => {
 
   const user = auth.currentUser
 
-  const favouritesRef = doc(db, 'users', `${user.uid}`)
+  // const favouritesRef = doc(db, 'users', `${user.uid}`)
 
-  const addToFavourite = async (team) => {
-    console.log(team.team_name);
-    await updateDoc(favouritesRef, {
+  // const addToFavourite = async (team) => {
+  //   console.log(team.team_name);
+  //   await updateDoc(favouritesRef, {
       
-      favourites: [{
-        teams: [{...teams}],
-        leagues: [{
-          team: team.team_name,
-          team_key: team.team_key,
-          team_logo: team.team_logo
-        }]
-      }]
-    }).then(team => {
-      console.log(`${team} added to fav`);
-    }).catch(err => {
-      console.log(`${err} adding failed`);
-    })
-  }
+  //     favourites: [{
+  //       teams: [{...teams}],
+  //       leagues: [{
+  //         team: team.team_name,
+  //         team_key: team.team_key,
+  //         team_logo: team.team_logo
+  //       }]
+  //     }]
+  //   }).then(team => {
+  //     console.log(`${team} added to fav`);
+  //   }).catch(err => {
+  //     console.log(`${err} adding failed`);
+  //   })
+  // }
 
   const date = new Date();
   // console.log(date);
@@ -64,7 +65,7 @@ const Teams = ({ toggleMode }) => {
         .then((json) => {
           setTeams(json.result);
           setLoading(false);
-          // console.log(json.result);
+          console.log(json.result);
           json.result.map((team) =>
             team.players.map((cap) => setIsCap(cap.player_is_captain))
           );
@@ -126,7 +127,7 @@ const Teams = ({ toggleMode }) => {
               <div>
                 <div className="text-3xl font-bold ">{team.team_name} </div>
               </div>
-                <button onClick={() => addToFavourite(team)}>Add</button>
+                <Star team={team.team_name} teamData={{team: team.team_name, team_key: team.team_key, team_logo: team.team_logo, }}/>
             </div>
 
             <div>

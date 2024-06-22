@@ -455,13 +455,14 @@ const App = () => {
                 if (profileToggle === false) setProfileToggle(false);
               }}
             >
-              <div
+              <button
                 className={`${
                   profileToggle ? "block" : "hidden"
                 } absolute -bottom-10 right-0`}
+                onClick={handleSignOut} 
               >
                 drop
-              </div>
+              </button>
             </ClickAwayListener>
             <div className=" relative pr-2">
               {/* <HamburgerMenu ham={ham} setHam={setHam} toggleMode={toggleMode}/> */}
@@ -604,7 +605,7 @@ const App = () => {
           />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/favourites/" element={<Favourites />}></Route>
+          <Route path="/favourites/" element={<Favourites toggleMode={toggleMode} />}></Route>
         </Routes>
       </div>
     </div>

@@ -46,7 +46,7 @@ const LineUp = ({
         (statToggle.includes("Line-Up") ? "block" : "hidden")
       } ${toggleMode ? "text-darkText" : "text-lightText"} `}
     >
-      {lineUp.map((l,index) =>
+      {lineUp.map((l, index) =>
         l.home_team.starting_lineups.length == 0 ? (
           <div>No line up yet</div>
         ) : (
@@ -65,7 +65,7 @@ const LineUp = ({
               } flex justify-between flex-col sm:flex-row lg:animate-zoom animate-swipe p-2 rounded-lg `}
             >
               <div className=" sm:w-[48%] w-full  ">
-                <div className="  divide-y divide-black">
+                <div className="  ">
                   {lineUp &&
                     lineUp.map((coach) =>
                       coach.home_team.coaches.map((coache, index) => (
@@ -78,7 +78,7 @@ const LineUp = ({
                   <div className=" hover:">
                     {lineUp &&
                       lineUp.map((lineUp, index) => (
-                        <div key={index} className="divide-y divide-black">
+                        <div key={index} className="">
                           <div className=" text-base sm:text-lg font-semibold text-customBg text-center sm:text-left">
                             Home Line-Up
                           </div>
@@ -94,15 +94,17 @@ const LineUp = ({
                                 className="py-2 flex gap-2 px-2 text-xs sm:text-base "
                               >
                                 <div
-                                  className=" flex gap-4 items-center cursor-pointer"
+                                  className=" flex gap-4 items-center cursor-pointer rounded-r-full  border border-solid border-gray-700  "
                                   onClick={() =>
                                     showPlayerStat(startingLineUp.player_key)
                                   }
                                 >
-                                  <div className="  opacity-60 border-2 border-solid border-gray-400  h-7 w-7 flex justify-center items-center rounded-full">
+                                  <div className="  opacity-60  h-7 w-7 flex justify-center items-center rounded-full">
                                     {startingLineUp.player_number}
                                   </div>
-                                  {startingLineUp.player}
+                                  <div className={` pr-4 `}>
+                                    {startingLineUp.player}
+                                  </div>
                                 </div>
                               </div>
                             ))}
@@ -111,17 +113,17 @@ const LineUp = ({
                     <div
                       className={`${
                         showStatToggle ? "visible" : "invisible"
-                      } fixed bottom-2 right-2 w-full md:w-[400px]  an `}
+                      } fixed bottom-2 right-2 w-[400px] outline outline-blue-600 outline-2`}
                       ref={reff}
                     >
                       {playerStat &&
-                        playerStat.map((stat,index) => (
-                          <div >
+                        playerStat.map((stat, index) => (
+                          <div>
                             {stat.home
                               .filter(
                                 (stat) => stat.player_key == clickedPlayer
                               )
-                              .map((stat,index) => (
+                              .map((stat, index) => (
                                 <PlayerStat
                                   reff={reff}
                                   stat={stat}
@@ -134,7 +136,7 @@ const LineUp = ({
                     </div>
                   </div>
                 </div>
-                <div className="divide-y divide-black">
+                <div className="">
                   <div className=" text-base sm:text-lg text-center sm:text-left font-semibold mt-4 text-customBg">
                     Home Sub
                   </div>
@@ -146,21 +148,21 @@ const LineUp = ({
                           className="py-2 flex gap-2 px-2 text-xs sm:text-base "
                         >
                           <div
-                            className=" flex gap-4 items-center cursor-pointer"
+                            className=" flex gap-4 items-center cursor-pointer rounded-r-full  border border-solid border-gray-700 "
                             onClick={() => showPlayerStat(sub.player_key)}
                           >
-                            <div className="opacity-60 border-2 border-solid border-gray-400 h-7 w-7 flex justify-center items-center rounded-full">
+                            <div className="opacity-60   h-7 w-7 flex justify-center items-center rounded-full">
                               {sub.player_number}
                             </div>
-                            {sub.player}
+                            <div className={` pr-4 `}>{sub.player}</div>
                           </div>
                         </div>
                       ))
                     )}
                   <div
                     className={`${
-                      showStatToggle ? "block" : "hidden"
-                    } fixed bottom-2 right-2  md:w-[400px]  an `}
+                      showStatToggle ? "visible" : "invisible"
+                    } fixed bottom-2 right-2  md:w-[400px]  `}
                     ref={reff}
                   >
                     {playerStat &&
@@ -168,7 +170,7 @@ const LineUp = ({
                         <div>
                           {stat.away
                             .filter((stat) => stat.player_key == clickedPlayer)
-                            .map((stat,index) => (
+                            .map((stat, index) => (
                               <PlayerStat
                                 reff={reff}
                                 stat={stat}
@@ -182,7 +184,7 @@ const LineUp = ({
                 </div>
               </div>
               <div className=" sm:w-[48%] ">
-                <div className="divide-y divide-black">
+                <div className="">
                   {lineUp &&
                     lineUp.map((coach) =>
                       coach.away_team.coaches.map((coache, index) => (
@@ -197,7 +199,7 @@ const LineUp = ({
                   </div>
                   {lineUp &&
                     lineUp.map((lineUp, index) => (
-                      <div key={index} className="divide-y divide-black ">
+                      <div key={index} className=" ">
                         {lineUp.away_team.starting_lineups
                           .sort(
                             (a, b) =>
@@ -211,13 +213,15 @@ const LineUp = ({
                             >
                               <div className=" flex  gap-2">
                                 <div
-                                  className=" flex gap-4 sm:flex-row flex-row-reverse items-center cursor-pointer"
+                                  className=" flex gap-4 sm:flex-row flex-row-reverse items-center cursor-pointer border border-solid border-gray-700 sm:rounded-l-full sm:rounded-r-none rounded-r-full"
                                   onClick={() =>
                                     showPlayerStat(startingLineUp.player_key)
                                   }
                                 >
-                                  {startingLineUp.player}
-                                  <div className="opacity-60 border-2 border-solid border-gray-400  h-7 w-7 flex justify-center items-center rounded-full">
+                                  <div className={`pr-4 sm:pr-0 sm:pl-4 `}>
+                                    {startingLineUp.player}
+                                  </div>
+                                  <div className="opacity-60  h-7 w-7 flex justify-center items-center rounded-full">
                                     {startingLineUp.player_number}
                                   </div>
                                 </div>
@@ -229,7 +233,7 @@ const LineUp = ({
                   <div
                     className={`${
                       showStatToggle ? "visible" : "invisible"
-                    } fixed bottom-2 right-2  w-full md:w-[400px]`}
+                    } fixed bottom-2 right-2 w-full md:w-[400px]`}
                     ref={reff}
                   >
                     {playerStat &&
@@ -237,7 +241,7 @@ const LineUp = ({
                         <div>
                           {stat.away
                             .filter((stat) => stat.player_key == clickedPlayer)
-                            .map((stat,index) => (
+                            .map((stat, index) => (
                               <PlayerStat
                                 reff={reff}
                                 stat={stat}
@@ -250,7 +254,7 @@ const LineUp = ({
                       ))}
                   </div>
                 </div>
-                <div className="divide-y divide-black ">
+                <div className=" ">
                   <div className=" text-base sm:text-lg font-semibold mt-4 sm:text-right text-customBg text-center">
                     Away Sub
                   </div>
@@ -263,11 +267,13 @@ const LineUp = ({
                         >
                           <div className=" flex sm:flex-row flex-row-reverse gap-2">
                             <div
-                              className=" flex gap-4 items-center cursor-pointer sm:flex-row flex-row-reverse"
+                              className=" flex gap-4 sm:flex-row flex-row-reverse items-center cursor-pointer border border-solid border-gray-700 sm:rounded-l-full sm:rounded-r-none rounded-r-full "
                               onClick={() => showPlayerStat(sub.player_key)}
                             >
-                              {sub.player}
-                              <div className="opacity-60 border-2 border-solid border-gray-400  h-7 w-7 flex justify-center items-center rounded-full">
+                              <div className={` pr-4 sm:pr-0 sm:pl-4 `}>
+                                    {sub.player}
+                                  </div>
+                              <div className="opacity-60   h-7 w-7 flex justify-center items-center rounded-full">
                                 {sub.player_number}
                               </div>
                             </div>
@@ -286,7 +292,7 @@ const LineUp = ({
                         <div>
                           {stat.away
                             .filter((stat) => stat.player_key == clickedPlayer)
-                            .map((stat,index) => (
+                            .map((stat, index) => (
                               <PlayerStat
                                 reff={reff}
                                 stat={stat}

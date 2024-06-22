@@ -119,6 +119,9 @@ const Star = ({ team, teamData }) => {
       // }
     >
       {/* <span className={` absolute`}>add {team}</span> */}
+      <button onClick={() => addFav(teamData)}>
+        
+
       <svg
         viewBox="0 0 24.00 24.00"
         fill={
@@ -128,7 +131,6 @@ const Star = ({ team, teamData }) => {
         }
         xmlns="http://www.w3.org/2000/svg"
         className={"w-8 h-8 cursor-pointer "}
-        onClick={() => addFav(teamData)}
       >
         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
         <g
@@ -145,6 +147,7 @@ const Star = ({ team, teamData }) => {
           ></path>{" "}
         </g>
       </svg>
+      </button>
     </div>
   );
 };

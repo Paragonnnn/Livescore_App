@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { auth, db } from "../../firebase/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword,sendEmailVerification,onAuthStateChanged } from "firebase/auth";
 import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
@@ -18,10 +18,13 @@ const SignUp = () => {
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        sendEmailVerification(user).then(() => {
+          alert('Email verification link sent')
+        })
         console.log(user);
         setEmail("");
         setPassword("");
-        navigate("/");
+        navigate("/signin");
         setDoc(doc(db, "users", `${user.uid}`), {
           // name: user.displayName ? user.displayName : "",
           // email: user.email,
