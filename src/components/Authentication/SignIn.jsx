@@ -9,9 +9,8 @@ import {
   updatePassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { setDoc, } from "firebase/firestore";
+import { setDoc,doc,getDoc } from "firebase/firestore";
 import { auth, googleProvider,db } from "../../firebase/firebase";
-import { doc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
@@ -21,55 +20,44 @@ const SignIn = () => {
 
   const navigate = useNavigate();
   console.log(auth?.currentUser?.displayName);
-  const user = auth.currentUser
+  const user = auth?.currentUser
 
+  
   const signInWithGoogle = async () => {
     setError("");
-    await signInWithPopup(auth, googleProvider)
-      .then((userCredential) => {
-        // docSnap.data().favouritesTeams.teams &&
-        user && setDoc(doc(db, "users", `${user.uid}`), {
+    
+    try {
+      const userCredential = await signInWithPopup(auth, googleProvider);
+      const user = userCredential.user;
+  
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+  
+      if (!docSnap.exists()) {
+        await setDoc(docRef, {
+          favouritesTeams: { 
+            teams: {}
+          },
+          
           // name: user.displayName ? user.displayName : "",
           // email: user.email,
           // user_id: user.uid,
-          // profile_img_url: user.photoURL ? user.photoURL : "",
-          favouritesTeams: 
-            { 
-              teams: {}
-            },
-        })
-          .then(() => {
-            console.log("details uploaded");
-          })
-          .catch((err) => {
-            console.log(err, "error uploading data");
-          });
-        navigate("/");
-      })
-      .catch((err) => {
-        console.error(err.message);
-        setError(err.message);
-      });
+          // profile_img_url: user.photoURL ? user.photoURL : ""
+        });
+        console.log("details uploaded");
+      }
+  
+      // Navigate to home or another page
+      navigate("/");
+    } catch (err) {
+      console.error(err.message);
+      setError(err.message);
+    }
   };
   const signIn = async () => {
     await signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        // setDoc(doc(db, "users", `${user.uid}`), {
-        //   // name: user.displayName ? user.displayName : "",
-        //   // email: user.email,
-        //   // user_id: user.uid,
-        //   // profile_img_url: user.photoURL ? user.photoURL : "",
-        //   favouritesTeams: 
-        //     { 
-        //       teams: {}
-        //     },
-        // })
-        //   .then(() => {
-        //     console.log("details uploaded");
-        //   })
-        //   .catch((err) => {
-        //     console.log(err, "error uploading data");
-        //   });
+        
         navigate("/");
       })
       .catch((err) => {

@@ -113,35 +113,70 @@ const App = () => {
     };
   });
 
-  useEffect(() => {
-    if (lastJsonMessage !== null && fixtures) {
-      // console.log(lastJsonMessage);
+  // useEffect(() => {
+  //   if (lastJsonMessage !== null && fixtures) {
+  //     // console.log(lastJsonMessage);
 
-      // console.log([lastJsonMessage.map((l) => l.event_key)]);
-      fixtures.map((f) => {
-        // console.log(lastJsonMessage.find(l => l.event_key === f.event_key))
-        function replaceItems(fixtures, lastJsonMessage) {
-          return fixtures.map((f) => {
-            // Check if there is a matching ID in the lastJsonMessage
-            let replacementItem = lastJsonMessage.find(
-              (l) => l.event_key === f.event_key
-            );
+  //     // console.log([lastJsonMessage.map((l) => l.event_key)]);
+  //     fixtures.map((f) => {
+  //       // console.log(lastJsonMessage.find(l => l.event_key === f.event_key))
+  //       function replaceItems(fixtures, lastJsonMessage) {
+  //         return fixtures.map((f) => {
+  //           // Check if there is a matching ID in the lastJsonMessage
+  //           let replacementItem = lastJsonMessage.find(
+  //             (l) => l.event_key === f.event_key
+  //           );
 
-            // If there is a match, use the replacement item, otherwise use the original item
-            return replacementItem ? replacementItem : f;
-          });
-        }
+  //           // If there is a match, use the replacement item, otherwise use the original item
+  //           return replacementItem ? replacementItem : f;
+  //         });
+  //       }
 
-        // Use the function to get the updated array
-        let updatedArray = replaceItems(fixtures, lastJsonMessage);
+  //       // Use the function to get the updated array
+  //       let updatedArray = replaceItems(fixtures, lastJsonMessage);
 
-        // console.log(updatedArray);
-        return setFixtures(updatedArray);
-      });
-    }
-    // setNewFixtures([lastJsonMessage.map((l) => l.event_key)]);
+  //       // console.log(updatedArray);
+  //       return setFixtures(updatedArray);
+  //     });
+  //   }
+  //   // setNewFixtures([lastJsonMessage.map((l) => l.event_key)]);
+  //   console.log(readyState);
+  // }, [lastJsonMessage]);
+
+
+// Define the function to replace items in the fixtures array
+const replaceItems = (fixtures, lastJsonMessage) => {
+  return fixtures.map((f) => {
+    // Check if there is a matching ID in the lastJsonMessage
+    let replacementItem = lastJsonMessage.find(
+      (l) => l.event_key === f.event_key
+    );
+
+    // If there is a match, use the replacement item, otherwise use the original item
+    return replacementItem ? replacementItem : f;
+  });
+};
+
+// Define the main function to handle the update
+const handleUpdate = (lastJsonMessage, fixtures, setFixtures, readyState) => {
+  if (lastJsonMessage !== null && fixtures) {
+    // Use the function to get the updated array
+    let updatedArray = replaceItems(fixtures, lastJsonMessage);
+
+    // Set the updated fixtures
+    setFixtures(updatedArray);
+    
+    // Log the readyState (assuming you need to keep this console log)
     console.log(readyState);
-  }, [lastJsonMessage]);
+  }
+};
+
+// Use the function inside the useEffect hook
+useEffect(() => {
+  handleUpdate(lastJsonMessage, fixtures, setFixtures, readyState);
+}, [lastJsonMessage]);
+
+
 
   useEffect(() => {
     setLiveCheck(
@@ -294,12 +329,12 @@ const App = () => {
                 !check.includes(fixture.league_key) && fixture.league_key
             )
           );
-          // setReCheck(
-          //   json.result.map(
-          //     (fixture) =>
-          //       !check.includes(fixture.league_key) && fixture.league_key
-          //   )
-          // )
+          setReCheck(
+            json.result.map(
+              (fixture) =>
+                !check.includes(fixture.league_key) && fixture.league_key
+            )
+          )
           setLiveCheck(
             json.result.map(
               (fixture) =>

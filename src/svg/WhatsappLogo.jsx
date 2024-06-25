@@ -2,7 +2,7 @@ import React from "react";
 
 const WhatsappLogo = () => {
   return (
-      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className=" h-10 w-10 fixed bottom-5 right-5 cursor-pointer animate-bounce">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className=" h-10 w-10 fixed bottom-5 hidden lg:block right-5 cursor-pointer animate-bounce">
         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
         <g
           id="SVGRepo_tracerCarrier"

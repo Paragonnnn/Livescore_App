@@ -9,30 +9,41 @@ const Favourites = ({toggleMode}) => {
   // console.log(user.uid);
   useEffect(() => {
     const getData = async () => {
-      console.log(user.uid);
-      const docRef = doc(db, "users", `${user.uid}`);
-      const docSnap = await getDoc(docRef);
-      console.log(docSnap.data().favouritesTeams.teams);
-      setFavteam(
-        Object.entries(docSnap.data().favouritesTeams.teams).map(
-          (team) => team[1]
-        )
-      );
-      console.log(
-        Object.entries(docSnap.data().favouritesTeams.teams).map(
-          (team) => team[1]
-        )
-      );
-
-      // const querySnapshot = await getDocs(collection(db, "users"));
-      // console.log(querySnapshot.query);
+      try {
+        console.log(user.uid);
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+    
+        if (docSnap.exists()) {
+          const favTeams = Object.entries(docSnap.data().favouritesTeams.teams).map(
+            (team) => team[1]
+          );
+    
+          setFavteam(favTeams);
+          console.log(favTeams);
+        } else {
+          console.log("No such document!");
+        }
+      } catch (err) {
+        console.log("Error getting document:", err);
+      }
     };
+    
 
     getData();
   }, [user]);
 
   return (
     <div className={`p-2 mt-4   `}>
+      {!user && (
+        <div className="text-center">
+          <Link to="/signin" className="text-customText">
+            Login to view your favourite teams
+          </Link>
+        </div>
+      )}
+      {/* <button className=" text-white">Get data</button> */}
+      
       {/* <button className=" text-white">Get data</button> */}
       <div className={`${toggleMode ? 'text-darkText' : 'text-lightText'} `}>
         {favTeam?.map((fav, i) => (

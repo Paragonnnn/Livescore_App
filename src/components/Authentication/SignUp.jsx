@@ -25,22 +25,22 @@ const SignUp = () => {
         setEmail("");
         setPassword("");
         navigate("/signin");
-        setDoc(doc(db, "users", `${user.uid}`), {
-          // name: user.displayName ? user.displayName : "",
-          // email: user.email,
-          // user_id: user.uid,
-          // profile_img_url: user.photoURL ? user.photoURL : "",
-          favouritesTeams: 
-            { 
-              teams: {}
-            },
-        })
-          .then((data) => {
-            console.log("details uploaded");
-          })
-          .catch((err) => {
-            console.log(err, "error uploading data");
-          });
+        // setDoc(doc(db, "users", `${user.uid}`), {
+        //   // name: user.displayName ? user.displayName : "",
+        //   // email: user.email,
+        //   // user_id: user.uid,
+        //   // profile_img_url: user.photoURL ? user.photoURL : "",
+        //   favouritesTeams: 
+        //     { 
+        //       teams: {}
+        //     },
+        // })
+        //   .then((data) => {
+        //     console.log("details uploaded");
+        //   })
+        //   .catch((err) => {
+        //     console.log(err, "error uploading data");
+        //   });
       })
       .catch((err) => {
         const message = err.message;

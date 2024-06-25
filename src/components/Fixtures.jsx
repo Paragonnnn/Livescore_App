@@ -24,21 +24,21 @@ const Fixtures = ({
   readyState,
 }) => {
   const [isLive, setIsLive] = useState(true);
-  // const [checkCheck, setCheckCheck] = useState([])
+  const [checkCheck, setCheckCheck] = useState([])
   const [notificationMessage, setNotificationMessage] = useState([]);
   const [showCards, setShowCards] = useState(false);
 
-  // useEffect(() => {
-  //   if (check != []) {
-  //     setCheckCheck([])
-  //     setCheckCheck(check)
-  //     console.log('checkkkkk');
-  //   } else(check == []); {
-  //     setCheckCheck([])
-  //     setCheckCheck(reCheck)
-  //     console.log('not checkkkk');
-  //   }
-  // },[check])
+  useEffect(() => {
+    if (check != []) {
+      setCheckCheck([])
+      setCheckCheck(check)
+      console.log('checkkkkk');
+    } else(check == []); {
+      setCheckCheck([])
+      setCheckCheck(reCheck)
+      console.log('not checkkkk');
+    }
+  },[check])
 
   
 
@@ -57,85 +57,63 @@ const Fixtures = ({
     }
     // console.log(currentFixture);
     // console.log("hi");
+
   };
-  const homeYellowCard = (fixture) => {
-    return fixture.cards
-      .filter((c, i) => c.card == "yellow card" && c.home_fault)
-      .map((c, i) => (
-        <div
-          key={i}
-          className={`${showCards ? "block" : "hidden"} ${
-            c.card == "yellow card" && c.home_fault && i == 0
-              ? " bg-yellow-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black"
-              : ""
-          } `}
-        >
-          {i == 0 &&
-            fixture.cards.filter(
-              (c, i) => c.card == "yellow card" && c.home_fault
-            ).length}
-        </div>
-      ));
+
+  const yellowCard = (fixture, isHome) => {
+    // Filter the cards once and store them
+    const yellowCards = fixture.cards.filter(
+      (c) => c.card === "yellow card" && (isHome ? c.home_fault : c.away_fault)
+    );
+  
+    // Get the number of yellow cards
+    const yellowCardsCount = yellowCards.length;
+  
+    return yellowCards.map((c, i) => (
+      <div
+        key={`${c.player}-${i}`} // Ensure a unique key, assuming each card has a unique player property
+        className={`${showCards ? "block" : "hidden"} ${
+          i === 0
+            ? "bg-yellow-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px] sm:text-xxs text-black"
+            : "hidden"
+        } `}
+      >
+        {yellowCardsCount}
+      </div>
+    ));
   };
-  const awayYellowCard = (fixture) => {
-    return fixture.cards
-      .filter((c, i) => c.card == "yellow card" && c.away_fault)
-      .map((c, i) => (
-        <div
-          key={i}
-          className={`${showCards ? "block" : "hidden"} ${
-            c.card == "yellow card" && c.away_fault && i == 0
-              ? " bg-yellow-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black"
-              : ""
-          } `}
-        >
-          {i == 0 &&
-            fixture.cards.filter(
-              (c, i) => c.card == "yellow card" && c.away_fault
-            ).length}
-        </div>
-      ));
+
+  const redCard = (fixture, isHome) => {
+    // Filter the cards once and store them
+    const redCards = fixture.cards.filter(
+      (c) => c.card === "red card" && (isHome ? c.home_fault : c.away_fault)
+    );
+  
+    // Get the number of yellow cards
+    const redCardsCount = redCards.length;
+  
+    return redCards.map((c, i) => (
+      <div
+        key={`${c.player}-${i}`} // Ensure a unique key, assuming each card has a unique player property
+        className={`${showCards ? "block" : "hidden"} ${
+          i === 0
+            ? "bg-red-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px] sm:text-xxs text-black"
+            : "hidden"
+        } `}
+      >
+        {redCardsCount}
+      </div>
+    ));
   };
-  const homeRedCard = (fixture) => {
-    return fixture.cards
-      .filter((c, i) => c.card == "red card" && c.home_fault)
-      .map((c, i) => (
-        <div
-          key={i}
-          className={`${showCards ? "block" : "hidden"} ${
-            c.card == "red card" && c.home_fault && i == 0
-              ? " bg-red-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black mr-[2px]"
-              : ""
-          } `}
-        >
-          {i == 0 &&
-            fixture.cards.filter((c, i) => c.card == "red card" && c.home_fault)
-              .length != 0 &&
-            fixture.cards.filter((c, i) => c.card == "red card" && c.home_fault)
-              .length}
-        </div>
-      ));
-  };
-  const awayRedCard = (fixture) => {
-    return fixture.cards
-      .filter((c, i) => c.card == "red card" && c.away_fault)
-      .map((c, i) => (
-        <div
-          key={i}
-          className={`${showCards ? "block" : "hidden"} ${
-            c.card == "red card" && c.away_fault && i == 0
-              ? " bg-red-500 w-2 h-[10px] sm:w-3 sm:h-4 rounded-[2px] flex justify-center items-center text-[7px]  sm:text-xxs text-black mr-[2px]"
-              : ""
-          } `}
-        >
-          {i == 0 &&
-            fixture.cards.filter((c, i) => c.card == "red card" && c.away_fault)
-              .length != 0 &&
-            fixture.cards.filter((c, i) => c.card == "red card" && c.away_fault)
-              .length}
-        </div>
-      ));
-  };
+  
+  
+  
+  
+  
+  
+  
+  
+  
   const handleShowCards = () => {
     setShowCards((prev) => !prev);
     console.log(showCards);
@@ -263,17 +241,18 @@ const Fixtures = ({
               leagues &&
               !loadingFixtures &&
               !fixturesError &&
+              
               leagues.map(
                 (league, index) =>
                   (!isLive
-                    ? check?.includes(league.league_key) &&
+                    ? checkCheck?.includes(league.league_key) &&
                       liveCheck?.includes(league.league_key)
-                    : check?.includes(league.league_key)) && (
+                    : checkCheck?.includes(league.league_key)) && (
                     <div
                       key={league.league_key}
                       className={` border border-solid border-gray-400 mb-4 first:rounded-t-lg last:rounded-b-lg divide-y divide-gray-400 border-opacity-20 divide-opacity-20`}
                     >
-                      {check?.includes(league.league_key) && (
+                      {checkCheck?.includes(league.league_key) && (
                         <div
                           className={` text-customBg py-2 px-3 text-xs  flex gap-1 items-center `}
                         >
@@ -417,8 +396,8 @@ const Fixtures = ({
                                         <span className=" mr-1 sm:mr-2 ">
                                           {fixture.event_home_team}
                                         </span>
-                                        {homeRedCard(fixture)}
-                                        {homeYellowCard(fixture)}
+                                        {yellowCard(fixture, true)}
+                                        {redCard(fixture, true)}
                                       </div>
                                       <div
                                         className={`${
@@ -448,8 +427,8 @@ const Fixtures = ({
                                         <span className=" mr-1 sm:mr-2">
                                           {fixture.event_away_team}
                                         </span>
-                                        {awayRedCard(fixture)}
-                                        {awayYellowCard(fixture)}
+                                        {yellowCard(fixture, false)}
+                                        {redCard(fixture, false)}
                                       </div>
                                       <div
                                         className={`${

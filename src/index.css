@@ -104,7 +104,7 @@
   flex-wrap: wrap;
   gap: 50px;
 }
-.country {
+/* .country {
   color: #ffffff10;
   width: 300px;
   height: 50px;
@@ -196,25 +196,25 @@
 }
 .players_div {
   /* outline: solid 5px blue; */
-  width: 95%;
-  margin: auto;
-}
-.player_div_1 {
+  /* width: 95%; */
+  /* margin: auto; */
+/* } */
+/* .player_div_1 {
   /* background-color: rgba(0, 0, 0, 0.192); */
-  background-color: #1e1e1e;
+  /* background-color: #1e1e1e;
   color: white;
   padding: 20px;
-  border-radius: 5px;
-}
-.player_det_header {
+  border-radius: 5px; */
+/* } */
+/* .player_det_header {
   padding-bottom: 20px;
   color: #f39d12c0;
 }
 .player_div {
   padding: 20px 30px;
   /* outline: solid 5px green; */
-  margin-bottom: 30px;
-  border-radius: 10px;
+  /* margin-bottom: 30px; */ 
+  /* border-radius: 10px; */ 
   /* background-color: rgba(0, 128, 128, 0.295); */
   /* background-color: rgba(0, 0, 0, 0.192); */
 
@@ -222,20 +222,20 @@
   /* justify-content: space-between; */
   /* align-items: center; */
   /* flex-direction: column; */
-}
-.player_team {
-  margin-bottom: 20px;
+/* } */
+/* .player_team {
+  margin-bottom: 20px; */
   /* background-color: rgba(0, 128, 128, 0.082); */
   /* background-color: rgba(0, 0, 0, 0.192); */
   /* background-color: #1E1E1E; */
-  background-color: var(--primary-color);
+  /* background-color: var(--primary-color);
   /* background-color: #f39c12; */
-  color: #f39c12;
+  /* color: #f39c12;
   padding: 5px 15px;
-  border-radius: 5px;
+  border-radius: 5px; */
   /* color: blue; */
-}
-.player_image {
+/* } */
+/* .player_image {
   height: 80px;
   border-radius: 80px;
 }
@@ -243,36 +243,36 @@
   display: flex;
   align-items: center;
   gap: 30px;
-}
-.player_details_div {
-  margin-top: 30px;
+} */
+/* .player_details_div { */
+  /* margin-top: 30px;
   display: flex;
   gap: 30px;
   width: fit-content;
   text-align: center;
-  flex-wrap: wrap;
-}
-.player_details {
+  flex-wrap: wrap; */
+/* } */
+/* .player_details {
   /* outline: solid 1px red; */
-  padding: 5px 10px;
-  border-radius: 5px;
+  /* padding: 5px 10px;
+  border-radius: 5px; */
   /* background-color: rgba(0, 0, 0, 0.096); */
   /* background-color: rgba(0, 0, 0, 0.096); */
-  box-shadow: 0 0 3px 1px #f39d1241;
+  /* box-shadow: 0 0 3px 1px #f39d1241; */
   /* background-color: rgba(0, 128, 128, 0.082); */
-}
+/* }  */
 
-.player_details_1 {
+/* .player_details_1 {
   color: grey;
-}
-.table {
+} */
+/* .table {
   margin-bottom: 50px;
-}
-.player_div_2 {
+} */
+/* .player_div_2 { */
   /* background-color: rgba(0, 0, 0, 0.192); */
-  background-color: #1e1e1ead;
+  /* background-color: #1e1e1ead;
   color: white;
   padding: 10px;
   border-radius: 5px;
-  margin-top: 20px;
-}
+  margin-top: 20px; */
+/* } */
