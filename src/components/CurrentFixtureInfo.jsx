@@ -39,7 +39,7 @@ const CurrentFixtureInfo = ({ match, toggleMode, loading }) => {
               } bg-customBg2 mb-2  p-2 rounded-sm`}
             >
               {/* {match.event_date} */}
-              <div className="px-2 text-base">
+              <div className="px-2 md:text-base text-xs">
 
               {match.league_name}
               </div>

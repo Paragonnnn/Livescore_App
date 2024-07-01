@@ -99,7 +99,7 @@ const LineUp = ({
                                     showPlayerStat(startingLineUp.player_key)
                                   }
                                 >
-                                  <div className="  opacity-60  h-7 w-7 flex justify-center items-center rounded-full">
+                                  <div className="  opacity-60  h-7 w-7 flex justify-center items-center rounded-full border-r border-solid border-gray-700">
                                     {startingLineUp.player_number}
                                   </div>
                                   <div className={` pr-4 `}>
@@ -151,7 +151,7 @@ const LineUp = ({
                             className=" flex gap-4 items-center cursor-pointer rounded-r-full  border border-solid border-gray-700 "
                             onClick={() => showPlayerStat(sub.player_key)}
                           >
-                            <div className="opacity-60   h-7 w-7 flex justify-center items-center rounded-full">
+                            <div className="opacity-60   h-7 w-7 flex justify-center items-center rounded-full border-r border-solid border-gray-700">
                               {sub.player_number}
                             </div>
                             <div className={` pr-4 `}>{sub.player}</div>
@@ -221,7 +221,7 @@ const LineUp = ({
                                   <div className={`pr-4 sm:pr-0 sm:pl-4 `}>
                                     {startingLineUp.player}
                                   </div>
-                                  <div className="opacity-60  h-7 w-7 flex justify-center items-center rounded-full">
+                                  <div className="opacity-60  h-7 w-7 flex justify-center items-center rounded-full border-l border-solid border-gray-700">
                                     {startingLineUp.player_number}
                                   </div>
                                 </div>
@@ -273,7 +273,7 @@ const LineUp = ({
                               <div className={` pr-4 sm:pr-0 sm:pl-4 `}>
                                     {sub.player}
                                   </div>
-                              <div className="opacity-60   h-7 w-7 flex justify-center items-center rounded-full">
+                              <div className="opacity-60   h-7 w-7 flex justify-center items-center rounded-full border-l border-solid border-gray-700">
                                 {sub.player_number}
                               </div>
                             </div>

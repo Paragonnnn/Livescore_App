@@ -26,7 +26,7 @@ const Fixtures = ({
   const [isLive, setIsLive] = useState(true);
   const [checkCheck, setCheckCheck] = useState([])
   const [notificationMessage, setNotificationMessage] = useState([]);
-  const [showCards, setShowCards] = useState(false);
+  const [showCards, setShowCards] = useState(true);
 
   useEffect(() => {
     if (check != []) {
@@ -153,7 +153,7 @@ const Fixtures = ({
             <button
               onClick={all}
               className={`${
-                isLive ? " border border-solid border-customBg" : " "
+                isLive ? " outline outline-1 outline-customBg" : " "
               } ${
                 toggleMode ? "text-darkText" : "text-lightText"
               } px-3 rounded-lg  transition duration-200 ease-in-out`}
@@ -163,7 +163,7 @@ const Fixtures = ({
             <button
               onClick={live}
               className={`${
-                !isLive ? " border border-solid border-customBg" : ""
+                !isLive ? " outline outline-1 outline-customBg" : ""
               } ${
                 toggleMode ? "text-darkText" : "text-lightText"
               } transition duration-200 ease-in px-3 rounded-lg flex items-center gap-1`}
@@ -233,7 +233,7 @@ const Fixtures = ({
           className={`${
             !loadingFixtures &&
             (toggleMode ? "bg-customBgLight" : "bg-customBg2")
-          }  mb-14 p-3 md:p-4 rounded-xl `}
+          }  mb-14 p-2 md:p-4 rounded-xl `}
         >
           {
             // !(loading && error) &&

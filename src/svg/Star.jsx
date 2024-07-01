@@ -8,7 +8,7 @@ import {
   deleteField,
 } from "firebase/firestore";
 
-const Star = ({ team, teamData }) => {
+const Star = ({ team, teamData,setFavteam, favTeam }) => {
   const [favTeams, setFavteams] = useState([]);
 
   const user = auth.currentUser;
@@ -36,6 +36,7 @@ const Star = ({ team, teamData }) => {
         });
         console.log("deleted");
         alert(`${team.team} removed from favourites`);
+        setFavteam(favTeam.filter(f => !(f.team_key === teamData.team_key)))
         await getDocFunc();
       }
     } catch (err) {

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { auth, db } from "../../firebase/firebase";
-import { createUserWithEmailAndPassword,sendEmailVerification,onAuthStateChanged } from "firebase/auth";
+import { auth, db, googleProvider } from "../../firebase/firebase";
+import { createUserWithEmailAndPassword,sendEmailVerification,onAuthStateChanged,signInWithPopup } from "firebase/auth";
 import { collection, addDoc, setDoc, doc } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -48,9 +48,40 @@ const SignUp = () => {
         console.error(message);
       });
   };
+  const signInWithGoogle = async () => {
+    setError("");
+
+    try {
+      const userCredential = await signInWithPopup(auth, googleProvider);
+      const user = userCredential.user;
+
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+
+      if (!docSnap.exists()) {
+        await setDoc(docRef, {
+          favouritesTeams: {
+            teams: {},
+          },
+
+          // name: user.displayName ? user.displayName : "",
+          // email: user.email,
+          // user_id: user.uid,
+          // profile_img_url: user.photoURL ? user.photoURL : ""
+        });
+        console.log("details uploaded");
+      }
+
+      // Navigate to home or another page
+      navigate("/");
+    } catch (err) {
+      console.error(err.message);
+      setError(err.message);
+    }
+  };
   return (
     <div className="flex justify-center items-center w-full mt-4 h-[100%]">
-      <div className="bg-customBg2 rounded-xl flex flex-col items-center text-customBg  justify-center md:w-[450px] gap-4 pb-32 pt-20 h w-[95%]">
+      <div className="bg-customBg2 rounded-xl flex flex-col items-center text-customBg  justify-center md:w-[450px] gap-2 pb-32 pt-20 h w-[95%]">
         <div className=" mb-10">
           <h1 className=" text-4xl text-lightText">Sign Up</h1>
         </div>
@@ -105,7 +136,29 @@ const SignUp = () => {
         >
           Create Account
         </button>
+        <div className="flex justify-center items-center my-4">
+            <div className=" bg-customBg opacity-40 w-20 h-[1px]"></div>
+            <div className=" px-4 text-white">or</div>
+            <div className=" bg-customBg opacity-40 w-20 h-[1px]"></div>
+          </div>
+        <button
+            onClick={signInWithGoogle}
+            className="flex gap-3 items-center justify-center hover:bg-darkCustomBg3 hover:bg-opacity-50 rounded-md transition-colors duration-200 py-2 mb-2 border border-solid border-gray-300 border-opacity-20 w-[85%]"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/24px-Google_%22G%22_logo.svg.png?20230822192911"
+              className=" h-5"
+            />
+            <div className=" text-gray-200 text-xs">Sign in with google</div>
+          </button>
+        <div className=" flex justify-center text-gray-300 mt-3">
+            Already have an account? {" "}
+            <Link to={`/signin`} className=" underline" >
+              Log In
+            </Link>
+          </div>
       </div>
+
     </div>
   );
 };

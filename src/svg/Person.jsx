@@ -2,7 +2,7 @@ import React from "react";
 
 const Person = ({toggleMode}) => {
   return (
-    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className={`h-7 w-7 fill-inherit`}>
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className={`sm:h-7 h-5 w-5 sm:w-7 fill-inherit`}>
       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
       <g
         id="SVGRepo_tracerCarrier"
