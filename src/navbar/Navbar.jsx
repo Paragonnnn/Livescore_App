@@ -16,7 +16,6 @@ const navbar = ({
   windowWidth,
   setProfileToggle,
   ham,
-  hamRef
 }) => {
   const hamRef = useRef();
 

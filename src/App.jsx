@@ -114,19 +114,19 @@ const App = () => {
 
   
 
-  useEffect(() => {
-    let outsideClick = (e) => {
-      if (!hamRef.current.contains(e.target)) {
-        setHam(false);
-        console.log(e.target);
-      }
-    };
-    document.addEventListener("mousedown", outsideClick);
+  // useEffect(() => {
+  //   let outsideClick = (e) => {
+  //     if (!hamRef.current.contains(e.target)) {
+  //       setHam(false);
+  //       console.log(e.target);
+  //     }
+  //   };
+  //   document.addEventListener("mousedown", outsideClick);
 
-    return () => {
-      document.removeEventListener("mousedown", outsideClick);
-    };
-  });
+  //   return () => {
+  //     document.removeEventListener("mousedown", outsideClick);
+  //   };
+  // });
 
   // useEffect(() => {
   //   if (lastJsonMessage !== null && fixtures) {
@@ -413,7 +413,6 @@ const App = () => {
           windowWidth={windowWidth}
           setProfileToggle={setProfileToggle}
           ham={ham}
-          hamRef={hamRef}
         />
       </div>
       <a href="https://wa.link/pyj1aa">
