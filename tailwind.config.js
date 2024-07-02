@@ -89,6 +89,10 @@ export default {
         toggle: {
           '0%': {left: '2px'},
           '100%': {right: '2px'}
+        },
+        alert: {
+          '0%': {transform: 'translateY(-100%)'},
+          '100%': {transform: 'translateY(0)'}
         }
         
       }, 
@@ -104,7 +108,8 @@ export default {
         countryDropUp: 'countryDropUp .1s',
         mode: 'mode 1s',
         translate: 'translate .3s',
-        toggle: 'toggle 1s'
+        toggle: 'toggle 1s',
+        alert: 'alert .3s'
       },
 
     },
@@ -112,6 +117,7 @@ export default {
   plugins: [],
 }
 
+// ou can also disable this overlay by setting server.hmr.overlay to false in vite.config.js.
 
 173753
 // 8EB19D

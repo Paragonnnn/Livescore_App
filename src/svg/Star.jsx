@@ -8,7 +8,7 @@ import {
   deleteField,
 } from "firebase/firestore";
 
-const Star = ({ team, teamData,setFavteam, favTeam }) => {
+const Star = ({ team, teamData,setFavteam, favTeam,alert,setAlert,alertMessage,setAlertMessage }) => {
   const [favTeams, setFavteams] = useState([]);
 
   const user = auth.currentUser;
@@ -29,13 +29,21 @@ const Star = ({ team, teamData,setFavteam, favTeam }) => {
           },
         });
         console.log("details uploaded");
-        alert(`${team.team} added to favourites`);
+        setAlertMessage(`${team.team} added to favourites`);
+        setAlert(true);
+        setTimeout(() => {
+          setAlert(false);
+        }, 3000);
       } else {
         await updateDoc(docRef, {
           [`favouritesTeams.teams.${teamKey}`]: deleteField(),
         });
         console.log("deleted");
-        alert(`${team.team} removed from favourites`);
+        setAlertMessage(`${team.team} removed from favourites`);
+        setAlert(true);
+        setTimeout(() => {
+          setAlert(false);
+        }, 3000);
         setFavteam(favTeam.filter(f => !(f.team_key === teamData.team_key)))
         await getDocFunc();
       }

@@ -74,6 +74,7 @@ const Table = ({ toggleMode }) => {
           setLoading(false);
         })
         .catch((err) => {
+          console.log(err);
           setError(true);
           setLoading(false);
         });
@@ -122,37 +123,37 @@ const Table = ({ toggleMode }) => {
   //     getData();
   //   })
   // }, [id]);
-  useEffect(() => {
-    async function fetchAllData() {
-      // Use map() to create an array of promises for fetching data for each key
-      const promiseArray = teamKeys.map(async (key) => {
-        // Logic to fetch data based on the key
-        let data;
-        await fetch(
-          `https://apiv2.allsportsapi.com/football/?met=Fixtures&teamId=${key}&APIkey=${api_key}&from=${from}&to=${to}`
-        )
-          .then((res) => res.json)
-          .then((json) => {
-            // console.log(json.result);
-            data = json.result;
-          });
+  // useEffect(() => {
+  //   async function fetchAllData() {
+  //     // Use map() to create an array of promises for fetching data for each key
+  //     const promiseArray = teamKeys.map(async (key) => {
+  //       // Logic to fetch data based on the key
+  //       let data;
+  //       await fetch(
+  //         `https://apiv2.allsportsapi.com/football/?met=Fixtures&teamId=${key}&APIkey=${api_key}&from=${from}&to=${to}`
+  //       )
+  //         .then((res) => res.json)
+  //         .then((json) => {
+  //           // console.log(json.result);
+  //           data = json.result;
+  //         });
 
-        // This could be fetching data from an API, a database, etc.
-        // Replace this with your actual implementation for fetching data
+  //       // This could be fetching data from an API, a database, etc.
+  //       // Replace this with your actual implementation for fetching data
 
-        return data;
-      });
+  //       return data;
+  //     });
 
-      // Use Promise.all() to await all promises and get the fetched data
-      const fetchedData = await new Promise.all(promiseArray);
+  //     // Use Promise.all() to await all promises and get the fetched data
+  //     // const fetchedData = await new Promise.all(promiseArray);
       
-      // Now fetchedData contains the data fetched for each key
-      // console.log(fetchedData);
-    }
+  //     // Now fetchedData contains the data fetched for each key
+  //     // console.log(fetchedData);
+  //   }
 
-    // Call the function to fetch all data
-    fetchAllData();
-  }, [id]);
+  //   // Call the function to fetch all data
+  //   fetchAllData();
+  // }, [id]);
 
   return (
     <div className="">

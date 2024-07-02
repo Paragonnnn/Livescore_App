@@ -4,7 +4,7 @@ import { auth, db } from "../firebase/firebase";
 import { Link } from "react-router-dom";
 import Star from '../svg/Star'
 
-const Favourites = ({ toggleMode }) => {
+const Favourites = ({ toggleMode,alert,setAlert,alertMessage,setAlertMessage }) => {
   const [favTeam, setFavteam] = useState();
   const [updateFav, setUpdateFav] = useState('')
   const user = auth.currentUser;
@@ -70,7 +70,7 @@ const Favourites = ({ toggleMode }) => {
               <div >{fav.team}</div>
             </Link>
             <div >
-              <Star teamData={fav} setFavteam={setFavteam} favTeam={favTeam}/>
+              <Star teamData={fav} setFavteam={setFavteam} favTeam={favTeam} alert={alert} setAlert={setAlert} setAlertMessage={setAlertMessage} alertMessage={alertMessage}/>
 
             </div>
 

@@ -188,8 +188,8 @@ const Standing = ({
         </svg>{" "}
         Rotate your phone for more info.
       </div>
-      <div>{table?.slice(0,1).map((t) => {
-        return <div>Table last updated: {t.standing_updated}</div>
+      <div>{table?.slice(0,1).map((t,i) => {
+        return <div key={i}>Table last updated: {t.standing_updated}</div>
       })}</div>
     </div>
   );

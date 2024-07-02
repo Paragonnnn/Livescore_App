@@ -37,7 +37,7 @@ import SearchPlayers from "./components/SearchPlayers";
 import Person from "./svg/Person";
 import WhatsappLogo from "./svg/WhatsappLogo";
 import Navbar from "./navbar/Navbar";
-
+import Alert from "./components/Alert";
 
 inject();
 
@@ -65,6 +65,8 @@ const App = () => {
   const [profileToggle, setProfileToggle] = useState(false);
   const [ham, setHam] = useState(false);
   const [webSocketIndicator, setWebSocketIndicator] = useState(null);
+  const [alert, setAlert] = useState(false);
+  const [alertMessage,setAlertMessage] = useState('')
 
   const api_key = import.meta.env.VITE_api_key;
   const socketUrl = `wss://wss.allsportsapi.com/live_events?APIkey=${api_key}`;
@@ -110,9 +112,6 @@ const App = () => {
   // connectSocket()
 
   //sign out
-  
-
-  
 
   // useEffect(() => {
   //   let outsideClick = (e) => {
@@ -406,7 +405,7 @@ const App = () => {
             : "bg-darkCustomBg3 shadow-sm"
         }   w-full  sticky top-[-2px] rounded-b-xl z-50`}
       >
-        <Navbar 
+        <Navbar
           toggleMode={toggleMode}
           setToggleMode={setToggleMode}
           profileToggle={profileToggle}
@@ -415,6 +414,7 @@ const App = () => {
           ham={ham}
         />
       </div>
+      <Alert alert={alert} setAlert={setAlert} setAlertMessage={setAlertMessage} alertMessage={alertMessage} />
       <a href="https://wa.link/pyj1aa">
         <WhatsappLogo />
       </a>
@@ -522,7 +522,7 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route
             path="/favourites/"
-            element={<Favourites toggleMode={toggleMode} />}
+            element={<Favourites toggleMode={toggleMode} alert={alert} setAlert={setAlert} setAlertMessage={setAlertMessage} alertMessage={alertMessage} />}
           ></Route>
         </Routes>
       </div>
