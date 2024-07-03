@@ -3,7 +3,15 @@ import { Link } from "react-router-dom";
 import Loading from "./Loading";
 import Star from "../svg/Star";
 
-const CurrentFixtureInfo = ({ match, toggleMode, loading }) => {
+const CurrentFixtureInfo = ({
+  match,
+  toggleMode,
+  loading,
+  alert,
+  setAlert,
+  setAlertMessage,
+  alertMessage,
+}) => {
   return (
     <div className={`${toggleMode ? "text-darkText" : "text-lightText"}`}>
       {loading && (
@@ -40,8 +48,7 @@ const CurrentFixtureInfo = ({ match, toggleMode, loading }) => {
             >
               {/* {match.event_date} */}
               <div className="px-2 md:text-base text-xs">
-
-              {match.league_name}
+                {match.league_name}
               </div>
             </div>
             <div
@@ -50,7 +57,19 @@ const CurrentFixtureInfo = ({ match, toggleMode, loading }) => {
               } w-full p-2 px-3 flex items-center rounded mb-4 `}
             >
               <div className="text-center flex gap-5 w-1/3 justify-center items-center ">
-                <Star team={match.event_home_team} teamData={{team: match.event_home_team, team_key: match.home_team_key, team_logo: match.home_team_logo, team_country: match.country_name}}/>
+                <Star
+                  team={match.event_home_team}
+                  teamData={{
+                    team: match.event_home_team,
+                    team_key: match.home_team_key,
+                    team_logo: match.home_team_logo,
+                    team_country: match.country_name,
+                  }}
+                  alert={alert}
+                  setAlert={setAlert}
+                  setAlertMessage={setAlertMessage}
+                  alertMessage={alertMessage}
+                />
                 <div className="flex flex-col items-center gap-1">
                   <Link
                     to={`/team/${match.event_home_team.replace(/ +/g, "-")}/${
@@ -103,7 +122,19 @@ const CurrentFixtureInfo = ({ match, toggleMode, loading }) => {
                     {match.event_away_team}
                   </div>
                 </div>
-                <Star team={match.event_away_team} teamData={{team: match.event_away_team, team_key: match.away_team_key, team_logo: match.away_team_logo, team_country: match.country_name}}/>
+                <Star
+                  team={match.event_away_team}
+                  teamData={{
+                    team: match.event_away_team,
+                    team_key: match.away_team_key,
+                    team_logo: match.away_team_logo,
+                    team_country: match.country_name,
+                  }}
+                  alert={alert}
+                  setAlert={setAlert}
+                  setAlertMessage={setAlertMessage}
+                  alertMessage={alertMessage}
+                />
               </div>
             </div>
             <div className="flex justify-center">

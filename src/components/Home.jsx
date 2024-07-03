@@ -42,7 +42,7 @@ const Home = ({
   setFocus,
   lastJsonMessage,
   reCheck,
-  readyState
+  readyState,
 }) => {
   const [picker, setPicker] = useState(null);
   const date = new Date();

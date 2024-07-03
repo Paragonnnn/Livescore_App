@@ -6,12 +6,12 @@ import Defenders from "./team_players/Defenders";
 import Midfielders from "./team_players/Midfielders";
 import Forwards from "./team_players/Forwards";
 import TeamFixtures from "./TeamFixtures";
-import { auth,db } from "../firebase/firebase";
+import { auth, db } from "../firebase/firebase";
 import { updateDoc, doc } from "firebase/firestore";
 import Favourites from "../components/Favourites";
 import Star from "../svg/Star";
 
-const Teams = ({ toggleMode }) => {
+const Teams = ({ toggleMode,alert,setAlert,alertMessage,setAlertMessage }) => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isCap, setIsCap] = useState([]);
@@ -20,15 +20,14 @@ const Teams = ({ toggleMode }) => {
   const { id } = useParams();
   const api_key = import.meta.env.VITE_api_key;
 
-
-  const user = auth.currentUser
+  const user = auth.currentUser;
 
   // const favouritesRef = doc(db, 'users', `${user.uid}`)
 
   // const addToFavourite = async (team) => {
   //   console.log(team.team_name);
   //   await updateDoc(favouritesRef, {
-      
+
   //     favourites: [{
   //       teams: [{...teams}],
   //       leagues: [{
@@ -127,7 +126,18 @@ const Teams = ({ toggleMode }) => {
               <div>
                 <div className="text-3xl font-bold ">{team.team_name} </div>
               </div>
-                <Star team={team.team_name} teamData={{team: team.team_name, team_key: team.team_key, team_logo: team.team_logo, }}/>
+              <Star
+                team={team.team_name}
+                teamData={{
+                  team: team.team_name,
+                  team_key: team.team_key,
+                  team_logo: team.team_logo,
+                }}
+                alert={alert}
+                setAlert={setAlert}
+                setAlertMessage={setAlertMessage}
+                alertMessage={alertMessage}
+              />
             </div>
 
             <div>

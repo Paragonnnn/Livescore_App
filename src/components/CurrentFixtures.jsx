@@ -11,7 +11,7 @@ import MatchInfo from "./MatchInfo";
 import Standing from "./Standing";
 import useWebSocket from "react-use-websocket";
 
-const CurrentFixtures = ({ toggleMode, windowWidth }) => {
+const CurrentFixtures = ({ toggleMode, windowWidth,alert,setAlert,alertMessage,setAlertMessage }) => {
   const [loading, setLoading] = useState(false);
   const [match, setMatch] = useState([]);
   const [hToH, setHToH] = useState([]);
@@ -361,6 +361,10 @@ const CurrentFixtures = ({ toggleMode, windowWidth }) => {
               match={match}
               toggleMode={toggleMode}
               loading={loading}
+              alert={alert}
+              setAlert={setAlert}
+              setAlertMessage={setAlertMessage}
+              alertMessage={alertMessage}
             />
             <MatchInfo
               match={match}

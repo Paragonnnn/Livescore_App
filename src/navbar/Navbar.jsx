@@ -101,11 +101,11 @@ const navbar = ({
                 toggleMode
                   ? "sm:bg-customBgLight"
                   : "sm:bg-customBg2 text-lightText"
-              } flex items-center gap-2 py-1 px-2 rounded-lg cursor-pointer hover:opacity-90 active:opacity-70 bg-none sm:hover:bg-red-500 transition-colors duration-500 sm:hover:first:visible origin-right scale-x-20`}
+              } flex items-center gap-2 py-1 px-2 rounded-lg cursor-pointer hover:opacity-90 active:opacity-70 bg-none`}
               onClick={() => setProfileToggle((toggle) => !toggle)}
               id={`${profileToggle ? "profile-pic" : ""}`}
             >
-              <div className=" scale-0 ">
+              <div className="hidden sm:block">
                 {auth?.currentUser?.displayName
                   ? auth?.currentUser?.displayName.split(" ")[0]
                   : auth?.currentUser?.email}
@@ -114,7 +114,7 @@ const navbar = ({
                 auth?.currentUser?.photoURL ? (
                   <img
                     src={auth.currentUser.photoURL}
-                    className=" sm:h-7 sm:w-7 h-6 w-6 rounded-full cursor-pointer "
+                    className=" sm:h-7 sm:w-7 h-6 w-6 rounded-full cursor-pointer"
                     id="profile-pic"
                   />
                 ) : auth?.currentUser?.email ? (

@@ -66,7 +66,7 @@ const App = () => {
   const [ham, setHam] = useState(false);
   const [webSocketIndicator, setWebSocketIndicator] = useState(null);
   const [alert, setAlert] = useState(false);
-  const [alertMessage,setAlertMessage] = useState('')
+  const [alertMessage, setAlertMessage] = useState("");
 
   const api_key = import.meta.env.VITE_api_key;
   const socketUrl = `wss://wss.allsportsapi.com/live_events?APIkey=${api_key}`;
@@ -414,7 +414,12 @@ const App = () => {
           ham={ham}
         />
       </div>
-      <Alert alert={alert} setAlert={setAlert} setAlertMessage={setAlertMessage} alertMessage={alertMessage} />
+      <Alert
+        alert={alert}
+        setAlert={setAlert}
+        setAlertMessage={setAlertMessage}
+        alertMessage={alertMessage}
+      />
       <a href="https://wa.link/pyj1aa">
         <WhatsappLogo />
       </a>
@@ -500,13 +505,26 @@ const App = () => {
               <CurrentFixtures
                 toggleMode={toggleMode}
                 windowWidth={windowWidth}
+                alert={alert}
+                setAlert={setAlert}
+                setAlertMessage={setAlertMessage}
+                alertMessage={alertMessage}
               />
             }
           />
           {/* <Route path='/fixtures' element={<Fixtures check={check} fixtures={fixtures} leagues={leagues} loadingFixtures={loadingFixtures} fixturesError={fixturesError}/>}/> */}
           <Route
             path="/team/:teamname/:id"
-            element={<Teams leagues={leagues} toggleMode={toggleMode} />}
+            element={
+              <Teams
+                leagues={leagues}
+                toggleMode={toggleMode}
+                alert={alert}
+                setAlert={setAlert}
+                setAlertMessage={setAlertMessage}
+                alertMessage={alertMessage}
+              />
+            }
           />
           <Route
             path="/player/:playername/:id"
@@ -522,7 +540,15 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route
             path="/favourites/"
-            element={<Favourites toggleMode={toggleMode} alert={alert} setAlert={setAlert} setAlertMessage={setAlertMessage} alertMessage={alertMessage} />}
+            element={
+              <Favourites
+                toggleMode={toggleMode}
+                alert={alert}
+                setAlert={setAlert}
+                setAlertMessage={setAlertMessage}
+                alertMessage={alertMessage}
+              />
+            }
           ></Route>
         </Routes>
       </div>
