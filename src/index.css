@@ -9,7 +9,7 @@
   margin: 0;
   padding: 0;
   text-decoration: none;
-  /* outline: solid 1px red; */
+  outline: solid 1px red;
 }
 .day_style {
   background-color: #3498db;
