@@ -88,9 +88,9 @@ const SignIn = () => {
   });
 
   return (
-    <div className="flex flex-col justify-center items-center mt-4 ">
+    <div className="flex flex-col justify-center items-center mt-4 px-2">
 
-    <div className=" bg-customBg2 w-fit ">
+    <div className=" bg-customBg2 w-full ">
       <div className=" ">
         <h1 className=" text-4xl py-8 text-lightText text-center">Sign In</h1>
       </div>

@@ -105,11 +105,11 @@ const navbar = ({
               onClick={() => setProfileToggle((toggle) => !toggle)}
               id={`${profileToggle ? "profile-pic" : ""}`}
             >
-              <div className="hidden sm:block">
+              {/* <div className="hidden sm:block">
                 {auth?.currentUser?.displayName
                   ? auth?.currentUser?.displayName.split(" ")[0]
                   : auth?.currentUser?.email}
-              </div>
+              </div> */}
               {
                 auth?.currentUser?.photoURL ? (
                   <img

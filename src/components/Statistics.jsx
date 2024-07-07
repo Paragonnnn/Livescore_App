@@ -45,11 +45,11 @@ const Statistics = ({ statToggle, stats, windowWidth, toggleMode }) => {
                                     : "bg-red-600"
                                 }  h-[6px]`
                               : `w-[${Math.round(
-                                  (+s.home * 100) / (+s.home + +s.away)
+                                  ((s.home).includes(',') ? +(s.home).split(',')[0] : +s.home * 100) / (((s.home).includes(',') ? +(s.home).split(',')[0] : +s.home) + ((s.away).includes(',') ? +(s.away).split(',')[0] : +s.away))
                                 )}%] ${
-                                  +s.home === +s.away
+                                  ((s.home).includes(',') ? +(s.home).split(',')[0] : +s.home) === ((s.away).includes(',') ? +(s.away).split(',')[0] : +s.away)
                                     ? "bg-gray-400"
-                                    : +s.home > +s.away
+                                    : ((s.home).includes(',') ? parseFloat((s.home).split(',')[0]) : +s.home) > ((s.away).includes(',') ? +(s.away).split(',')[0] : +s.away)
                                     ? " bg-green-500"
                                     : "bg-red-500"
                                 }  h-[6px]`
@@ -57,7 +57,7 @@ const Statistics = ({ statToggle, stats, windowWidth, toggleMode }) => {
                         ></div>
                       </div>
                       <div className="flex  w-[100px] justify-center  opacity-50">
-                        {s.home} - {s.away}
+                        {(s.home).includes(',') ? (s.home).split(',')[0] : s.home} - {(s.away).includes(',') ? (s.away).split(',')[0] : s.away}
                       </div>
                       <div className="w-[45%]  h-[6px] overflow-hidden  rounded-r-full  ">
                         <div

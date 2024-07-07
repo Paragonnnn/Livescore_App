@@ -426,7 +426,7 @@ const CurrentFixtures = ({ toggleMode, windowWidth,alert,setAlert,alertMessage,s
           </div>
         </div>
       ) : (
-        <div className="">
+        <div className=" w-full">
           <div className=" w-full  mx-auto mb-4">
             <CurrentFixtureInfo
               match={match}
@@ -436,6 +436,10 @@ const CurrentFixtures = ({ toggleMode, windowWidth,alert,setAlert,alertMessage,s
               bookie={bookie}
               seeMore={seeMore}
               toggleMode={toggleMode}
+              alert={alert}
+              setAlert={setAlert}
+              setAlertMessage={setAlertMessage}
+              alertMessage={alertMessage}
             />
           </div>
           <div
@@ -443,7 +447,7 @@ const CurrentFixtures = ({ toggleMode, windowWidth,alert,setAlert,alertMessage,s
               toggleMode
                 ? "text-darkText bg-customBgLight"
                 : "text-lightText bg-customBg2"
-            } fixtures_scroll flex gap-4 overflow-x-scroll m-auto w-[95vw] sm:w-full justify-between mb-3 py-2 px-3 rounded text-base sm:text-lg   `}
+            } fixtures_scroll flex gap-4 overflow-x-scroll m-auto w-[98%] lg:w-full justify-between mb-3 py-2 px-3 rounded text-base sm:text-lg   `}
           >
             {match && (
               <button
