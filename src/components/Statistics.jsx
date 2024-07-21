@@ -17,6 +17,7 @@ const Statistics = ({ statToggle, stats, windowWidth, toggleMode }) => {
             {stats &&
               stats.map((stat) =>
                 stat.map((s,index) => (
+                  s.home === "0" && s.away === "0" ? null :
                   <div
                     key={index}
                     className={`${
