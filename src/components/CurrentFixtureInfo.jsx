@@ -57,22 +57,20 @@ const CurrentFixtureInfo = ({
               } w-full p-2 px-3 flex items-center rounded mb-4 `}
             >
               <div className="text-center flex gap-5 w-1/3 justify-center items-center ">
-                <div className=" w-1/2">
-                  <Star
-                    team={match.event_home_team}
-                    teamData={{
-                      team: match.event_home_team,
-                      team_key: match.home_team_key,
-                      team_logo: match.home_team_logo,
-                      team_country: match.country_name,
-                    }}
-                    alert={alert}
-                    setAlert={setAlert}
-                    setAlertMessage={setAlertMessage}
-                    alertMessage={alertMessage}
-                  />
-                </div>
-                <div className="flex flex-col items-center gap-1 w-1/2">
+                <Star
+                  team={match.event_home_team}
+                  teamData={{
+                    team: match.event_home_team,
+                    team_key: match.home_team_key,
+                    team_logo: match.home_team_logo,
+                    team_country: match.country_name,
+                  }}
+                  alert={alert}
+                  setAlert={setAlert}
+                  setAlertMessage={setAlertMessage}
+                  alertMessage={alertMessage}
+                />
+                <div className="flex flex-col items-center gap-1">
                   <Link
                     to={`/team/${match.event_home_team.replace(/ +/g, "-")}/${
                       match.home_team_key
@@ -108,7 +106,7 @@ const CurrentFixtureInfo = ({
                 </div>
               </div>
               <div className="text-center  flex gap-5 justify-center items-center   w-1/3">
-                <div className="flex flex-col items-center gap-1 w-1/2">
+                <div className="flex flex-col items-center gap-1">
                   <Link
                     to={`/team/${match.event_away_team.replace(/ +/g, "-")}/${
                       match.away_team_key
@@ -124,21 +122,19 @@ const CurrentFixtureInfo = ({
                     {match.event_away_team}
                   </div>
                 </div>
-                <div className=" w-1/2">
-                  <Star
-                    team={match.event_away_team}
-                    teamData={{
-                      team: match.event_away_team,
-                      team_key: match.away_team_key,
-                      team_logo: match.away_team_logo,
-                      team_country: match.country_name,
-                    }}
-                    alert={alert}
-                    setAlert={setAlert}
-                    setAlertMessage={setAlertMessage}
-                    alertMessage={alertMessage}
-                  />
-                </div>
+                <Star
+                  team={match.event_away_team}
+                  teamData={{
+                    team: match.event_away_team,
+                    team_key: match.away_team_key,
+                    team_logo: match.away_team_logo,
+                    team_country: match.country_name,
+                  }}
+                  alert={alert}
+                  setAlert={setAlert}
+                  setAlertMessage={setAlertMessage}
+                  alertMessage={alertMessage}
+                />
               </div>
             </div>
             <div className="flex justify-center">
