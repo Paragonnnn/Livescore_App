@@ -57,7 +57,7 @@ const CurrentFixtureInfo = ({
               } w-full p-2 px-3 flex items-center rounded mb-4 `}
             >
               <div className="text-center flex gap-5 w-1/3 justify-center items-center ">
-                <Star
+                {/* <Star
                   team={match.event_home_team}
                   teamData={{
                     team: match.event_home_team,
@@ -69,7 +69,7 @@ const CurrentFixtureInfo = ({
                   setAlert={setAlert}
                   setAlertMessage={setAlertMessage}
                   alertMessage={alertMessage}
-                />
+                /> */}
                 <div className="flex flex-col items-center gap-1">
                   <Link
                     to={`/team/${match.event_home_team.replace(/ +/g, "-")}/${
@@ -122,7 +122,7 @@ const CurrentFixtureInfo = ({
                     {match.event_away_team}
                   </div>
                 </div>
-                <Star
+                {/* <Star
                   team={match.event_away_team}
                   teamData={{
                     team: match.event_away_team,
@@ -134,7 +134,7 @@ const CurrentFixtureInfo = ({
                   setAlert={setAlert}
                   setAlertMessage={setAlertMessage}
                   alertMessage={alertMessage}
-                />
+                /> */}
               </div>
             </div>
             <div className="flex justify-center">
