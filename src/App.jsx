@@ -38,6 +38,7 @@ import Person from "./svg/Person";
 import WhatsappLogo from "./svg/WhatsappLogo";
 import Navbar from "./navbar/Navbar";
 import Alert from "./components/Alert";
+import Transfer from "./components/Transfers/Transfer";
 
 inject();
 
@@ -550,6 +551,7 @@ const App = () => {
               />
             }
           ></Route>
+          <Route path="/transfers" element={<Transfer />} />
         </Routes>
       </div>
     </div>

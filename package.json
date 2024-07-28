@@ -12,9 +12,11 @@
   "dependencies": {
     "@vercel/analytics": "^1.2.2",
     "date-fns": "^2.30.0",
+    "express": "^4.19.2",
     "firebase": "^10.11.0",
     "flowbite": "^2.3.0",
     "mathjs": "^12.2.1",
+    "puppeteer": "^22.13.1",
     "react": "^18.2.0",
     "react-calendar": "^4.6.1",
     "react-click-away-listener": "^2.2.3",

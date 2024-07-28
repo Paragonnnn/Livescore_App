@@ -13,6 +13,7 @@ import Calendar2 from "../svg/Calendar2";
 import SearchSvg from "../svg/SearchSvg";
 import HomeCurrentFixtureInfo from "./HomeCurrentFixtureInfo";
 import SIgnIn from "./Authentication/SignIn";
+// import Transfer from "./Transfers/Transfer";
 
 const Home = ({
   countries,
@@ -241,12 +242,16 @@ const Home = ({
           toggleMode ? " bg-customBgLight" : " bg-customBg2"
         } hidden lg:block col-span-3 sticky top-[70px] text-black rounded-xl bg-customBg2  p-4 h-fit`}
       >
+        <div>
         <HomeCurrentFixtureInfo
           loadingFixtures={loadingFixtures}
           currentFixture={currentFixture}
           toggleMode={toggleMode}
           setCurrentFixture={setCurrentFixture}
         />
+        </div>
+        {/* <Transfer /> */}
+
       </div>
 
       {/* {

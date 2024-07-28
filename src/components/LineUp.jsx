@@ -113,7 +113,7 @@ const LineUp = ({
                     <div
                       className={`${
                         showStatToggle ? "visible" : "invisible"
-                      } fixed bottom-2 right-2 w-[400px] outline outline-blue-600 outline-2`}
+                      } fixed bottom-2 right-2 w-full sm:w-[400px] outline outline-blue-600 outline-2`}
                       ref={reff}
                     >
                       {playerStat &&
