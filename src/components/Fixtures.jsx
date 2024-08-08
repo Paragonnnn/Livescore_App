@@ -3,8 +3,10 @@ import Loading from "./Loading";
 import Error from "./Error";
 import Countries from "./Countries";
 import { Link } from "react-router-dom";
-import { fix, max } from "mathjs";
+import { fix, forEach, max } from "mathjs";
 import LoadingFixtures from "./LoadingFixtures";
+import { getDoc, doc } from "firebase/firestore";
+import { auth, db } from "../firebase/firebase";
 
 const Fixtures = ({
   leagues,
@@ -24,23 +26,52 @@ const Fixtures = ({
   readyState,
 }) => {
   const [isLive, setIsLive] = useState(true);
-  const [checkCheck, setCheckCheck] = useState([])
+  const [checkCheck, setCheckCheck] = useState([]);
   const [notificationMessage, setNotificationMessage] = useState([]);
   const [showCards, setShowCards] = useState(true);
+  const [favTeamsId, setFavTeamsId] = useState([]);
 
+  const user = auth.currentUser;
   useEffect(() => {
     if (check != []) {
-      setCheckCheck([])
-      setCheckCheck(check)
-      console.log('checkkkkk');
-    } else(check == []); {
-      setCheckCheck([])
-      setCheckCheck(reCheck)
-      console.log('not checkkkk');
+      setCheckCheck([]);
+      setCheckCheck(check);
+      console.log("checkkkkk");
+    } else check == [];
+    {
+      setCheckCheck([]);
+      setCheckCheck(reCheck);
+      console.log("not checkkkk");
     }
-  },[check])
+  }, [check]);
 
-  
+  const checkDoc = async () => {
+    // console.log(fixtures.map((f) => f.home_team_key));
+    try {
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const favTeams = Object.keys(docSnap.data().favouritesTeams.teams);
+        setFavTeamsId(favTeams);
+        console.log(favTeamsId);
+      } else {
+        console.log("No such document!");
+      }
+    } catch (err) {
+      console.log(err, "error getting document");
+    }
+  };
+
+  const checkDocForFav = (team) => {
+    
+    // favTeamsId?.includes(team) ? " text-green-500" : "";
+    favTeamsId?.map((f) => parseFloat(f) == team ? " text-green-500" : "");
+  };
+
+  useEffect(() => {
+    user && checkDoc();
+  }, [user]);
 
   const all = () => {
     setIsLive(true);
@@ -57,7 +88,6 @@ const Fixtures = ({
     }
     // console.log(currentFixture);
     // console.log("hi");
-
   };
 
   const yellowCard = (fixture, isHome) => {
@@ -65,10 +95,10 @@ const Fixtures = ({
     const yellowCards = fixture.cards.filter(
       (c) => c.card === "yellow card" && (isHome ? c.home_fault : c.away_fault)
     );
-  
+
     // Get the number of yellow cards
     const yellowCardsCount = yellowCards.length;
-  
+
     return yellowCards.map((c, i) => (
       <div
         key={`${c.player}-${i}`} // Ensure a unique key, assuming each card has a unique player property
@@ -88,10 +118,10 @@ const Fixtures = ({
     const redCards = fixture.cards.filter(
       (c) => c.card === "red card" && (isHome ? c.home_fault : c.away_fault)
     );
-  
+
     // Get the number of yellow cards
     const redCardsCount = redCards.length;
-  
+
     return redCards.map((c, i) => (
       <div
         key={`${c.player}-${i}`} // Ensure a unique key, assuming each card has a unique player property
@@ -105,15 +135,7 @@ const Fixtures = ({
       </div>
     ));
   };
-  
-  
 
-  
-  
-  
-  
-  
-  
   const handleShowCards = () => {
     setShowCards((prev) => !prev);
     console.log(showCards);
@@ -223,12 +245,16 @@ const Fixtures = ({
           <Error />
         </div>
       )}
-      {console.log(fixtures.filter((f) => f.event_live === '1' && f.event_status != 'Finished').length)}
-      {
-        (fixtures.filter((f) => f.event_live === '1' && f.event_status != 'Finished').length) == '0' && !isLive && 
-        <div>no live games</div>
-      }
-      {(!fixturesError ) && (
+      {console.log(
+        fixtures.filter(
+          (f) => f.event_live === "1" && f.event_status != "Finished"
+        ).length
+      )}
+      {fixtures.filter(
+        (f) => f.event_live === "1" && f.event_status != "Finished"
+      ).length == "0" &&
+        !isLive && <div>no live games</div>}
+      {!fixturesError && (
         <div
           className={`${
             !loadingFixtures &&
@@ -241,7 +267,6 @@ const Fixtures = ({
               leagues &&
               !loadingFixtures &&
               !fixturesError &&
-              
               leagues.map(
                 (league, index) =>
                   (!isLive
@@ -298,7 +323,8 @@ const Fixtures = ({
                           (a, b) =>
                             a.event_time.replace(":", ".") -
                             b.event_time.replace(":", ".")
-                        ).sort((a, b) => a.event_key - b.event_key)
+                        )
+                        .sort((a, b) => a.event_key - b.event_key)
                         .map(
                           (fixture, index) =>
                             // leagues.map(league => (
@@ -392,8 +418,12 @@ const Fixtures = ({
                                       className="w-3 h-3"
                                     />
                                     <div className="flex justify-between items-center  w-full">
-                                      <div className=" text-xs sm:text-base flex items-center gap-[1px] sm:gap-[2px]">
-                                        <span className=" mr-1 sm:mr-2 ">
+                                      <div
+                                        className={` text-xs sm:text-base flex items-center gap-[1px] sm:gap-[2px] ${
+                                          favTeamsId.forEach((f) => (+f == fixture.home_team_key) ? ' text-green-600' : '' )
+                                        }`}
+                                      >
+                                        <span className={` mr-1 sm:mr-2 `}>
                                           {fixture.event_home_team}
                                         </span>
                                         {yellowCard(fixture, true)}

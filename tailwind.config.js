@@ -10,6 +10,9 @@ export default {
   ],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        "24" : 'repeat(24, minmax(0, 1fr))'
+      },
       colors: {
         customBg: '#1D9BF0',
         customBg2: '#0F243A50',
