@@ -13,6 +13,9 @@ import Calendar2 from "../svg/Calendar2";
 import SearchSvg from "../svg/SearchSvg";
 import HomeCurrentFixtureInfo from "./HomeCurrentFixtureInfo";
 import SIgnIn from "./Authentication/SignIn";
+import TransferSvg from "../svg/TransferSvg";
+import Star2 from "../svg/Star2";
+import TransferInfo from "./Transfers/TransferInfo";
 // import Transfer from "./Transfers/Transfer";
 
 const Home = ({
@@ -56,6 +59,8 @@ const Home = ({
       }
     });
   }, []);
+  console.log(calenderDate);
+  
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-11 h-[100%] gap-2">
@@ -216,6 +221,12 @@ const Home = ({
               setFocus={setFocus}
             />
           </div>
+          <Link to={`/transfers`}>
+            <TransferSvg />
+          </Link>
+          <div>
+            <Star2 />
+          </div>
         </div>
       </div>
       <div className="col-span-5">
@@ -238,11 +249,11 @@ const Home = ({
         />
       </div>
       <div
-        className={`${
-          toggleMode ? " bg-customBgLight" : " bg-customBg2"
-        } hidden lg:block col-span-3 sticky top-[70px] text-black rounded-xl bg-customBg2  p-4 h-fit`}
+        className={` hidden lg:block col-span-3 sticky top-[70px] text-black h-fit  `}
       >
-        <div>
+        <div className={`${
+          toggleMode ? " bg-customBgLight" : " bg-customBg2"
+        } p-4 rounded-xl `}>
         <HomeCurrentFixtureInfo
           loadingFixtures={loadingFixtures}
           currentFixture={currentFixture}
@@ -250,8 +261,10 @@ const Home = ({
           setCurrentFixture={setCurrentFixture}
         />
         </div>
-        {/* <Transfer /> */}
 
+        <div className=" p-4 bg-customBg2  mt-4 rounded-xl text-lightText ">
+          <TransferInfo />
+        </div>
       </div>
 
       {/* {
