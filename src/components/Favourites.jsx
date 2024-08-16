@@ -54,18 +54,18 @@ const Favourites = ({ toggleMode,alert,setAlert,alertMessage,setAlertMessage }) 
         {favTeam?.map((fav, i) => (
           <div
             key={i}
-            className={` mb-1 px-1 py-[2px] first:rounded-t-md last:rounded-b-md  ${
+            className={` flex justify-between items-center mb-1 px-4 py-[2px] first:rounded-t-md last:rounded-b-md ${
               toggleMode ? "bg-customBgLight" : "bg-customBg2"
             }`}
           >
             <Link
               to={`/team/${fav.team}/${fav.team_key}`}
-              className={`flex gap-7 items-center`}
+              className={`flex gap-5 items-center`}
             >
               <img
                 src={fav.team_logo}
                 alt={fav.team}
-                className={`sm:h-10 sm:w-10 h-8 w-8 `}
+                className={` h-6 w-6 `}
               />
               <div >{fav.team}</div>
             </Link>

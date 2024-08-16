@@ -133,7 +133,7 @@ const Star = ({
               : "transparent"
           }
           xmlns="http://www.w3.org/2000/svg"
-          className={"w-8 h-8 cursor-pointer stroke-customBg"}
+          className={"w-6 h-6 cursor-pointer stroke-customBg"}
         >
           <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
           <g
