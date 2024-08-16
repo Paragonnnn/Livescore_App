@@ -105,7 +105,7 @@ const SecondHalfEvent = ({ events, toggleMode }) => {
                               </div>
                             )}
                         </div>
-                        <div className={`${index === 0 ? ' before:hidden' : ''} w-[40px] h-[40px] text-xxs sm:text-xs opacity-60 flex items-center gap-1 justify-center border-[2px] border-solid relative bg-customBg2 border-gray-700 rounded-full before:w-[2px] before:h-[34px] before:bg-gray-700 before:absolute before:-z-20  before:bottom-[36px] before:block`}>
+                        <div className={`${index === 0 ? ' before:hidden' : ''} w-[40px] h-[40px] text-xxs sm:text-xs opacity-60 flex items-center gap-1 justify-center border-[2px] border-solid relative bg-customBg2 border-customBg rounded-full before:w-[2px] before:h-[34px] before:bg-customBg before:absolute before:-z-20  before:bottom-[36px] before:block`}>
                           {eve.time}
                           {/* {(eve.home_scorer || eve.away_scorer) &&
                             !isNaN(eve.score.slice(0, 1)) && (

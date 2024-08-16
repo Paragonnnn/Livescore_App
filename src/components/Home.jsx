@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Countries from "./Countries";
 import Fixtures from "./Fixtures";
 import { ball, ogball, calendar, searchLogo } from "..";
@@ -16,6 +16,7 @@ import SIgnIn from "./Authentication/SignIn";
 import TransferSvg from "../svg/TransferSvg";
 import Star2 from "../svg/Star2";
 import TransferInfo from "./Transfers/TransferInfo";
+import NewsInfo from "./News/NewsInfo";
 // import Transfer from "./Transfers/Transfer";
 
 const Home = ({
@@ -47,12 +48,14 @@ const Home = ({
   lastJsonMessage,
   reCheck,
   readyState,
+  searchParam,
 }) => {
   const [picker, setPicker] = useState(null);
   const date = new Date();
   const calendarRef = useRef(null);
   useEffect(() => {
     document.addEventListener("mousedown", (e) => {
+      e.stopPropagation();
       if (!calendarRef.current.contains(e.target)) {
         setShowCalendar(false);
         // console.log(e.target);
@@ -60,10 +63,9 @@ const Home = ({
     });
   }, []);
   console.log(calenderDate);
-  
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-11 h-[100%] gap-2">
+    <div className="grid grid-cols-1 lg:grid-cols-11 h-[100%] gap-4">
       {/* <h1>Livescore</h1>
       <Link to={`/countries`}>
         <button>show</button>
@@ -88,7 +90,9 @@ const Home = ({
             minDetail="year"
             maxDetail="month"
             tileClassName={({ date }) => {
-              return date.getDate() === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear()
+              return date.getDate() === new Date().getDate() &&
+                date.getMonth() === new Date().getMonth() &&
+                date.getFullYear() === new Date().getFullYear()
                 ? "day_style"
                 : "date_hover";
             }}
@@ -191,6 +195,13 @@ const Home = ({
               className={` text-customBg bg-transparent border-none w-full bg-opacity-50 `}
               minDetail="year"
               maxDetail="month"
+              tileClassName={({ date }) => {
+                return date.getDate() === new Date().getDate() &&
+                  date.getMonth() === new Date().getMonth() &&
+                  date.getFullYear() === new Date().getFullYear()
+                  ? "day_style"
+                  : "date_hover";
+              }}
             />
             <button
               onClick={() => {
@@ -249,21 +260,26 @@ const Home = ({
         />
       </div>
       <div
-        className={` hidden lg:block col-span-3 sticky top-[70px] text-black h-fit  `}
+        className={` hidden lg:block col-span-3  text-black countries-scroll overflow-y-scroll`}
       >
-        <div className={`${
-          toggleMode ? " bg-customBgLight" : " bg-customBg2"
-        } p-4 rounded-xl `}>
-        <HomeCurrentFixtureInfo
-          loadingFixtures={loadingFixtures}
-          currentFixture={currentFixture}
-          toggleMode={toggleMode}
-          setCurrentFixture={setCurrentFixture}
-        />
+        <div
+          className={`${
+            toggleMode ? " bg-customBgLight" : " bg-customBg2"
+          } p-4 rounded-xl h-fit`}
+        >
+          <HomeCurrentFixtureInfo
+            loadingFixtures={loadingFixtures}
+            currentFixture={currentFixture}
+            toggleMode={toggleMode}
+            setCurrentFixture={setCurrentFixture}
+          />
         </div>
 
         <div className=" p-4 bg-customBg2  mt-4 rounded-xl text-lightText ">
           <TransferInfo />
+        </div>
+        <div className=" mb-7 mt-5 bg-customBg2 text-lightText">
+          <NewsInfo />
         </div>
       </div>
 

@@ -8,6 +8,7 @@ import { signOut } from "firebase/auth";
 import Person from "../svg/Person";
 import Light from "../svg/Light";
 import Dark from "../svg/Dark";
+import Logout from "../svg/Logout";
 
 const navbar = ({
   toggleMode,
@@ -33,12 +34,11 @@ const navbar = ({
 
   return (
     <div>
-      <div className="m-auto  max-w-[1440px]  flex items-center justify-between relative px-1 py-2 sm:py-3">
+      <div className="m-auto  max-w-[1440px]  flex items-center justify-between relative px-3 py-2 sm:py-3">
         {/* <Link  className="  outline outline-blue-600"> */}
         <Link
           to={"/"}
-          className=" text-2xl sm:text-3xl md:text-[40px] text-customBg font-bold flex items-center  "
-          
+          className=" text-[34px] md:text-[40px] text-customBg font-bold flex items-center "
         >
           {/* <img
                 src="https://upload.wikimedia.org/wikipedia/commons/c/c0/Santa_hat.svg"
@@ -77,7 +77,7 @@ const navbar = ({
               to={"/signin"}
               className={`${
                 auth?.currentUser ? "hidden" : "block"
-              } border border-solid text-xs md:text-base px-2 md:px-3 md:py-1 py-[2px] rounded-md hover:bg-customBg hover:text-lightText transition-colors duration-200 flex items-center md:gap-2 gap-1 hover:fill-white ${
+              } border border-solid text-base px-2 md:px-3 md:py-1 py-[4px] rounded-md hover:bg-customBg hover:text-lightText transition-colors duration-200 flex items-center md:gap-2 gap-1 hover:fill-white ${
                 toggleMode
                   ? "text-darkText bg-customBgLight border-gray-400  fill-black"
                   : "text-lightText bg-customBg2 fill-white border-gray-700"
@@ -114,7 +114,7 @@ const navbar = ({
                 auth?.currentUser?.photoURL ? (
                   <img
                     src={auth.currentUser.photoURL}
-                    className=" sm:h-7 sm:w-7 h-6 w-6 rounded-full cursor-pointer"
+                    className=" sm:h-9 sm:w-9 h-8 w-8 rounded-full cursor-pointer"
                     id="profile-pic"
                   />
                 ) : auth?.currentUser?.email ? (
@@ -139,11 +139,18 @@ const navbar = ({
             <nav
               className={`${
                 profileToggle ? "block" : "hidden"
-              } absolute -bottom-10 right-0`}
+              } absolute -bottom-24 right-2 bg-darkCustomBg3 px-3 py-5 text-white rounded-lg z-10 w-48 `}
             >
-              <ul>
-                <li onClick={handleSignOut}>Logout</li>
-                <li><Link to={'/favourites'}>Favourites</Link></li>
+              <ul className=" divide-y divide-gray-400 divide-opacity-20">
+                <li onClick={handleSignOut} className=" px-1 py-2 flex gap-1">
+                  <Logout />
+                  Logout
+                </li>
+                <li className=" px-1 py-2">
+                  <Link to={"/favourites"} >
+                    Favourites
+                  </Link>
+                </li>
               </ul>
             </nav>
           </ClickAwayListener>

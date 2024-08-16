@@ -12,13 +12,20 @@
   /* outline: solid 1px red; */
 }
 .day_style {
-  background-color: #3498db;
+  /* background-color: #048ba8 ; */
+  border-bottom: solid 2px #048ba8 ;
+  color: white ;
   border-radius: 10px;
   font-weight: 800;
   font-size: 16px;
 }
+.line-height>p {
+  margin-bottom: 24px;
+  
+}
 .date_hover:hover {
   color: black;
+  
 }
 :root {
   --primary-color: #1e1e1e;
@@ -50,7 +57,7 @@
 }
 .countries-scroll::-webkit-scrollbar-thumb {
   border-radius: 6px;
-  background-color: #2a86ff38;
+  background-color: #048BA810;
 }
 
 /* .dis{

@@ -35,7 +35,7 @@ const Standing = ({
         <div
           className={`${
             toggleMode ? "bg-customBgLight" : "bg-customBg2"
-          }  divide-y divide-black shadow-sm rounded-md px-1 mb-2 xs:mb-5`}
+          }  divide-y divide-black mt-4 rounded-md px-1 mb-2 xs:mb-5`}
         >
           <div className="px-4 py-2">
             <button
@@ -73,27 +73,27 @@ const Standing = ({
           </div>
 
           <section className="">
-            <section className=" flex justify-between md:p-4 p-1 text-xxs md:text-base">
+            <section className="grid grid-cols-10 text-xxs md:text-base">
               {/* <div className='p-2 w-fit border border-solid border-lighterOrange'>S/P</div> */}
-              <div className="md:p-2 p-1 w-fit ">Club</div>
-              <section className="flex justify-between md:w-[350px] xs:w-[150px] w-[80px] ">
-                <div className="md:p-2 p-1 ">MP</div>
-                <div className="md:p-2 p-1 hidden xs:block">W</div>
-                <div className="md:p-2 p-1 hidden xs:block">D</div>
-                <div className="md:p-2 p-1 hidden xs:block">L</div>
-                <div className="md:p-2 p-1 hidden sm:block ">GF</div>
-                <div className="md:p-2 p-1 hidden sm:block">GA</div>
-                <div className="md:p-2 p-1 ">GD</div>
-                <div className="md:p-2 p-1 ">Pts</div>
-                <div className="md:p-2 p-1 ">Form</div>
+              <div className=" col-span-6">Club</div>
+              <section className=" col-span-4 grid grid-cols-3 xs:grid-cols-6 sm:grid-cols-8 place-items-center">
+                <div className=" col-span-1">MP</div>
+                <div className="col-span-1  hidden xs:block">W</div>
+                <div className="col-span-1  hidden xs:block">D</div>
+                <div className="col-span-1  hidden xs:block">L</div>
+                <div className="col-span-1  hidden sm:block ">GF</div>
+                <div className="col-span-1  hidden sm:block">GA</div>
+                <div className="col-span-1  ">GD</div>
+                <div className="col-span-1  ">Pts</div>
+                {/* <div className="col-span-1  ">Form</div> */}
               </section>
             </section>
           </section>
           <section className="divide-y divide-black">
             {mappedTable &&
               mappedTable.map((table, index) => (
-                <section key={index}>
-                  <div>{table.league_round}{Math.max(table.standing_place)}</div>
+                <section key={index} className=" ">
+                  {/* <div>{table.league_round}{Math.max(table.standing_place)}</div> */}
 
                   <section
                     className={`${
@@ -109,7 +109,7 @@ const Standing = ({
                           )
                         ? "bg-lightOrange"
                         : "")
-                    }  flex justify-between items-center gap-4 md:px-4 p-1 `}
+                    }    grid grid-cols-10`}
                   >
                     <div
                       className={`${
@@ -120,7 +120,7 @@ const Standing = ({
                         getHomeTeamId == table.team_key
                           ? "border-l-4 border-solid border-customBg"
                           : ""
-                      }  md:p-2 p-1 flex items-center gap-2 `}
+                      }  md:p-2 p-1 flex items-center gap-2 col-span-6 text-xxs md:text-base`}
                     >
                       <div className="md:p-2 p-1 ">{table.standing_place}.</div>
                       <img
@@ -137,26 +137,26 @@ const Standing = ({
                         {table.standing_team}
                       </Link>
                     </div>
-                    <section className="flex justify-between md:w-[350px] xs:w-[150px] w-[80px] text-xxs md:text-base ">
-                      <div className="md:p-2 p-1">{table.standing_P}</div>
-                      <div className="md:p-2 p-1 hidden xs:block">
+                    <section className="text-xxs md:text-base col-span-4 grid grid-cols-3 xs:grid-cols-6 sm:grid-cols-8 place-items-center">
+                      <div className=" col-span-1">{table.standing_P}</div>
+                      <div className=" col-span-1 hidden xs:block">
                         {table.standing_W}
                       </div>
-                      <div className="md:p-2 p-1 hidden xs:block">
+                      <div className=" col-span-1 hidden xs:block">
                         {table.standing_D}
                       </div>
-                      <div className="md:p-2 p-1 hidden xs:block">
+                      <div className=" col-span-1 hidden xs:block">
                         {table.standing_L}
                       </div>
-                      <div className="md:p-2 p-1 hidden sm:block">
+                      <div className=" col-span-1 hidden sm:block">
                         {table.standing_F}
                       </div>
-                      <div className="md:p-2 p-1 hidden sm:block">
+                      <div className=" col-span-1 hidden sm:block">
                         {table.standing_A}
                       </div>
-                      <div className="md:p-2 p-1">{table.standing_GD}</div>
-                      <div className="md:p-2 p-1">{table.standing_PTS}</div>
-                      <div className="md:p-2 p-1">{table.standing_PTS}</div>
+                      <div className=" col-span-1">{table.standing_GD}</div>
+                      <div className=" col-span-1">{table.standing_PTS}</div>
+                      {/* <div className=" col-span-1">{table.standing_PTS}</div> */}
                     </section>
                   </section>
                 </section>

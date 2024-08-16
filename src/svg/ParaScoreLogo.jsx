@@ -3,7 +3,7 @@ import React from "react";
 const ParaScoreLogo = () => {
   return (
     <svg
-      fill="#3F8EFC"
+      fill=""
       height="30px"
       width="30px"
       version="1.2"
@@ -13,8 +13,8 @@ const ParaScoreLogo = () => {
       xmlns:xlink="http://www.w3.org/1999/xlink"
       viewBox="-30 32 194 194"
       xml:space="preserve"
-      stroke="#3F8EFC"
-      className=" h-4 w-4 sm:h-5 sm:w-5 md:h-8 md:w-8"
+      stroke={``}
+      className=" h-6 w-6 md:h-8 md:w-8 fill-customBg"
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
       <g

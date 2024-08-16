@@ -7,6 +7,7 @@ import {
   useNavigate,
   useLocation,
   useParams,
+  useSearchParams,
 } from "react-router-dom";
 import Home from "./components/Home";
 import { Routes, Route } from "react-router-dom";
@@ -39,6 +40,8 @@ import WhatsappLogo from "./svg/WhatsappLogo";
 import Navbar from "./navbar/Navbar";
 import Alert from "./components/Alert";
 import Transfer from "./components/Transfers/Transfer";
+import News from "./components/News/News";
+import NewsDetails from "./components/News/NewsDetails";
 
 inject();
 
@@ -67,7 +70,11 @@ const App = () => {
   const [ham, setHam] = useState(false);
   const [webSocketIndicator, setWebSocketIndicator] = useState(null);
   const [alert, setAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
+  const [alertMessage, setAlertMessage] = useState({});
+  const [searchParam, setSearchParam] = useSearchParams();
+
+  const searchDate = searchParam.get("date");
+  console.log(searchDate);
 
   const api_key = import.meta.env.VITE_api_key;
   const socketUrl = `wss://wss.allsportsapi.com/live_events?APIkey=${api_key}`;
@@ -225,8 +232,31 @@ const App = () => {
   // console.log(date);
   // const newDate2 = newDate
   const [calenderDate, setCalenderDate] = useState(
-    `${date.getFullYear()}-${(date.getMonth() + 1) < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1 }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`
-  );
+    `${date.getFullYear()}-${
+      date.getMonth() + 1 < 10
+        ? `0${date.getMonth() + 1}`
+        : date.getMonth() + 1
+    }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`);
+
+  useEffect(() => {
+    setCalenderDate(
+      searchDate ||
+        `${date.getFullYear()}-${
+          date.getMonth() + 1 < 10
+            ? `0${date.getMonth() + 1}`
+            : date.getMonth() + 1
+        }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`
+    );
+  }, []);
+  console.log(calenderDate);
+  
+  // setSearchParam({
+  //   'date' :
+  //   `${date.getFullYear()}-${
+  //   date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
+  // }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`
+  // }
+  // );
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -244,8 +274,20 @@ const App = () => {
   const handleDateChange = (date) => {
     // console.log(date);
     setCalenderDate(
-      `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+      `${date.getFullYear()}-${
+        date.getMonth() + 1 < 10
+          ? `0${date.getMonth() + 1}`
+          : date.getMonth() + 1
+      }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`
     );
+    setSearchParam({
+      date: `${date.getFullYear()}-${
+        date.getMonth() + 1 < 10
+          ? `0${date.getMonth() + 1}`
+          : date.getMonth() + 1
+      }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`,
+    });
+
     // console.log(date.toISOString().split("T")[0]);
     // console.log(
     //   `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`
@@ -480,6 +522,7 @@ const App = () => {
                 setFocus={setFocus}
                 lastJsonMessage={lastJsonMessage}
                 readyState={readyState}
+                searchDate={searchDate}
               />
             }
           />
@@ -552,6 +595,9 @@ const App = () => {
             }
           ></Route>
           <Route path="/transfers" element={<Transfer />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/news/:id" element={<NewsDetails />} />
+          <Route path="/topnews/:id" element={<NewsDetails />} />
         </Routes>
       </div>
     </div>

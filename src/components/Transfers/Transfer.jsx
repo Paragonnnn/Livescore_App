@@ -34,12 +34,24 @@ const Transfer = () => {
 
   const handleSelected = (e) => {
     setSelected(e.target.value);
-    setUrl(`https://parascore-server.onrender.com/transfers?orderBy=${e.target.value === "latest" ? "" : e.target.value === "fee" ? "fee" : "value"}`);
-  }
+    setUrl(
+      `https://parascore-server.onrender.com/transfers?orderBy=${
+        e.target.value === "latest"
+          ? ""
+          : e.target.value === "fee"
+          ? "fee"
+          : "value"
+      }`
+    );
+  };
   const handleSelected2 = (e) => {
     setSelected2(e.target.value);
-    setUrl(`https://parascore-server.onrender.com/transfers?showTop=${e.target.value === "All transfers" ? "" : true}`);
-  }
+    setUrl(
+      `https://parascore-server.onrender.com/transfers?showTop=${
+        e.target.value === "All transfers" ? "" : true
+      }`
+    );
+  };
 
   useEffect(() => {
     // console.log(
@@ -51,7 +63,7 @@ const Transfer = () => {
         const response = await fetch(url);
         const data = await response.json();
         setTransfers(data.transfers);
-        console.log(data.transfers);
+        // console.log(data.transfers);
       } catch (err) {
         console.error(err);
       }
@@ -62,18 +74,18 @@ const Transfer = () => {
 
   return (
     <div
-      className={` w-[95%] m-auto bg-customBg2 p-4 rounded-2xl mt-5 text-lightText`}
+      className={` w-[100%] m-auto bg-customBg2 p-2 rounded-2xl mt-5 text-lightText`}
     >
       <h1>Transfers</h1>
       <section>
         <select
           value={selected}
           onChange={handleSelected}
-          className=" text-black"
+          className=" text-white px-5 py-2 rounded-full bg-transparent outline outline-customBg"
         >
-          <option value="latest">Latest transfers</option>
-          <option value="fee">Fee</option>
-          <option value="marketValue">Market value</option>
+          <option value="latest" className=" bg-gray-700">Latest transfers</option>
+          <option value="fee" className=" bg-gray-700">Fee</option>
+          <option value="marketValue" className=" bg-gray-700">Market value</option>
         </select>
         <select
           value={selected2}
@@ -99,8 +111,9 @@ const Transfer = () => {
             key={t.playerId + i}
             className="py-2 lg:grid grid-cols-24 gap-x-2 grid-flow-row relative"
           >
-            <div className=" flex col-span-8 gap-2 items-center lg:items-start flex-col">
-              <div className="relative">
+            <div className=" flex col-span-8 items-center lg:items-start flex-col">
+              <div className=" flex flex-col lg:flex-row items-center gap-x-4 gap-y-2">
+              <div className="relative ">
                 <div className=" w-9 h-9 bg-slate-600 bg-opacity-30 relative rounded-full overflow-hidden">
                   <img
                     src={`https://www.fotmob.com/_next/image?url=https%3A%2F%2Fimages.fotmob.com%2Fimage_resources%2Fplayerimages%2F${t.playerId}.png&w=48&q=75`}
@@ -113,7 +126,7 @@ const Transfer = () => {
                       e.target.src = defaultPlayerImage;
                     }}
                     alt=""
-                    className=" w-8 absolute bottom-0 left-[50%] -translate-x-[50%]"
+                    className=" w-12 absolute bottom-0 left-[50%] -translate-x-[50%]"
                   />
                 </div>
                 <div className=" absolute lg:hidden block z-10 -bottom-1 -right-2 px-[5px] rounded-full text-xs bg-slate-600 text-gray-300">
@@ -123,6 +136,9 @@ const Transfer = () => {
               <div className=" flex flex-col">
                 <div className=" text-white">{t.name}</div>
                 <div className=" lg:flex gap-1 items-center hidden">
+                  <div className="">
+                    <TransferArrow />
+                  </div>
                   <img
                     src={`https://www.fotmob.com/_next/image?url=https%3A%2F%2Fimages.fotmob.com%2Fimage_resources%2Flogo%2Fteamlogo%2F${t.toClubId}_xsmall.png&w=32&q=75`}
                     alt=""
@@ -132,6 +148,7 @@ const Transfer = () => {
                     {t.toClub && t.toClub}
                   </div>
                 </div>
+              </div>
               </div>
             </div>
             <div className="col-span-2 lg:flex items-center justify-center lg:justify-start hidden">
@@ -158,21 +175,22 @@ const Transfer = () => {
                   alt=""
                   className=" h-3"
                 />
+
                 <div className=" ">{t.toClub && t.toClub}</div>
               </div>
             </div>
             <div className="col-span-1 lg:flex items-center justify-center lg:justify-start hidden">
               {t.position && t.position.label}
             </div>
-            <div className="flex justify-center col-span-4 gap-2 text-gray-500 lg:text-lightText">
-              <div className=" flex items-center justify-center lg:justify-start lg:hidden">
+            <div className="flex justify-center items-center lg:justify-start col-span-4 gap-2 text-gray-500 lg:text-lightText">
+              <div className=" flex lg:hidden">
                 {t.fee &&
                   (t.fee.feeText === "fee"
                     ? "€" + formatNumber(t.fee.value)
                     : t.fee.feeText)}
               </div>
               <div className="lg:hidden block">Contract:</div>
-              <div className="col-span-4 flex items-center justify-center lg:justify-start">
+              <div className="col-span-4 flex items-center">
                 {`${formatDate(t.fromDate).split(" ")[0]} ${
                   formatDate(t.fromDate).split(" ")[2]
                 } - ${
@@ -193,6 +211,11 @@ const Transfer = () => {
             </div>
           </div>
         ))}
+        <div>
+          <button className=" text-white text-lg bg-customBg px-5 py-1">
+            Prev
+          </button>
+        </div>
       </div>
     </div>
   );

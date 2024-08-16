@@ -11,11 +11,12 @@ export default {
   theme: {
     extend: {
       gridTemplateColumns: {
-        "24" : 'repeat(24, minmax(0, 1fr))'
+        "24" : 'repeat(24, minmax(0, 1fr))',
+        "18" : 'repeat(24, minmax(0, 1fr))',
       },
       colors: {
-        customBg: '#1D9BF0',
-        customBg2: '#0F243A50',
+        customBg: '#048BA8',
+        customBg2: '#08192b',
         customBgLight: '#0F243A10',
         customBg3: '#F7F7FF',
         darkCustomBg3: '#031525',
@@ -34,6 +35,7 @@ export default {
       },
       boxShadow: {
         sm: '0 0 2px 2px #ffffff11',
+        dark: '0 0 10px #00000080',
         light: '0 0 2px 2px #00000011',
         main: '0px 0px 17px 5px rgba(42,134,255,0.1)'
       },
@@ -41,7 +43,8 @@ export default {
         'xxs': '.6rem'
       },
       screens: {
-        xs: '400px'
+        xs: '400px',
+        lg2: '990px'
       },
       keyframes: {
         dis : {
@@ -96,7 +99,15 @@ export default {
         alert: {
           '0%': {transform: 'translateY(-100%)'},
           '100%': {transform: 'translateY(0)'}
-        }
+        },
+        slidein: {
+          '0%': { transform: 'translateX(-100%)', opacity: 0 },
+          '100%': { transform: 'translateX(0)', opacity: 1 },
+        },
+        slideout: {
+          '0%': { transform: 'translateX(0)', opacity: 1 },
+          '100%': { transform: 'translateX(-100%)', opacity: 0 },
+        },
         
       }, 
       animation: {
@@ -112,7 +123,10 @@ export default {
         mode: 'mode 1s',
         translate: 'translate .3s',
         toggle: 'toggle 1s',
-        alert: 'alert .3s'
+        alert: 'alert .3s',
+        'slide-in': 'slidein 0.5s ease-out',
+        'slide-out': 'slideout 0.5s ease-out',
+      
       },
 
     },
