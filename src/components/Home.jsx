@@ -278,7 +278,8 @@ const Home = ({
         <div className=" p-4 bg-customBg2  mt-4 rounded-xl text-lightText ">
           <TransferInfo />
         </div>
-        <div className=" mb-7 mt-5 bg-customBg2 text-lightText">
+        <div className=" mb-7 mt-5 bg-customBg2 text-lightText rounded-xl p-2">
+          
           <NewsInfo />
         </div>
       </div>

@@ -7,7 +7,7 @@ import { pic } from "../..";
 const NewsInfo = () => {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [newsIndex, setNewsIndex] = useState(0)
+  const [newsIndex, setNewsIndex] = useState(0);
 
   useEffect(() => {
     async function getData() {
@@ -31,21 +31,42 @@ const NewsInfo = () => {
         <h1>Loading...</h1>
       ) : (
         <div className="relative rounded-md overflow-hidden">
-          {news.map((item,index) => {
+          {news.map((item, index) => {
             return (
-                index === newsIndex &&
-              <div key={item.id} className=" ">
-                <img src={item.imageUrl} alt="" className=" " onError={`pic`}/>
-                <h1 className=" p-3">{item.title}</h1>
-              </div>
+              index === newsIndex && (
+                <div key={item.id} className=" ">
+                  <img src={item.imageUrl} alt="" className=" " onError={``} />
+                  <h1 className=" p-3">{item.title}</h1>
+                </div>
+              )
             );
           })}
-          
-          <div className=" absolute top-[44%] left-1 -translate-y-1/2 cursor-pointer" onClick={() => (newsIndex > 0) && setNewsIndex(prev => prev - 1)}><BackwarkArrow /></div>
-          <div className=" absolute top-[44%] right-1 -translate-y-1/2 cursor-pointer" onClick={() => (newsIndex < 2) && setNewsIndex(prev => prev + 1)}><ForwardArrow /></div>
+
+          <div
+            className=" absolute top-[44%] left-1 -translate-y-1/2 cursor-pointer"
+            onClick={() => newsIndex > 0 && setNewsIndex((prev) => prev - 1)}
+          >
+            <BackwarkArrow />
+          </div>
+          <div
+            className=" absolute top-[44%] right-1 -translate-y-1/2 cursor-pointer"
+            onClick={() => newsIndex < 2 && setNewsIndex((prev) => prev + 1)}
+          >
+            <ForwardArrow />
+          </div>
         </div>
       )}
-      <Link to={'/news'}>News</Link>
+      {loading ? (
+        <div className="flex justify-center ">
+          <div className=" h-10 w-30 bg-[#ffffff10] mt-6 rounded"></div>
+        </div>
+      ) : (
+        <Link to={"/news"} className="flex justify-center mt-3  items-center">
+          <div className="px-7 bg-customBg py-1 text-lg rounded hover:bg-opacity-80">
+            News
+          </div>
+        </Link>
+      )}
     </div>
   );
 };

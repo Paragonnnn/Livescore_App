@@ -89,7 +89,7 @@ const SignIn = () => {
 
   return (
     <div className="flex flex-col justify-center items-center mt-4 w-full">
-      <div className=" bg-customBg2 w-[95%] max-w-[450px]">
+      <div className=" bg-customBg2 w-[95%] max-w-[450px] ">
         <div className=" ">
           <h1 className=" text-4xl py-8 text-lightText text-center">Sign In</h1>
         </div>
@@ -99,7 +99,7 @@ const SignIn = () => {
           alt=""
           className={`md:h-fit md:w-1/2 w-full scale-y-110 md:block hidden`}
         /> */}
-        <div className="  rounded-xl flex flex-col items-center text-customBg py-12  justify-center md:w-[450px] gap-10 w-[95%] ">
+        <div className="  rounded-xl flex flex-col items-center text-customBg py-12  justify-center md:w-[450px] gap-10 w-full m-auto">
           <div className="flex flex-col w-[85%] ">
             <div className="flex flex-col gap-1 mb-3">
               <label htmlFor="" className=" text-gray-400 opacity-60 text-xs">
@@ -156,7 +156,7 @@ const SignIn = () => {
             <div className=" flex justify-center text-gray-300 mt-3">
               Are you new?{" "}
               <Link to={`/signup`} className=" underline" onClick={logOut}>
-                Create Account
+                Sign up
               </Link>
             </div>
             {/* <button onClick={logOut}>Log Out</button> */}
