@@ -17,6 +17,8 @@ import TransferSvg from "../svg/TransferSvg";
 import Star2 from "../svg/Star2";
 import TransferInfo from "./Transfers/TransferInfo";
 import NewsInfo from "./News/NewsInfo";
+import NewsSvg from "../svg/NewsSvg";
+import BottomNavBar from "../navbar/BottomNavBar";
 // import Transfer from "./Transfers/Transfer";
 
 const Home = ({
@@ -49,15 +51,16 @@ const Home = ({
   reCheck,
   readyState,
   searchParam,
+  profileToggle
 }) => {
   const [picker, setPicker] = useState(null);
   const date = new Date();
   const calendarRef = useRef(null);
   useEffect(() => {
     document.addEventListener("mousedown", (e) => {
-      e.stopPropagation();
       if (!calendarRef.current.contains(e.target)) {
         setShowCalendar(false);
+        e.stopPropagation();
         // console.log(e.target);
       }
     });
@@ -65,7 +68,7 @@ const Home = ({
   console.log(calenderDate);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-11 h-[100%] gap-4">
+    <div className="grid grid-cols-1 lg:grid-cols-11 h-[100%] gap-4 relative">
       {/* <h1>Livescore</h1>
       <Link to={`/countries`}>
         <button>show</button>
@@ -74,6 +77,7 @@ const Home = ({
       <Link to={`/fixtures`}>
         <button>fixtures</button>
       </Link> */}
+      <div className={`${showCalendar || profileToggle ? 'block' : 'hidden'}  h-[120vh] w-full z-40 fixed -top-10 right-0`}></div>
       <div className="hidden lg:block col-span-3">
         {/* <SearchTeamAndPlayer /> */}
         <div
@@ -85,8 +89,8 @@ const Home = ({
             value={calenderDate}
             onChange={handleDateChange}
             className={`${
-              toggleMode ? "text-darkText" : "text-lightText"
-            } mb-2 bg-transparent border-none  bg-opacity-50 text-opacity-80 w-full px-1`}
+              toggleMode ? "text-darkText" : ""
+            } mb-2 bg-transparent border-none  bg-opacity-50 text-opacity-80 w-full px-1 text-customBg`}
             minDetail="year"
             maxDetail="month"
             tileClassName={({ date }) => {
@@ -135,11 +139,11 @@ const Home = ({
                         top.league_key === 302
                           ? "https://upload.wikimedia.org/wikipedia/commons/0/0f/LaLiga_logo_2023.svg"
                           : top.league_key === 152
-                          ? "https://upload.wikimedia.org/wikipedia/az/f/f2/Premier_League_Logo.svg"
+                          ? "https://www.premierleague.com/resources/rebrand/v7.152.2/i/elements/pl-main-logo.png"
                           : top.league_key === 207
                           ? "https://upload.wikimedia.org/wikipedia/commons/e/e9/Serie_A_logo_2022.svg"
                           : top.league_key === 175
-                          ? "https://upload.wikimedia.org/wikipedia/az/f/f6/Bundesliga_%28Official_logo%29.png"
+                          ? "https://upload.wikimedia.org/wikipedia/en/thumb/d/df/Bundesliga_logo_%282017%29.svg/180px-Bundesliga_logo_%282017%29.svg.png"
                           : top.league_key === 168
                           ? "https://upload.wikimedia.org/wikipedia/commons/f/fb/Ligue1_logo.png"
                           : top.league_key === 344
@@ -178,13 +182,13 @@ const Home = ({
       <div
         className={`${
           toggleMode ? "bg-customBg3" : "bg-darkCustomBg3"
-        } block fixed lg:hidden bottom-[0px] w-full  z-10 p-3 left-0 `}
+        } block fixed lg:hidden bottom-[0px] w-full p-3 left-0 z-50`}
       >
-        <div>
+        <div className=" z-50">
           <div
             className={`${showCalendar ? "block" : "hidden"}  ${
               toggleMode ? "bg-customBg3" : "bg-darkCustomBg3"
-            } rounded-t-xl absolute bottom-[50px] animate-dis left-0 w-full `}
+            } rounded-t-xl absolute bottom-[50px] animate-dis left-0 w-full z-50`}
             tabIndex={-1}
             // onFocus={console.log("yii")}
             ref={calendarRef}
@@ -192,7 +196,7 @@ const Home = ({
             <Calendar
               value={calenderDate}
               onChange={handleDateChange}
-              className={` text-customBg bg-transparent border-none w-full bg-opacity-50 `}
+              className={` text-customBg bg-transparent border-none w-full bg-opacity-50`}
               minDetail="year"
               maxDetail="month"
               tileClassName={({ date }) => {
@@ -219,25 +223,13 @@ const Home = ({
             </button>
           </div>
         </div>
-        <div className={` flex justify-between w-full`}>
-          <div>
-            <Calendar2
-              setShowCalendar={setShowCalendar}
-              calendarRef={calendarRef}
-            />
-          </div>
-          <div>
-            <SearchSvg
-              handleSearchToggleClick={handleSearchToggleClick}
-              setFocus={setFocus}
-            />
-          </div>
-          <Link to={`/transfers`}>
-            <TransferSvg />
-          </Link>
-          <div>
-            <Star2 />
-          </div>
+        <div>
+          <BottomNavBar
+            handleSearchToggleClick={handleSearchToggleClick}
+            setFocus={setFocus}
+            setShowCalendar={setShowCalendar}
+            calendarRef={calendarRef}
+          />
         </div>
       </div>
       <div className="col-span-5">
@@ -279,7 +271,6 @@ const Home = ({
           <TransferInfo />
         </div>
         <div className=" mb-7 mt-5 bg-customBg2 text-lightText rounded-xl p-2">
-          
           <NewsInfo />
         </div>
       </div>

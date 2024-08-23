@@ -142,14 +142,14 @@ const navbar = ({
               } absolute -bottom-24 right-2 bg-darkCustomBg3 px-3 py-5 text-white rounded-lg z-10 w-48 `}
             >
               <ul className=" divide-y divide-gray-400 divide-opacity-20">
-                <li onClick={handleSignOut} className=" px-1 py-2 flex gap-1">
-                  <Logout />
-                  Logout
-                </li>
                 <li className=" px-1 py-2">
                   <Link to={"/favourites"} >
                     Favourites
                   </Link>
+                </li>
+                <li onClick={handleSignOut} className=" px-1 py-2 flex gap-1">
+                  <Logout />
+                  Logout
                 </li>
               </ul>
             </nav>

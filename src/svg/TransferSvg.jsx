@@ -8,7 +8,7 @@ const TransferSvg = () => {
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
       fill=""
-      className="fill-customBg h-7"
+      className={`fill-customBg h-7`}
     >
       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
       <g

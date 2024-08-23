@@ -463,7 +463,7 @@ const App = () => {
         setAlertMessage={setAlertMessage}
         alertMessage={alertMessage}
       />
-      <a href="https://wa.link/pyj1aa">
+      <a href="https://wa.link/pyj1aa" target="_blank">
         <WhatsappLogo />
       </a>
       <div
@@ -523,6 +523,7 @@ const App = () => {
                 lastJsonMessage={lastJsonMessage}
                 readyState={readyState}
                 searchDate={searchDate}
+                profileToggle={profileToggle}
               />
             }
           />

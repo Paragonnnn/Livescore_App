@@ -253,8 +253,9 @@ const Fixtures = ({
       {fixtures.filter(
         (f) => f.event_live === "1" && f.event_status != "Finished"
       ).length == "0" &&
-        !isLive && <div>no live games</div>}
+        !isLive && <div className=" bg-customBg2">no live games</div>}
       {!fixturesError && (
+        
         <div
           className={`${
             !loadingFixtures &&
