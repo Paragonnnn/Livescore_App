@@ -168,7 +168,7 @@ const Fixtures = ({
       <div
         className={`${
           toggleMode ? "bg-customBgLight" : "bg-customBg2"
-        } text-gray-400 p-2 mb-4 text-lg  rounded-xl`}
+        } text-gray-400 p-2 mb-4 text-lg  rounded-xl shadow-dark`}
       >
         <div className=" flex items-center w-full  rounded-full p-1 justify-between">
           <div className=" flex">
@@ -260,7 +260,7 @@ const Fixtures = ({
           className={`${
             !loadingFixtures &&
             (toggleMode ? "bg-customBgLight" : "bg-customBg2")
-          }  mb-14 p-2 md:p-4 rounded-xl `}
+          }  mb-14 p-2 md:p-4 rounded-xl shadow-dark`}
         >
           {
             // !(loading && error) &&

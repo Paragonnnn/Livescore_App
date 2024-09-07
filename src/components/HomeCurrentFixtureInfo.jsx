@@ -88,8 +88,8 @@ const HomeCurrentFixtureInfo = ({
         )}
         {!loadingFixtures &&
           currentFixture?.map((fixture) => (
-            <div key={fixture.event_key} >
-              <div className={`${toggleMode ? 'text-darkText' : 'text-lightText'} flex mb-1`}>
+            <div key={fixture.event_key}>
+              <div className={`${toggleMode ? 'text-darkText' : 'text-lightText'} flex mb-1 `}>
                 <Link
                   to={`/leagues/${fixture.country_name.replace(/ +/g, "-")}/${
                     fixture.league_key

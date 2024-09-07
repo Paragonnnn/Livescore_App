@@ -35,7 +35,7 @@ export default {
       },
       boxShadow: {
         sm: '0 0 2px 2px #ffffff11',
-        dark: '0 0 10px #00000080',
+        dark: '0 0 10px #00000040',
         light: '0 0 2px 2px #00000011',
         main: '0px 0px 17px 5px rgba(42,134,255,0.1)'
       },

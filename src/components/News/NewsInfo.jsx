@@ -26,7 +26,7 @@ const NewsInfo = () => {
     getData();
   }, []);
   return (
-    <div className="min-h-[200px]">
+    <div className="min-h-[300px]">
       {loading ? (
         <h1>Loading...</h1>
       ) : (
@@ -34,8 +34,15 @@ const NewsInfo = () => {
           {news.map((item, index) => {
             return (
               index === newsIndex && (
-                <div key={item.id} className=" ">
-                  <img src={item.imageUrl} alt="" className=" " onError={``} />
+                <div key={item.id} className="flex flex-col">
+                  <div className="w-full max-h-[200px] overflow-hidden">
+                    <img
+                      src={item.imageUrl}
+                      alt=""
+                      className=" object-cover"
+                      onError={``}
+                    />
+                  </div>
                   <h1 className=" p-3">{item.title}</h1>
                 </div>
               )

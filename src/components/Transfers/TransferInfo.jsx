@@ -65,7 +65,7 @@ const TransferInfo = () => {
             </section>
             <section className=" ">
               <p>
-                {t.fee.value ? `€${formatNumber(t.fee.value)}` : t.fee.feeText}
+                {t.fee && (t.fee.value ? `€${formatNumber(t.fee.value)}` : t.fee.feeText)}
               </p>
             </section>
           </div>

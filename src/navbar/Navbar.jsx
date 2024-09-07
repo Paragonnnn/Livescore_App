@@ -10,6 +10,7 @@ import Light from "../svg/Light";
 import Dark from "../svg/Dark";
 import Logout from "../svg/Logout";
 
+
 const navbar = ({
   toggleMode,
   setToggleMode,

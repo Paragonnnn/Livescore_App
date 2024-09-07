@@ -252,12 +252,12 @@ const Home = ({
         />
       </div>
       <div
-        className={` hidden lg:block col-span-3  text-black countries-scroll overflow-y-scroll`}
+        className={` hidden lg:block col-span-3  text-black countries-scroll overflow-y-scroll `}
       >
         <div
           className={`${
             toggleMode ? " bg-customBgLight" : " bg-customBg2"
-          } p-4 rounded-xl h-fit`}
+          } p-4 rounded-xl h-fit shadow-dark`}
         >
           <HomeCurrentFixtureInfo
             loadingFixtures={loadingFixtures}
@@ -270,7 +270,7 @@ const Home = ({
         <div className=" p-4 bg-customBg2  mt-4 rounded-xl text-lightText ">
           <TransferInfo />
         </div>
-        <div className=" mb-7 mt-5 bg-customBg2 text-lightText rounded-xl p-2">
+        <div className=" mb-7 mt-5 bg-customBg2 text-lightText rounded-xl py-2">
           <NewsInfo />
         </div>
       </div>
