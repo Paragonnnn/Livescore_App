@@ -16,10 +16,9 @@ const Table = ({ toggleMode }) => {
   const [teamKeys, setTeamKeys] = useState([]);
   const [results, setResults] = useState([]);
   const [leagueFixtures, setLeagueFixtures] = useState([]);
-  const [selectFrom, setSelectFrom] = useState(null)
-  const [selectTo, setSelectTo] = useState(null)
+  const [selectFrom, setSelectFrom] = useState(null);
+  const [selectTo, setSelectTo] = useState(null);
   const [stageName, setStageName] = useState("Current");
-
 
   const { id } = useParams();
   const date = new Date();
@@ -34,14 +33,12 @@ const Table = ({ toggleMode }) => {
   const [from, setFrom] = useState(fromDate);
   const [to, setTo] = useState(toDate);
   const home = () => {
-    
     setChangeTable("home");
     setMappedTable(homeTable);
-    
+
     // console.log(changeTable);
   };
   const away = () => {
-    
     setChangeTable("away");
     setMappedTable(awayTable);
     // console.log(changeTable);
@@ -146,7 +143,7 @@ const Table = ({ toggleMode }) => {
 
   //     // Use Promise.all() to await all promises and get the fetched data
   //     // const fetchedData = await new Promise.all(promiseArray);
-      
+
   //     // Now fetchedData contains the data fetched for each key
   //     // console.log(fetchedData);
   //   }
@@ -178,8 +175,19 @@ const Table = ({ toggleMode }) => {
 
         <div className=" col-span-1 ">
           <div>
-            <input type="date" name="" id="" onChange={e => setSelectFrom(e.target.value)} max='06-12-2021'/>
-            <input type="date" name="" id="" onChange={e => selectTo(e.target.value)}/>
+            <input
+              type="date"
+              name=""
+              id=""
+              onChange={(e) => setSelectFrom(e.target.value)}
+              max="06-12-2021"
+            />
+            <input
+              type="date"
+              name=""
+              id=""
+              onChange={(e) => selectTo(e.target.value)}
+            />
           </div>
           {topScorers && table.length != 0 && (
             <div className="  h-fit w-full bg-customBg2 divide-y divide-black px-4 sticky top-[80px] ">
@@ -198,8 +206,19 @@ const Table = ({ toggleMode }) => {
                         className="flex justify-between p-2 py-2"
                         key={index}
                       >
-                        <div>
-                          {index + 1}. {top.player_name}
+                        <div className="flex items-center gap-2">
+                          <div>
+                            {index + 1}. {top.player_name}
+                          </div>
+                          <img
+                            src={`https://apiv2.allsportsapi.com/logo/${
+                              top.team_key
+                            }_${top.team_name
+                              .replace(" ", "-")
+                              .toLowerCase()}.jpg`}
+                            className=" h-5"
+                            alt=""
+                          />
                         </div>
                         <div>{top.goals}</div>
                       </div>

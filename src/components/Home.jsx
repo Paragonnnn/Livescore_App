@@ -51,7 +51,7 @@ const Home = ({
   reCheck,
   readyState,
   searchParam,
-  profileToggle
+  profileToggle,
 }) => {
   const [picker, setPicker] = useState(null);
   const date = new Date();
@@ -77,7 +77,11 @@ const Home = ({
       <Link to={`/fixtures`}>
         <button>fixtures</button>
       </Link> */}
-      <div className={`${showCalendar || profileToggle ? 'block' : 'hidden'}  h-[120vh] w-full z-40 fixed -top-10 right-0`}></div>
+      <div
+        className={`${
+          showCalendar || profileToggle ? "block" : "hidden"
+        }  h-[120vh] w-full z-40 fixed -top-10 right-0`}
+      ></div>
       <div className="hidden lg:block col-span-3">
         {/* <SearchTeamAndPlayer /> */}
         <div
@@ -252,27 +256,27 @@ const Home = ({
         />
       </div>
       <div
-        className={` hidden lg:block col-span-3  text-black countries-scroll overflow-y-scroll `}
+        className={` hidden lg:block col-span-3  text-black  relative`}
       >
-        <div
-          className={`${
-            toggleMode ? " bg-customBgLight" : " bg-customBg2"
-          } p-4 rounded-xl h-fit shadow-dark`}
-        >
-          <HomeCurrentFixtureInfo
-            loadingFixtures={loadingFixtures}
-            currentFixture={currentFixture}
-            toggleMode={toggleMode}
-            setCurrentFixture={setCurrentFixture}
-          />
-        </div>
+          <div
+            className={`${
+              toggleMode ? " bg-customBgLight" : " bg-customBg2"
+            } p-4 rounded-xl h-fit shadow-dark sticky top-[85px] z-50`}
+          >
+            <HomeCurrentFixtureInfo
+              loadingFixtures={loadingFixtures}
+              currentFixture={currentFixture}
+              toggleMode={toggleMode}
+              setCurrentFixture={setCurrentFixture}
+            />
+          </div>
 
-        <div className=" p-4 bg-customBg2  mt-4 rounded-xl text-lightText ">
-          <TransferInfo />
-        </div>
-        <div className=" mb-7 mt-5 bg-customBg2 text-lightText rounded-xl py-2">
-          <NewsInfo />
-        </div>
+          <div className=" p-4 bg-customBg2  mt-4 rounded-xl text-lightText ">
+            <TransferInfo />
+          </div>
+          <div className=" mb-7 mt-5 bg-customBg2 text-lightText rounded-xl py-2">
+            <NewsInfo />
+          </div>
       </div>
 
       {/* {

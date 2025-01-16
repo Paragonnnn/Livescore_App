@@ -28,7 +28,7 @@ const NewsInfo = () => {
   return (
     <div className="min-h-[300px]">
       {loading ? (
-        <h1>Loading...</h1>
+        <h1 className=" text-center">Loading...</h1>
       ) : (
         <div className="relative rounded-md overflow-hidden">
           {news.map((item, index) => {
