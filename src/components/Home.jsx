@@ -47,9 +47,9 @@ const Home = ({
   focus,
   toggleSearch,
   setFocus,
-  lastJsonMessage,
+  // lastJsonMessage,
   reCheck,
-  readyState,
+  // readyState,
   searchParam,
   profileToggle,
 }) => {
@@ -250,9 +250,9 @@ const Home = ({
           windowWidth={windowWidth}
           toggleMode={toggleMode}
           toggleSearch={toggleSearch}
-          lastJsonMessage={lastJsonMessage}
+          // lastJsonMessage={lastJsonMessage}
           showCalendar={showCalendar}
-          readyState={readyState}
+          // readyState={readyState}
         />
       </div>
       <div

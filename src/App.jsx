@@ -42,6 +42,7 @@ import Alert from "./components/Alert";
 import Transfer from "./components/Transfers/Transfer";
 import News from "./components/News/News";
 import NewsDetails from "./components/News/NewsDetails";
+import { getMatches } from "./polling/polling";
 
 inject();
 
@@ -81,20 +82,20 @@ const App = () => {
 
   console.log(navigator.onLine);
 
-  const { lastJsonMessage, readyState, getWebSocket, sendJsonMessage } =
-    useWebSocket(socketUrl, {
-      // onOpen: () => setWebSocketIndicator(true),
-      // onClose: () => setWebSocketIndicator(false),
-      // onError: () => setWebSocketIndicator(false),
-      shouldReconnect: () => true,
-      // reconnectAttempts: 10,
-      // reconnectInterval: 3000,
-      //Will attempt to reconnect on all close events, such as server shutting down
-    });
+  // const { lastJsonMessage, readyState, getWebSocket, sendJsonMessage } =
+  //   useWebSocket(socketUrl, {
+  //     // onOpen: () => setWebSocketIndicator(true),
+  //     // onClose: () => setWebSocketIndicator(false),
+  //     // onError: () => setWebSocketIndicator(false),
+  //     shouldReconnect: () => true,
+  //     // reconnectAttempts: 10,
+  //     // reconnectInterval: 3000,
+  //     //Will attempt to reconnect on all close events, such as server shutting down
+  //   });
 
-  const connectSocket = () => {
-    useWebSocket(socketUrl);
-  };
+  // const connectSocket = () => {
+  //   useWebSocket(socketUrl);
+  // };
 
   // const connectSocket = () => {
   //   const { lastJsonMessage, readyState, getWebSocket, sendJsonMessage } =
@@ -166,59 +167,59 @@ const App = () => {
   // }, [lastJsonMessage]);
 
   // Define the function to replace items in the fixtures array
-  const replaceItems = (fixtures, lastJsonMessage) => {
-    return fixtures.map((f) => {
-      // Check if there is a matching ID in the lastJsonMessage
-      let replacementItem = lastJsonMessage.find(
-        (l) => l.event_key === f.event_key
-      );
+  // const replaceItems = (fixtures, lastJsonMessage) => {
+  //   return fixtures.map((f) => {
+  //     // Check if there is a matching ID in the lastJsonMessage
+  //     let replacementItem = lastJsonMessage.find(
+  //       (l) => l.event_key === f.event_key
+  //     );
 
-      // If there is a match, use the replacement item, otherwise use the original item
-      return replacementItem ? replacementItem : f;
-    });
-  };
+  //     // If there is a match, use the replacement item, otherwise use the original item
+  //     return replacementItem ? replacementItem : f;
+  //   });
+  // };
 
-  // Define the main function to handle the update
-  const handleUpdate = (lastJsonMessage, fixtures, setFixtures, readyState) => {
-    if (lastJsonMessage !== null && fixtures) {
-      // Use the function to get the updated array
-      let updatedArray = replaceItems(fixtures, lastJsonMessage);
+  // // Define the main function to handle the update
+  // const handleUpdate = (lastJsonMessage, fixtures, setFixtures, readyState) => {
+  //   if (lastJsonMessage !== null && fixtures) {
+  //     // Use the function to get the updated array
+  //     let updatedArray = replaceItems(fixtures, lastJsonMessage);
 
-      // Set the updated fixtures
-      setFixtures(updatedArray);
+  //     // Set the updated fixtures
+  //     setFixtures(updatedArray);
 
-      // Log the readyState (assuming you need to keep this console log)
-      console.log(readyState);
-    }
-  };
+  //     // Log the readyState (assuming you need to keep this console log)
+  //     console.log(readyState);
+  //   }
+  // };
 
-  // Use the function inside the useEffect hook
-  useEffect(() => {
-    handleUpdate(lastJsonMessage, fixtures, setFixtures, readyState);
-  }, [lastJsonMessage]);
+  // // Use the function inside the useEffect hook
+  // useEffect(() => {
+  //   handleUpdate(lastJsonMessage, fixtures, setFixtures, readyState);
+  // }, [lastJsonMessage]);
 
-  useEffect(() => {
-    setLiveCheck(
-      fixtures?.map(
-        (fixture) =>
-          // !check.includes(fixture.league_key) &&
-          fixture.event_live === "1" &&
-          fixture.event_status !== "Finished" &&
-          fixture.league_key
-      )
-    );
-    // console.log(fixtures);
-    // console.log(check);
-    console.log(
-      fixtures?.map(
-        (fixture) =>
-          // !check.includes(fixture.league_key) &&
-          fixture.event_live === "1" &&
-          fixture.event_status !== "Finished" &&
-          fixture.league_key
-      )
-    );
-  }, [lastJsonMessage]);
+  // useEffect(() => {
+  //   setLiveCheck(
+  //     fixtures?.map(
+  //       (fixture) =>
+  //         // !check.includes(fixture.league_key) &&
+  //         fixture.event_live === "1" &&
+  //         fixture.event_status !== "Finished" &&
+  //         fixture.league_key
+  //     )
+  //   );
+  //   // console.log(fixtures);
+  //   // console.log(check);
+  //   console.log(
+  //     fixtures?.map(
+  //       (fixture) =>
+  //         // !check.includes(fixture.league_key) &&
+  //         fixture.event_live === "1" &&
+  //         fixture.event_status !== "Finished" &&
+  //         fixture.league_key
+  //     )
+  //   );
+  // }, [lastJsonMessage]);
 
   const { id } = useParams();
   // const history = useNavigate()
@@ -233,10 +234,9 @@ const App = () => {
   // const newDate2 = newDate
   const [calenderDate, setCalenderDate] = useState(
     `${date.getFullYear()}-${
-      date.getMonth() + 1 < 10
-        ? `0${date.getMonth() + 1}`
-        : date.getMonth() + 1
-    }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`);
+      date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
+    }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`
+  );
 
   useEffect(() => {
     setCalenderDate(
@@ -249,7 +249,7 @@ const App = () => {
     );
   }, []);
   console.log(calenderDate);
-  
+
   // setSearchParam({
   //   'date' :
   //   `${date.getFullYear()}-${
@@ -438,6 +438,25 @@ const App = () => {
   //   }
   // })
 
+  useEffect(() => {
+    let controller = new AbortController();
+
+    const fetchData = () => {
+      controller.abort();
+      controller = new AbortController();
+      getMatches(controller, setFixtures);
+    };
+    fetchData();
+    const interval = setInterval(
+      () => getMatches(fixtures, setFixtures),
+      10000
+    );
+    return () => {
+      clearInterval(interval);
+      controller.abort();
+    };
+  }, []);
+
   return (
     <div className={`${toggleMode ? "bg-customBg3" : "bg-darkCustomBg3"} `}>
       {/* <Notifications /> */}
@@ -520,8 +539,8 @@ const App = () => {
                 setCheck={setCheck}
                 toggleSearch={toggleSearch}
                 setFocus={setFocus}
-                lastJsonMessage={lastJsonMessage}
-                readyState={readyState}
+                // lastJsonMessage={lastJsonMessage}
+                // readyState={readyState}
                 searchDate={searchDate}
                 profileToggle={profileToggle}
               />

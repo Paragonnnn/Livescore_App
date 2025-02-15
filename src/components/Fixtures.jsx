@@ -21,9 +21,9 @@ const Fixtures = ({
   toggleMode,
   toggleSearch,
   showCalendar,
-  lastJsonMessage,
+  // lastJsonMessage,
   reCheck,
-  readyState,
+  // readyState,
 }) => {
   const [isLive, setIsLive] = useState(true);
   const [checkCheck, setCheckCheck] = useState([]);
@@ -205,13 +205,16 @@ const Fixtures = ({
             </button>
             <div className="flex items-center">
               <div
-                className={`${
-                  readyState === 1
-                    ? "bg-green-500"
-                    : readyState === 0
-                    ? "bg-gray-400"
-                    : "bg-red-500"
-                } h-1 w-1  rounded-full`}
+                // className={`
+                //   ${
+                //   //readyState === 1
+                //     //? "bg-green-500"
+                //     //: readyState === 0
+                //     //? "bg-gray-400"
+                //     //: "bg-red-500"
+                // }
+                //      h-1 w-1  rounded-full`}
+                className="h-1 w-1  rounded-full"
               ></div>
             </div>
           </div>
@@ -386,7 +389,7 @@ const Fixtures = ({
                                     className={`${
                                       fixture.event_status !== "Finished" &&
                                       fixture.event_live === "1"
-                                        ? " text-live font-bold  text-[.75rem] animate-pulse"
+                                        ? " text-live font-bold  text-[.75rem]"
                                         : ""
                                     } ' text-[.5rem] text-center font-semibold w-[40px] text-ellipsis overflow-hidden  '`}
                                   >
@@ -407,7 +410,7 @@ const Fixtures = ({
                                           +fixture.event_status ||
                                             fixture.event_status.includes("+")
                                         )
-                                      ? `${fixture.event_status}'`
+                                      ? <span>{fixture.event_status}<span className=" animate-blink">'</span></span>
                                       : `${fixture.event_status.slice(0, 4)}.`}
                                   </div>
                                 </div>
