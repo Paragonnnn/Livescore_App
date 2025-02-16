@@ -438,17 +438,21 @@ const App = () => {
   //   }
   // })
 
+  
+  const latestRequestId = useRef(0);
   useEffect(() => {
     let controller = new AbortController();
+    const currentRequestId = latestRequestId.current + 1;
+    latestRequestId.current = currentRequestId;
 
     const fetchData = () => {
       controller.abort();
       controller = new AbortController();
-      getMatches(controller, setFixtures);
+      getMatches(controller, setFixtures,calenderDate,latestRequestId,currentRequestId);
     };
     fetchData();
     const interval = setInterval(
-      () => getMatches(fixtures, setFixtures),
+      () => getMatches(fixtures, setFixtures,calenderDate,latestRequestId,currentRequestId),
       10000
     );
     return () => {

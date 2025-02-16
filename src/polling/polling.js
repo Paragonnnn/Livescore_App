@@ -1,13 +1,16 @@
 const api_key = import.meta.env.VITE_api_key;
 
-export const getMatches = async (controller, setFixtures) => {
+export const getMatches = async (controller, setFixtures, date,latestRequestId,currentRequestId) => {
   try {
+
     const response = await fetch(
-      `https://apiv2.allsportsapi.com/football/?met=Fixtures&APIkey=${api_key}&from=2025-02-15&to=2025-02-15`,
+      `https://apiv2.allsportsapi.com/football/?met=Fixtures&APIkey=${api_key}&from=${date}&to=${date}`,
       { signal: controller.signal }
     );
     const data = await response.json();
-    setFixtures(data.result);
+    if (currentRequestId === latestRequestId.current) {
+      setFixtures(data.result);
+    }
     console.log(data);
   } catch (error) {
     console.error("Error:", error);
