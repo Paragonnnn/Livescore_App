@@ -452,7 +452,9 @@ const App = () => {
         setFixtures,
         calenderDate,
         latestRequestId,
-        currentRequestId
+        currentRequestId,
+        setLiveCheck,
+        check
       );
     };
     fetchData();
@@ -463,7 +465,9 @@ const App = () => {
           setFixtures,
           calenderDate,
           latestRequestId,
-          currentRequestId
+          currentRequestId,
+          setLiveCheck,
+          check
         ),
       10000
     );

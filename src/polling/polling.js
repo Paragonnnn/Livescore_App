@@ -5,7 +5,9 @@ export const getMatches = async (
   setFixtures,
   date,
   latestRequestId,
-  currentRequestId
+  currentRequestId,
+  setLiveCheck,
+  check
 ) => {
   try {
     const response = await fetch(
@@ -17,6 +19,15 @@ export const getMatches = async (
       setFixtures(data.result);
     }
     console.log(data);
+    setLiveCheck(
+      data.result.map(
+        (fixture) =>
+          !check.includes(fixture.league_key) &&
+          fixture.event_live === "1" &&
+          fixture.event_status !== "Finished" &&
+          fixture.league_key
+      )
+    );
   } catch (error) {
     console.error("Error:", error);
   }
