@@ -90,7 +90,7 @@ const CurrentFixtureInfo = ({
               <div
                 className={`${
                   match.event_live === "1" && match.event_status != "Finished"
-                    ? "text-live animate-pulse "
+                    ? "text-live"
                     : ""
                 } text-center   w-1/3`}
               >
@@ -103,6 +103,7 @@ const CurrentFixtureInfo = ({
                     : match.event_status === "Half Time"
                     ? "HT"
                     : match.event_status}
+                    <span className=" animate-blink">'</span>
                 </div>
               </div>
               <div className="text-center  flex gap-5 justify-center items-center   w-1/3">

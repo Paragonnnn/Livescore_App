@@ -10,8 +10,16 @@ import CurrentFixtureInfo from "./CurrentFixtureInfo";
 import MatchInfo from "./MatchInfo";
 import Standing from "./Standing";
 import useWebSocket from "react-use-websocket";
+import { getMatchUpdate } from "../polling/polling";
 
-const CurrentFixtures = ({ toggleMode, windowWidth,alert,setAlert,alertMessage,setAlertMessage }) => {
+const CurrentFixtures = ({
+  toggleMode,
+  windowWidth,
+  alert,
+  setAlert,
+  alertMessage,
+  setAlertMessage,
+}) => {
   const [loading, setLoading] = useState(false);
   const [match, setMatch] = useState([]);
   const [hToH, setHToH] = useState([]);
@@ -43,37 +51,39 @@ const CurrentFixtures = ({ toggleMode, windowWidth,alert,setAlert,alertMessage,s
   // console.log(useParams());
   const api_key = import.meta.env.VITE_api_key;
 
-  const socketUrl = `wss://wss.allsportsapi.com/live_events?APIkey=${api_key}&matchId=${id}`;
-  const {
-    sendMessage,
-    sendJsonMessage,
-    lastMessage,
-    lastJsonMessage,
-    readyState,
-    getWebSocket,
-  } = useWebSocket(socketUrl, {
-    // onOpen: () => console.log(lastJsonMessage, lastMessage),
-    //Will attempt to reconnect on all close events, such as server shutting down
-  });
+  // const socketUrl = `wss://wss.allsportsapi.com/live_events?APIkey=${api_key}&matchId=${id}`;
+  // const {
+  //   sendMessage,
+  //   sendJsonMessage,
+  //   lastMessage,
+  //   lastJsonMessage,
+  //   readyState,
+  //   getWebSocket,
+  // } = useWebSocket(socketUrl, {
+  //   // onOpen: () => console.log(lastJsonMessage, lastMessage),
+  //   //Will attempt to reconnect on all close events, such as server shutting down
+  // });
 
-  useEffect(() => {
-    // console.log(lastJsonMessage);
-    if (lastJsonMessage !== null) {
-      setMatch(lastJsonMessage);
-      // console.log(lastJsonMessage?.map((s) => s.statistics));
-      setStats(lastJsonMessage.map((s) => s.statistics));
-      // setPlayerStat(lastJsonMessage.map((s) => s.player_stats));
-      setEvents(
-        lastJsonMessage
-          .map((c) => c.cards)
-          .concat(lastJsonMessage.map((g) => g.goalscorers))
-          .concat(lastJsonMessage.map((s) => s.substitutes))
-          .reduce((a, c) => {
-            return a.concat(c);
-          }, [])
-      );
-    }
-  }, [lastJsonMessage]);
+  // useEffect(() => {
+  //   // console.log(lastJsonMessage);
+  //   if (lastJsonMessage !== null) {
+  //     setMatch(lastJsonMessage);
+  //     // console.log(lastJsonMessage?.map((s) => s.statistics));
+  //     setStats(lastJsonMessage.map((s) => s.statistics));
+  //     // setPlayerStat(lastJsonMessage.map((s) => s.player_stats));
+  //     setEvents(
+  //       lastJsonMessage
+  //         .map((c) => c.cards)
+  //         .concat(lastJsonMessage.map((g) => g.goalscorers))
+  //         .concat(lastJsonMessage.map((s) => s.substitutes))
+  //         .reduce((a, c) => {
+  //           return a.concat(c);
+  //         }, [])
+  //     );
+  //   }
+  // }, [lastJsonMessage]);
+
+  
   const handleClick = (e) => {
     let book = e.target.innerHTML;
     setBookie(book);
@@ -274,7 +284,7 @@ const CurrentFixtures = ({ toggleMode, windowWidth,alert,setAlert,alertMessage,s
             `firstTeamId=${match.home_team_key}&secondTeamId=${match.away_team_key}`
         )}`
       )
-        .then((res) => res.json())
+      .then((res) => res.json())
         .then((json) => {
           setHToH(json.result.H2H);
           // console.log(json.result.H2H);
@@ -302,7 +312,7 @@ const CurrentFixtures = ({ toggleMode, windowWidth,alert,setAlert,alertMessage,s
                     eval(h.event_final_result) > 0) ||
                   (getHomeTeamId == h.away_team_key &&
                     eval(h.event_final_result) < 0)
-              ).length
+                  ).length
             )
           );
           setH2hAwayStat(
@@ -313,7 +323,7 @@ const CurrentFixtures = ({ toggleMode, windowWidth,alert,setAlert,alertMessage,s
                     eval(h.event_final_result) < 0) ||
                   (getAwayTeamId == h.home_team_key &&
                     eval(h.event_final_result) > 0)
-              ).length
+                  ).length
             )
           );
         })
@@ -340,18 +350,30 @@ const CurrentFixtures = ({ toggleMode, windowWidth,alert,setAlert,alertMessage,s
       await fetch(
         `https://apiv2.allsportsapi.com/football/?&met=Standings&leagueId=${getLeagueId}&APIkey=${api_key}`
       )
-        .then((res) => res.json())
-        .then((json) => {
+      .then((res) => res.json())
+      .then((json) => {
           setTable(json.result.total);
           setHomeTable(json.result.home);
           setAwayTable(json.result.away);
           setMappedTable(json.result.total);
           // console.log(json.result);
         });
-    }
+      }
     getData();
   }, [getLeagueId]);
 
+  useEffect(() => {
+    const fetchData = () => {
+      getMatchUpdate(id,setMatch, setEvents, setStats);
+    };
+    fetchData();
+    const interval = setInterval(() => {
+      getMatchUpdate(id,setMatch, setEvents, setStats);
+    }, 10000);
+    return () => clearInterval(interval);
+  },[]);
+
+  
   return (
     <div className=" gap-4">
       {windowWidth > 1024 ? (

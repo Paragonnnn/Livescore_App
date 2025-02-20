@@ -125,7 +125,7 @@ export default {
         alert: "alert .3s",
         "slide-in": "slidein 0.5s ease-out",
         "slide-out": "slideout 0.5s ease-out",
-        blink: "blink 1s linear infinite",
+        blink: "blink 2s linear infinite",
       },
     },
   },
