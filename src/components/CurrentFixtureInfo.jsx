@@ -103,7 +103,7 @@ const CurrentFixtureInfo = ({
                     : match.event_status === "Half Time"
                     ? "HT"
                     : match.event_status}
-                    <span className=" animate-blink">'</span>
+                    {match.event_live === '1' && <span className=" animate-blink">'</span>}
                 </div>
               </div>
               <div className="text-center  flex gap-5 justify-center items-center   w-1/3">

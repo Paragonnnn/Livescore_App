@@ -438,7 +438,6 @@ const App = () => {
   //   }
   // })
 
-  
   const latestRequestId = useRef(0);
   useEffect(() => {
     let controller = new AbortController();
@@ -448,11 +447,24 @@ const App = () => {
     const fetchData = () => {
       controller.abort();
       controller = new AbortController();
-      getMatches(controller, setFixtures,calenderDate,latestRequestId,currentRequestId);
+      getMatches(
+        controller,
+        setFixtures,
+        calenderDate,
+        latestRequestId,
+        currentRequestId
+      );
     };
     fetchData();
     const interval = setInterval(
-      () => getMatches(fixtures, setFixtures,calenderDate,latestRequestId,currentRequestId),
+      () =>
+        getMatches(
+          fixtures,
+          setFixtures,
+          calenderDate,
+          latestRequestId,
+          currentRequestId
+        ),
       10000
     );
     return () => {

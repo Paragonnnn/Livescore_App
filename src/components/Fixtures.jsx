@@ -36,17 +36,14 @@ const Fixtures = ({
     if (check != []) {
       setCheckCheck([]);
       setCheckCheck(check);
-      console.log("checkkkkk");
     } else check == [];
     {
       setCheckCheck([]);
       setCheckCheck(reCheck);
-      console.log("not checkkkk");
     }
   }, [check]);
 
   const checkDoc = async () => {
-    // console.log(fixtures.map((f) => f.home_team_key));
     try {
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
@@ -54,9 +51,7 @@ const Fixtures = ({
       if (docSnap.exists()) {
         const favTeams = Object.keys(docSnap.data().favouritesTeams.teams);
         setFavTeamsId(favTeams);
-        console.log(favTeamsId);
       } else {
-        console.log("No such document!");
       }
     } catch (err) {
       console.log(err, "error getting document");
@@ -86,8 +81,6 @@ const Fixtures = ({
     } else {
       setCurrentFixture([id]);
     }
-    // console.log(currentFixture);
-    // console.log("hi");
   };
 
   const yellowCard = (fixture, isHome) => {
@@ -138,7 +131,6 @@ const Fixtures = ({
 
   const handleShowCards = () => {
     setShowCards((prev) => !prev);
-    console.log(showCards);
   };
 
   // const buttonClick = () => {
@@ -248,11 +240,6 @@ const Fixtures = ({
           <Error />
         </div>
       )}
-      {console.log(
-        fixtures.filter(
-          (f) => f.event_live === "1" && f.event_status != "Finished"
-        ).length
-      )}
       {fixtures.filter(
         (f) => f.event_live === "1" && f.event_status != "Finished"
       ).length == "0" &&
@@ -359,10 +346,10 @@ const Fixtures = ({
                                     )}/${fixture.event_home_team.replace(
                                       / +/g,
                                       "-"
-                                    )}-${fixture.event_away_team.replace(
+                                    ).replace('/', '-')}-${fixture.event_away_team.replace(
                                       / +/g,
                                       "-"
-                                    )}/${fixture.event_key}`}
+                                    ).replace('/', '-')}/${fixture.event_key}`}
                                   ></Link>
                                 )}
                                 <div

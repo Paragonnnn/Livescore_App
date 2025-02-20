@@ -275,7 +275,7 @@ const HomeCurrentFixtureInfo = ({
                   )}/${fixture.event_home_team.replace(
                     / +/g,
                     "-"
-                  )}-${fixture.event_away_team.replace(/ +/g, "-")}/${
+                  ).replace('/', '-')}-${fixture.event_away_team.replace(/ +/g, "-").replace('/', '-')}/${
                     fixture.event_key
                   }`}
                   className={` text-lightText px-4 bg-customBg py-1 text-lg rounded hover:bg-opacity-80 mt-3`}
