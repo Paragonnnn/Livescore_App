@@ -36,7 +36,7 @@ const navbar = ({
   return (
     <div>
        {new Date().getDate() === 8 && new Date().getMonth() === 2 && (
-        <marquee behavior="" direction="" className="text-lightText absolute">
+        <marquee behavior="" direction="" className="text-lightText absolute w-[98vw] left-[50%] translate-x-[-50%]">
           Happy International Women's Day 🎉❤️
         </marquee>
       )}
