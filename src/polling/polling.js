@@ -1,3 +1,4 @@
+
 const api_key = import.meta.env.VITE_api_key;
 
 export const getMatches = async (
@@ -19,6 +20,7 @@ export const getMatches = async (
       setFixtures(data.result);
     }
     console.log(data);
+    console.log(date)
     setLiveCheck(
       data.result.map(
         (fixture) =>

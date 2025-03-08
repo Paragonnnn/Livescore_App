@@ -475,7 +475,7 @@ const App = () => {
       clearInterval(interval);
       controller.abort();
     };
-  }, []);
+  }, [calenderDate]);
 
   return (
     <div className={`${toggleMode ? "bg-customBg3" : "bg-darkCustomBg3"} `}>
@@ -559,6 +559,7 @@ const App = () => {
                 setCheck={setCheck}
                 toggleSearch={toggleSearch}
                 setFocus={setFocus}
+                setSearchParam={setSearchParam}
                 // lastJsonMessage={lastJsonMessage}
                 // readyState={readyState}
                 searchDate={searchDate}

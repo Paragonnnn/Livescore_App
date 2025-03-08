@@ -52,6 +52,7 @@ const Home = ({
   // readyState,
   searchParam,
   profileToggle,
+  setSearchParam,
 }) => {
   const [picker, setPicker] = useState(null);
   const date = new Date();
@@ -107,9 +108,8 @@ const Home = ({
           />
           <button
             onClick={() => {
-              setCalenderDate(
-                `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
-              );
+              setCalenderDate(new Date().toLocaleDateString('en-CA'));
+              setSearchParam('')
               setCheck([]);
             }}
             className="  px-3 py-1 rounded-full text-white bg-customBg w-fit ml-4 mb-4 cursor-pointer hover:opacity-80 active:opacity-60"
@@ -218,7 +218,9 @@ const Home = ({
                     date.getMonth() + 1
                   }-${date.getDate()}`
                 );
+                
                 setShowCalendar(false);
+                setSearchParam('')
                 setCheck([]);
               }}
               className="  px-3 py-2 rounded-full text-white bg-customBg  w-fit ml-4 mb-4 cursor-pointer hover:opacity-80 active:opacity-60"
