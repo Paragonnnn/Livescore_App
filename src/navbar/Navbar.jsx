@@ -35,6 +35,11 @@ const navbar = ({
 
   return (
     <div>
+       {new Date().getDate() === 8 && new Date().getMonth() === 2 && (
+        <marquee behavior="" direction="" className="text-lightText absolute">
+          Happy International Women's Day 🎉❤️
+        </marquee>
+      )}
       <div className="m-auto  max-w-[1440px]  flex items-center justify-between relative px-3 py-2 sm:py-3">
         {/* <Link  className="  outline outline-blue-600"> */}
         <Link

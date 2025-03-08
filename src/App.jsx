@@ -480,181 +480,187 @@ const App = () => {
 
   return (
     <>
-    <Helmet>
-      <title>ParaScore</title>
-      <meta name="twitter:card" content=""/>
-      <meta name="twitter:site" content="@oluwaseyi__7"/>
-      <meta name="twitter:creator" content="@oluwaseyi__7"/>
-      <meta name="twitter:title" content="ParaScore"/>
-      <meta name="twitter:description" content="ParaScore is a football app that provides live scores, fixtures, news, transfers, and more."/>
-      <meta name="twitter:image" content="https://res.cloudinary.com/drxjxycnn/image/upload/c_fill,w_300,h_157/v1741418731/logo_aabzju.jpg"/>
-      <meta name="twitter:image:alt" content="ParaScore"/>
-      
-    </Helmet>
-    <div className={`${toggleMode ? "bg-customBg3" : "bg-darkCustomBg3"} `}>
-      {/* <Notifications /> */}
-      <div
-        className={`${
-          toggleMode
-            ? "bg-customBg3 shadow-light"
-            : "bg-darkCustomBg3 shadow-sm"
-        }   w-full  sticky top-[-2px] rounded-b-xl z-50`}
-      >
-        <Navbar
-          toggleMode={toggleMode}
-          setToggleMode={setToggleMode}
-          profileToggle={profileToggle}
-          windowWidth={windowWidth}
-          setProfileToggle={setProfileToggle}
-          ham={ham}
+      <Helmet>
+        <title>ParaScore</title>
+        <meta name="twitter:card" content="" />
+        <meta name="twitter:site" content="@oluwaseyi__7" />
+        <meta name="twitter:creator" content="@oluwaseyi__7" />
+        <meta name="twitter:title" content="ParaScore" />
+        <meta
+          name="twitter:description"
+          content="ParaScore is a football app that provides live scores, fixtures, news, transfers, and more."
         />
-      </div>
-      <Alert
-        alert={alert}
-        setAlert={setAlert}
-        setAlertMessage={setAlertMessage}
-        alertMessage={alertMessage}
-      />
-      <a href="https://wa.link/pyj1aa" target="_blank">
-        <WhatsappLogo />
-      </a>
-      <div
-        className={`${
-          toggleSearch ? "block animate-dis" : "hidden animate-dat"
-        } h-full static  w-full `}
-      >
-        {windowWidth < 1024 && (
-          <div className=" ">
-            <SearchClub
-              handleSearchToggleClick={handleSearchToggleClick}
-              toggleSearch={toggleSearch}
-              setToggleSearch={setToggleSearch}
-              searchClub={searchClub}
-              handleSearchChange={handleSearchChange}
-              setSearchClub={setSearchClub}
-              clubs={leagues.concat(countries)}
-              windowWidth={windowWidth}
-              toggleMode={toggleMode}
-              focus={focus}
-              setFocus={setFocus}
-            />
-          </div>
-        )}
-      </div>
-
-      <div className=" max-w-[1440px] m-auto  lg:p-4 p-1">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                countries={countries}
-                loadingCountries={loadingCountries}
-                error={error}
-                leagues={leagues}
-                check={check}
-                reCheck={reCheck}
-                fixtures={fixtures}
-                loadingFixtures={loadingFixtures}
-                fixturesError={fixturesError}
-                currentFixture={currentFixture}
-                setCurrentFixture={setCurrentFixture}
-                liveCheck={liveCheck}
-                windowWidth={windowWidth}
-                calenderDate={calenderDate}
-                setCalenderDate={setCalenderDate}
-                handleDateChange={handleDateChange}
-                handleDateFocus={handleDateFocus}
-                showCalendar={showCalendar}
-                setShowCalendar={setShowCalendar}
+        <meta
+          name="twitter:image"
+          content="https://res.cloudinary.com/drxjxycnn/image/upload/c_fill,w_300,h_157/v1741418731/logo_aabzju.jpg"
+        />
+        <meta name="twitter:image:alt" content="ParaScore" />
+      </Helmet>
+     
+      <div className={`${toggleMode ? "bg-customBg3" : "bg-darkCustomBg3"} `}>
+        {/* <Notifications /> */}
+        <div
+          className={`${
+            toggleMode
+              ? "bg-customBg3 shadow-light"
+              : "bg-darkCustomBg3 shadow-sm"
+          }   w-full  sticky top-[-2px] rounded-b-xl z-50`}
+        >
+          <Navbar
+            toggleMode={toggleMode}
+            setToggleMode={setToggleMode}
+            profileToggle={profileToggle}
+            windowWidth={windowWidth}
+            setProfileToggle={setProfileToggle}
+            ham={ham}
+          />
+        </div>
+        <Alert
+          alert={alert}
+          setAlert={setAlert}
+          setAlertMessage={setAlertMessage}
+          alertMessage={alertMessage}
+        />
+        <a href="https://wa.link/pyj1aa" target="_blank">
+          <WhatsappLogo />
+        </a>
+        <div
+          className={`${
+            toggleSearch ? "block animate-dis" : "hidden animate-dat"
+          } h-full static  w-full `}
+        >
+          {windowWidth < 1024 && (
+            <div className=" ">
+              <SearchClub
                 handleSearchToggleClick={handleSearchToggleClick}
-                toggleMode={toggleMode}
-                setCheck={setCheck}
                 toggleSearch={toggleSearch}
-                setFocus={setFocus}
-                setSearchParam={setSearchParam}
-                // lastJsonMessage={lastJsonMessage}
-                // readyState={readyState}
-                searchDate={searchDate}
-                profileToggle={profileToggle}
-              />
-            }
-          />
-
-          <Route
-            path="/countries"
-            element={
-              <Countries
-                countries={countries}
-                loadingCountries={loadingCountries}
-                error={error}
-                leagues={leagues}
-              />
-            }
-          />
-          <Route path="/leagues/:countryname/:id" element={<Leagues />} />
-          <Route
-            path="/table/:leaguename/:id"
-            element={<Table toggleMode={toggleMode} />}
-          />
-          <Route
-            path="/fixture/:league/:teamsname/:id"
-            element={
-              <CurrentFixtures
-                toggleMode={toggleMode}
+                setToggleSearch={setToggleSearch}
+                searchClub={searchClub}
+                handleSearchChange={handleSearchChange}
+                setSearchClub={setSearchClub}
+                clubs={leagues.concat(countries)}
                 windowWidth={windowWidth}
-                alert={alert}
-                setAlert={setAlert}
-                setAlertMessage={setAlertMessage}
-                alertMessage={alertMessage}
-              />
-            }
-          />
-          {/* <Route path='/fixtures' element={<Fixtures check={check} fixtures={fixtures} leagues={leagues} loadingFixtures={loadingFixtures} fixturesError={fixturesError}/>}/> */}
-          <Route
-            path="/team/:teamname/:id"
-            element={
-              <Teams
-                leagues={leagues}
                 toggleMode={toggleMode}
-                alert={alert}
-                setAlert={setAlert}
-                setAlertMessage={setAlertMessage}
-                alertMessage={alertMessage}
+                focus={focus}
+                setFocus={setFocus}
               />
-            }
-          />
-          <Route
-            path="/player/:playername/:id"
-            element={
-              <Players
-                countries={countries}
-                leagues={leagues}
-                toggleMode={toggleMode}
-              />
-            }
-          />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route
-            path="/favourites/"
-            element={
-              <Favourites
-                toggleMode={toggleMode}
-                alert={alert}
-                setAlert={setAlert}
-                setAlertMessage={setAlertMessage}
-                alertMessage={alertMessage}
-              />
-            }
-          ></Route>
-          <Route path="/transfers" element={<Transfer />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/news/:id" element={<NewsDetails />} />
-          <Route path="/topnews/:id" element={<NewsDetails />} />
-        </Routes>
+            </div>
+          )}
+        </div>
+
+        <div className=" max-w-[1440px] m-auto  lg:p-4 p-1">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  countries={countries}
+                  loadingCountries={loadingCountries}
+                  error={error}
+                  leagues={leagues}
+                  check={check}
+                  reCheck={reCheck}
+                  fixtures={fixtures}
+                  loadingFixtures={loadingFixtures}
+                  fixturesError={fixturesError}
+                  currentFixture={currentFixture}
+                  setCurrentFixture={setCurrentFixture}
+                  liveCheck={liveCheck}
+                  windowWidth={windowWidth}
+                  calenderDate={calenderDate}
+                  setCalenderDate={setCalenderDate}
+                  handleDateChange={handleDateChange}
+                  handleDateFocus={handleDateFocus}
+                  showCalendar={showCalendar}
+                  setShowCalendar={setShowCalendar}
+                  handleSearchToggleClick={handleSearchToggleClick}
+                  toggleMode={toggleMode}
+                  setCheck={setCheck}
+                  toggleSearch={toggleSearch}
+                  setFocus={setFocus}
+                  setSearchParam={setSearchParam}
+                  // lastJsonMessage={lastJsonMessage}
+                  // readyState={readyState}
+                  searchDate={searchDate}
+                  profileToggle={profileToggle}
+                />
+              }
+            />
+
+            <Route
+              path="/countries"
+              element={
+                <Countries
+                  countries={countries}
+                  loadingCountries={loadingCountries}
+                  error={error}
+                  leagues={leagues}
+                />
+              }
+            />
+            <Route path="/leagues/:countryname/:id" element={<Leagues />} />
+            <Route
+              path="/table/:leaguename/:id"
+              element={<Table toggleMode={toggleMode} />}
+            />
+            <Route
+              path="/fixture/:league/:teamsname/:id"
+              element={
+                <CurrentFixtures
+                  toggleMode={toggleMode}
+                  windowWidth={windowWidth}
+                  alert={alert}
+                  setAlert={setAlert}
+                  setAlertMessage={setAlertMessage}
+                  alertMessage={alertMessage}
+                />
+              }
+            />
+            {/* <Route path='/fixtures' element={<Fixtures check={check} fixtures={fixtures} leagues={leagues} loadingFixtures={loadingFixtures} fixturesError={fixturesError}/>}/> */}
+            <Route
+              path="/team/:teamname/:id"
+              element={
+                <Teams
+                  leagues={leagues}
+                  toggleMode={toggleMode}
+                  alert={alert}
+                  setAlert={setAlert}
+                  setAlertMessage={setAlertMessage}
+                  alertMessage={alertMessage}
+                />
+              }
+            />
+            <Route
+              path="/player/:playername/:id"
+              element={
+                <Players
+                  countries={countries}
+                  leagues={leagues}
+                  toggleMode={toggleMode}
+                />
+              }
+            />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route
+              path="/favourites/"
+              element={
+                <Favourites
+                  toggleMode={toggleMode}
+                  alert={alert}
+                  setAlert={setAlert}
+                  setAlertMessage={setAlertMessage}
+                  alertMessage={alertMessage}
+                />
+              }
+            ></Route>
+            <Route path="/transfers" element={<Transfer />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/news/:id" element={<NewsDetails />} />
+            <Route path="/topnews/:id" element={<NewsDetails />} />
+          </Routes>
+        </div>
       </div>
-    </div>
     </>
   );
 };
