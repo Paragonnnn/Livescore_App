@@ -43,6 +43,7 @@ import Transfer from "./components/Transfers/Transfer";
 import News from "./components/News/News";
 import NewsDetails from "./components/News/NewsDetails";
 import { getMatches } from "./polling/polling";
+import { Helmet } from "react-helmet-async";
 
 inject();
 
@@ -478,6 +479,18 @@ const App = () => {
   }, [calenderDate]);
 
   return (
+    <>
+    <Helmet>
+      <title>ParaScore</title>
+      <meta name="twitter:card" content=""/>
+      <meta name="twitter:site" content="@oluwaseyi__7"/>
+      <meta name="twitter:creator" content="@oluwaseyi__7"/>
+      <meta name="twitter:title" content="ParaScore"/>
+      <meta name="twitter:description" content="ParaScore is a football app that provides live scores, fixtures, news, transfers, and more."/>
+      <meta name="twitter:image" content="https://res.cloudinary.com/drxjxycnn/image/upload/c_fill,w_300,h_157/v1741418731/logo_aabzju.jpg"/>
+      <meta name="twitter:image:alt" content="ParaScore"/>
+      
+    </Helmet>
     <div className={`${toggleMode ? "bg-customBg3" : "bg-darkCustomBg3"} `}>
       {/* <Notifications /> */}
       <div
@@ -642,6 +655,7 @@ const App = () => {
         </Routes>
       </div>
     </div>
+    </>
   );
 };
 

@@ -23,6 +23,7 @@
     "react-click-away-listener": "^2.2.3",
     "react-datepicker": "^4.20.0",
     "react-dom": "^18.2.0",
+    "react-helmet-async": "^2.0.5",
     "react-router-dom": "^6.16.0",
     "react-use-websocket": "^4.5.0"
   },
