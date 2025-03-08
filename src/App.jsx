@@ -469,7 +469,7 @@ const App = () => {
           setLiveCheck,
           check
         ),
-      10000
+      30000
     );
     return () => {
       clearInterval(interval);

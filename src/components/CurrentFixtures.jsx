@@ -369,7 +369,7 @@ const CurrentFixtures = ({
     fetchData();
     const interval = setInterval(() => {
       getMatchUpdate(id,setMatch, setEvents, setStats);
-    }, 10000);
+    }, 30000);
     return () => clearInterval(interval);
   },[]);
 

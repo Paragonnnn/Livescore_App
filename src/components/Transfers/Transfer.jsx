@@ -63,160 +63,173 @@ const Transfer = () => {
         const response = await fetch(url);
         const data = await response.json();
         setTransfers(data.transfers);
-        // console.log(data.transfers);
+        console.log(data.transfers);
       } catch (err) {
         console.error(err);
       }
     }
 
     getData();
+    console.log(transfers);
   }, [selected, selected2]);
 
   return (
     <div
       className={` w-[100%] m-auto bg-customBg2 p-2 rounded-2xl mt-5 text-lightText`}
     >
-      <h1>Transfers</h1>
-      <section>
-        <select
-          value={selected}
-          onChange={handleSelected}
-          className=" text-white px-5 py-2 rounded-full bg-transparent outline outline-customBg"
-        >
-          <option value="latest" className=" bg-gray-700">Latest transfers</option>
-          <option value="fee" className=" bg-gray-700">Fee</option>
-          <option value="marketValue" className=" bg-gray-700">Market value</option>
-        </select>
-        <select
-          value={selected2}
-          onChange={handleSelected2}
-          className=" text-black"
-        >
-          <option value="All transfers">All transfers</option>
-          <option value="Top transfers">Top transfers</option>
-        </select>
-      </section>
-      <div className=" lg:grid grid-cols-24 items-center gap-x-2 text-xxs text-gray-500 hidden">
-        <div className=" col-span-8">Player</div>
-        <div className=" col-span-2">Fee</div>
-        <div className=" col-span-5">From</div>
-        <div className=" col-span-1">Position</div>
-        <div className=" col-span-4">Contract</div>
-        <div className=" col-span-2">Market Value</div>
-        <div className=" col-span-2">Date</div>
-      </div>
-      <div className="divide-y divide-gray-800 ">
-        {transfers?.map((t, i) => (
-          <div
-            key={t.playerId + i}
-            className="py-2 lg:grid grid-cols-24 gap-x-2 grid-flow-row relative"
-          >
-            <div className=" flex col-span-8 items-center lg:items-start flex-col">
-              <div className=" flex flex-col lg:flex-row items-center gap-x-4 gap-y-2">
-              <div className="relative ">
-                <div className=" w-9 h-9 bg-slate-600 bg-opacity-30 relative rounded-full overflow-hidden">
-                  <img
-                    src={`https://www.fotmob.com/_next/image?url=https%3A%2F%2Fimages.fotmob.com%2Fimage_resources%2Fplayerimages%2F${t.playerId}.png&w=48&q=75`}
-                    ref={image}
-                    onLoad={(e) => {
-                      e.target.src = `https://www.fotmob.com/_next/image?url=https%3A%2F%2Fimages.fotmob.com%2Fimage_resources%2Fplayerimages%2F${t.playerId}.png&w=48&q=75`;
-                    }}
-                    onError={(e) => {
-                      // e.target.onerror = null;
-                      e.target.src = defaultPlayerImage;
-                    }}
-                    alt=""
-                    className=" w-12 absolute bottom-0 left-[50%] -translate-x-[50%]"
-                  />
+      {transfers?.length === 0 || transfers === undefined ? (
+        <div className=" text-center">Transfer window is closed</div>
+      ) : (
+        <>
+          <h1>Transfers</h1>
+          <section>
+            <select
+              value={selected}
+              onChange={handleSelected}
+              className=" text-white px-5 py-2 rounded-full bg-transparent outline outline-customBg"
+            >
+              <option value="latest" className=" bg-gray-700">
+                Latest transfers
+              </option>
+              <option value="fee" className=" bg-gray-700">
+                Fee
+              </option>
+              <option value="marketValue" className=" bg-gray-700">
+                Market value
+              </option>
+            </select>
+            <select
+              value={selected2}
+              onChange={handleSelected2}
+              className=" text-black"
+            >
+              <option value="All transfers">All transfers</option>
+              <option value="Top transfers">Top transfers</option>
+            </select>
+          </section>
+          <div className=" lg:grid grid-cols-24 items-center gap-x-2 text-xxs text-gray-500 hidden">
+            <div className=" col-span-8">Player</div>
+            <div className=" col-span-2">Fee</div>
+            <div className=" col-span-5">From</div>
+            <div className=" col-span-1">Position</div>
+            <div className=" col-span-4">Contract</div>
+            <div className=" col-span-2">Market Value</div>
+            <div className=" col-span-2">Date</div>
+          </div>
+          <div className="divide-y divide-gray-800 ">
+            {transfers?.map((t, i) => (
+              <div
+                key={t.playerId + i}
+                className="py-2 lg:grid grid-cols-24 gap-x-2 grid-flow-row relative"
+              >
+                <div className=" flex col-span-8 items-center lg:items-start flex-col">
+                  <div className=" flex flex-col lg:flex-row items-center gap-x-4 gap-y-2">
+                    <div className="relative ">
+                      <div className=" w-9 h-9 bg-slate-600 bg-opacity-30 relative rounded-full overflow-hidden">
+                        <img
+                          src={`https://www.fotmob.com/_next/image?url=https%3A%2F%2Fimages.fotmob.com%2Fimage_resources%2Fplayerimages%2F${t.playerId}.png&w=48&q=75`}
+                          ref={image}
+                          onLoad={(e) => {
+                            e.target.src = `https://www.fotmob.com/_next/image?url=https%3A%2F%2Fimages.fotmob.com%2Fimage_resources%2Fplayerimages%2F${t.playerId}.png&w=48&q=75`;
+                          }}
+                          onError={(e) => {
+                            // e.target.onerror = null;
+                            e.target.src = defaultPlayerImage;
+                          }}
+                          alt=""
+                          className=" w-12 absolute bottom-0 left-[50%] -translate-x-[50%]"
+                        />
+                      </div>
+                      <div className=" absolute lg:hidden block z-10 -bottom-1 -right-2 px-[5px] rounded-full text-xs bg-slate-600 text-gray-300">
+                        {t.position && t.position.label}
+                      </div>
+                    </div>
+                    <div className=" flex flex-col">
+                      <div className=" text-white">{t.name}</div>
+                      <div className=" lg:flex gap-1 items-center hidden">
+                        <div className="">
+                          <TransferArrow />
+                        </div>
+                        <img
+                          src={`https://www.fotmob.com/_next/image?url=https%3A%2F%2Fimages.fotmob.com%2Fimage_resources%2Flogo%2Fteamlogo%2F${t.toClubId}_xsmall.png&w=32&q=75`}
+                          alt=""
+                          className=" h-4"
+                        />
+                        <div className=" text-xs text-gray-400">
+                          {t.toClub && t.toClub}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className=" absolute lg:hidden block z-10 -bottom-1 -right-2 px-[5px] rounded-full text-xs bg-slate-600 text-gray-300">
-                  {t.position && t.position.label}
+                <div className="col-span-2 lg:flex items-center justify-center lg:justify-start hidden">
+                  {t.fee &&
+                    (t.fee.feeText === "fee"
+                      ? "€" + formatNumber(t.fee.value)
+                      : t.fee.feeText)}
                 </div>
-              </div>
-              <div className=" flex flex-col">
-                <div className=" text-white">{t.name}</div>
-                <div className=" lg:flex gap-1 items-center hidden">
-                  <div className="">
+                <div className="col-span-5 flex items-center gap-2 justify-center lg:justify-start lg:text-base text-[10px] lg:font-normal font-light text-gray-200 lg:text-lightText">
+                  <div className=" flex lg:flex-row flex-row-reverse gap-2 items-center">
+                    <img
+                      src={`https://www.fotmob.com/_next/image?url=https%3A%2F%2Fimages.fotmob.com%2Fimage_resources%2Flogo%2Fteamlogo%2F${t.fromClubId}_xsmall.png&w=32&q=75`}
+                      alt=""
+                      className=" h-3"
+                    />
+                    <div className=" flex">{t.fromClub && t.fromClub}</div>
+                  </div>
+                  <div className=" block lg:hidden">
                     <TransferArrow />
                   </div>
-                  <img
-                    src={`https://www.fotmob.com/_next/image?url=https%3A%2F%2Fimages.fotmob.com%2Fimage_resources%2Flogo%2Fteamlogo%2F${t.toClubId}_xsmall.png&w=32&q=75`}
-                    alt=""
-                    className=" h-4"
-                  />
-                  <div className=" text-xs text-gray-400">
-                    {t.toClub && t.toClub}
+                  <div className=" flex gap-2 items-center lg:hidden">
+                    <img
+                      src={`https://www.fotmob.com/_next/image?url=https%3A%2F%2Fimages.fotmob.com%2Fimage_resources%2Flogo%2Fteamlogo%2F${t.toClubId}_xsmall.png&w=32&q=75`}
+                      alt=""
+                      className=" h-3"
+                    />
+
+                    <div className=" ">{t.toClub && t.toClub}</div>
                   </div>
                 </div>
+                <div className="col-span-1 lg:flex items-center justify-center lg:justify-start hidden">
+                  {t.position && t.position.label}
+                </div>
+                <div className="flex justify-center items-center lg:justify-start col-span-4 gap-2 text-gray-500 lg:text-lightText">
+                  <div className=" flex lg:hidden">
+                    {t.fee &&
+                      (t.fee.feeText === "fee"
+                        ? "€" + formatNumber(t.fee.value)
+                        : t.fee.feeText)}
+                  </div>
+                  <div className="lg:hidden block">Contract:</div>
+                  <div className="col-span-4 flex items-center">
+                    {`${formatDate(t.fromDate).split(" ")[0]} ${
+                      formatDate(t.fromDate).split(" ")[2]
+                    } - ${
+                      t.toDate
+                        ? formatDate(t.toDate).split(" ")[0] +
+                          " " +
+                          formatDate(t.toDate).split(" ")[2]
+                        : "undisclosed"
+                    }`}
+                  </div>
+                </div>
+                <div className="col-span-2 flex items-center justify-center lg:justify-start lg:text-lightText text-gray-500">
+                  <div className=" lg:hidden block mr-2">Market Value</div>
+                  {t.marketValue && "€" + formatNumber(t.marketValue)}
+                </div>
+                <div className="col-span-2 flex items-center justify-center lg:justify-start lg:relative absolute lg:top-0 lg:right-0 top-1 right-2 text-gray-500 lg:text-lightText">
+                  {t.transferDate && formatDate(t.transferDate.slice(0, 10))}
+                </div>
               </div>
-              </div>
-            </div>
-            <div className="col-span-2 lg:flex items-center justify-center lg:justify-start hidden">
-              {t.fee &&
-                (t.fee.feeText === "fee"
-                  ? "€" + formatNumber(t.fee.value)
-                  : t.fee.feeText)}
-            </div>
-            <div className="col-span-5 flex items-center gap-2 justify-center lg:justify-start lg:text-base text-[10px] lg:font-normal font-light text-gray-200 lg:text-lightText">
-              <div className=" flex lg:flex-row flex-row-reverse gap-2 items-center">
-                <img
-                  src={`https://www.fotmob.com/_next/image?url=https%3A%2F%2Fimages.fotmob.com%2Fimage_resources%2Flogo%2Fteamlogo%2F${t.fromClubId}_xsmall.png&w=32&q=75`}
-                  alt=""
-                  className=" h-3"
-                />
-                <div className=" flex">{t.fromClub && t.fromClub}</div>
-              </div>
-              <div className=" block lg:hidden">
-                <TransferArrow />
-              </div>
-              <div className=" flex gap-2 items-center lg:hidden">
-                <img
-                  src={`https://www.fotmob.com/_next/image?url=https%3A%2F%2Fimages.fotmob.com%2Fimage_resources%2Flogo%2Fteamlogo%2F${t.toClubId}_xsmall.png&w=32&q=75`}
-                  alt=""
-                  className=" h-3"
-                />
-
-                <div className=" ">{t.toClub && t.toClub}</div>
-              </div>
-            </div>
-            <div className="col-span-1 lg:flex items-center justify-center lg:justify-start hidden">
-              {t.position && t.position.label}
-            </div>
-            <div className="flex justify-center items-center lg:justify-start col-span-4 gap-2 text-gray-500 lg:text-lightText">
-              <div className=" flex lg:hidden">
-                {t.fee &&
-                  (t.fee.feeText === "fee"
-                    ? "€" + formatNumber(t.fee.value)
-                    : t.fee.feeText)}
-              </div>
-              <div className="lg:hidden block">Contract:</div>
-              <div className="col-span-4 flex items-center">
-                {`${formatDate(t.fromDate).split(" ")[0]} ${
-                  formatDate(t.fromDate).split(" ")[2]
-                } - ${
-                  t.toDate
-                    ? formatDate(t.toDate).split(" ")[0] +
-                      " " +
-                      formatDate(t.toDate).split(" ")[2]
-                    : "undisclosed"
-                }`}
-              </div>
-            </div>
-            <div className="col-span-2 flex items-center justify-center lg:justify-start lg:text-lightText text-gray-500">
-              <div className=" lg:hidden block mr-2">Market Value</div>
-              {t.marketValue && "€" + formatNumber(t.marketValue)}
-            </div>
-            <div className="col-span-2 flex items-center justify-center lg:justify-start lg:relative absolute lg:top-0 lg:right-0 top-1 right-2 text-gray-500 lg:text-lightText">
-              {t.transferDate && formatDate(t.transferDate.slice(0, 10))}
+            ))}
+            <div>
+              <button className=" text-white text-lg bg-customBg px-5 py-1">
+                Prev
+              </button>
             </div>
           </div>
-        ))}
-        <div>
-          <button className=" text-white text-lg bg-customBg px-5 py-1">
-            Prev
-          </button>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 };
