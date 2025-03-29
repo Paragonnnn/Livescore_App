@@ -263,7 +263,7 @@ const Home = ({
           <div
             className={`${
               toggleMode ? " bg-customBgLight" : " bg-customBg2"
-            } p-4 rounded-xl h-fit shadow-dark sticky top-[85px] z-50`}
+            } p-4 rounded-xl h-fit shadow-dark sticky top-[85px] z-40`}
           >
             <HomeCurrentFixtureInfo
               loadingFixtures={loadingFixtures}

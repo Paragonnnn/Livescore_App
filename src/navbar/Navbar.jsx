@@ -145,7 +145,7 @@ const navbar = ({
             <nav
               className={`${
                 profileToggle ? "block" : "hidden"
-              } absolute -bottom-24 right-2 bg-darkCustomBg3 px-3 py-5 text-white rounded-lg z-10 w-48 `}
+              } absolute -bottom-24 right-2 bg-darkCustomBg3 px-3 py-5 text-white rounded-lg w-48 z-50`}
             >
               <ul className=" divide-y divide-gray-400 divide-opacity-20">
                 <li className=" px-1 py-2">
