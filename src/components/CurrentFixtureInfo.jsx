@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Loading from "./Loading";
 import Star from "../svg/Star";
+import useCountDown from "../Hooks/usecountDown";
 
 const CurrentFixtureInfo = ({
   match,
@@ -12,6 +13,9 @@ const CurrentFixtureInfo = ({
   setAlertMessage,
   alertMessage,
 }) => {
+  const {difference,countDown} = useCountDown(match)
+  console.log(countDown)
+
   return (
     <div className={`${toggleMode ? "text-darkText" : "text-lightText"}`}>
       {loading && (
@@ -102,8 +106,9 @@ const CurrentFixtureInfo = ({
                     ? "FT"
                     : match.event_status === "Half Time"
                     ? "HT"
-                    : match.event_status}
-                    {match.event_live === '1' && <span className=" animate-blink">'</span>}
+                    : (match.event_status)}
+                    {match.event_live === '1' && match.event_status !== "Finished" && <span className=" animate-blink">'</span>}
+                    {(difference > 0 && difference < 14400000) && countDown}
                 </div>
               </div>
               <div className="text-center  flex gap-5 justify-center items-center   w-1/3">
