@@ -12,7 +12,7 @@ export const getMatches = async (
 ) => {
   try {
     const response = await fetch(
-      `https://apiv2.allsportsapi.com/football/?met=Fixtures&APIkey=${api_key}&from=${date}&to=${date}`,
+      `https://apiv2.allsportsapi.com/football/?met=Fixtures&timezone=Africa/Lagos&APIkey=${api_key}&from=${date}&to=${date}`,
       { signal: controller.signal }
     );
     const data = await response.json();
