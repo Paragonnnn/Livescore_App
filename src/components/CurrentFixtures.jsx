@@ -369,7 +369,7 @@ const CurrentFixtures = ({
     fetchData();
     const interval = setInterval(() => {
       getMatchUpdate(id,setMatch, setEvents, setStats);
-    }, 30000);
+    }, 20000);
     return () => clearInterval(interval);
   },[]);
 
@@ -444,6 +444,7 @@ const CurrentFixtures = ({
               away={away}
               getAwayTeamId={getAwayTeamId}
               getHomeTeamId={getHomeTeamId}
+              match={match}
             />
           </div>
         </div>
@@ -627,6 +628,7 @@ const CurrentFixtures = ({
               windowWidth={windowWidth}
               getAwayTeamId={getAwayTeamId}
               getHomeTeamId={getHomeTeamId}
+              match={match}
             />
           </div>
         </div>

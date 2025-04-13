@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ball, ogball } from "..";
 import useWebSocket from "react-use-websocket";
@@ -17,6 +17,8 @@ const HomeCurrentFixtureInfo = ({
   );
   const [homeScorers, setHomeScorers] = useState([]);
   const [awayScorers, setAwayScorers] = useState([]);
+  const [isPulsing, setIsPulsing] = useState(false);
+  const showMoreRef = useRef(null);
 
   useEffect(() => {
     if (currentFixture) {
@@ -66,6 +68,20 @@ const HomeCurrentFixtureInfo = ({
     }
   }, [lastJsonMessage]);
 
+  useEffect(() => {
+    if (currentFixture && !loadingFixtures) {
+      // Trigger pulse animation
+      setIsPulsing(true);
+
+      // Reset after 3 seconds
+      const timer = setTimeout(() => {
+        setIsPulsing(false);
+      }, 2500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [currentFixture, loadingFixtures]);
+
   return (
     <div>
       <div>
@@ -89,7 +105,11 @@ const HomeCurrentFixtureInfo = ({
         {!loadingFixtures &&
           currentFixture?.map((fixture) => (
             <div key={fixture.event_key}>
-              <div className={`${toggleMode ? 'text-darkText' : 'text-lightText'} flex mb-1 `}>
+              <div
+                className={`${
+                  toggleMode ? "text-darkText" : "text-lightText"
+                } flex mb-1 `}
+              >
                 <Link
                   to={`/leagues/${fixture.country_name.replace(/ +/g, "-")}/${
                     fixture.league_key
@@ -97,7 +117,7 @@ const HomeCurrentFixtureInfo = ({
                 >
                   {/* {fixture.country_name}  */}
                 </Link>
-                
+
                 <Link
                   to={`/table/${fixture.league_name.replace(/ +/g, "-")}/${
                     fixture.league_key
@@ -272,13 +292,13 @@ const HomeCurrentFixtureInfo = ({
                   to={`/fixture/${fixture.league_name.replace(
                     / +/g,
                     "-"
-                  )}/${fixture.event_home_team.replace(
-                    / +/g,
-                    "-"
-                  ).replace('/', '-')}-${fixture.event_away_team.replace(/ +/g, "-").replace('/', '-')}/${
-                    fixture.event_key
-                  }`}
-                  className={` text-lightText px-4 bg-customBg py-1 text-lg rounded hover:bg-opacity-80 mt-3`}
+                  )}/${fixture.event_home_team
+                    .replace(/ +/g, "-")
+                    .replace("/", "-")}-${fixture.event_away_team
+                    .replace(/ +/g, "-")
+                    .replace("/", "-")}/${fixture.event_key}`}
+                  className={`${isPulsing? "animate-bounce" : ''} text-lightText px-4 bg-customBg py-1 text-lg rounded hover:bg-opacity-80 mt-3`}
+                  ref={showMoreRef}
                 >
                   show more
                 </Link>

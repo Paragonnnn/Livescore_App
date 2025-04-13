@@ -26,16 +26,16 @@ const NewsInfo = () => {
     getData();
   }, []);
   return (
-    <div className="min-h-[300px]">
+    <div className="min-h-[50px]">
       {loading ? (
-        <h1 className=" text-center">Loading...</h1>
+        <h1 className="flex items-center justify-center h-full">Loading...</h1>
       ) : (
         <div className="relative rounded-md overflow-hidden">
           {news.map((item, index) => {
             return (
               index === newsIndex && (
                 <div key={item.id} className="flex flex-col">
-                  <div className="w-full max-h-[200px] overflow-hidden">
+                  <div className="w-full max-h-[200px] overflow-hidden min-h-[180px]">
                     <img
                       src={item.imageUrl}
                       alt=""

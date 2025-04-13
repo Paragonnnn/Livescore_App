@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Standing = ({
@@ -14,16 +14,9 @@ const Standing = ({
   getAwayTeamId,
   getHomeTeamId,
   stageName,
+  match,
 }) => {
-  // for (let i = 0; i < table.length; i++) {
-  //   const element = table[i]
-  //   console.log(element.team_key)
-  // }
-  console.log(table);
-  console
-    .log
-    // mappedTable.map((t) => t.standing_place_type.includes("Relegation"))
-    ();
+  console.log(match);
   return (
     <div
       className={`${
@@ -99,28 +92,20 @@ const Standing = ({
                     className={`${
                       changeTable === "all" &&
                       (table.standing_place_type.includes("Relegation")
-                        ? " bg-red-400"
+                        ? "border-l border-red-400"
                         : table.standing_place_type.includes("Champions League")
-                        ? "bg-green-400"
+                        ? "border-l border-green-400"
                         : table.standing_place_type.includes("Europa League")
-                        ? "bg-orange"
+                        ? "border-l border-orange"
                         : table.standing_place_type.includes(
-                            "Europa Conference League"
+                            "European Conference League"
                           )
                         ? "bg-lightOrange"
                         : "")
                     }    grid grid-cols-10`}
                   >
                     <div
-                      className={`${
-                        getAwayTeamId == table.team_key
-                          ? "border-l-4 border-solid border-customBg"
-                          : ""
-                      } ${
-                        getHomeTeamId == table.team_key
-                          ? "border-l-4 border-solid border-customBg"
-                          : ""
-                      }  md:p-2 p-1 flex items-center gap-2 col-span-6 text-xxs md:text-base`}
+                      className={`  md:p-2 p-1 flex items-center gap-2 col-span-6 text-xxs md:text-base`}
                     >
                       <div className="md:p-2 p-1 ">{table.standing_place}.</div>
                       <img
@@ -129,12 +114,46 @@ const Standing = ({
                         alt=""
                       />
                       <Link
-                        className="text-xs sm:text-sm md:text-lg"
+                        className="text-xs sm:text-sm md:text-lg flex gap-4 items-center"
                         to={`/team/${table.standing_team.replace(/ +/g, "-")}/${
                           table.team_key
                         }`}
                       >
                         {table.standing_team}
+                        <div>
+                          {getHomeTeamId == table.team_key &&
+                            (match[0]?.event_live === "1" ? (
+                              <div
+                                className={`${
+                                  eval(match[0].event_final_result) > 0
+                                    ? "bg-green-600"
+                                    : eval(match[0]?.event_final_result) === 0
+                                    ? "bg-gray-500"
+                                    : "bg-red-700"
+                                } px-2 py-1 rounded-md text-xs`}
+                              >
+                                {match[0]?.event_final_result}
+                              </div>
+                            ) : (
+                              <div className="bg-customBg h-2 w-2 rounded-full"></div>
+                            ))}
+                          {getAwayTeamId == table.team_key &&
+                            (match[0]?.event_live === "1" ? (
+                              <div
+                                className={`${
+                                  eval(match[0].event_final_result) < 0
+                                    ? "bg-green-700"
+                                    : eval(match[0]?.event_final_result) === 0
+                                    ? "bg-gray-500"
+                                    : "bg-red-700"
+                                } px-2 py-1 rounded-md text-xs`}
+                              >
+                                {match[0]?.event_final_result}
+                              </div>
+                            ) : (
+                              <div className="bg-customBg h-2 w-2 rounded-full"></div>
+                            ))}
+                        </div>
                       </Link>
                     </div>
                     <section className="text-xxs md:text-base col-span-4 grid grid-cols-3 xs:grid-cols-6 sm:grid-cols-8 place-items-center">
@@ -188,9 +207,11 @@ const Standing = ({
         </svg>{" "}
         Rotate your phone for more info.
       </div>
-      <div>{table?.slice(0,1).map((t,i) => {
-        return <div key={i}>Table last updated: {t.standing_updated}</div>
-      })}</div>
+      <div>
+        {table?.slice(0, 1).map((t, i) => {
+          return <div key={i}>Table last updated: {t.standing_updated}</div>;
+        })}
+      </div>
     </div>
   );
 };
