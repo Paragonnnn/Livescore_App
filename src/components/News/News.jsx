@@ -20,7 +20,7 @@ const News = () => {
   const timeAgo = new TimeAgo("en-US");
 
   useEffect(() => {
-    setPage(searchParam.get("page") || 1); // Update page from search params
+    setPage(searchParam.get("page") || 1);
   }, [searchParam]);
 
   const pagee = searchParam.get("page");
@@ -33,9 +33,10 @@ const News = () => {
   };
 
   const handlePaginationClick = (direction) => {
+    if (direction === "prev" && page <= 1) return;
     const newPage = direction === "next" ? +page + 1 : +page - 1;
     setPage(newPage);
-    setSearchParam({ page: newPage }); // Update search params with new page number
+    setSearchParam({ page: newPage });
     window.scrollTo(0, 0);
     scrollUp();
   };
@@ -64,13 +65,15 @@ const News = () => {
         Football News
       </h1>
       {loading ? (
-        <l-hourglass
-          size="40"
-          bg-opacity="0.1"
-          speed="1.75"
-          color="black"
-          className="m-auto"
-        ></l-hourglass>
+        <div className="flex justify-center items-center">
+
+          <l-hourglass
+            size="40"
+            bg-opacity="0.1"
+            speed="1.75"
+            color="black"
+          ></l-hourglass>
+        </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full scroll-smooth transition-all duration-300 ">
           {news.map((n, i) => (
