@@ -1,5 +1,5 @@
 
-# ParaScores
+# ParaScores ⚽
 
 ParaScore is a web-based application designed to handle event management, scoring, and team tracking. The application utilizes Firebase for backend services, including database management and hosting.
 ## Features
