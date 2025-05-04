@@ -33,13 +33,6 @@ const HomeCurrentFixtureInfo = ({
         })
       );
     }
-
-    console.log(currentFixture);
-    console.log(
-      currentFixture?.map((c) => {
-        return c.goalscorers;
-      })
-    );
   }, [currentFixture]);
 
   const api_key = import.meta.env.VITE_api_key;

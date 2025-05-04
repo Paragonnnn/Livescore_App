@@ -22,8 +22,7 @@ export const usePolling = () => {
         if (currentRequestId === latestRequestId.current) {
           setFixtures(data.result);
         }
-        console.log(data);
-        console.log(date);
+
         setLiveCheck(
           data.result.map(
             (fixture) =>
@@ -47,7 +46,6 @@ export const usePolling = () => {
           `https://apiv2.allsportsapi.com/football/?met=Fixtures&withPlayerStats=1&matchId=${id}&timezone=Africa/Lagos&APIkey=${api_key}`
         );
         const data = await response.json();
-        console.log(data);
         setMatch(data.result);
         setEvents(
           data.result

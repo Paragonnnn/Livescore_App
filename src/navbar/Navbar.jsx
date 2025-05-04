@@ -52,7 +52,6 @@ const navbar = ({
                 className=" h-5 md:h-8 absolute left-[-4px] md:left-[-10px] top-2 rotate-[-15deg]"
               /> */}
           <span>ParaSc</span> <ParaScoreLogo /> <span>re</span>
-          {/* <button onClick={() => {sendJsonMessage({type: 'close_connection'}); console.log(readyState);}}>close</button> */}
         </Link>
         {/* </Link> */}
         <div className="px-2 ">

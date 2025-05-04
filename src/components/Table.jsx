@@ -22,31 +22,26 @@ const Table = ({ toggleMode }) => {
 
   const { id } = useParams();
   const date = new Date();
-  // console.log(date);
   const fromDate = `${date.getFullYear() - 3}-${
     date.getMonth() + 1
   }-${date.getDate()}`;
   const toDate = `${date.getFullYear() + 1}-${
     date.getMonth() + 1
   }-${date.getDate()}`;
-  // console.log(fromDate, toDate, date);
   const [from, setFrom] = useState(fromDate);
   const [to, setTo] = useState(toDate);
   const home = () => {
     setChangeTable("home");
     setMappedTable(homeTable);
 
-    // console.log(changeTable);
   };
   const away = () => {
     setChangeTable("away");
     setMappedTable(awayTable);
-    // console.log(changeTable);
   };
   const all = () => {
     setChangeTable("all");
     setMappedTable(table);
-    // console.log(changeTable);
   };
 
   const api_key = import.meta.env.VITE_api_key;
@@ -62,9 +57,7 @@ const Table = ({ toggleMode }) => {
           setTable(json.result.total);
           setStageName(json.result.total[0].stage_name);
           setTeamKeys(json.result.total.map((k) => k.team_key));
-          // console.log(json.result.total.map(k => k.team_key));
           setMappedTable(json.result.total);
-          // console.log(json.result.total);
           setHomeTable(json.result.home);
           setAwayTable(json.result.away);
           setError(false);
@@ -86,7 +79,6 @@ const Table = ({ toggleMode }) => {
         .then((res) => res.json())
         .then((scorers) => {
           setTopScorers(scorers.result);
-          // console.log(scorers.result);
         })
         .catch((err) => {});
     }
@@ -100,57 +92,11 @@ const Table = ({ toggleMode }) => {
         .then((res) => res.json())
         .then((fix) => {
           setLeagueFixtures(fix.result);
-          console.log(fix.result);
         });
     }
     getData();
   }, [id]);
-  // useEffect(() => {
-  //   teamKeys?.map((k) => {
-
-  //     async function getData() {
-  //       await fetch(
-  //         `https://apiv2.allsportsapi.com/football/?met=Fixtures&teamId=${k}&APIkey=${api_key}&from=${from}&to=${to}`
-  //       )
-  //         .then((res) => res.json)
-  //         .then((json) => {
-  //           console.log(json.result);
-  //         });
-  //     }
-  //     getData();
-  //   })
-  // }, [id]);
-  // useEffect(() => {
-  //   async function fetchAllData() {
-  //     // Use map() to create an array of promises for fetching data for each key
-  //     const promiseArray = teamKeys.map(async (key) => {
-  //       // Logic to fetch data based on the key
-  //       let data;
-  //       await fetch(
-  //         `https://apiv2.allsportsapi.com/football/?met=Fixtures&teamId=${key}&APIkey=${api_key}&from=${from}&to=${to}`
-  //       )
-  //         .then((res) => res.json)
-  //         .then((json) => {
-  //           // console.log(json.result);
-  //           data = json.result;
-  //         });
-
-  //       // This could be fetching data from an API, a database, etc.
-  //       // Replace this with your actual implementation for fetching data
-
-  //       return data;
-  //     });
-
-  //     // Use Promise.all() to await all promises and get the fetched data
-  //     // const fetchedData = await new Promise.all(promiseArray);
-
-  //     // Now fetchedData contains the data fetched for each key
-  //     // console.log(fetchedData);
-  //   }
-
-  //   // Call the function to fetch all data
-  //   fetchAllData();
-  // }, [id]);
+ 
 
   return (
     <div className="">

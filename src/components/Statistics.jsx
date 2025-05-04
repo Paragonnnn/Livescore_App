@@ -1,7 +1,6 @@
 import React from "react";
 
 const Statistics = ({ statToggle, stats, windowWidth, toggleMode }) => {
-  console.log(stats);
   return (
     <div>
       <div

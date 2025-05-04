@@ -17,25 +17,15 @@ const LineUp = ({
     document.addEventListener("mousedown", (e) => {
       if (!reff.current.contains(e.target)) {
         setShowStatToggle(false);
-        // console.log(e.target);
       }
     });
   }, []);
 
-  // document.onclick = function(e) {
-  //   if (!reff.current.contains(e.target)) {
-  //     console.log('outside');
-  //     setShowStatToggle(false)
-  //     // setToggleSearch(false)
-  //   }else {
-  //     console.log('inside');
-  //   }
-  // }
+
 
   const showPlayerStat = (clickedPlayerKey) => {
     if (!showStatToggle) {
       setShowStatToggle(true);
-      // console.log(showStatToggle);
       setClickedPlayer(clickedPlayerKey);
     }
   };

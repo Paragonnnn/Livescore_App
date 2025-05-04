@@ -8,11 +8,9 @@ const Favourites = ({ toggleMode,alert,setAlert,alertMessage,setAlertMessage }) 
   const [favTeam, setFavteam] = useState();
   const [updateFav, setUpdateFav] = useState('')
   const user = auth.currentUser;
-  // console.log(user.uid);
   useEffect(() => {
     const getData = async () => {
       try {
-        console.log(user.uid);
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
 
@@ -23,7 +21,6 @@ const Favourites = ({ toggleMode,alert,setAlert,alertMessage,setAlertMessage }) 
 
           setFavteam(favTeams);
 
-          console.log(favTeams);
         } else {
           console.log("No such document!");
         }

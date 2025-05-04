@@ -13,7 +13,6 @@ const TransferInfo = () => {
         );
         const data = await response.json();
         setTransfer(data.transfers);
-        // console.log(data.transfers);
       } catch (error) {
         console.error("Error:", error);
       }

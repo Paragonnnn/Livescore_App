@@ -5,22 +5,9 @@ const SearchTeamAndPlayer = () => {
   const [searchResult, setSearchResult] = useState([]);
   const handleSearchValueChange = (e) => {
     setSearchValue(e.target.value);
-    // console.log(e.target.value);
   };
   const api_key = import.meta.env.VITE_api_key;
-  //   useEffect(() => {
-  //     async function getData() {
-  //       await fetch(
-  //         `https://apiv2.allsportsapi.com/football/?met=Teams&teamName=${searchValue}&APIkey=${api_key}&`
-  //       )
-  //         .then((res) => res.json())
-  //         .then((json) => {
-  //             setSearchResult(json.result)
-  //             console.log(json.result);
-  //         });
-  //     }
-  //     getData()
-  //   },[searchValue]);
+
   useEffect(() => {
     async function getData() {
       await fetch(
@@ -29,7 +16,6 @@ const SearchTeamAndPlayer = () => {
         .then((res) => res.json())
         .then((json) => {
           setSearchResult(json.result);
-          // console.log(json.result);
         });
     }
     getData();

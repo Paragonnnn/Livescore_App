@@ -19,7 +19,6 @@ const Countries = ({
   const [seeAll, setSeeAll] = useState(20);
 
   const handleClick = (index) => {
-    // console.log(activeIndex);
 
     if (activeIndex.includes(index)) {
       setActiveIndex(activeIndex.filter((i) => i !== index));

@@ -29,23 +29,11 @@ const SearchClub = ({
       if (!refOne.current.contains(e.target) && windowWidth > 1024) {
         // setShowSearch(false);
         // setFocus(false);
-        // console.log(e.target);
       }
     });
   }, []);
 
-  // window.onclick = myFunction;
 
-  // function myFunction(e) {
-  //   console.log(e.target.id);
-  //   console.log(document.getElementById('clickaway2').id);
-  //   if ((e.target != document.getElementById('clickaway')) || (e.target != document.getElementById('clickaway2')) ) {
-  //     console.log('yes');
-  //   } else {
-  //     console.log('no');
-  //   }
-  // }
-  // console.log(refOne);
 
   return (
     <div

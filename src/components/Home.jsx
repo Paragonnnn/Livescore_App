@@ -62,11 +62,9 @@ const Home = ({
       if (!calendarRef.current.contains(e.target)) {
         setShowCalendar(false);
         e.stopPropagation();
-        // console.log(e.target);
       }
     });
   }, []);
-  console.log(calenderDate);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-11 h-[100%] gap-4 relative">
@@ -194,7 +192,6 @@ const Home = ({
               toggleMode ? "bg-customBg3" : "bg-darkCustomBg3"
             } rounded-t-xl absolute bottom-[50px] animate-dis left-0 w-full z-50`}
             tabIndex={-1}
-            // onFocus={console.log("yii")}
             ref={calendarRef}
           >
             <Calendar

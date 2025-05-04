@@ -23,8 +23,6 @@ const Players = ({ countries, leagues,toggleMode }) => {
           setError(false);
           setLoading(false);
           setPlayers(json.result);
-          // console.log(json.result);
-          // console.log(json.success);
         })
         .catch((err) => {
           setError(true);

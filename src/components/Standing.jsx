@@ -16,7 +16,6 @@ const Standing = ({
   stageName,
   match,
 }) => {
-  console.log(match);
   return (
     <div
       className={`${

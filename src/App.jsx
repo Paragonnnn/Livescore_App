@@ -44,6 +44,7 @@ import News from "./components/News/News";
 import NewsDetails from "./components/News/NewsDetails";
 import { getMatches } from "./polling/polling";
 import { Helmet } from "react-helmet-async";
+import PageNotFound from "./components/PageNotFound";
 
 inject();
 
@@ -76,12 +77,10 @@ const App = () => {
   const [searchParam, setSearchParam] = useSearchParams();
 
   const searchDate = searchParam.get("date");
-  console.log(searchDate);
 
   const api_key = import.meta.env.VITE_api_key;
   const socketUrl = `wss://wss.allsportsapi.com/live_events?APIkey=${api_key}`;
 
-  console.log(navigator.onLine);
 
   // const { lastJsonMessage, readyState, getWebSocket, sendJsonMessage } =
   //   useWebSocket(socketUrl, {
@@ -228,11 +227,7 @@ const App = () => {
   document.querySelector("body").style.backgroundColor = `${
     toggleMode ? "#F7F7FF" : "#031525"
   }`;
-  // console.log(document.querySelector("body"));
   const date = new Date();
-  // const newDate = format(date, 'MM-dd-yyyy')
-  // console.log(date);
-  // const newDate2 = newDate
   const [calenderDate, setCalenderDate] = useState(
     `${date.getFullYear()}-${
       date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
@@ -249,7 +244,6 @@ const App = () => {
         }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`
     );
   }, []);
-  console.log(calenderDate);
 
   // setSearchParam({
   //   'date' :
@@ -269,11 +263,9 @@ const App = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  // console.log(windowWidth);
-  // console.log(focus);
+
 
   const handleDateChange = (date) => {
-    // console.log(date);
     setCalenderDate(
       `${date.getFullYear()}-${
         date.getMonth() + 1 < 10
@@ -289,22 +281,16 @@ const App = () => {
       }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`,
     });
 
-    // console.log(date.toISOString().split("T")[0]);
-    // console.log(
-    //   `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`
-    // );
+
     setShowCalendar(false);
     if (new Date() == new Date(calenderDate)) {
     }
-    // history(`/${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
-    // console.log(new Date(calenderDate));
+
 
     setCheck([]);
-    // console.log("hi");
-    // console.log(fixtures);
+
   };
   const handleDateFocus = (e) => {
-    // e.key && e.code === "Backspace" && e.preventDefault();
     !isNaN(e.key) && e.preventDefault();
   };
 
@@ -332,7 +318,6 @@ const App = () => {
           setCountries(json.result);
           setClubs(json.result);
           setLoadingCountries(false);
-          // console.log(json.result);
         })
         .catch((err) => {
           setLoadingCountries(false);
@@ -354,7 +339,6 @@ const App = () => {
           setError(false);
           setLoadingLeagues(false);
           setLeagues(json.result);
-          // console.log(json.result);
         })
         .catch((err) => {
           // console.log(err);
@@ -375,7 +359,6 @@ const App = () => {
         .then((res) => res.json())
         .then((json) => {
           setFixtures(json.result);
-          // console.log(json.result);
           setLoadingFixtures(false);
           setCurrentFixture(json.result.slice(0, 1));
           setCheck(
@@ -400,22 +383,6 @@ const App = () => {
             )
           );
 
-          // console.log(
-          //   json.result.map(
-          //     (fixture) =>
-          //       !check.includes(fixture.league_key) &&
-          //       fixture.event_live === "1" &&
-          //       fixture.event_status !== "Finished" &&
-          //       fixture.league_key
-          //   )
-          // );
-          // console.log(liveCheck);
-          //   console.log(
-          //     json.result.map(
-          //       (fixture) =>
-          //         !check.includes(fixture.league_key) && fixture.league_key
-          //     )
-          //   );
         })
         .catch((err) => {
           setLoadingFixtures(false);
@@ -423,21 +390,11 @@ const App = () => {
           console.log(err);
         });
     }
-    // const timeoutId = setTimeout(getData(), 2000);
-
-    // Clean up the timer when the component unmounts
-    // return () => {
-    //   clearTimeout(timeoutId);
-    // };
+    
     getData();
-    // setCheck([])
   }, [calenderDate, history]);
 
-  // useEffect(() => {
-  //   async function getData() {
-  //     await fetch(`https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=&APIkey=${api_key}`)
-  //   }
-  // })
+
 
   const latestRequestId = useRef(0);
   useEffect(() => {
@@ -496,7 +453,7 @@ const App = () => {
         />
         <meta name="twitter:image:alt" content="ParaScore" />
       </Helmet>
-     
+
       <div className={`${toggleMode ? "bg-customBg3" : "bg-darkCustomBg3"} `}>
         {/* <Notifications /> */}
         <div
@@ -548,8 +505,9 @@ const App = () => {
           )}
         </div>
 
-        <div className=" max-w-[1440px] m-auto  lg:p-4 p-1">
+        <div className=" max-w-[1440px] m-auto  lg:p-4 p-1 min-h-screen">
           <Routes>
+            <Route path="*" element={<PageNotFound />} />
             <Route
               path="/"
               element={
@@ -660,6 +618,11 @@ const App = () => {
             <Route path="/topnews/:id" element={<NewsDetails />} />
           </Routes>
         </div>
+        <footer>
+          <div className="flex justify-center items-center gap-2 text-white text-sm font-light p-4 sticky bottom-0">
+            <p>© 2023 ParaScore. All rights reserved.</p>
+            </div>
+        </footer>
       </div>
     </>
   );

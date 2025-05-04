@@ -10,7 +10,6 @@ import {
 import Calendar from "../svg/Calendar";
 
 const MatchInfo = ({ statToggle, match, windowWidth, toggleMode }) => {
-  console.log(match);
   return (
     <div>
       <div

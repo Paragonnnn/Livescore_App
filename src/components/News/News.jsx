@@ -24,7 +24,6 @@ const News = () => {
   }, [searchParam]);
 
   const pagee = searchParam.get("page");
-  console.log(pagee, page);
 
   const top = useRef(null);
 

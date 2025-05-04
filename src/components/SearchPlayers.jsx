@@ -18,7 +18,7 @@ const SearchPlayers = () => {
           `)
         .then((res) => res.json())
         .then((json) => {
-          console.log(json.result.sort((a, b) => a.player_key - b.player_key));
+          // console.log(json.result.sort((a, b) => a.player_key - b.player_key));
           setPlayers(json.result);
         })
         .catch((err) => {
@@ -26,7 +26,6 @@ const SearchPlayers = () => {
         });
     };
     getData();
-    console.log(players);
   }, [playerName]);
 
   return (

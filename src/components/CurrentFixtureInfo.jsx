@@ -14,7 +14,6 @@ const CurrentFixtureInfo = ({
   alertMessage,
 }) => {
   const {difference,countDown} = useCountDown(match)
-  console.log(countDown)
 
   return (
     <div className={`${toggleMode ? "text-darkText" : "text-lightText"}`}>

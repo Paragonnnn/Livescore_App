@@ -54,23 +54,18 @@ const Transfer = () => {
   };
 
   useEffect(() => {
-    // console.log(
-    //   getTransfers(url)
-    // )
 
     async function getData() {
       try {
         const response = await fetch(url);
         const data = await response.json();
         setTransfers(data.transfers);
-        console.log(data.transfers);
       } catch (err) {
         console.error(err);
       }
     }
 
     getData();
-    console.log(transfers);
   }, [selected, selected2]);
 
   return (

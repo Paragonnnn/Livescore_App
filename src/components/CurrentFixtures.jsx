@@ -48,7 +48,6 @@ const CurrentFixtures = ({
   const [h2hAwayStat, setH2hAwayStat] = useState([]);
 
   const { id } = useParams();
-  // console.log(useParams());
   const api_key = import.meta.env.VITE_api_key;
 
   // const socketUrl = `wss://wss.allsportsapi.com/live_events?APIkey=${api_key}&matchId=${id}`;
@@ -87,7 +86,6 @@ const CurrentFixtures = ({
   const handleClick = (e) => {
     let book = e.target.innerHTML;
     setBookie(book);
-    // console.log(book);
   };
   const handleSeeMore = () => {
     setSeeMore((prev) => !prev);
@@ -96,25 +94,19 @@ const CurrentFixtures = ({
     let current = e.target.innerHTML;
     setStatToggle(current);
 
-    // console.log(statToggle, current);
-    // if (!statToggle.includes(current)) {
-    //   setStatToggle([current])
-    // }
+  
   };
   const home = () => {
     setChangeTable("home");
     setMappedTable(homeTable);
-    // console.log(changeTable);
   };
   const away = () => {
     setChangeTable("away");
     setMappedTable(awayTable);
-    // console.log(changeTable);
   };
   const all = () => {
     setChangeTable("all");
     setMappedTable(table);
-    // console.log(changeTable);
   };
 
   // for (let i = 0; i < 101; i++) {
@@ -242,16 +234,9 @@ const CurrentFixtures = ({
           setGetAwayTeamId(
             parseFloat(json.result.map((id) => id.away_team_key))
           );
-          // console.log(parseFloat(json.result.map((id) => id.league_key)));
           setStats(json.result.map((s) => s.statistics));
           setLineUp(json.result.map((s) => s.lineups));
           setPlayerStat(json.result.map((s) => s.player_stats));
-          // console.log(json.result.map((s) => s.lineups));
-          // console.log(json.result.map((s) => s.statistics));
-          // console.log(json.result.map((s) => s.player_stats));
-          // setEvents((json.result.cards).concat(json.result.goalscorers))
-          // setCards(json.result.map(c => (c.cards)))
-          // setGoalscorers(json.result.map(g => (g.goalscorers)))
           setEvents(
             json.result
               .map((c) => c.cards)
@@ -261,15 +246,6 @@ const CurrentFixtures = ({
                 return a.concat(c);
               }, [])
           );
-          // console.log(
-          //   json.result
-          //     .map((c) => c.cards)
-          //     .concat(json.result.map((g) => g.goalscorers))
-          //     .concat(json.result.map((s) => s.substitutes))
-          //     .reduce((a, c) => {
-          //       return a.concat(c);
-          //     }, [])
-          // );
           setLoading(false);
         })
         .catch((err) => {});
@@ -287,17 +263,6 @@ const CurrentFixtures = ({
       .then((res) => res.json())
         .then((json) => {
           setHToH(json.result.H2H);
-          // console.log(json.result.H2H);
-          // console.log(
-          //   parseFloat(
-          //     json.result.H2H.filter((h) => eval(h.event_final_result) < 0)
-          //       .length
-          //   ) /
-          //     parseFloat(
-          //       json.result.H2H.filter((h) => eval(h.event_final_result) == 0)
-          //         .length
-          //     )
-          // );
           setH2hDrawStat(
             parseFloat(
               json.result.H2H.filter((h) => eval(h.event_final_result) == 0)
@@ -339,7 +304,6 @@ const CurrentFixtures = ({
         .then((res) => res.json())
         .then((json) => {
           setOdds(json.result[id]);
-          // console.log(json.result[id]);
         });
     }
     getData();
@@ -356,7 +320,6 @@ const CurrentFixtures = ({
           setHomeTable(json.result.home);
           setAwayTable(json.result.away);
           setMappedTable(json.result.total);
-          // console.log(json.result);
         });
       }
     getData();
